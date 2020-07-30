@@ -74,4 +74,5 @@ feed:
 deploy:
   type: git
   repo: git@github.com:qdriven/qdriven.github.io
+  branch: gh-pages
 

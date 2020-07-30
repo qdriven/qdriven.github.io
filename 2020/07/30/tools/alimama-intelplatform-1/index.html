@@ -1,0 +1,179 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>测试日志2020-4 Dive Into Markov(阿里妈妈功能测试平台) | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="java,testing-platform,吐槽">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="测试日志2020-4 Dive Into Markov(阿里妈妈功能测试平台)"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>测试日志2020-4 Dive Into Markov(阿里妈妈功能测试平台)</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2020/07/30/tools/alimama-intelplatform-1/" rel="bookmark">
+        <time class="entry-date published" datetime="2020-07-30T04:12:00.000Z">
+          2020-07-30
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="Dive-Into-Markov-阿里妈妈功能测试平台-架构分析"><a href="#Dive-Into-Markov-阿里妈妈功能测试平台-架构分析" class="headerlink" title="Dive Into Markov(阿里妈妈功能测试平台) 架构分析"></a>Dive Into Markov(阿里妈妈功能测试平台) 架构分析</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_png/DWQ5ap0dyHMvWOVCYt8M5463BURIjtVD4x8ibtJxYRa0euRLC3ic47oHkRXltOg4SbEtECFwQVoOjlLqIWicpsPwg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" width="70%" height="70%"></img></p>
+<p>根据Markov本身提供的功能图，以及代码，大致总结Markov如下图:<br><img src="img/alimama/overview.jpg" alt="img"></p>
+<a id="more"></a>
+
+<p>从技术角度看了一下这个代码仓库的pom文件,有几个问题可以改善</p>
+<ol>
+<li>mysql的依赖使用了两个可以去除一个</li>
+<li>使用了至少三个以上的json包，不确定是什么原因</li>
+<li>使用了.gitignore，为什么还有*.iml和.idea/目录存在</li>
+<li>然后pom文件里面为什么有这样的</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>markov-demo<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>markov-demo<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">description</span>&gt;</span>Demo project for Spring Boot<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>artifactId是markov-demo? 认真的？</p>
+<p>不过这些都是第一眼的小问题，具体做的东西让老鸟在慢慢看看，具体做的内容才是吸引人的东西.</p>
+<h2 id="如何使用-搭建环境"><a href="#如何使用-搭建环境" class="headerlink" title="如何使用-搭建环境"></a>如何使用-搭建环境</h2><p>在进入代码分析之前，先把环境构建起来，然后跑跑试试看看哪些功能.因为没有具体的使用手册，老鸟就按照经验自己一步一步玩耍.</p>
+<h3 id="如何使用-搭建环境-build-jar包"><a href="#如何使用-搭建环境-build-jar包" class="headerlink" title="如何使用-搭建环境 - build jar包"></a>如何使用-搭建环境 - build jar包</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn clean package</span><br></pre></td></tr></table></figure>
+<p>这个时候会出现一下错误：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Could not find artifact net.sf.json-lib:json-lib:jar:2.4 <span class="keyword">in</span> central (https://repo.maven.apache.org/maven2) </span><br></pre></td></tr></table></figure>
+
+<p>最后的解决办法是: json-lib依赖添加classifier是jdk15</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>net.sf.json-lib<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>json-lib<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">classifier</span>&gt;</span>jdk15<span class="tag">&lt;/<span class="name">classifier</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>运行*** mvn clean compile *** 通过，然后重新build打出jar包<br>不过使用maven打包的时候，会出现测试不通过情况：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">2020-05-15 13:50:04.461  INFO 39887 --- [extShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService <span class="string">&#x27;applicationTaskExecutor&#x27;</span></span><br><span class="line">[INFO] </span><br><span class="line">[INFO] Results:</span><br><span class="line">[INFO] </span><br><span class="line">[ERROR] Errors: </span><br><span class="line">[ERROR]   MarkovDemoApplicationTests.wordTest:51 » FileNotFound dic.txt (No such file or...</span><br><span class="line">[INFO] </span><br><span class="line">[ERROR] Tests run: 1, Failures: 0, Errors: 1, Skipped: 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>测试代码:</p>
+<p>由于这个dict.txt没有在classpath下面，所以就找不到了. 所以build的时候ignore tests就可以了</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">    void wordTest () throws IOException &#123;</span><br><span class="line"></span><br><span class="line">        // FileInputStream fis = new FileInputStream(<span class="string">&quot;199801.txt&quot;</span>);</span><br><span class="line">        // FileOutputStream fos = new FileOutputStream(<span class="string">&quot;dic.txt&quot;</span>);</span><br><span class="line">        // ImportCorpus readF = new ImportCorpus(fis, fos);</span><br><span class="line">        // readF.readDic();</span><br><span class="line">        // System.out.println(<span class="string">&quot;µ¼Èë½áÊø&quot;</span>);</span><br><span class="line"></span><br><span class="line">        String filename = <span class="string">&quot;dic.txt&quot;</span>;</span><br><span class="line">        HashMap hm = new HashMap();</span><br><span class="line">        HashMap len = new HashMap();</span><br><span class="line">        GenerateDictionary genDic = new GenerateDictionary();</span><br><span class="line">        Segmentation seg;</span><br><span class="line">    .....</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mvn clean package -Dmaven.test.skip=<span class="literal">true</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>第一片吐槽先到这里.</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/java/">java</a>, <a href="/categories/java/testing-platform/">testing-platform</a>, <a href="/categories/java/testing-platform/吐槽/">吐槽</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/java/">java</a><a href="/tags/testing-platform/">testing-platform</a><a href="/tags/吐槽/">吐槽</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>
