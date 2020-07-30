@@ -1,0 +1,195 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>测试日志2020-5 前端部署 NGINX Conf文件自动配置 | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="python,eat-dog-food,test-ops">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="测试日志2020-5 前端部署 NGINX Conf文件自动配置"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>测试日志2020-5 前端部署 NGINX Conf文件自动配置</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2020/07/30/tools/nginx-runner/" rel="bookmark">
+        <time class="entry-date published" datetime="2020-07-30T04:12:00.000Z">
+          2020-07-30
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="前端部署-NGINX-Conf文件自动配置"><a href="#前端部署-NGINX-Conf文件自动配置" class="headerlink" title="前端部署 NGINX Conf文件自动配置"></a>前端部署 NGINX Conf文件自动配置</h2><p>新部署了一个服务，测试环境NGINX帮忙配置一下；这周老鸟被这些事情忙的不亦乐乎，一会nginx加一个环境配置，<br>一会部署一个测试环境前端,一会重启一些nginx,一周很快就过去了，老鸟感觉一周测试的事情做的很少，倒是做了很多nginx运维的事情.<br>按照现在流行的说法叫test-ops，不知道哪个天才创造了这个职位名称，但是很遗憾，老鸟不能再招人了，公司HC已经冻结了，但是如果一直这样也不是个事情呀. 怎么解决？老鸟除了这些破事，还有其他项目要搞，会要开，还想着早点回家和小孩做做几何题，怎么办？</p>
+<p>问题怎么解决？ 老鸟一般问题会遵照下面几个步骤进行:</p>
+<ol>
+<li>问题是什么？想要解决什么问题</li>
+<li>有没有现成的解决方案？解决的思路是什么</li>
+<li>不求完美解决，但求80%以上解决问题<a id="more"></a>
+<h2 id="1-问题是什么"><a href="#1-问题是什么" class="headerlink" title="1. 问题是什么"></a>1. 问题是什么</h2></li>
+</ol>
+<p>问题其实很清楚，目前通过手工的方式修改NGXIN conf文件， 然后手工重启(reload)nginx进行配置更新,严重影响了工作产出了,如果不能够解决这些重要又紧急的事情，产出就不够了，年纪大了可能就被人嫌弃了, 那么怎么解决呢？</p>
+<p>无论如何先从实际情况出发，ngxin 配置到底配置的是什么? 这个NGINX前端的配置其实说来很简单,就是在NGINX CONF文件里面给每个新的项目(project2)添加URL路径,以及router的配置:</p>
+<ul>
+<li><ol>
+<li>nginx Location 配置<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location /project2 &#123;</span><br><span class="line">    try_files <span class="variable">$uri</span> <span class="variable">$uri</span>/ @router;</span><br><span class="line">    index index.html;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><ol start="2">
+<li>project2 router的配置添加: 把project2的index.html加到router里面</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">location @router &#123;</span><br><span class="line">    rewrite ^.*$ /index.html last;</span><br><span class="line">    rewrite ^.*$ /mng/index.html last;</span><br><span class="line">    rewrite ^.*$ /client/index.html last;</span><br><span class="line">    rewrite ^.*$ /engineer/index.html last;</span><br><span class="line">    rewrite ^.*$ /project2/index.html last;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>把这些手动的事情自动化了，同时不加新的沟通，还沿用原来的使用方式,用户使用方面不需要又任何变化. </p>
+<p>为什么修改一个东西，我觉得大体分两种情况</p>
+<ol>
+<li>原来用户的使用习惯不需要变化，默默把他需要的事情给做了</li>
+<li>如果要改变用户的使用方式，一定要大大提高用户的效率，否者用户有隐性成本</li>
+</ol>
+<p>某种程度上Do’t make me think的产品设计未必任何情况下都是对的， 也有一种可能就是扇用户两巴掌，说你有点傻，换个方式可以让你提高很多效率。</p>
+<h2 id="1-1-解决思路"><a href="#1-1-解决思路" class="headerlink" title="1.1 解决思路"></a>1.1 解决思路</h2><p>在开始考虑解决思路的时候，先考虑两个问题，当前的约束条件(一些现状)和最终要达成的目标.</p>
+<ul>
+<li><p>约束条件<br>公司没有什么高大上的服务发现，K8S集群，就只有一个NGINX服务给测试环境用,同时部署是通过JENKINS来发布的. 所以解决的办法不能超过这个范畴.</p>
+</li>
+<li><p>最终要达成的效果</p>
+</li>
+</ul>
+<ol>
+<li>QA触发项目的新建的前端Jenkins任务</li>
+<li>QA开始测试新的前端项目</li>
+</ol>
+<ul>
+<li>完成目标分解的任务</li>
+</ul>
+<p>整件事情其实简单讲就是：</p>
+<ol>
+<li>输入： projectName</li>
+<li>输出:  对应的nginx conf就生成好，同时nginx生效(也就是需要reload)</li>
+</ol>
+<p>那么接下来的问题是从哪里输入这个projectName，目前看如果要融入到流程里面就已有一个地方，那就是Jenkins 部署的脚本里面.</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/python/">python</a>, <a href="/categories/python/eat-dog-food/">eat-dog-food</a>, <a href="/categories/python/eat-dog-food/test-ops/">test-ops</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/python/">python</a><a href="/tags/eat-dog-food/">eat-dog-food</a><a href="/tags/test-ops/">test-ops</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>
