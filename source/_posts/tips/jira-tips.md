@@ -1,8 +1,12 @@
 ---
-title: Git Upstream/Patch Tips
+title: JIRA Fields 说明
 date: 2020-08-04 09:17:08
 tags: ["daily-tips","jira"]
 ---
+
+JIRA可以导出的字段的说明
+
+<!-- more -->
 
 JIRA可以导出的字段|中文名|字段说明|字段样例
 |-------|-------|----|----|
