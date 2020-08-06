@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 TITLE=$1
-LABEL=$2
-FILE_PATH=$3
+LABEL="tips"
+FILE_PATH=$2
 echo "cat ${FILE_PATH}"
 content=`cat ${FILE_PATH}`
 echo $content
