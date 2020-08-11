@@ -65,6 +65,131 @@
 
   
     
+    <h3 class="article-title"><a href="/2016/02/26/python/2016-02-26-zabbix_monitoring/"><span>zabbix 基础</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/02/26/python/2016-02-26-zabbix_monitoring/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-02-26T08:48:54.000Z">
+          2016-02-26
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>抽空花了1个小时看了一下Zabbix的界面和简单的手册，了解了一下Zabbix的基础知识，下面是一个小小的记录,后面就写一些Python的脚本来直接调用Zabbix的API在进行一些自动化的操作.</p>
+<h1 id="Zabbix-基础"><a href="#Zabbix-基础" class="headerlink" title="Zabbix 基础"></a>Zabbix 基础</h1><p>Zabbix 是一个开源的监控系统，由于需要帮助运维写一些调用ZABBIX API的代码，所以就开始了解一下ZABBIX的一些基本概念. 简单的看了一下Zabbix的一个手册，大致了解Zabbix监控的一些概念，以下是Zabbix中比较重要的概念或者可以认为一些抽象的实体资源:</p>
+<ul>
+<li><p>Configuration</p>
+<ul>
+<li>HOST</li>
+<li>HOST GROUP</li>
+<li>Templates</li>
+</ul>
+</li>
+<li><p>Monitor</p>
+<ul>
+<li>Application</li>
+<li>Items: keys</li>
+<li>Triggers</li>
+<li>Graphs</li>
+</ul>
+</li>
+</ul>
+<h2 id="Configuration-HOST"><a href="#Configuration-HOST" class="headerlink" title="Configuration:HOST"></a>Configuration:HOST</h2><p>HOST 就是Zabbix监控的对象，创建HOST可以通过一些预先定义好的模版来实现.<br>以Linux Group来说的话，HOST可能还有以下的一些属性：</p>
+<ul>
+<li>Agent Interface</li>
+<li>SNMP Interface</li>
+<li>JMX Interface</li>
+<li>IPMI Interface</li>
+<li>Monitory proxy</li>
+<li>Status</li>
+</ul>
+<h2 id="Configuration-HOST-GROUP"><a href="#Configuration-HOST-GROUP" class="headerlink" title="Configuration: HOST GROUP"></a>Configuration: HOST GROUP</h2><p>创建HOST的同时可以创建一个HOST GROUP，HOST GROUP实际上就是不同的HOST组合起来成一组.</p>
+<h2 id="Configuration-Templates"><a href="#Configuration-Templates" class="headerlink" title="Configuration: Templates"></a>Configuration: Templates</h2><p>Templates 就是一些HOST的模版，相似的HOST可以通过模版继承，组合的方式创建</p>
+<h2 id="Monitor"><a href="#Monitor" class="headerlink" title="Monitor"></a>Monitor</h2><p>从监控的层级来看，监控HOST的层级逻辑是：</p>
+<ul>
+<li>HOSTGROUP: HOST GROUP是可以认为不同HOST的容器</li>
+<li>HOST: 监控的实体,监控的实体实际上有不同的监控模版组合而成</li>
+</ul>
+<p>以下的APPLICATION，ITEM,TRIGGER,Graph 其实都是继承了模版的：</p>
+<ul>
+<li>APPLICATION,可以认为是一组监控的内容</li>
+<li>ITEM: item就是监控的具体的一个数值,比如<code>cl Loaded Class Count</code>他的key是<code>jmx[&quot;java.lang:type=ClassLoading&quot;,LoadedClassCount]</code><br>这个ITEM就是具体监控LoadedClass数目的一项，那么多个项目就可以组合成一个Application，ITEM 其实可以认为是采样数据的一个项</li>
+</ul>
+<p>一个Template可以通过多个Application来组合而成，一个Application可以由Items来组合而成，一个HOST包含有多个监控的Template，一个HOST Group可以有多个HOST.</p>
+<p>关于TEMPLATE的继承关系是： HOST 继承HOST GROUP的TEMPLATE</p>
+<ul>
+<li>Graph： 图表</li>
+<li>Trigger： 触发器<br>这两个可以设置到模版级别的</li>
+</ul>
+<h2 id="Monitor-Application"><a href="#Monitor-Application" class="headerlink" title="Monitor: Application"></a>Monitor: Application</h2><p>Application 可以认为是监控的一个大的项目，里面可能包括了不同的采样项目(item)<br>create Application，可以参考一下API文档就可以</p>
+<h2 id="Monitor-Item"><a href="#Monitor-Item" class="headerlink" title="Monitor: Item"></a>Monitor: Item</h2><p>Item创建首先需要创建一个key(在创建KEY之前可以先创建一个TEMPLATE)，key 相当于需要监控什么，如何设置？</p>
+<ul>
+<li>监控客户端设置, 在zabbix_agentd.conf中需要添加UserParameter</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep -v &#x27;#&#x27; /etc/zabbix/zabbix_agentd.conf|grep -v &quot;^$&quot;</span><br><span class="line">export UserParameter=&lt;key_name&gt;,&lt;shell_command&gt; &gt;&gt;  &lt;configure_file_location&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ITEM的设置，可以设置ITEM的类型，同时使用一些表达是来完成需要的采样内容的设置</li>
+</ul>
+<h2 id="Graphs"><a href="#Graphs" class="headerlink" title="Graphs"></a>Graphs</h2><p>graph 就是图标，那么很明显，一个graph有x,y 轴，x轴一般总是时间序列，另外一个轴对应不同的item（采样项目），同时又一些graph的类型选择，以及图表大小的设置</p>
+<h2 id="Triggers"><a href="#Triggers" class="headerlink" title="Triggers"></a>Triggers</h2><p>Trigger 就是一个触发器，对于单独的一个item来说，如果设置了一些阀值,那么如果超过这个阀值，那么就会报警了.</p>
+<p>这是Zabbix的一些基本概念，其他还有如：</p>
+<ul>
+<li>Action, 遇到问题进行的操作</li>
+<li>Screens: 多个Graph就组合成一个Screen</li>
+<li>Slideshow: 多个Screen可以轮播</li>
+<li>Map: 网络路径图</li>
+<li>Discovery Rule: 发现安装Zabbix Agent的机器的规则</li>
+<li>其他：如一些各种interface的设置，大致有个了结，可能在后续中会使用</li>
+</ul>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/python/">python</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/python/">python</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2016/02/13/python/2016-02-13-python-yaml/"><span>python yaml 使用介绍</span></a></h3>
     
   
@@ -184,144 +309,6 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">It<span class="string">&#x27;s 15:16</span></span><br><span class="line"><span class="string">pocoo.org [http]</span></span><br></pre></td></tr></table></figure>
 
 <p>是不是很方便的.</p>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/python/">python</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/python/">python</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2015/05/16/python/2015-05-16-svn_reviewboard_python/"><span>Python完成简单的SVN Reviewboard Precommit的客户端</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2015/05/16/python/2015-05-16-svn_reviewboard_python/" rel="bookmark">
-        <time class="entry-date published" datetime="2015-05-15T18:31:11.000Z">
-          2015-05-16
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>最近公司需要使用review board进行代码pre-commit review(pre-commit:正式提交前review)，而公司的现状是：</p>
-<ol>
-<li>使用SVN作为代码版本管理工具</li>
-<li>开发工具有eclipse，idea</li>
-<li>MAC 和windows 机器居多</li>
-</ol>
-<p>考虑到开发eclipse和idea插件，连接review board我一个人无法完成，同时能力也不够来开发这两种插件，<br>所以就准备python写一个命令行工具，期间研究了一下taobao review board的插件，感觉有点复杂，这个也是<br>使用python来些命令行工具的一个理由,也考虑过使用node-webkit来写个客户端，不过由于时间上的限制也就先放弃了</p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>实现过程中，使用到主要的包和工具是：</p>
-<ol>
-<li>RBTools,review board 自带的工具，但是支持中文能力让人有点困惑</li>
-<li>python，cmd 包(python自带)，requests包使用 pip install requests 安装</li>
-<li>ConEmuPack(windows CMD的替代),主要为了支持window系统</li>
-<li>SVN</li>
-</ol>
-<p>最后实现了如下功能</p>
-<ul>
-<li>选择更改的文件，提交Review Board 作为pre-commit review</li>
-<li>根据review request id 提交代码到SVN</li>
-<li>python直接操作svn命令,可以通过简单的命令就提交代码(由于使用习惯的问题,个人觉得命令行比UI效率更高)<br>svn命令有个问题就是如果操作delete或者add这种的话,如果文件没有直接放到svn work copy的话,提交需要两步操作,<br>而这个工具也解决了这个问题</li>
-</ul>
-<h2 id="Review-Board-功能介绍"><a href="#Review-Board-功能介绍" class="headerlink" title="Review Board 功能介绍"></a>Review Board 功能介绍</h2><p>review board 是进行代码review的一个工具，目前公司主要用来做pre-commit的review，在review board针对pre-主要有如下概念：</p>
-<ul>
-<li>review request draft, draft里面包含了differ文件，描述，review的人等等</li>
-<li>review request，在这个review request上面review</li>
-<li>review完毕，才可以提交代码</li>
-</ul>
-<h2 id="安装和配置"><a href="#安装和配置" class="headerlink" title="安装和配置"></a>安装和配置</h2><h3 id="1-安装Python-和Requests包"><a href="#1-安装Python-和Requests包" class="headerlink" title="1.安装Python 和Requests包"></a>1.安装Python 和Requests包</h3><ul>
-<li>下载安装最新版本的Python，确保在命令行中可以执行Python命令，如果打开命令行工具，执行python -v 失败，需要在环境变量中设置Python的执行路径</li>
-<li>安装Python完成之后，在命令行中执行</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install requests</span><br></pre></td></tr></table></figure>
-
-<p>安装requests包到全局。MAC可能需要使用:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install requests</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-安装RBTools"><a href="#2-安装RBTools" class="headerlink" title="2. 安装RBTools"></a>2. 安装RBTools</h3><p>下载安装RBTool,RBTool有不同操作系统对应的版本，根据自身操作系统下载并安装，MAC和windows都是可执行文件，一路next就可以<br>安装完毕，在命令行检查是否安装成功:</p>
- <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rbt -v</span><br></pre></td></tr></table></figure>
-
-<p> 检查版本，如果有版本显示则成功</p>
-<h3 id="3-配置SVN"><a href="#3-配置SVN" class="headerlink" title="3. 配置SVN"></a>3. 配置SVN</h3><p>配置SVN，MAC自带了SVN，Windows需要将SVN，配置到环境变量里面，具体方法如下,命令行中执行</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn --version</span><br></pre></td></tr></table></figure>
-
-<p>如果返回版本信息，则忽略下面步骤:</p>
-<pre><code>下载SVN BIN文件，将BIN目录配置到环境变量PATH下面，命令行中执行svn --version如果返回版本信息则成功</code></pre>
-<h3 id="4-Windows-下载ComEmuPack"><a href="#4-Windows-下载ComEmuPack" class="headerlink" title="4. Windows 下载ComEmuPack"></a>4. Windows 下载ComEmuPack</h3><p>ComEmuPack是Windows Cmd的替代工具，主要为了解决中文输入和显示问题，Window上使用，如果MAC上使用终端工具就可以terminal或者iterm都可以</p>
-<h2 id="运行客户端"><a href="#运行客户端" class="headerlink" title="运行客户端"></a>运行客户端</h2><p>复制svnrbclient.py 到你本地SVN的目录下面，这个目录需要和Review Board上面的配置相对应，具体如下例说明：<br>1.review board配置某个repository是<a target="_blank" rel="noopener" href="https://scm.******.com:8443/svn/Test/automation">https://scm.******.com:8443/svn/Test/automation</a><br>2.repository的名字是：******-automation,假设你使用</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn checkout https://scm.******.com:8443/svn/******-automation</span><br></pre></td></tr></table></figure>
-
-<p>检出代码到**<strong><strong>-automation目录，那么你需要将svnrbclient.py复制到你本地的**</strong></strong>-automation下面.</p>
-<p>打开命令行工具，运行</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python svnrbclient.py</span><br></pre></td></tr></table></figure>
-
-<p>就可以，第一次使用会让你配置你的review board设置，如果嫌麻烦，可以创建如下内容的文件<br>到.reviewboardrc，不过复制之前需要修改，具体修改参考一下注释.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 不需要修改</span><br><span class="line">REVIEWBOARD_URL &#x3D; &quot;192.168.3.180&quot;</span><br><span class="line">&#x2F;&#x2F; 一般修改至你动作的目录名</span><br><span class="line">REPOSITORY &#x3D; &quot;******-automation&quot;</span><br><span class="line">&#x2F;&#x2F; 工号</span><br><span class="line">USERNAME&#x3D;110863</span><br><span class="line">&#x2F;&#x2F;review board密码，和LDAP密码一样</span><br><span class="line">PASSWORD&#x3D;&quot;*******&quot;</span><br><span class="line">&#x2F;&#x2F; 默认代码审查人的工号，可以是****，****格式，,间隔表示多人</span><br><span class="line">TARGET_PEOPLE&#x3D;****</span><br></pre></td></tr></table></figure>
-
-<h2 id="使用客户端"><a href="#使用客户端" class="headerlink" title="使用客户端"></a>使用客户端</h2><p>在运行客户端之后，可以看到如下内容：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> ****** Review Board Client, ? <span class="keyword">for</span> <span class="built_in">help</span>, and the total <span class="built_in">command</span> lists:</span><br><span class="line"> 1. setup:setup review board setting</span><br><span class="line"> 2. pre:precommit your changes to review board</span><br><span class="line"> 3. upre:update your precommit</span><br><span class="line"> 4. ss:svn status,find svn status <span class="keyword">for</span> the working copies</span><br><span class="line"> 5. sa:svn add,add files to <span class="built_in">local</span> svn</span><br><span class="line"> 6. sd:svn delete,delete svn file</span><br><span class="line"> 7. ci:svn commit,commit the changes by review request id</span><br><span class="line"> 8. sre: revert changes</span><br><span class="line"> 9. sdiff: generate differ file</span><br><span class="line"> 10.sci: commit the selected files directly</span><br><span class="line"> 11.exit: <span class="built_in">exit</span> the client</span><br><span class="line">(****** RB Client)</span><br></pre></td></tr></table></figure>
-
-<p>以上就是这个客户端的所有功能，重点是如下几个功能：</p>
-<ol>
-<li>pre: 创建review request</li>
-<li>upre： 更新review request</li>
-<li>ci: review通过之后，提交代码到SVN中央仓库，这个是根据review request id来作的提交<br>也就是你提交review request修改了什么文件，使用ci命令就帮你提交此review request修改过的文件<br>一般执行方法是：在(<strong>**</strong> RB Client)后面输入你需要的命令如：pre,然后按照提示一步一步操作就可以了.以下是输入的日志：</li>
-</ol>
-<p>以下是使用pre commit的一个完全的shell场景:</p>
-<ul>
-<li>输入命令pre</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">****** RB Client)pre</span><br><span class="line">&#x2F;&#x2F; 得到输出，需要选择此次修改的文件：</span><br><span class="line">pre-commit the changes</span><br><span class="line">svn status:</span><br><span class="line">Changed Files Status:</span><br><span class="line">ID |FILE SVN Status|File Name&#x2F;File Path</span><br><span class="line">0 | ? | .git</span><br><span class="line">1 | ? | .idea</span><br><span class="line">2 | ? | .ignorerc</span><br><span class="line">3 | A | .reviewboardrc</span><br><span class="line">4 | ? | automation-common&#x2F;automation-common.iml</span><br><span class="line">5 | M | automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;ITestProcessor.java</span><br><span class="line">6 | ? | automation-common&#x2F;target</span><br><span class="line">7 | A | automation-demo&#x2F;automation-demo.iml</span><br><span class="line">8 | ? | automation-demo&#x2F;target</span><br><span class="line">9 | A | differ_temp</span><br><span class="line">10 | A | differ_temp&#x2F;105</span><br><span class="line">11 | A | differ_temp&#x2F;105&#x2F;diff_105_latest.txt</span><br><span class="line">12 | A | differ_temp&#x2F;105&#x2F;differ_1432611692.92.txt</span><br><span class="line">13 | A | differ_temp&#x2F;105&#x2F;differ_1432612400.93.txt</span><br><span class="line">14 | A | differ_temp&#x2F;105&#x2F;notes.txt</span><br><span class="line">15 | A | differ_temp&#x2F;113</span><br><span class="line">16 | A | differ_temp&#x2F;113&#x2F;diff_113_latest.txt</span><br><span class="line">17 | A | differ_temp&#x2F;113&#x2F;differ_1432620381.6.txt</span><br><span class="line">18 | A | differ_temp&#x2F;113&#x2F;differ_1432620573.37.txt</span><br><span class="line">19 | A | differ_temp&#x2F;113&#x2F;notes.txt</span><br><span class="line">20 | A | differ_temp&#x2F;114</span><br><span class="line">21 | A | differ_temp&#x2F;114&#x2F;diff_114_latest.txt</span><br><span class="line">22 | A | differ_temp&#x2F;114&#x2F;differ_1432621517.49.txt</span><br><span class="line">23 | A | differ_temp&#x2F;114&#x2F;differ_1432621894.64.txt</span><br><span class="line">24 | ? | differ_temp&#x2F;114&#x2F;differ_1432622051.84.txt</span><br><span class="line">25 | A | differ_temp&#x2F;114&#x2F;notes.txt</span><br><span class="line">26 | ? | differ_temp&#x2F;115</span><br><span class="line">27 | ? | differ_temp&#x2F;116</span><br><span class="line">28 | ? | differ_temp&#x2F;125</span><br><span class="line">29 | ? | differ_temp&#x2F;132</span><br><span class="line">30 | ? | ******-automation.iml</span><br><span class="line">31 | A | rbtools_requests.py</span><br><span class="line">32 | M | svnrbtclient.py</span><br><span class="line">33 | A | +</span><br><span class="line">34 |  | &gt;</span><br><span class="line">35 | Summary | of</span><br><span class="line">36 |  | Tree</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>输入文件的ID， 可以是5,32，或者是5-32，34-90 表示5-32,34-90的文件</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Please select the files IDs which your want to commit,eg. 0,1,2,3, or Enter for All Files</span><br><span class="line">&lt;5,32</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;ITestProcessor.java svnrbtclient.py is ready to post to review board......</span><br><span class="line">Please input your reviewer ID,Entry for default Reviewer&gt;</span><br><span class="line">reviewer ID:</span><br><span class="line">Please input summary for your changes,it is nice to provide your Bug No:&gt;修改svnrbclient</span><br><span class="line">&lt;Response [201]&gt;</span><br><span class="line">None</span><br><span class="line">update draft timeout but it doesn&#39;t matter</span><br><span class="line">draft request review id :133</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;到这里review request 提交完毕</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>审核通过之后，输入ci命令，提交review request</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">(****** RB Client)ci</span><br><span class="line"></span><br><span class="line">last 5 review requests status:</span><br><span class="line">Request Review Id |Summary  | Status | Changed File List</span><br><span class="line">133 | 修改svnrbclient</span><br><span class="line"> | pending | automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;ITestProcessor.java svnrbtclient.py</span><br><span class="line"></span><br><span class="line">132 | 测试很多文件</span><br><span class="line"> | pending | README.md automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;Environment.java automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;ITestProcessor.java automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;drivers&#x2F;DriverFactory.java automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;helpers&#x2F;webdriver&#x2F;WebDriverHelper.java automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;listener&#x2F;testng&#x2F;SimpleWebDriverScreenShotTestListener.java automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;testscaffold&#x2F;BaseWebCurrencyTest.java automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;testscaffold&#x2F;BaseWebTest.java automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;testscaffold&#x2F;webtest&#x2F;WebTestContext.java automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;testscaffold&#x2F;webtest&#x2F;webUI&#x2F;elementloader&#x2F;locator&#x2F;CustomerElementLocatorFactory.java automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;testscaffold&#x2F;webtest&#x2F;webUI&#x2F;htmlelements&#x2F;HtmlElement.java automation-common&#x2F;src&#x2F;test&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;drivers&#x2F;DriverFactoryTest2.java automation-common&#x2F;src&#x2F;test&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;drivers&#x2F;DriverFactoryTest_Concurrency.java automation-common&#x2F;src&#x2F;test&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;drivers&#x2F;testng-test1.xml automation-common&#x2F;src&#x2F;test&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;helpers&#x2F;webdriver&#x2F;WebDriverHelperTest.java</span><br><span class="line"></span><br><span class="line">115 | 更新readme</span><br><span class="line"> | pending | ******rbclient_en.py README.md</span><br><span class="line"></span><br><span class="line">116 | 测试测试</span><br><span class="line"> | pending | ******rbclient.py</span><br><span class="line"></span><br><span class="line">125 | 修改中文注释</span><br><span class="line"> | pending | automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;Environment.java automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;ITestProcessor.java</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;输入你要需要提交的 review request id号：  &#x2F;&#x2F;提交结束</span><br><span class="line">(****** RB Client)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
       
     </div>

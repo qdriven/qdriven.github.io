@@ -65,6 +65,150 @@
 
   
     
+    <h3 class="article-title"><a href="/2016/02/28/python/2016-02-28-python_oop_attributes/"><span>Python 面向对象，以及访问对象属性基础</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/02/28/python/2016-02-28-python_oop_attributes/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-02-28T06:57:44.000Z">
+          2016-02-28
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>在前面的Zabbix API调用中我们看到了python的<code>__getattr__</code>的妙用，下面就探索一下这里面的道理,所以就聊聊python面向对象的基础知识.</p>
+<h2 id="Python-面向对象"><a href="#Python-面向对象" class="headerlink" title="Python 面向对象"></a>Python 面向对象</h2><p>说到面向对象，就会说到类(class)，对象(object),那么什么是Class，Object呢？</p>
+<ul>
+<li>Object：<br>Objects have states and behaviors. Example: A dog has states - color, name, breed as well as behaviors -wagging, barking, eating. An object is an instance of a class.</li>
+<li>Class:<br>A class can be defined as a template/blue print that describes the behaviors/states that object of its type support.</li>
+</ul>
+<p>那么综合起来，class就是用来描述一系列对象的一个模版，抽象出了共同的东西(class)，object就是具体的某种情况下的一个例子(instance)</p>
+<p>面向对象有如下基础概念：</p>
+<ul>
+<li>Polymorphism</li>
+<li>Inheritance</li>
+<li>Encapsulation</li>
+<li>Abstraction</li>
+<li>Classes</li>
+<li>Objects</li>
+<li>Instance</li>
+<li>Method</li>
+<li>Message Parsing</li>
+</ul>
+<h2 id="Python-Class-and-Object-的使用"><a href="#Python-Class-and-Object-的使用" class="headerlink" title="Python Class and Object 的使用"></a>Python Class and Object 的使用</h2><p>看下例：</p>
+<ul>
+<li><code>class Dog</code> 定义了一个类</li>
+<li><code>__init__</code> 构造这个类的方法，就是创建出一个Dog的对象是通过这个方法</li>
+<li><code>name</code>, 类的一个属性;<code>eat()</code>,也可以看成是类的一个属性，实际上它是一个dog的一个行为(behavior)</li>
+<li><code> dog = Dog()</code> 是创建了一个Dog(class)的新的的对象(object), 按照我们上面说的，dog是类Dog(class)的一个实例(instance)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">    self.name=<span class="string">&#x27;dog&#x27;</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">eat</span>():</span></span><br><span class="line">    print(<span class="string">&#x27;eating......&#x27;</span>)</span><br><span class="line"></span><br><span class="line">dog = Dog()</span><br><span class="line">print(dog.name)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Python-对象的创建"><a href="#Python-对象的创建" class="headerlink" title="Python 对象的创建"></a>Python 对象的创建</h2><p>参考上例，分别来说明对象的创建，访问.</p>
+<ul>
+<li>对象的访问</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dog = Dog()</span><br></pre></td></tr></table></figure>
+
+<p>Dog() 实际上创建了一个Dog的实例(object),那么他具体是通过Dog类的那个东西去实现的呢？是<code>__init__</code> 方法实现的，可以通过下面的例子还看看：</p>
+<p>我们修改代码，就class Dog 中的<code>__init__</code>方法去掉，然后运行代码看看</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AttributeError: <span class="string">&#x27;Dog&#x27;</span> object has no attribute <span class="string">&#x27;name&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>这是运行后的一个错误，也就是说<code>name</code>没有被初始化，远来的例子中name是通过<code>__init__</code> 方法去初始化的，这也说明了实例的创建是通过<code>__init__</code>来创建的.</p>
+<p>把<code>__init__</code> 的修改还原，同时修改原有代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">    self.name=<span class="string">&#x27;dog&#x27;</span></span><br><span class="line">    print(<span class="string">&#x27;Dog is created .....&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>运行代码，发现Dog is created……输出了，所以使用<code>__init__</code>的猜测是正确的.<br>不过我们进一步做一个尝试，去掉<code>__init__</code>的代码，我们发现其实dog实例也是可以创建的，那么要问，没有<code>__init__</code>也可以创建呀，那么如果类都是通过<code>__init__</code>实例化的，那么这个时候怎么实例化的呢？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(Dog.__base__)</span><br><span class="line">print(Dog.__bases__)</span><br></pre></td></tr></table></figure>
+
+<p>使用如上的代码可以知道Dog的base class是object，也就是使用object的<code>__init__</code>来实例话自己的.<br>到这里就简单的介绍了一下Python实例的创建.</p>
+<h2 id="Python-类实例的创建－-继承"><a href="#Python-类实例的创建－-继承" class="headerlink" title="Python 类实例的创建－ 继承"></a>Python 类实例的创建－ 继承</h2><p>面向对象就逃不过继承，下面看看在继承的情况下，如何创建对象的.<br>好，那么久先创建继承一个Dog的一个类： CrazyDog():</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CrazyDog</span>(<span class="params">Dog</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">why_crazy</span>(<span class="params">self</span>):</span></span><br><span class="line">        print(<span class="string">&#x27;I am sick.......&#x27;</span>)</span><br><span class="line"></span><br><span class="line">crazy_dog = CrazyDog()</span><br><span class="line">crazy_dog.eat()</span><br><span class="line">print(crazy_dog.name)</span><br><span class="line">crazy_dog.why_crazy()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>以下是一个创建了一个CrazyDog的类，继承了Dog，python中继承就是在类声明语句的()中加入需要继承的类.运行上面的程序，可以看到：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Dog <span class="keyword">is</span> created .....</span><br><span class="line">eating .....</span><br><span class="line">dog</span><br><span class="line">I am sick.......</span><br></pre></td></tr></table></figure>
+
+<p>这里就更加清楚的看到了子类在没有定义<code>__init__</code>的情况下，去使用了父类的<code>__init__</code>方法.接下来我们尝试用自己的<code>__init__</code> 方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CrazyDog</span>(<span class="params">Dog</span>):</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">      super().__init__()</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">why_crazy</span>(<span class="params">self</span>):</span></span><br><span class="line">      print(<span class="string">&#x27;I am sick.......&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>注意使用super的写法哦，他需要调用__init__方法的哦.重写后实际上我们是显性调用了父类的<code>__init__</code>方法，同时可以完成自己写自己的<code>__init__</code>方法:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CrazyDog</span>(<span class="params">Dog</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.is_crazy=<span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">why_crazy</span>(<span class="params">self</span>):</span></span><br><span class="line">        print(<span class="string">&#x27;I am sick.......&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>运行，报错，name不存在,<code>AttributeError: &#39;CrazyDog&#39; object has no attribute &#39;name&#39;</code>, 哦，远来要使用父类的属性，是需要显性初始化父类的,修改成如下代码，一切就OK了.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CrazyDog</span>(<span class="params">Dog</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        self.is_crazy=<span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">why_crazy</span>(<span class="params">self</span>):</span></span><br><span class="line">        print(<span class="string">&#x27;I am sick.......&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Python-访问对象中的属性"><a href="#Python-访问对象中的属性" class="headerlink" title="Python 访问对象中的属性"></a>Python 访问对象中的属性</h2><p>上面例子中其实已经有如何访问对象的属性或者方法了，如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">crazy_dog = CrazyDog()</span><br><span class="line">crazy_dog.eat()</span><br><span class="line">print(crazy_dog.name)</span><br><span class="line">crazy_dog.why_crazy()</span><br></pre></td></tr></table></figure>
+
+<p>这些都非常容易理解，同时这里也可以看到，python的对象里面没有java的：<code>public,private,protected</code>等定义来确定访问的范围.</p>
+<h2 id="Python-访问对象的属性：-getattr-setattr"><a href="#Python-访问对象的属性：-getattr-setattr" class="headerlink" title="Python 访问对象的属性： getattr,setattr"></a>Python 访问对象的属性： <strong>getattr</strong>,<strong>setattr</strong></h2><p>继续再聊聊python的访问对象的属性，做个试验：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CrazyDog</span>(<span class="params">Dog</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        self.is_crazy = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">why_crazy</span>(<span class="params">self</span>):</span></span><br><span class="line">        print(<span class="string">&#x27;I am sick.......&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span>(<span class="params">self, item</span>):</span></span><br><span class="line">        print(<span class="string">&#x27;getting attribute&#x27;</span>, item)</span><br><span class="line">        <span class="keyword">return</span> (item, <span class="string">&#x27;getattr_created&#x27;</span>)</span><br><span class="line">crazy_dog = CrazyDog()</span><br><span class="line">crazy_dog.eat()</span><br><span class="line">print(crazy_dog.name)</span><br><span class="line">crazy_dog.why_crazy()</span><br><span class="line">print(crazy_dog.name1)</span><br></pre></td></tr></table></figure>
+
+<p>得到如下结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Dog <span class="keyword">is</span> created .....</span><br><span class="line">eating .....</span><br><span class="line">dog</span><br><span class="line">I am sick.......</span><br><span class="line">getting attribute name1</span><br><span class="line">(<span class="string">&#x27;name1&#x27;</span>, <span class="string">&#x27;getattr_created&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这个例子表明，如果访问没有定义变量名的时候，python是通过__getattr__来访问的，未定义属性的赋值呢？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CrazyDog</span>(<span class="params">Dog</span>):</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">      super().__init__()</span><br><span class="line">      self.is_crazy = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">why_crazy</span>(<span class="params">self</span>):</span></span><br><span class="line">      print(<span class="string">&#x27;I am sick.......&#x27;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span>(<span class="params">self, item</span>):</span></span><br><span class="line">      print(<span class="string">&#x27;getting attribute&#x27;</span>, item)</span><br><span class="line">      <span class="keyword">return</span> (item, <span class="string">&#x27;getattr_created&#x27;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__setattr__</span>(<span class="params">self, key, value</span>):</span></span><br><span class="line">      print(<span class="string">&#x27;using setattr set value&#x27;</span>)</span><br><span class="line">      print(key, value)</span><br><span class="line">      super().__setattr__(key, value)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>访问：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">crazy_dog = CrazyDog()</span><br><span class="line">crazy_dog.eat()</span><br><span class="line">print(crazy_dog.name)</span><br><span class="line">crazy_dog.why_crazy()</span><br><span class="line">crazy_dog.name2 = <span class="string">&#x27;test_set_attr&#x27;</span></span><br><span class="line">print(crazy_dog.name1)</span><br><span class="line">print(crazy_dog.name2)</span><br></pre></td></tr></table></figure>
+
+<p>结果<code>crazy_dog.name2</code>是test_set_attr, 这个例子清楚的表明，没有定义的属性变量是通过<code>__setattr__</code>去访问的，如果我们修改原有的代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># super().__setattr__(key, value) 修改到如下的代码：</span></span><br><span class="line">setattr(self,key,value)</span><br></pre></td></tr></table></figure>
+<p>运行，我们会发现递归深度不够的错误，所以这个地方我们需要使用<code>super().__setattr__(k,v)</code>来处理, 那么为什么呢？<br>我自己推测是setattr(self,k,v)是使用了self的<strong>setattr</strong>,那么很明显这个就是死循环了，因为他具体到了self这个实例，如果改为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">setattr(Dog,key,value)</span><br><span class="line">setattr(CrazyDog,key,value)</span><br></pre></td></tr></table></figure>
+
+<p>都可以成功，相信这里面python语言再lookup method的时候有一套自己的方法.</p>
+<p>回顾一下这个<strong>getattr</strong>,_setattr__ 两个方法，可以动态创建属性，这个机制会减少不少的代码量.和java比起来会减少很多的反射的代码.</p>
+<p>这块内容需要继续学习和挖掘！</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/python/">python</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/python/">python</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2016/02/28/python/2016-02-28-simple_word_count/"><span>Simple Word Counter</span></a></h3>
     
   
@@ -172,131 +316,6 @@
 <li>template也没有create这个方法呀，他是怎么做到的？？</li>
 </ul>
 <p>这个例子很好的说明了使用<code>__getattr__</code>可以做一些魔法的事情</p>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/python/">python</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/python/">python</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2016/02/26/python/2016-02-26-zabbix_monitoring/"><span>zabbix 基础</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2016/02/26/python/2016-02-26-zabbix_monitoring/" rel="bookmark">
-        <time class="entry-date published" datetime="2016-02-26T08:48:54.000Z">
-          2016-02-26
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>抽空花了1个小时看了一下Zabbix的界面和简单的手册，了解了一下Zabbix的基础知识，下面是一个小小的记录,后面就写一些Python的脚本来直接调用Zabbix的API在进行一些自动化的操作.</p>
-<h1 id="Zabbix-基础"><a href="#Zabbix-基础" class="headerlink" title="Zabbix 基础"></a>Zabbix 基础</h1><p>Zabbix 是一个开源的监控系统，由于需要帮助运维写一些调用ZABBIX API的代码，所以就开始了解一下ZABBIX的一些基本概念. 简单的看了一下Zabbix的一个手册，大致了解Zabbix监控的一些概念，以下是Zabbix中比较重要的概念或者可以认为一些抽象的实体资源:</p>
-<ul>
-<li><p>Configuration</p>
-<ul>
-<li>HOST</li>
-<li>HOST GROUP</li>
-<li>Templates</li>
-</ul>
-</li>
-<li><p>Monitor</p>
-<ul>
-<li>Application</li>
-<li>Items: keys</li>
-<li>Triggers</li>
-<li>Graphs</li>
-</ul>
-</li>
-</ul>
-<h2 id="Configuration-HOST"><a href="#Configuration-HOST" class="headerlink" title="Configuration:HOST"></a>Configuration:HOST</h2><p>HOST 就是Zabbix监控的对象，创建HOST可以通过一些预先定义好的模版来实现.<br>以Linux Group来说的话，HOST可能还有以下的一些属性：</p>
-<ul>
-<li>Agent Interface</li>
-<li>SNMP Interface</li>
-<li>JMX Interface</li>
-<li>IPMI Interface</li>
-<li>Monitory proxy</li>
-<li>Status</li>
-</ul>
-<h2 id="Configuration-HOST-GROUP"><a href="#Configuration-HOST-GROUP" class="headerlink" title="Configuration: HOST GROUP"></a>Configuration: HOST GROUP</h2><p>创建HOST的同时可以创建一个HOST GROUP，HOST GROUP实际上就是不同的HOST组合起来成一组.</p>
-<h2 id="Configuration-Templates"><a href="#Configuration-Templates" class="headerlink" title="Configuration: Templates"></a>Configuration: Templates</h2><p>Templates 就是一些HOST的模版，相似的HOST可以通过模版继承，组合的方式创建</p>
-<h2 id="Monitor"><a href="#Monitor" class="headerlink" title="Monitor"></a>Monitor</h2><p>从监控的层级来看，监控HOST的层级逻辑是：</p>
-<ul>
-<li>HOSTGROUP: HOST GROUP是可以认为不同HOST的容器</li>
-<li>HOST: 监控的实体,监控的实体实际上有不同的监控模版组合而成</li>
-</ul>
-<p>以下的APPLICATION，ITEM,TRIGGER,Graph 其实都是继承了模版的：</p>
-<ul>
-<li>APPLICATION,可以认为是一组监控的内容</li>
-<li>ITEM: item就是监控的具体的一个数值,比如<code>cl Loaded Class Count</code>他的key是<code>jmx[&quot;java.lang:type=ClassLoading&quot;,LoadedClassCount]</code><br>这个ITEM就是具体监控LoadedClass数目的一项，那么多个项目就可以组合成一个Application，ITEM 其实可以认为是采样数据的一个项</li>
-</ul>
-<p>一个Template可以通过多个Application来组合而成，一个Application可以由Items来组合而成，一个HOST包含有多个监控的Template，一个HOST Group可以有多个HOST.</p>
-<p>关于TEMPLATE的继承关系是： HOST 继承HOST GROUP的TEMPLATE</p>
-<ul>
-<li>Graph： 图表</li>
-<li>Trigger： 触发器<br>这两个可以设置到模版级别的</li>
-</ul>
-<h2 id="Monitor-Application"><a href="#Monitor-Application" class="headerlink" title="Monitor: Application"></a>Monitor: Application</h2><p>Application 可以认为是监控的一个大的项目，里面可能包括了不同的采样项目(item)<br>create Application，可以参考一下API文档就可以</p>
-<h2 id="Monitor-Item"><a href="#Monitor-Item" class="headerlink" title="Monitor: Item"></a>Monitor: Item</h2><p>Item创建首先需要创建一个key(在创建KEY之前可以先创建一个TEMPLATE)，key 相当于需要监控什么，如何设置？</p>
-<ul>
-<li>监控客户端设置, 在zabbix_agentd.conf中需要添加UserParameter</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep -v &#x27;#&#x27; /etc/zabbix/zabbix_agentd.conf|grep -v &quot;^$&quot;</span><br><span class="line">export UserParameter=&lt;key_name&gt;,&lt;shell_command&gt; &gt;&gt;  &lt;configure_file_location&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>ITEM的设置，可以设置ITEM的类型，同时使用一些表达是来完成需要的采样内容的设置</li>
-</ul>
-<h2 id="Graphs"><a href="#Graphs" class="headerlink" title="Graphs"></a>Graphs</h2><p>graph 就是图标，那么很明显，一个graph有x,y 轴，x轴一般总是时间序列，另外一个轴对应不同的item（采样项目），同时又一些graph的类型选择，以及图表大小的设置</p>
-<h2 id="Triggers"><a href="#Triggers" class="headerlink" title="Triggers"></a>Triggers</h2><p>Trigger 就是一个触发器，对于单独的一个item来说，如果设置了一些阀值,那么如果超过这个阀值，那么就会报警了.</p>
-<p>这是Zabbix的一些基本概念，其他还有如：</p>
-<ul>
-<li>Action, 遇到问题进行的操作</li>
-<li>Screens: 多个Graph就组合成一个Screen</li>
-<li>Slideshow: 多个Screen可以轮播</li>
-<li>Map: 网络路径图</li>
-<li>Discovery Rule: 发现安装Zabbix Agent的机器的规则</li>
-<li>其他：如一些各种interface的设置，大致有个了结，可能在后续中会使用</li>
-</ul>
 
       
     </div>

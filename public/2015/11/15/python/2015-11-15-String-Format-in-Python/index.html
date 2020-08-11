@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Python 中String的格式化 | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="python">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Python 中String的格式化"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Python 中String的格式化</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/11/15/python/2015-11-15-String-Format-in-Python/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-11-15T07:12:56.000Z">
+          2015-11-15
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>python中对于string有些挺有意思操作,现在把他记录如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">output = <span class="string">&#x27;Hello &#123;0&#125;!&#x27;</span>.format(<span class="string">&#x27;World!&#x27;</span>)</span><br><span class="line">output1 = <span class="string">&#x27;Hello &#123;0&#125; &#123;1&#125; !&#x27;</span>.format(<span class="string">&#x27;Mr.&#x27;</span>,<span class="string">&#x27;World!&#x27;</span>)</span><br><span class="line">output2 = <span class="string">&#x27;Hello &#123;name&#125; !&#x27;</span>.format(name=<span class="string">&#x27;World&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print(output)</span><br><span class="line">print(output1)</span><br><span class="line">print(output2)</span><br></pre></td></tr></table></figure>
+
+<p>以上可读性最好的，个人认为是:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">output2 = <span class="string">&#x27;Hello &#123;name&#125; !&#x27;</span>.format(name=<span class="string">&#x27;World&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="时间，urlparser的一起使用"><a href="#时间，urlparser的一起使用" class="headerlink" title="时间，urlparser的一起使用"></a>时间，urlparser的一起使用</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">&#x27;It\&#x27;s &#123;0:%H:%M&#125;&#x27;</span>.format(datetime.today()))</span><br><span class="line">url = urlparse(<span class="string">&#x27;http://pocoo.org/&#x27;</span>)</span><br><span class="line">print(<span class="string">&#x27;&#123;0.netloc&#125; [&#123;0.scheme&#125;]&#x27;</span>.format(url))</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">It<span class="string">&#x27;s 15:16</span></span><br><span class="line"><span class="string">pocoo.org [http]</span></span><br></pre></td></tr></table></figure>
+
+<p>是不是很方便的.</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/python/">python</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/python/">python</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

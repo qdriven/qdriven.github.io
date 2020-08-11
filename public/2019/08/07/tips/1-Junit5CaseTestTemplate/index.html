@@ -1,0 +1,199 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Xmind,Test Cases,and Allure templates for TDD | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="Automation,JAVA,TDD,Productivity">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Xmind,Test Cases,and Allure templates for TDD"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Xmind,Test Cases,and Allure templates for TDD</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/08/07/tips/1-Junit5CaseTestTemplate/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-08-07T13:34:04.000Z">
+          2019-08-07
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="Xmind-TestCases-and-JUnit5-Allure-Template"><a href="#Xmind-TestCases-and-JUnit5-Allure-Template" class="headerlink" title="Xmind,TestCases and JUnit5 Allure Template"></a>Xmind,TestCases and JUnit5 Allure Template</h1><p>Learn from the requirements and write test cases are the common daily work of a tester.<br>Normally write the mind map as a guide of test cases(in internet it is enough), then<br>execute the test cases or write testing codes based on the xmind file(mind map).<br>But do you ever question about this process? It is productive enough? Is there any improvement?</p>
+<a id="more"></a>
+
+<p>Let me give an example: I want to test a DateUtil functionality, it has several features, the mindmap like this:</p>
+<ol>
+<li><p>DateUtil Test Cases Mindmap:<br><img src="/images/productivity/testcase_map.jpg" alt="img"></p>
+</li>
+<li><p>Then write test codes(your boss required you to write automation codes) using junit and allure:</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Epic(&quot;Hutool DateUtil Usage&quot;)</span></span><br><span class="line"><span class="meta">@Feature(&quot;Hutool DateUtil Simple Usage&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HutoolDateUtilsTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="meta">@DisplayName(&quot;DateUtil-Formatter-From Date&quot;)</span></span><br><span class="line">    <span class="meta">@Story(value =&quot;Formatter-From Date&quot; )</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testFrom_Date</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//write testing codes</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="meta">@DisplayName(&quot;DateUtil-Formatter-From DateTime&quot;)</span></span><br><span class="line">    <span class="meta">@Story(value =&quot;Formatter-From DateTime&quot; )</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testFrom_DateTime</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//write testing codes</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://docs.qameta.io/allure/#_junit_5">allure</a> is a tool for unified test report. It is worth to use.<br>Two conceptions in allure mapping to requirments: </p>
+<ul>
+<li>EPIC: A big functionality,usally have several small featuers</li>
+<li>Feature: A relative small functionality, which might have one or more user stories</li>
+<li>User Story: a small/independent functionality</li>
+</ul>
+<p>Writing code is actually transforming the test cases into codes, and labeling the test codes by different test cases names.</p>
+<ol start="3">
+<li>Running the tests, the report is like:</li>
+</ol>
+<p><img src="/images/productivity/allure_story_feature.jpg" alt="img"></p>
+<p>It is perfect! But don’t you think you write test cases twice? In <strong><em>xmind</em></strong>, and in <strong><em>code</em></strong> like <strong><em>@Story</em></strong> bla bla bla …..</p>
+<p>Why do I write the annotations like @Story,@Epic or @Feature? The answer is that I want to make a fancy report,but I actually did duplicated work, didn’t I?  Duplicate work have bad smell. In this case, it looks like you sacrifice your productivity to make report fancy. What if I want both fancy report and productivity? Is it possible to write once?  Scripting Boy thought there should be a way.</p>
+<h2 id="Become-a-scripting-boy-to-connect-these-dots"><a href="#Become-a-scripting-boy-to-connect-these-dots" class="headerlink" title="Become a scripting boy to connect these dots"></a>Become a scripting boy to connect these dots</h2><p>Actaully It is not that hard to find a way to achieve the goal: fancy report and productivity both.<br>Let me figure it out:</p>
+<ol>
+<li>Export to test cases in markdown format through xmind(xmind has java/python sdk to manupilate the xmind file, but it is too complex), export is in xmind menu <strong><em>file&gt;export&gt;text</em></strong>:</li>
+</ol>
+<p><img src="/images/productivity/export_md.jpg" alt="img"></p>
+<p>BTW: importing md file to xmind is in ``file&gt;import&gt;text```</p>
+<p>The exported markdown file content:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># DateUtil</span></span><br><span class="line"><span class="comment">## Functions</span></span><br><span class="line"><span class="comment">### isSameDate</span></span><br><span class="line"><span class="comment">### CurrentYear</span></span><br><span class="line"><span class="comment">### CurrentMonth</span></span><br><span class="line"><span class="comment">### CurrentDay</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>Parse the markdown test cases, and render parsed test cases into testing code template<br>It is not hard, there are only three files, and less than 50 lines of codes:</li>
+</ol>
+<ul>
+<li><p>pom.xml for leveraging existing libs</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.jtwig&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;jtwig-core&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;5.87.0.RELEASE&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>a junit test code template file in class path(resources folder),named <strong><em>junit_allure_template.twig</em></strong></p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> io.qameta.allure.Epic;</span><br><span class="line"><span class="keyword">import</span> io.qameta.allure.Story;</span><br><span class="line"><span class="keyword">import</span> io.qameta.allure.Feature;</span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.Assertions;</span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.DisplayName;</span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.Test;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Epic(&quot;&#123;&#123;context.epic&#125;&#125;&quot;)</span></span><br><span class="line"><span class="meta">@Feature(&quot;&#123;&#123;context.epic&#125;&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> </span>&#123;&#123;context.epic&#125;&#125;Test &#123;</span><br><span class="line"></span><br><span class="line">   &#123;% <span class="keyword">for</span> entry in context.features.entrySet() %&#125;</span><br><span class="line">    &#123;% <span class="keyword">for</span> feature in entry.value() %&#125;</span><br><span class="line">        <span class="meta">@Test</span></span><br><span class="line">        <span class="meta">@DisplayName(&quot;&#123;&#123;context.epic&#125;&#125;-&#123;&#123;feature.desc&#125;&#125;&quot;)</span></span><br><span class="line">        <span class="meta">@Story(value =&quot;&#123;&#123;feature.desc&#125;&#125;&quot; )</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> test&#123;&#123;feature.name&#125;&#125;()&#123;</span><br><span class="line">            <span class="comment">//write testing codes</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#123;% endfor %&#125;</span><br><span class="line">   &#123;% endfor %&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>50 lines of codes, to read the exported markdown file, and render the template <strong><em>junit_allure_template.twig</em></strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Junit5TestTemplateGenerator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">generateJunit5TC</span><span class="params">(String mdFile,String fileName)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        AllureTestModel allureTestModel = <span class="keyword">new</span> AllureTestModel();</span><br><span class="line">        List&lt;String&gt; mdContent= Resources.readLines(Resources.getResource(mdFile),Charsets.UTF_8);</span><br><span class="line"></span><br><span class="line">        String currentFeature=<span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span> (String line : mdContent) &#123;</span><br><span class="line">            <span class="keyword">if</span>(line.startsWith(<span class="string">&quot;###&quot;</span>))&#123;</span><br><span class="line">                AllureFeature feature = <span class="keyword">new</span> AllureFeature();</span><br><span class="line">                feature.setDesc(currentFeature+<span class="string">&quot;-&quot;</span>+line.replace(<span class="string">&quot;###&quot;</span>,<span class="string">&quot;&quot;</span>).trim());</span><br><span class="line">                feature.setName(line.replace(<span class="string">&quot;###&quot;</span>,<span class="string">&quot;&quot;</span>).trim().replace(<span class="string">&quot; &quot;</span>,<span class="string">&quot;_&quot;</span>));</span><br><span class="line">                allureTestModel.features.get(currentFeature).add(feature);</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(line.startsWith(<span class="string">&quot;##&quot;</span>))&#123;</span><br><span class="line">                currentFeature = line.replace(<span class="string">&quot;##&quot;</span>,<span class="string">&quot;&quot;</span>).trim();</span><br><span class="line">                allureTestModel.features.putIfAbsent(currentFeature,<span class="keyword">new</span> ArrayList&lt;&gt;());</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(line.startsWith(<span class="string">&quot;#&quot;</span>))&#123;</span><br><span class="line">                allureTestModel.setEpic(line.replace(<span class="string">&quot;#&quot;</span>,<span class="string">&quot;&quot;</span>).trim());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        JtwigTemplate template = JtwigTemplate.classpathTemplate(<span class="string">&quot;junit_allure_template.twig&quot;</span>);</span><br><span class="line">        JtwigModel model = JtwigModel.newModel().with(<span class="string">&quot;context&quot;</span>,allureTestModel);</span><br><span class="line">        template.render(model,<span class="keyword">new</span> FileOutputStream(<span class="keyword">new</span> File(fileName+<span class="string">&quot;.java&quot;</span>)));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Data</span></span><br><span class="line">     <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">AllureTestModel</span></span>&#123;</span><br><span class="line">        <span class="keyword">private</span> String epic;</span><br><span class="line">        <span class="keyword">private</span> Map&lt;String,List&lt;AllureFeature&gt;&gt; features = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="meta">@Data</span></span><br><span class="line">     <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">AllureFeature</span></span>&#123;</span><br><span class="line">        <span class="keyword">private</span> String name;</span><br><span class="line">        <span class="keyword">private</span> String desc;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        Junit5TestTemplateGenerator.generateJunit5TC(<span class="string">&quot;DateUtil.md&quot;</span>,<span class="string">&quot;HutoolDateUtilTest.java&quot;</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>And the result is:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Epic(&quot;Hutool DateUtil Usage&quot;)</span></span><br><span class="line"><span class="meta">@Feature(&quot;Hutool DateUtil Simple Usage&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HutoolDateUtilsTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="meta">@DisplayName(&quot;DateUtil-Formatter-From Date&quot;)</span></span><br><span class="line">    <span class="meta">@Story(value =&quot;Formatter-From Date&quot; )</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testFrom_Date</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//write testing codes</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="meta">@DisplayName(&quot;DateUtil-Formatter-From DateTime&quot;)</span></span><br><span class="line">    <span class="meta">@Story(value =&quot;Formatter-From DateTime&quot; )</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testFrom_DateTime</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//write testing codes</span></span><br><span class="line">    &#125;</span><br><span class="line">    ......</span><br><span class="line">&#125;   </span><br></pre></td></tr></table></figure>
+<p>which is same as your writing before.</p>
+<p>Scripting boy is not kidding you, use a JAVA template lib to make both fancy report and test cases real without<br>duplicated work. </p>
+<p>It is not perfect solution which I need to admit. But it works somehow, and save my time anyway.<br>It also demostrated that there are plenty opportunities to tester to practice coding skills,<br>to know a little bit more about other libaries. It is not about rocket science, not about make a fancy product, it is just about practicing day in and day out to make life a little bit easier than before. </p>
+<h2 id="What’s-next"><a href="#What’s-next" class="headerlink" title="What’s next?"></a>What’s next?</h2><p>It looks good, not why not write it as a plugin of a modern ide like intellj IDEA. Wait, Wait, I am a scripting boy, try to<br>make a product?  But Why not? And why not support more templates like testng or other testing framework?  See you next time!</p>
+<h2 id="Reference-Code"><a href="#Reference-Code" class="headerlink" title="Reference Code"></a>Reference Code</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/evenhumble/tdd-simple">github</a></li>
+</ul>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Automation/">Automation</a><a href="/tags/JAVA/">JAVA</a><a href="/tags/TDD/">TDD</a><a href="/tags/Productivity/">Productivity</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

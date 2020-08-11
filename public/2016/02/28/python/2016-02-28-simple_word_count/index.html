@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Simple Word Counter | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="python">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Simple Word Counter"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Simple Word Counter</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/02/28/python/2016-02-28-simple_word_count/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-02-28T02:41:15.000Z">
+          2016-02-28
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>有时测试的面试题中会考点编程的内容，比如统计字符串中的相同字符数量，具体题目如下：</p>
+<ul>
+<li>给定一个字符串，如MIssissippi</li>
+<li>计算字符串中每一个不同字符出现的数量</li>
+</ul>
+<h2 id="Python-的解法"><a href="#Python-的解法" class="headerlink" title="Python 的解法"></a>Python 的解法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">letter_count=&#123;&#125;</span><br><span class="line"><span class="keyword">for</span> letter <span class="keyword">in</span> <span class="string">&#x27;Mississippi&#x27;</span>:</span><br><span class="line">  letter[letter]=letter_count.get(letter,<span class="number">0</span>)+<span class="number">1</span></span><br><span class="line">print(letter_count)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#39;s&#39;: 4, &#39;M&#39;: 1, &#39;i&#39;: 3, &#39;I&#39;: 1, &#39;p&#39;: 2&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Java-的解法"><a href="#Java-的解法" class="headerlink" title="Java 的解法"></a>Java 的解法</h2><p>JAVA 8 中给Map加入了getOrDefault的方法，下面就分别介绍一下JAVA8之前和使用JAVA8的方法：</p>
+<h3 id="JAVA8-之前："><a href="#JAVA8-之前：" class="headerlink" title="JAVA8 之前："></a>JAVA8 之前：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Map&lt;String,Integer&gt; <span class="title">countCharacters</span><span class="params">(String source)</span></span>&#123;</span><br><span class="line">       <span class="keyword">char</span>[] chars = source.toCharArray();</span><br><span class="line">       Map&lt;String,Integer&gt; result = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">char</span> aChar : chars) &#123;</span><br><span class="line">           Integer existing_counter = result.get(String.valueOf(aChar));</span><br><span class="line">           <span class="keyword">int</span> counter =  existing_counter==<span class="keyword">null</span>?<span class="number">0</span>:existing_counter;</span><br><span class="line">           result.put(String.valueOf(aChar),counter+<span class="number">1</span>);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> result;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="JAVA8-解法"><a href="#JAVA8-解法" class="headerlink" title="JAVA8 解法"></a>JAVA8 解法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> Map&lt;String,Integer&gt; <span class="title">countCharacters_JAVA8</span><span class="params">(String source)</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span>[] chars = source.toCharArray();</span><br><span class="line">    Map&lt;String,Integer&gt; result = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">char</span> aChar : chars) &#123;</span><br><span class="line">        result.put(String.valueOf(aChar),result.getOrDefault(String.valueOf(aChar),<span class="number">0</span>)+<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/python/">python</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/python/">python</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>
