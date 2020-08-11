@@ -1,0 +1,174 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>python yaml 使用介绍 | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="python">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="python yaml 使用介绍"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>python yaml 使用介绍</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/02/13/python/2016-02-13-python-yaml/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-02-13T10:38:43.000Z">
+          2016-02-13
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="Python-YAML-应用"><a href="#Python-YAML-应用" class="headerlink" title="Python YAML 应用"></a>Python YAML 应用</h1><p>YAML由于其可读性，越来越多的地方用它来做配置文件了来代替XML文件.下面就是用来介绍如何使用PYTHON来进行YAML的操作.<br>读取yaml或者写yaml，主要是用的是两个方法：</p>
+<ul>
+<li>load 读</li>
+<li>dump 写</li>
+</ul>
+<h2 id="Read-YAML-to-List"><a href="#Read-YAML-to-List" class="headerlink" title="Read YAML to List"></a>Read YAML to List</h2><p>以下是读YAML 内容到python的list</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> yaml</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_list</span>():</span></span><br><span class="line">    content = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        - config</span></span><br><span class="line"><span class="string">        - domain</span></span><br><span class="line"><span class="string">        - repository</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> yaml.load(content)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Read-YAML-TO-DICT"><a href="#Read-YAML-TO-DICT" class="headerlink" title="Read YAML TO DICT"></a>Read YAML TO DICT</h2><p>load yaml to dict or a nest dict:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> yaml</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_dict</span>():</span></span><br><span class="line">  content = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">      hello1: test</span></span><br><span class="line"><span class="string">      hello2: test2</span></span><br><span class="line"><span class="string">  &quot;&quot;&quot;</span></span><br><span class="line">  <span class="keyword">return</span> yaml.load(content)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_all_dict</span>():</span></span><br><span class="line">  contents = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    hero:</span></span><br><span class="line"><span class="string">      hp: 34</span></span><br><span class="line"><span class="string">      sp: 8</span></span><br><span class="line"><span class="string">      level: 4</span></span><br><span class="line"><span class="string">    orc:</span></span><br><span class="line"><span class="string">      hp: 12</span></span><br><span class="line"><span class="string">      sp: 0</span></span><br><span class="line"><span class="string">      level: 2</span></span><br><span class="line"><span class="string">  &quot;&quot;&quot;</span></span><br><span class="line">  <span class="keyword">return</span> yaml.load(contents)</span><br><span class="line"></span><br><span class="line">print(load_dict())</span><br><span class="line">print(load_all_dict())</span><br></pre></td></tr></table></figure>
+
+<h2 id="Read-YAML-auto-type-conversation"><a href="#Read-YAML-auto-type-conversation" class="headerlink" title="Read YAML: auto type conversation"></a>Read YAML: auto type conversation</h2><p>yaml 对于格式要求比较严格的，： 后面注意加空格，同时python的原始类型通过load函数可以自动转化的.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> yaml</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_with_type</span>():</span></span><br><span class="line">    contents = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        none: [~,null]</span></span><br><span class="line"><span class="string">        bool: [true,false,on,off]</span></span><br><span class="line"><span class="string">        int: 42</span></span><br><span class="line"><span class="string">        float: 3.1415</span></span><br><span class="line"><span class="string">        list: [test1,test2,test3]</span></span><br><span class="line"><span class="string">        dict: &#123;name: simon,sp: 5&#125;</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> yaml.load(contents)</span><br><span class="line"></span><br><span class="line">print(load_with_type())</span><br><span class="line"></span><br><span class="line"><span class="comment">## result:</span></span><br><span class="line">&#123;<span class="string">&#x27;dict&#x27;</span>: &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;simon&#x27;</span>, <span class="string">&#x27;sp&#x27;</span>: <span class="number">5</span>&#125;, <span class="string">&#x27;none&#x27;</span>: [<span class="literal">None</span>, <span class="literal">None</span>], <span class="string">&#x27;int&#x27;</span>: <span class="number">42</span>, <span class="string">&#x27;bool&#x27;</span>: [<span class="literal">True</span>, <span class="literal">False</span>, <span class="literal">True</span>, <span class="literal">False</span>], <span class="string">&#x27;list&#x27;</span>: [<span class="string">&#x27;test1&#x27;</span>, <span class="string">&#x27;test2&#x27;</span>, <span class="string">&#x27;test3&#x27;</span>], <span class="string">&#x27;float&#x27;</span>: <span class="number">3.1415</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Dump-YAML-write-contents-to-a-yml-file"><a href="#Dump-YAML-write-contents-to-a-yml-file" class="headerlink" title="Dump YAML: write contents to a yml file"></a>Dump YAML: write contents to a yml file</h2><p>使用dump函数直接可以将dict 内容写入到yml文件，这里有两个参数：</p>
+<ul>
+<li>default_flow_style: 设为false之后就<code>first_name: simon</code> 这种格式了</li>
+<li>default_style: 设为‘“’, first_name 就会加上“”</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dump_file</span>():</span></span><br><span class="line">    contents = &#123;</span><br><span class="line">        <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;test&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;first_name&#x27;</span>: <span class="string">&#x27;simon&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;last_name&#x27;</span>: <span class="string">&#x27;kevin&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment"># return yaml.dump(contents)</span></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">&#x27;document.yaml&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">return</span> yaml.dump(contents, f, default_flow_style=<span class="literal">False</span>, default_style=<span class="string">&#x27;&quot;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># file result:</span></span><br><span class="line"><span class="string">&quot;first_name&quot;</span>: <span class="string">&quot;simon&quot;</span></span><br><span class="line"><span class="string">&quot;last_name&quot;</span>: <span class="string">&quot;kevin&quot;</span></span><br><span class="line"><span class="string">&quot;name&quot;</span>: <span class="string">&quot;test&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="复杂一点的YAML格式"><a href="#复杂一点的YAML格式" class="headerlink" title="复杂一点的YAML格式"></a>复杂一点的YAML格式</h2><p>下面一个yaml文件表示了一个JAVA maven项目里面主要的一些目录</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">main:</span><br><span class="line">  - config</span><br><span class="line">  - domain</span><br><span class="line">  - repository</span><br><span class="line">  - service</span><br><span class="line">  - rest:</span><br><span class="line">    - controller</span><br><span class="line">    - dto</span><br><span class="line">    - exception</span><br><span class="line">  - exceptions</span><br><span class="line">  - utils</span><br><span class="line">resources:</span><br><span class="line">  - config</span><br><span class="line">test:</span><br><span class="line">  - config</span><br><span class="line">  - domain</span><br><span class="line">  - repository</span><br><span class="line">  - service</span><br><span class="line">  - rest:</span><br><span class="line">    - controller</span><br><span class="line">    - dto</span><br><span class="line">    - exception</span><br><span class="line">  - exceptions</span><br><span class="line">  - utils</span><br></pre></td></tr></table></figure>
+
+<p>读取此文件的python代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_yaml_file</span>():</span></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">&#x27;springboot-folders.yml&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        result = yaml.load(f)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">folders = read_yaml_file()</span><br><span class="line">print(folders[<span class="string">&#x27;main&#x27;</span>])</span><br><span class="line">print(folders[<span class="string">&#x27;test&#x27;</span>])</span><br><span class="line">print(folders[<span class="string">&#x27;resources&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># result:</span></span><br><span class="line">[<span class="string">&#x27;config&#x27;</span>, <span class="string">&#x27;domain&#x27;</span>, <span class="string">&#x27;repository&#x27;</span>, <span class="string">&#x27;service&#x27;</span>, &#123;<span class="string">&#x27;rest&#x27;</span>: [<span class="string">&#x27;controller&#x27;</span>, <span class="string">&#x27;dto&#x27;</span>, <span class="string">&#x27;exception&#x27;</span>]&#125;, <span class="string">&#x27;exceptions&#x27;</span>, <span class="string">&#x27;utils&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;config&#x27;</span>, <span class="string">&#x27;domain&#x27;</span>, <span class="string">&#x27;repository&#x27;</span>, <span class="string">&#x27;service&#x27;</span>, &#123;<span class="string">&#x27;rest&#x27;</span>: [<span class="string">&#x27;controller&#x27;</span>, <span class="string">&#x27;dto&#x27;</span>, <span class="string">&#x27;exception&#x27;</span>]&#125;, <span class="string">&#x27;exceptions&#x27;</span>, <span class="string">&#x27;utils&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;config&#x27;</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>以上已经非常清楚的表示了如何读取yml文件了， 至此简单的yml的使用介绍就到此为止. 更加详细的介绍请参考：<br><a target="_blank" rel="noopener" href="http://pyyaml.org/wiki/PyYAMLDocumentation">python yaml</a></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/python/">python</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/python/">python</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

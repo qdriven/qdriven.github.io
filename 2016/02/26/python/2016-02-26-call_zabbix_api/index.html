@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Python 访问Zabbix API | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="python">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Python 访问Zabbix API"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Python 访问Zabbix API</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/02/26/python/2016-02-26-call_zabbix_api/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-02-26T08:51:20.000Z">
+          2016-02-26
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="Zabbix-API-访问"><a href="#Zabbix-API-访问" class="headerlink" title="Zabbix API 访问"></a>Zabbix API 访问</h2><p>准备使用Python来访问一下Zabbix，首先当然阅读一下Zabbix的<a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/2.4/">API Manual</a>,抛开什么json rpc这样的问题之外，zabbix的API的分类还是很工整的，所以看起来比较舒服，在一定了解了zabbix基础之后，基本上就可以上手来写了，网上查了一下，找个一个python zabbix的调用的一个客户段代码，感觉不错，就开始行动了。</p>
+<h2 id="Zabbix-API-客户端代码的实现"><a href="#Zabbix-API-客户端代码的实现" class="headerlink" title="Zabbix API 客户端代码的实现"></a>Zabbix API 客户端代码的实现</h2><p>Zabbix API的主要的两个参数其实是method，params，params基本上就可以看作一些可变的参数，其实就是一个json或者map， 对于method来说，一般就是 resource.action 这种方式，所以python客户端使用重写了一个__getattr__来做,返回一个可以访问不同资源名称的客户端,具体的代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ZabbixClient</span>:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Generic Zabbix API Client</span></span><br><span class="line"><span class="string">    - login</span></span><br><span class="line"><span class="string">    - get auth</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    globale_header = &#123;</span><br><span class="line">        <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/json-rpc&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, session=None, timeout=None</span>):</span></span><br><span class="line">        self.user_name, self.default_user_name = <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span></span><br><span class="line">        self.password, self.default_password = <span class="string">&#x27;123456&#x27;</span>, <span class="string">&#x27;123456&#x27;</span></span><br><span class="line">        self.zabbix_api_url = <span class="string">&#x27;http://&#123;0&#125;/api_jsonrpc.php&#x27;</span>.format(<span class="string">&#x27;abcd.http&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> session:</span><br><span class="line">            self.session = session</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.session = requests.session()</span><br><span class="line"></span><br><span class="line">        self.session.headers.update(&#123;</span><br><span class="line">            <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json-rpc&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;python-zabbix-client&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;Cache-Control&#x27;</span>: <span class="string">&#x27;no-cache&#x27;</span></span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">        self.auth = <span class="string">&#x27;&#x27;</span></span><br><span class="line">        self.id = <span class="number">0</span></span><br><span class="line">        self.timeout = timeout</span><br><span class="line">        logger.info(<span class="string">&#x27;JSON-RPC Server EndPoint: %s&#x27;</span>, self.zabbix_api_url)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">login_in</span>(<span class="params">self, user_name=None, password=None</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        login with given user_name and password, if None, use default user</span></span><br><span class="line"><span class="string">        :param user_name:</span></span><br><span class="line"><span class="string">        :param password:</span></span><br><span class="line"><span class="string">        :return: result,auth key</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> user_name:</span><br><span class="line">            self.user_name = user_name</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> password:</span><br><span class="line">            self.password = password</span><br><span class="line"></span><br><span class="line">        self.auth = self.user.login(user=self.user_name, password=self.password)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">api_version</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.apiinfo.version()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># def confimport(self, format=&#x27;&#x27;, source=&#x27;&#x27;, rules=&#x27;&#x27;):</span></span><br><span class="line">    <span class="comment">#     &quot;&quot;&quot;Alias for configuration.import because it clashes with</span></span><br><span class="line">    <span class="comment">#        Python&#x27;s import reserved keyword&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment">#     return self.do_request(</span></span><br><span class="line">    <span class="comment">#         method=&quot;configuration.import&quot;,</span></span><br><span class="line">    <span class="comment">#         params=&#123;&quot;format&quot;: format, &quot;source&quot;: source, &quot;rules&quot;: rules&#125;</span></span><br><span class="line">    <span class="comment">#     )[&#x27;result&#x27;]</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">do_request</span>(<span class="params">self, method, params=None</span>):</span></span><br><span class="line">        request_json = &#123;</span><br><span class="line">            <span class="string">&#x27;jsonrpc&#x27;</span>: <span class="string">&#x27;2.0&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;method&#x27;</span>: method,</span><br><span class="line">            <span class="string">&#x27;params&#x27;</span>: params <span class="keyword">or</span> &#123;&#125;,</span><br><span class="line">            <span class="string">&#x27;id&#x27;</span>: self.id,</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> method != <span class="string">&#x27;apiinfo.version&#x27;</span> <span class="keyword">and</span> self.auth:</span><br><span class="line">            request_json[<span class="string">&#x27;auth&#x27;</span>] = self.auth</span><br><span class="line"></span><br><span class="line">        logger.debug(<span class="string">&quot;sending: %s&quot;</span>, json.dumps(request_json, indent=<span class="number">4</span>, separators=(<span class="string">&#x27;,&#x27;</span>, <span class="string">&#x27;:&#x27;</span>)))</span><br><span class="line">        response = self.session.post(</span><br><span class="line">            self.zabbix_api_url,</span><br><span class="line">            data=json.dumps(request_json),</span><br><span class="line">            timeout=self.timeout</span><br><span class="line">        )</span><br><span class="line">        logger.debug(<span class="string">&quot;Response Code : %s&quot;</span>, str(response.status_code))</span><br><span class="line"></span><br><span class="line">        response.raise_for_status()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> len(response.text):</span><br><span class="line">            <span class="keyword">raise</span> ZabbixAPIException(<span class="string">&quot;没有返回值&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            response_json = json.loads(response.text)</span><br><span class="line">        <span class="keyword">except</span> ValueError:</span><br><span class="line">            <span class="keyword">raise</span> ZabbixAPIException(<span class="string">&quot;不能解析JSON %s&quot;</span> % response.text)</span><br><span class="line"></span><br><span class="line">        logger.debug(<span class="string">&quot;sending: %s&quot;</span>, json.dumps(request_json, indent=<span class="number">4</span>, separators=(<span class="string">&#x27;,&#x27;</span>, <span class="string">&#x27;:&#x27;</span>)))</span><br><span class="line"></span><br><span class="line">        self.id += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;error&#x27;</span> <span class="keyword">in</span> response_json:</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;data&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> response_json[<span class="string">&#x27;error&#x27;</span>]:</span><br><span class="line">                response_json[<span class="string">&#x27;error&#x27;</span>][<span class="string">&#x27;data&#x27;</span>] = <span class="string">&#x27;No Data&#x27;</span></span><br><span class="line">            msg = <span class="string">&quot;Error &#123;code&#125;: &#123;message&#125;,&#123;data&#125;&quot;</span>.format(</span><br><span class="line">                code=response_json[<span class="string">&#x27;error&#x27;</span>][<span class="string">&#x27;code&#x27;</span>],</span><br><span class="line">                message=response_json[<span class="string">&#x27;error&#x27;</span>][<span class="string">&#x27;message&#x27;</span>],</span><br><span class="line">                data=response_json[<span class="string">&#x27;error&#x27;</span>][<span class="string">&#x27;data&#x27;</span>]</span><br><span class="line">            )</span><br><span class="line">            <span class="keyword">raise</span> ZabbixAPIException(msg, response_json[<span class="string">&#x27;error&#x27;</span>][<span class="string">&#x27;code&#x27;</span>])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> response_json</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span>(<span class="params">self, item</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        auto create Zabbix API Client</span></span><br><span class="line"><span class="string">        :param item:</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">return</span> ZabbixAPIObjectClass(item, self)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ZabbixAPIObjectClass</span>(<span class="params">object</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, parent</span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.parent = parent</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span>(<span class="params">self, item</span>):</span></span><br><span class="line"></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        dynamic create a method (get,create,update,delete)</span></span><br><span class="line"><span class="string">        :param item:</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">fn</span>(<span class="params">*args, **kwargs</span>):</span></span><br><span class="line">            <span class="keyword">if</span> args <span class="keyword">and</span> kwargs:</span><br><span class="line">                <span class="keyword">raise</span> TypeError(<span class="string">&#x27;Found Both args and kwargs&#x27;</span>)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> self.parent.do_request(<span class="string">&#x27;&#123;0&#125;.&#123;1&#125;&#x27;</span>.format(self.name, item),</span><br><span class="line">                                          args <span class="keyword">or</span> kwargs)[<span class="string">&#x27;result&#x27;</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> fn</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>基本上一个文件就搞定了，不过这个基本上参考了网上的一个代码实现的，这里使用__getattr__这种方式可以非常简洁的处理了这种请求非常类似的情况，这也是python的魅力吧.</p>
+<h2 id="访问Zabbix-API"><a href="#访问Zabbix-API" class="headerlink" title="访问Zabbix API"></a>访问Zabbix API</h2><p>访问API比较简单(如何参数不多的话，哈哈)，实例代码取Template的一些信息如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestZabbixTemplateClient</span>(<span class="params">unittest.TestCase</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setUp</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.zapi = ZabbixClient()</span><br><span class="line">        self.zapi.login_in()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_get_template</span>(<span class="params">self</span>):</span></span><br><span class="line">        templates = self.zapi.template.get()</span><br><span class="line">        print(templates)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_get_template</span>(<span class="params">self</span>):</span></span><br><span class="line">        templates = self.zapi.template.get(</span><br><span class="line">            filter=&#123;</span><br><span class="line">                <span class="string">&quot;host&quot;</span>: [<span class="string">&quot;Template OS Linux&quot;</span>]</span><br><span class="line">            &#125;)</span><br><span class="line">        print(templates[<span class="number">0</span>][<span class="string">&quot;id&quot;</span>])</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_create_template</span>(<span class="params">self</span>):</span></span><br><span class="line">        template = self.zapi.template.create()</span><br></pre></td></tr></table></figure>
+
+<p>补充一句，就是其实可以看到：</p>
+<ul>
+<li>ZabbixClient这个类没有定义template，可是他去可以使用？写了JAVA人是不是感觉有点惊喜的感觉</li>
+<li>template也没有create这个方法呀，他是怎么做到的？？</li>
+</ul>
+<p>这个例子很好的说明了使用<code>__getattr__</code>可以做一些魔法的事情</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/python/">python</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/python/">python</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>
