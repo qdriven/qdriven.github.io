@@ -1,0 +1,388 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第 43 页 | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2015/10/22/tips/interview/2015-10-22-python_interview_questions/"><span>Python 面试题</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/10/22/tips/interview/2015-10-22-python_interview_questions/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-10-21T18:31:11.000Z">
+          2015-10-22
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>测试有的时候出去会遇到一些编程面试题,以下是用python来解决两个简单面试题.</p>
+<h2 id="倒转字符串中的单词的排列"><a href="#倒转字符串中的单词的排列" class="headerlink" title="倒转字符串中的单词的排列"></a>倒转字符串中的单词的排列</h2><p>给定字符串“Hello World!”,经过一段程序运行之后,得到输出结果“World! Hello”,也就是以单词<br>为单位,倒转输入“Hello World!”</p>
+<ul>
+<li>python解法: 不考虑编码格式</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">words = <span class="string">&quot;Hello World!&quot;</span></span><br><span class="line">print(<span class="string">&quot; &quot;</span>.join(reversed(words)))</span><br><span class="line">print(<span class="string">&quot; &quot;</span>.join(words.split(<span class="string">&quot; &quot;</span>)[::<span class="number">-1</span>]))</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Java 解法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReverseWords</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">reverseWords</span><span class="params">(String input)</span></span>&#123;</span><br><span class="line">        String[] words = input.split(<span class="string">&quot; &quot;</span>);</span><br><span class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = words.length-<span class="number">1</span>; i &gt;=<span class="number">0</span> ; i--) &#123;</span><br><span class="line">            sb.append(words[i]);</span><br><span class="line">            sb.append(<span class="string">&quot; &quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> sb.toString().trim();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(reverseWords(<span class="string">&quot;Hello World!&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="输出斐波那契数列"><a href="#输出斐波那契数列" class="headerlink" title="输出斐波那契数列"></a>输出斐波那契数列</h2><p>根据给定的值,输出相同数目的斐波那契列， 如如果给定是1， 则输出1;给定2,输出1,1;<br>给定3，输出1,1,2, 依次类推。</p>
+<ul>
+<li>python 解法</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n &lt;= <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> [<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> [<span class="number">1</span>, <span class="number">1</span>]</span><br><span class="line">    nums = [<span class="number">1</span>, <span class="number">1</span>]</span><br><span class="line">    temp1 = <span class="number">1</span></span><br><span class="line">    temp2 = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n - <span class="number">2</span>):</span><br><span class="line">        append_num = temp1 + temp2</span><br><span class="line">        nums.append(append_num)</span><br><span class="line">        temp1,temp2=temp2,append_num</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> nums</span><br><span class="line"></span><br><span class="line">print(f(<span class="number">3</span>))</span><br><span class="line">print(f(<span class="number">5</span>))</span><br><span class="line">print(f(<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>java 解法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getFibListByNum</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n&lt;=<span class="number">0</span>) <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">&quot;invalid input&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">1</span>) <span class="keyword">return</span> <span class="string">&quot;1&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">2</span>) <span class="keyword">return</span> <span class="string">&quot;1,1&quot;</span>;</span><br><span class="line">    <span class="keyword">int</span> temp1=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> temp2=<span class="number">1</span>;</span><br><span class="line">    String result = <span class="string">&quot;1,1&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">3</span>; i &lt;=n ; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> appendNum = temp1+temp2;</span><br><span class="line">        temp1=temp2;</span><br><span class="line">        temp2=appendNum;</span><br><span class="line">        result=result+<span class="string">&quot;,&quot;</span>+appendNum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/interview/">interview</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/interview/">interview</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2015/10/22/tips/thoughts/2015-10-22-Random-TestCaseDesign/"><span>测试用例设计- 随机指定一个产品的测试</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/10/22/tips/thoughts/2015-10-22-Random-TestCaseDesign/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-10-21T18:31:11.000Z">
+          2015-10-22
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>有时面试的时候会随机指定一个产品进行测试,比如一个电梯,你会如何设计测试用例？这个问题很发散,更多的是看应聘者的条理<br>和分析能力.</p>
+<p>本质上一个电梯是一个太大的范畴，实际测试的过程中很少一下子会有这么巨大的功能让你测试的。<br>与其说让你设计测试用例，其实好不如说让你想一个电梯有什么功能,然后根据功能再来考虑测试用例,所以更多的<br>是考察思路,在实际的测试工作中,如果突然有个人说我今天完成了一个电梯的功能,找个人给我测一下吧。<br>那么多半这个项目就是个让测试欲哭无泪的项目。</p>
+<p>不过既然面试有人问这样的问题，那么就分析分析吧，以下我是把电梯转化为类似互联网产品来做的分析，<br>完全是个人想法,一定有非常多欠缺。</p>
+<h2 id="后端服务组件和客户端分离-Client-Server-MVC"><a href="#后端服务组件和客户端分离-Client-Server-MVC" class="headerlink" title="后端服务组件和客户端分离(Client-Server/MVC)"></a>后端服务组件和客户端分离(Client-Server/MVC)</h2><p>首先其实对把一个电梯分成不同的组件：</p>
+<ul>
+<li>驱动服务: 可以使电梯上下行(后台服务)</li>
+<li>门: 开门关门(后台服务)</li>
+<li>电梯操作面板: 人机界面,担当用户和电梯的一个中间人作用,将用户操作转化为指令来控制电梯 (app/web page)<br>(如果简单的话可能操作命令转换就都在这个地方了，如果复杂可能还有一个控制系统层)</li>
+<li>指令控制系统(调度系统,监听器或者Queue)</li>
+<li>呼叫监控系统:(可以暂时不考虑)</li>
+</ul>
+<p>这里就先考虑简单的情况，电梯操作面板模块之内将操作转换成指令给电梯的驱动和门服务</p>
+<h2 id="逐个组件来考虑用例"><a href="#逐个组件来考虑用例" class="headerlink" title="逐个组件来考虑用例"></a>逐个组件来考虑用例</h2><h3 id="驱动服务可能包含的功能点有如下"><a href="#驱动服务可能包含的功能点有如下" class="headerlink" title="驱动服务可能包含的功能点有如下:"></a>驱动服务可能包含的功能点有如下:</h3><ul>
+<li>上行, 但是上行有极限位置(可配置)，按照指定步进数量上行</li>
+<li>中途等待</li>
+<li>步进距离(一层距离)可以配置</li>
+<li>下行,下行位置(可配置)，按照指定步进数量下行</li>
+<li>承载重量</li>
+<li>可靠性监测，使用寿命监测</li>
+<li>故障监测</li>
+</ul>
+<p>这里注意如果测试电梯产品和测试指定某个大楼的电梯,测试用例的设计考虑点是稍有不同的，如果是电梯产品他就有电梯的配置项需要测试，<br>如果是测试制定电梯,那么配置项就可以忽略了，配置的就是你目前的配置。</p>
+<h3 id="门服务"><a href="#门服务" class="headerlink" title="门服务"></a>门服务</h3><p>关于门的服务可能会想到的是:</p>
+<ul>
+<li>开门</li>
+<li>关门</li>
+<li>可靠性</li>
+</ul>
+<p>对于开门这个功能的测试用例测试可以围绕:</p>
+<ul>
+<li>接收到开门指令开门并且只做开门</li>
+<li>在电梯运动过程中接收到开门指令不开门</li>
+<li>接收不到开门指令则不开门</li>
+<li>开门指令被中断</li>
+<li>开门接到后的进行开门的响应时间</li>
+</ul>
+<p>关门是类似，但是关门需要考虑超重情况下不能关门.<br>可靠性考虑多少次开门关门之后开门关门的机械组件才失效</p>
+<h3 id="电梯操作面板"><a href="#电梯操作面板" class="headerlink" title="电梯操作面板"></a>电梯操作面板</h3><p>操作面板这块实际上分为界面控件状态改变和指令转换两大块,在通过操作操作面板按钮后，同时<br>改变按钮状态以及发送正确指令,而指令处理这块就可</p>
+<ul>
+<li>门开关按钮, 开关有效,开关无效</li>
+<li>楼层按钮，启用,取消，灯亮，灯关</li>
+<li>电梯上下调度, 多个按钮被按下之后,结合电梯自己所在位置决定运行方案</li>
+<li>易用性等，因为是见人的地方，所有就有usability 测试</li>
+</ul>
+<h3 id="指令控制系统"><a href="#指令控制系统" class="headerlink" title="指令控制系统"></a>指令控制系统</h3><p>指令控制系统可以认为根据电梯运行时的上下文,调度电梯运行的一个模块,这里面应该是根据某种规则<br>发出实际控制电梯的信号，具体什么的规则其实很难断定。</p>
+<h3 id="扩展到多个电梯的调度测试"><a href="#扩展到多个电梯的调度测试" class="headerlink" title="扩展到多个电梯的调度测试"></a>扩展到多个电梯的调度测试</h3><p>有可能会有多个电梯的调度，同样也是需要一套规则再来进行测试的</p>
+<p>这个文章写的有点粗糙,主要凭空去想这些case太伤脑袋，但是总体而言个人认为这是一个考虑问题的方向，同时个人觉得在一个短时间内<br>针对这样一个系统说写出很多测试用例，其实也就是呵呵了。<br>也许有更好的方法来总结这样的测试,可能类似于探索性测试之类的，希望有人能够指正。<br>同时我们也可以看到设计测试用例要包含多少东西,测试需要了解:</p>
+<ul>
+<li>产品需求(没有需要推测:))</li>
+<li>功能</li>
+<li>可靠性</li>
+<li>性能</li>
+<li>扩展性</li>
+<li>可用性</li>
+</ul>
+<p>从high level看可能还有更多,这些一个人都可以搞定的话,这个人还是人吗?而在实际的工作中这些会有都<br>多少人都进行相关类型的测试？不说进行这样的测试，估计连衡量这些测试的优先级都不会,有人说的头头<br>是道，可是真的有多少实践呢？</p>
+<p>生活可能就是这样的,说的天花乱坠的,可能其实都是别人的经验,如果真的自己动手做的时候,就说需要找人做.<br>然后他就成为领导了.也有更大的领导在说一个什么事情的时候，就接入一个宏大的名词，然后大领导一听，对，<br>然后他也成了领导了. 而做事的人苦苦的寻觅着那些宏大名次的解答，更为关键的是,很可能是你一个人去寻找<br>很多宏大名词的解答.</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/testing/">testing</a>, <a href="/categories/testing/thoughts/">thoughts</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/testing/">testing</a><a href="/tags/thoughts/">thoughts</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2015/09/24/tips/automation/2015-09-24-page-factory/"><span>Page Factory in Selenium</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/09/24/tips/automation/2015-09-24-page-factory/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-09-23T18:31:11.000Z">
+          2015-09-24
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>本文主要用来分析Page Factory实现的原理以及一些扩展的可能性。</p>
+<h2 id="Page-Factory-的例子"><a href="#Page-Factory-的例子" class="headerlink" title="Page Factory 的例子"></a>Page Factory 的例子</h2><p><a target="_blank" rel="noopener" href="https://code.google.com/p/selenium/wiki/PageFactory">Selenium Page Factory Wiki</a></p>
+<p>首先解释一下这个例子：</p>
+<ul>
+<li>使用注解描述元素定位</li>
+<li>使用 <code>PageFactory.initElements(driver, page);</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GoogleSearchPage</span> </span>&#123;</span><br><span class="line">    <span class="comment">// The element is now looked up using the name attribute</span></span><br><span class="line">    <span class="meta">@FindBy(how = How.NAME, using = &quot;q&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> WebElement searchBox;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">searchFor</span><span class="params">(String text)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// We continue using the element just as before</span></span><br><span class="line">        searchBox.sendKeys(text);</span><br><span class="line">        searchBox.submit();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">searchFor</span><span class="params">(String text)</span> </span>&#123;</span><br><span class="line">    GoogleSearchPage page＝ PageFactory.initElements(<span class="keyword">new</span> ChromeDriver(), GoogleSearchPage.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上一个显而易见的好处就是减少了查找元素的代码量，比如类似于一下的代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">driver.findElement(By.id(<span class="string">&quot;q&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>但是只有这样的好处吗？我们先从分析Selenium Page Factory实现的原理说起</p>
+<p>##Page Factory 实现的原理</p>
+<p>PageFactory 是使用反射(Reflection)和动态代理(dynamic proxies)的方式来创建页面的每<br>每个元素:</p>
+<ul>
+<li>PageFactory: initElements and proxyFields</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">initElements</span><span class="params">(FieldDecorator decorator, Object page)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(Class proxyIn = page.getClass(); proxyIn != Object.class; proxyIn = proxyIn.getSuperclass()) &#123;</span><br><span class="line">        proxyFields(decorator, page, proxyIn);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">proxyFields</span><span class="params">(FieldDecorator decorator, Object page, Class&lt;?&gt; proxyIn)</span> </span>&#123;</span><br><span class="line">    Field[] fields = proxyIn.getDeclaredFields();</span><br><span class="line">    Field[] arr$ = fields;</span><br><span class="line">    <span class="keyword">int</span> len$ = fields.length;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i$ = <span class="number">0</span>; i$ &lt; len$; ++i$) &#123;</span><br><span class="line">        Field field = arr$[i$];</span><br><span class="line">        Object value = decorator.decorate(page.getClass().getClassLoader(), field);</span><br><span class="line">        <span class="keyword">if</span>(value != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">                field.set(page, value);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IllegalAccessException var10) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(var10);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>FieldDecorator：DefaultFieldDecorator 源码<br>从DefaultFieldDecorator的源码看:</li>
+</ul>
+<ol>
+<li>实现decorate方法,WebElement 和List<WebElement> 都是通过proxy的方式创建的</li>
+<li>每个Proxy的方式都有一个对应的invocationHandler处理<br>Selenium的源码有两个invocationHandler：<ul>
+<li>LocatingElementHandler</li>
+<li>LocatingElementListHandler</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">decorate</span><span class="params">(ClassLoader loader, Field field)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!WebElement.class.isAssignableFrom(field.getType()) &amp;&amp; !<span class="keyword">this</span>.isDecoratableList(field)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            ElementLocator locator = <span class="keyword">this</span>.factory.createLocator(field);</span><br><span class="line">            <span class="keyword">return</span> locator == <span class="keyword">null</span>?<span class="keyword">null</span>:(WebElement.class.isAssignableFrom(field.getType())?<span class="keyword">this</span>.proxyForLocator(loader, locator):(List.class.isAssignableFrom(field.getType())?<span class="keyword">this</span>.proxyForListLocator(loader, locator):<span class="keyword">null</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isDecoratableList</span><span class="params">(Field field)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!List.class.isAssignableFrom(field.getType())) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            Type genericType = field.getGenericType();</span><br><span class="line">            <span class="keyword">if</span>(!(genericType <span class="keyword">instanceof</span> ParameterizedType)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                Type listType = ((ParameterizedType)genericType).getActualTypeArguments()[<span class="number">0</span>];</span><br><span class="line">                <span class="keyword">return</span> !WebElement.class.equals(listType)?<span class="keyword">false</span>:field.getAnnotation(FindBy.class) != <span class="keyword">null</span> || field.getAnnotation(FindBys.class) != <span class="keyword">null</span> || field.getAnnotation(FindAll.class) != <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> WebElement <span class="title">proxyForLocator</span><span class="params">(ClassLoader loader, ElementLocator locator)</span> </span>&#123;</span><br><span class="line">        LocatingElementHandler handler = <span class="keyword">new</span> LocatingElementHandler(locator);</span><br><span class="line">        WebElement proxy = (WebElement)Proxy.newProxyInstance(loader, <span class="keyword">new</span> Class[]&#123;WebElement.class, WrapsElement.class, Locatable.class&#125;, handler);</span><br><span class="line">        <span class="keyword">return</span> proxy;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> List&lt;WebElement&gt; <span class="title">proxyForListLocator</span><span class="params">(ClassLoader loader, ElementLocator locator)</span> </span>&#123;</span><br><span class="line">        LocatingElementListHandler handler = <span class="keyword">new</span> LocatingElementListHandler(locator);</span><br><span class="line">        List proxy = (List)Proxy.newProxyInstance(loader, <span class="keyword">new</span> Class[]&#123;List.class&#125;, handler);</span><br><span class="line">        <span class="keyword">return</span> proxy;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们再看一下LocatingElementHandler,可以看到实际在待用PageFactory创建的元素时候<br>都是通过这个掉用LocatingElementHandler:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LocatingElementHandler</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ElementLocator locator;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LocatingElementHandler</span><span class="params">(ElementLocator locator)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.locator = locator;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object object, Method method, Object[] objects)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        WebElement element;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            element = <span class="keyword">this</span>.locator.findElement();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchElementException var7) &#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="string">&quot;toString&quot;</span>.equals(method.getName())) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="string">&quot;Proxy element for: &quot;</span> + <span class="keyword">this</span>.locator.toString();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">throw</span> var7;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(<span class="string">&quot;getWrappedElement&quot;</span>.equals(method.getName())) &#123;</span><br><span class="line">            <span class="keyword">return</span> element;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> method.invoke(element, objects);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InvocationTargetException var6) &#123;</span><br><span class="line">                <span class="keyword">throw</span> var6.getCause();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上Selenium PageFactory大致的实现，从过程来看：<br>PageFaction-&gt; initElements-&gt; proxyFields</p>
+<h2 id="Page-Factory-有什么好处"><a href="#Page-Factory-有什么好处" class="headerlink" title="Page Factory 有什么好处"></a>Page Factory 有什么好处</h2><p>个人理解的好处:</p>
+<ul>
+<li>可以通过修改InvocationHandler里面的处理,比如<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element = <span class="keyword">this</span>.locator.findElement();</span><br></pre></td></tr></table></figure>
+如果都使用wait().util的方式,这样可以使所有查找的元素更加稳定</li>
+<li>使用了proxy的方式,在实例化WebElement的时候，实际上不管WebElement存在不存在都可以创建<br>而实际findElement都会延迟到真的调用这个元素时执行,这带来一个好处就是如果WebElement的实例创建后<br>页面DOM刷新后,需要重新查找WebElement,否则可能抛出StaleElementReferenceException,而Proxy之后每次都会自动<br>查找,这样就减少了代码处理</li>
+<li>工厂的设计模式同时也带了了灵活程度,在创建页面或者页面元素的时候,可以开始添加统一的前置或者后置的处理</li>
+</ul>
+<p>但是可惜的是Selenium并没有提供开发的接口来让用户定制,所以如果自己定制PageFactory模式,则需要自己去实现Selenium这<br>一套方法,同时加入自己特殊的实现</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/automation/">automation</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/automation/">automation</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+
+<nav class="pagination">
+  
+  <a href="/page/42/" class="pagination-prev">上一页</a>
+  
+  
+  <a href="/page/44/" class="pagination-next">下一页</a>
+  
+</nav>
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

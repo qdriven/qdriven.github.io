@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>服务器免密登录 | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="10Minutes,productivity,devops">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="服务器免密登录"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>服务器免密登录</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2020/01/13/tips/ssh-login/" rel="bookmark">
+        <time class="entry-date published" datetime="2020-01-12T18:19:56.000Z">
+          2020-01-13
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>使用下例中<code>ssh-keygen</code>和<code>ssh-copy-id</code>，仅需通过3个步骤的简单设置而无需输入密码就能登录远程Linux主机。 </p>
+<ul>
+<li><code>ssh-keygen</code> 创建公钥和密钥。 </li>
+<li><code>ssh-copy-id</code> 把本地主机的公钥复制到远程主机的<code>authorized_keys</code>文件上。</li>
+<li><code>ssh-copy-id</code> 也会给远程主机的用户主目录（home）和<code>~/.ssh</code>, 和<code>~/.ssh/authorized_keys</code>设置合适的权限 。</li>
+</ul>
+<p>####步骤1: 用 <code>ssh-key-gen</code> 在本地主机上创建公钥和密钥</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa</span><br><span class="line">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key (/home/sub/.ssh/id_rsa):[Enter key] </span><br><span class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase): [Press enter key]</span><br><span class="line">Enter same passphrase again: [Pess enter key]</span><br><span class="line">Your identification has been saved <span class="keyword">in</span> /home/sub/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved <span class="keyword">in</span> /home/sub/.ssh/id_rsa.pub. </span><br><span class="line">The key fingerprint is: 35:a4:b9:2f:c1:53:2a:42:88:df:89:dc:c1:e3:b8:a2 </span><br></pre></td></tr></table></figure>
+
+<p>####步骤2: 用 <code>ssh-copy-id</code> 把公钥复制到远程主机上</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-copy-id root@10.79.53.164</span><br><span class="line">Could not open a connection to your authentication agent.</span><br><span class="line">root@10.79.53.164<span class="string">&#x27;s password:</span></span><br><span class="line"><span class="string">Now try logging into the machine, with &quot;ssh &#x27;</span>root@10.79.53.164<span class="string">&#x27;&quot;, and check in:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  .ssh/authorized_keys</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">to make sure we haven&#x27;</span>t added extra keys that you weren<span class="string">&#x27;t expecting.</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注: <code>ssh-copy-id</code> 把公钥分发即追加到远程主机的 <code>.ssh/authorized_key</code> 上.</p>
+</blockquote>
+<p>####步骤3: 直接登录远程主机</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ssh root@10.79.53.164</span><br><span class="line">Last login: Thu May 21 02:46:19 2015 from 10.140.80.223</span><br><span class="line">root@vbox$ </span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注: 无需输入密码</p>
+</blockquote>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/10Minutes/">10Minutes</a><a href="/tags/productivity/">productivity</a><a href="/tags/devops/">devops</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

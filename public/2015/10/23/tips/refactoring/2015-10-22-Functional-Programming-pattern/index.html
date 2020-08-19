@@ -1,0 +1,225 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Functional Patterns | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="designpattern">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Functional Patterns"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Functional Patterns</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/10/23/tips/refactoring/2015-10-22-Functional-Programming-pattern/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-10-22T18:31:11.000Z">
+          2015-10-23
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="Functional-patterns"><a href="#Functional-patterns" class="headerlink" title="Functional patterns"></a>Functional patterns</h2><ul>
+<li>Core Principles of FP design<ul>
+<li>Functions</li>
+<li>Types</li>
+<li>Composition</li>
+</ul>
+</li>
+<li>Functions as parameters<ul>
+<li>Abstraction,Dependency injection</li>
+<li>Partial application, Continuations,Folds</li>
+</ul>
+</li>
+<li>Chaining Functions<ul>
+<li>Error handling, Async</li>
+<li>Monads</li>
+</ul>
+</li>
+<li>Dealing with wrapped data<ul>
+<li>Lifting,Functors</li>
+<li>Validation with applicatives</li>
+</ul>
+</li>
+<li>Aggregating data and operations<ul>
+<li>Monoids</li>
+</ul>
+</li>
+</ul>
+<h2 id="Functional-programming-is-scary"><a href="#Functional-programming-is-scary" class="headerlink" title="Functional programming is scary"></a>Functional programming is scary</h2><ul>
+<li>Functors</li>
+<li>applicatives</li>
+<li>currying</li>
+<li>catamorphism</li>
+<li>Monad</li>
+<li>Monoid</li>
+<li>chainable</li>
+<li>aggregatable</li>
+<li>mappable</li>
+</ul>
+<h2 id="Object-oriented-programming-is-scary"><a href="#Object-oriented-programming-is-scary" class="headerlink" title="Object oriented programming is scary"></a>Object oriented programming is scary</h2><ul>
+<li>Generic</li>
+<li>Polymorphism</li>
+<li>Interface</li>
+<li>Inheritance</li>
+<li>SOLID: SRP,OCP,LSP,ISP,DIP,……</li>
+<li>Covariance</li>
+<li>IOC,DI,MVC</li>
+</ul>
+<h2 id="OO-Patterns-VS-FP-Patterns"><a href="#OO-Patterns-VS-FP-Patterns" class="headerlink" title="OO Patterns VS FP Patterns"></a>OO Patterns VS FP Patterns</h2><ul>
+<li><p>OO pattern/principle<br>• Single Responsibility Principle<br>• Open/Closed principle<br>• Dependency Inversion Principle<br>• Interface Segregation Principle<br>• Factory pattern<br>• Strategy pattern<br>• Decorator pattern<br>• Visitor pattern</p>
+</li>
+<li><p>FP pattern/principle<br>• Functions<br>• Functions<br>• Functions, also<br>• Functions<br>• Yes, functions<br>• Oh my, functions again! • Functions<br>• Functions</p>
+</li>
+</ul>
+<p>:)</p>
+<h2 id="Functional-programming"><a href="#Functional-programming" class="headerlink" title="Functional programming"></a>Functional programming</h2><p>Haskell,OCaml, etc</p>
+<h2 id="Core-Principles-of-FP-Design"><a href="#Core-Principles-of-FP-Design" class="headerlink" title="Core Principles of FP Design"></a>Core Principles of FP Design</h2><ul>
+<li>Steal from mathematics</li>
+<li>Types are not classes</li>
+<li>Functions are things</li>
+<li>Composition everytwhere</li>
+</ul>
+<h3 id="Mathematics-functions"><a href="#Mathematics-functions" class="headerlink" title="Mathematics functions"></a>Mathematics functions</h3><p>• Input and output values already exist<br>• A function is not a calculation, just a mapping<br>• Input and output values are unchanged (immutable)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let add1 x &#x3D; x+1</span><br><span class="line">va1 add1: int-&gt;int</span><br></pre></td></tr></table></figure>
+
+<h3 id="Guideline-Strive-for-purity"><a href="#Guideline-Strive-for-purity" class="headerlink" title="Guideline: Strive for purity"></a>Guideline: Strive for purity</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">￼let x &#x3D; doSomething()</span><br><span class="line">let y &#x3D; doSomethingElse(x)</span><br><span class="line">return y + 1</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let helper() &#x3D;</span><br><span class="line">￼   let x &#x3D; doSomething()</span><br><span class="line">   let y &#x3D; doSomethingElse(x)</span><br><span class="line">   return y</span><br><span class="line">return helper() + 1</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Laziness: only evaluate when I need output</li>
+<li>Cacheable results<br>same answer every time – “memoization”</li>
+<li>No order dependencies</li>
+<li>Parallelizable  </li>
+<li>No Side Effects</li>
+<li>Immutable data</li>
+</ul>
+<p>Haskell/Clojure</p>
+<h3 id="Types-are-not-classes"><a href="#Types-are-not-classes" class="headerlink" title="Types are not classes"></a>Types are not classes</h3><p>set of valid inputs and sets of valid output</p>
+<p>Data Behavior Data</p>
+<h3 id="Functions-are-things"><a href="#Functions-are-things" class="headerlink" title="Functions are things"></a>Functions are things</h3><p>A function is a standalone thing, not attached to a class.<br>Functions as inputs and outputs</p>
+<h3 id="Composition-everywhere"><a href="#Composition-everywhere" class="headerlink" title="Composition everywhere"></a>Composition everywhere</h3><p>Types can be composed too<br>“algebraic types”</p>
+<ul>
+<li>Product type: *<br>set of people * set of dates</li>
+<li>Sum type: +<br>set of cash value + set of cheque value+ set of credit card value</li>
+</ul>
+<h3 id="DDD-amp-DOMAIN-MODELING"><a href="#DDD-amp-DOMAIN-MODELING" class="headerlink" title="DDD &amp; DOMAIN MODELING"></a>DDD &amp; DOMAIN MODELING</h3><p>to be continue ……….</p>
+<p>发现函数式编程其实挺有意思的，函数式我觉的可以比面向对象更为抽象，所以他的代码少<br>是有道理的。</p>
+<p>￼</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/designpattern/">designpattern</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

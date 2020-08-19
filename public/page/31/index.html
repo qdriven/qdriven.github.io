@@ -1,0 +1,301 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第 31 页 | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2016/01/27/tips/automation/2016-01-27-web-dev/"><span>WEB 开发的几个重点</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/01/27/tips/automation/2016-01-27-web-dev/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-01-27T14:47:28.000Z">
+          2016-01-27
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>再试用了Web 开发的框架之后，归纳一下大致的一个基础Web 开发需要的那些元素:</p>
+<ul>
+<li>URL Router，如何定义URL的访问</li>
+<li>Request Handler/Response Handler， HTTP请求/返回的处理<ul>
+<li>如果组织这些Request Handler/Response Handler</li>
+<li>如何定义全局/局部的URL拦截器</li>
+<li>如何处理特殊的HTTP Header</li>
+<li>如何处理Session/Cookie  </li>
+</ul>
+</li>
+<li>Database Access Layer/ORM， 数据操作CRUD<ul>
+<li>如何CRUD</li>
+<li>如何进行分页，排序，filterByCriteria…..等数据库的常见操作</li>
+<li>如何管理事务</li>
+<li>如何定义，初始化数据库表</li>
+<li>如何组织不同的数据库操作成不同的业务动作</li>
+<li>详细，复杂的ORM操作可以不用太在意</li>
+</ul>
+</li>
+<li>Template Render,模版渲染<ul>
+<li>不同模版的试用</li>
+<li>静态资源的访问</li>
+</ul>
+</li>
+<li>单元测试<ul>
+<li>断言，EXCEPTION检查</li>
+<li>Mock</li>
+<li>数据，内存数据库的使用</li>
+</ul>
+</li>
+<li>Web Application部署<ul>
+<li>不同环境的配置管理</li>
+<li>不同语言的打包工具，如MAVEN，GRADLE</li>
+<li>不同的构建工具,GULP</li>
+<li>不同的服务器，NGINX，TOMCAT，JBOSS</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/automation/">automation</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/automation/">automation</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2016/01/11/tips/refactoring/2016-01-11-ptyhon-design-pattern-chain/"><span>ptyhon design pattern: chain of responsibility</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/01/11/tips/refactoring/2016-01-11-ptyhon-design-pattern-chain/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-01-11T15:35:45.000Z">
+          2016-01-11
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>python 的责任链模式.</p>
+<p><strong><em>方法链：</em></strong></p>
+<p>上代码吧： 其实就死return 了一个self，java里面可能是this</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>(<span class="params">object</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, action</span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.action = action</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">do_action</span>(<span class="params">self</span>):</span></span><br><span class="line">        print(self.name, self.action.name, end=<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> self.action</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Action</span>(<span class="params">object</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name</span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">amount</span>(<span class="params">self, val</span>):</span></span><br><span class="line">        print(val, end=<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">stop</span>(<span class="params">self</span>):</span></span><br><span class="line">        print(<span class="string">&#x27;then stop&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    move = Action(<span class="string">&#x27;move&#x27;</span>)</span><br><span class="line">    person=Person(<span class="string">&#x27;Jack&#x27;</span>,move)</span><br><span class="line">    person.do_action().amount(<span class="string">&#x27;5m&#x27;</span>).stop</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>责任链:</em></strong></p>
+<p>这是一个责任链的模式，一个handler叠加，下例中：<br>ConcreteHandler1-&gt;ConcreteHandler3-&gt;ConcreteHandler2-&gt;DefaultHandler,<br>那么如果第一个request满足了ConcreteHandler1的条件，就结束了，如果没有怎尝试ConcreteHandler3，知道满足了就退出.<br>这样就把一大批if else 转化成不同的handler了.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Handler</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, successor</span>):</span></span><br><span class="line">        self._successor = successor;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">handle</span>(<span class="params">self, request</span>):</span></span><br><span class="line">        i = self._handle(request)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> i:</span><br><span class="line">            self._successor.handle(request)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_handle</span>(<span class="params">self, request</span>):</span></span><br><span class="line">        <span class="keyword">raise</span> NotImplementedError(<span class="string">&#x27;Must provide implementation in subclass.&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteHandler1</span>(<span class="params">Handler</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_handle</span>(<span class="params">self, request</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="number">0</span> &lt; request &lt;= <span class="number">10</span>:</span><br><span class="line">            print(<span class="string">&#x27;request &#123;&#125; handled in handler 1&#x27;</span>.format(request))</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteHandler2</span>(<span class="params">Handler</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_handle</span>(<span class="params">self, request</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="number">10</span> &lt; request &lt;= <span class="number">20</span>:</span><br><span class="line">            print(<span class="string">&#x27;request &#123;&#125; handled in handler 2&#x27;</span>.format(request))</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteHandler3</span>(<span class="params">Handler</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_handle</span>(<span class="params">self, request</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="number">20</span> &lt; request &lt;= <span class="number">30</span>:</span><br><span class="line">            print(<span class="string">&#x27;request &#123;&#125; handled in handler 3&#x27;</span>.format(request))</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DefaultHandler</span>(<span class="params">Handler</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_handle</span>(<span class="params">self, request</span>):</span></span><br><span class="line">        print(<span class="string">&#x27;end of chain, no handler for &#123;&#125;&#x27;</span>.format(request))</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.handler = ConcreteHandler1(ConcreteHandler3(ConcreteHandler2(DefaultHandler(<span class="literal">None</span>))))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">delegate</span>(<span class="params">self, requests</span>):</span></span><br><span class="line">        <span class="keyword">for</span> request <span class="keyword">in</span> requests:</span><br><span class="line">            self.handler.handle(request)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    client = Client()</span><br><span class="line">    requests = [<span class="number">2</span>, <span class="number">5</span>, <span class="number">14</span>, <span class="number">22</span>, <span class="number">18</span>, <span class="number">3</span>, <span class="number">35</span>, <span class="number">27</span>, <span class="number">20</span>]</span><br><span class="line">    client.delegate(requests)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/designpattern/">designpattern</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2016/01/11/tips/refactoring/2016-01-11-python-design-pattern-borg/"><span>python-borg-design-pattern</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/01/11/tips/refactoring/2016-01-11-python-design-pattern-borg/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-01-11T15:05:26.000Z">
+          2016-01-11
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>Python Design Pattern: Borg</p>
+<h2 id="Borg"><a href="#Borg" class="headerlink" title="Borg"></a>Borg</h2><p>Borg 模式实际上就是一个类的多个实例共享一个相同的状态.<br>简单的代码实现如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">__author__ = <span class="string">&#x27;patrick&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Borg</span>:</span></span><br><span class="line">    _share_state = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.__dict__ = self._share_state</span><br><span class="line">        self.state = <span class="string">&#x27;Init&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.state</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">YourBorg</span>(<span class="params">Borg</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    rm1 = Borg()</span><br><span class="line">    rm2 = Borg()</span><br><span class="line">    rm1.state = <span class="string">&#x27;Idle&#x27;</span></span><br><span class="line">    rm2.state = <span class="string">&#x27;Running&#x27;</span></span><br><span class="line"></span><br><span class="line">    print(<span class="string">&#x27;rm1: &#123;0&#125;&#x27;</span>.format(rm1))</span><br><span class="line">    print(<span class="string">&#x27;rm2: &#123;0&#125;&#x27;</span>.format(rm2))</span><br><span class="line"></span><br><span class="line">    rm2.state = <span class="string">&#x27;Zombie&#x27;</span></span><br><span class="line"></span><br><span class="line">    print(<span class="string">&#x27;rm1: &#123;0&#125;&#x27;</span>.format(rm1))</span><br><span class="line">    print(<span class="string">&#x27;rm2: &#123;0&#125;&#x27;</span>.format(rm2))</span><br><span class="line"></span><br><span class="line">    print(<span class="string">&#x27;rm1 id: &#123;0&#125;&#x27;</span>.format(id(rm1)))</span><br><span class="line">    print(<span class="string">&#x27;rm2 id: &#123;0&#125;&#x27;</span>.format(id(rm2)))</span><br><span class="line"></span><br><span class="line">    rm3 = YourBorg()</span><br><span class="line"></span><br><span class="line">    print(<span class="string">&#x27;rm1: &#123;0&#125;&#x27;</span>.format(rm1))</span><br><span class="line">    print(<span class="string">&#x27;rm2: &#123;0&#125;&#x27;</span>.format(rm2))</span><br><span class="line">    print(<span class="string">&#x27;rm3: &#123;0&#125;&#x27;</span>.format(rm3))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/designpattern/">designpattern</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+
+<nav class="pagination">
+  
+  <a href="/page/30/" class="pagination-prev">上一页</a>
+  
+  
+  <a href="/page/32/" class="pagination-next">下一页</a>
+  
+</nav>
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

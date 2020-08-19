@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Page Factory in Selenium | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="automation">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Page Factory in Selenium"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Page Factory in Selenium</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/09/24/tips/automation/2015-09-24-page-factory/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-09-23T18:31:11.000Z">
+          2015-09-24
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>本文主要用来分析Page Factory实现的原理以及一些扩展的可能性。</p>
+<h2 id="Page-Factory-的例子"><a href="#Page-Factory-的例子" class="headerlink" title="Page Factory 的例子"></a>Page Factory 的例子</h2><p><a target="_blank" rel="noopener" href="https://code.google.com/p/selenium/wiki/PageFactory">Selenium Page Factory Wiki</a></p>
+<p>首先解释一下这个例子：</p>
+<ul>
+<li>使用注解描述元素定位</li>
+<li>使用 <code>PageFactory.initElements(driver, page);</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GoogleSearchPage</span> </span>&#123;</span><br><span class="line">    <span class="comment">// The element is now looked up using the name attribute</span></span><br><span class="line">    <span class="meta">@FindBy(how = How.NAME, using = &quot;q&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> WebElement searchBox;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">searchFor</span><span class="params">(String text)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// We continue using the element just as before</span></span><br><span class="line">        searchBox.sendKeys(text);</span><br><span class="line">        searchBox.submit();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">searchFor</span><span class="params">(String text)</span> </span>&#123;</span><br><span class="line">    GoogleSearchPage page＝ PageFactory.initElements(<span class="keyword">new</span> ChromeDriver(), GoogleSearchPage.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上一个显而易见的好处就是减少了查找元素的代码量，比如类似于一下的代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">driver.findElement(By.id(<span class="string">&quot;q&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>但是只有这样的好处吗？我们先从分析Selenium Page Factory实现的原理说起</p>
+<p>##Page Factory 实现的原理</p>
+<p>PageFactory 是使用反射(Reflection)和动态代理(dynamic proxies)的方式来创建页面的每<br>每个元素:</p>
+<ul>
+<li>PageFactory: initElements and proxyFields</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">initElements</span><span class="params">(FieldDecorator decorator, Object page)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(Class proxyIn = page.getClass(); proxyIn != Object.class; proxyIn = proxyIn.getSuperclass()) &#123;</span><br><span class="line">        proxyFields(decorator, page, proxyIn);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">proxyFields</span><span class="params">(FieldDecorator decorator, Object page, Class&lt;?&gt; proxyIn)</span> </span>&#123;</span><br><span class="line">    Field[] fields = proxyIn.getDeclaredFields();</span><br><span class="line">    Field[] arr$ = fields;</span><br><span class="line">    <span class="keyword">int</span> len$ = fields.length;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i$ = <span class="number">0</span>; i$ &lt; len$; ++i$) &#123;</span><br><span class="line">        Field field = arr$[i$];</span><br><span class="line">        Object value = decorator.decorate(page.getClass().getClassLoader(), field);</span><br><span class="line">        <span class="keyword">if</span>(value != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">                field.set(page, value);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IllegalAccessException var10) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(var10);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>FieldDecorator：DefaultFieldDecorator 源码<br>从DefaultFieldDecorator的源码看:</li>
+</ul>
+<ol>
+<li>实现decorate方法,WebElement 和List<WebElement> 都是通过proxy的方式创建的</li>
+<li>每个Proxy的方式都有一个对应的invocationHandler处理<br>Selenium的源码有两个invocationHandler：<ul>
+<li>LocatingElementHandler</li>
+<li>LocatingElementListHandler</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">decorate</span><span class="params">(ClassLoader loader, Field field)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!WebElement.class.isAssignableFrom(field.getType()) &amp;&amp; !<span class="keyword">this</span>.isDecoratableList(field)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            ElementLocator locator = <span class="keyword">this</span>.factory.createLocator(field);</span><br><span class="line">            <span class="keyword">return</span> locator == <span class="keyword">null</span>?<span class="keyword">null</span>:(WebElement.class.isAssignableFrom(field.getType())?<span class="keyword">this</span>.proxyForLocator(loader, locator):(List.class.isAssignableFrom(field.getType())?<span class="keyword">this</span>.proxyForListLocator(loader, locator):<span class="keyword">null</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isDecoratableList</span><span class="params">(Field field)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!List.class.isAssignableFrom(field.getType())) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            Type genericType = field.getGenericType();</span><br><span class="line">            <span class="keyword">if</span>(!(genericType <span class="keyword">instanceof</span> ParameterizedType)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                Type listType = ((ParameterizedType)genericType).getActualTypeArguments()[<span class="number">0</span>];</span><br><span class="line">                <span class="keyword">return</span> !WebElement.class.equals(listType)?<span class="keyword">false</span>:field.getAnnotation(FindBy.class) != <span class="keyword">null</span> || field.getAnnotation(FindBys.class) != <span class="keyword">null</span> || field.getAnnotation(FindAll.class) != <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> WebElement <span class="title">proxyForLocator</span><span class="params">(ClassLoader loader, ElementLocator locator)</span> </span>&#123;</span><br><span class="line">        LocatingElementHandler handler = <span class="keyword">new</span> LocatingElementHandler(locator);</span><br><span class="line">        WebElement proxy = (WebElement)Proxy.newProxyInstance(loader, <span class="keyword">new</span> Class[]&#123;WebElement.class, WrapsElement.class, Locatable.class&#125;, handler);</span><br><span class="line">        <span class="keyword">return</span> proxy;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> List&lt;WebElement&gt; <span class="title">proxyForListLocator</span><span class="params">(ClassLoader loader, ElementLocator locator)</span> </span>&#123;</span><br><span class="line">        LocatingElementListHandler handler = <span class="keyword">new</span> LocatingElementListHandler(locator);</span><br><span class="line">        List proxy = (List)Proxy.newProxyInstance(loader, <span class="keyword">new</span> Class[]&#123;List.class&#125;, handler);</span><br><span class="line">        <span class="keyword">return</span> proxy;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们再看一下LocatingElementHandler,可以看到实际在待用PageFactory创建的元素时候<br>都是通过这个掉用LocatingElementHandler:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LocatingElementHandler</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ElementLocator locator;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LocatingElementHandler</span><span class="params">(ElementLocator locator)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.locator = locator;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object object, Method method, Object[] objects)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        WebElement element;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            element = <span class="keyword">this</span>.locator.findElement();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchElementException var7) &#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="string">&quot;toString&quot;</span>.equals(method.getName())) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="string">&quot;Proxy element for: &quot;</span> + <span class="keyword">this</span>.locator.toString();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">throw</span> var7;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(<span class="string">&quot;getWrappedElement&quot;</span>.equals(method.getName())) &#123;</span><br><span class="line">            <span class="keyword">return</span> element;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> method.invoke(element, objects);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InvocationTargetException var6) &#123;</span><br><span class="line">                <span class="keyword">throw</span> var6.getCause();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上Selenium PageFactory大致的实现，从过程来看：<br>PageFaction-&gt; initElements-&gt; proxyFields</p>
+<h2 id="Page-Factory-有什么好处"><a href="#Page-Factory-有什么好处" class="headerlink" title="Page Factory 有什么好处"></a>Page Factory 有什么好处</h2><p>个人理解的好处:</p>
+<ul>
+<li>可以通过修改InvocationHandler里面的处理,比如<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element = <span class="keyword">this</span>.locator.findElement();</span><br></pre></td></tr></table></figure>
+如果都使用wait().util的方式,这样可以使所有查找的元素更加稳定</li>
+<li>使用了proxy的方式,在实例化WebElement的时候，实际上不管WebElement存在不存在都可以创建<br>而实际findElement都会延迟到真的调用这个元素时执行,这带来一个好处就是如果WebElement的实例创建后<br>页面DOM刷新后,需要重新查找WebElement,否则可能抛出StaleElementReferenceException,而Proxy之后每次都会自动<br>查找,这样就减少了代码处理</li>
+<li>工厂的设计模式同时也带了了灵活程度,在创建页面或者页面元素的时候,可以开始添加统一的前置或者后置的处理</li>
+</ul>
+<p>但是可惜的是Selenium并没有提供开发的接口来让用户定制,所以如果自己定制PageFactory模式,则需要自己去实现Selenium这<br>一套方法,同时加入自己特殊的实现</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/automation/">automation</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/automation/">automation</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

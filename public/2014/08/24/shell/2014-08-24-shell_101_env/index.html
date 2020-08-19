@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Shell Learning - 环境变量 | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="shell">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Shell Learning - 环境变量"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Shell Learning - 环境变量</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2014/08/24/shell/2014-08-24-shell_101_env/" rel="bookmark">
+        <time class="entry-date published" datetime="2014-08-23T18:31:11.000Z">
+          2014-08-24
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>摘自：<a target="_blank" rel="noopener" href="http://wklken.me/posts/2014/01/12/shell-script-base.html">http://wklken.me/posts/2014/01/12/shell-script-base.html</a></p>
+<h3 id="env"><a href="#env" class="headerlink" title="env"></a>env</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">env |grep keyword</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改环境变量"><a href="#修改环境变量" class="headerlink" title="修改环境变量"></a>修改环境变量</h3><p>未在当前进程中定义，而是从父进程中继承而来的变量<br>export 设置环境变量,之后,从当前shell 执行的任何程序都会继承这个变量</p>
+<p>PATH 查找可执行文件路径, 通常定义在/etc/environment or /ect/profile or ~/.bashrc</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PYTHONPATH=<span class="variable">$PYTHONPATH</span>:/home/ken/workspace</span><br><span class="line"> <span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/new/path/</span><br></pre></td></tr></table></figure>
+<p>常用的环境变量名：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$HOME</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$PWD</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$USER</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$UID</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$SHELL</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Result</span></span><br><span class="line">╰─[:)] % sh env_variant.sh</span><br><span class="line">/Users/patrick</span><br><span class="line">/Users/patrick/workspace/works/shell_learning</span><br><span class="line">patrick</span><br><span class="line">501</span><br><span class="line">/bin/zsh</span><br></pre></td></tr></table></figure>
+<h3 id="检查是否是root"><a href="#检查是否是root" class="headerlink" title="检查是否是root"></a>检查是否是root</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># root的UID=0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$UID</span> -ne 0 ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;not root user&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;root&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#result:</span></span><br><span class="line">╰─[:)] % sh is_root.sh</span><br><span class="line">not root user</span><br><span class="line">╭─[~/workspace/works/shell_learning]─[patrick@patrickdeMacBook-Pro]─[0]─[10192]</span><br><span class="line">╰─[:)] % su root</span><br><span class="line">Password:</span><br><span class="line">sh-3.2<span class="comment"># sh is_root.sh</span></span><br><span class="line">yes I am root</span><br><span class="line">sh-3.2<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/shell/">shell</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

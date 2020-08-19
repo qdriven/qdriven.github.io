@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Python 面试题 | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="interview">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Python 面试题"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Python 面试题</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/10/22/tips/interview/2015-10-22-python_interview_questions/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-10-21T18:31:11.000Z">
+          2015-10-22
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>测试有的时候出去会遇到一些编程面试题,以下是用python来解决两个简单面试题.</p>
+<h2 id="倒转字符串中的单词的排列"><a href="#倒转字符串中的单词的排列" class="headerlink" title="倒转字符串中的单词的排列"></a>倒转字符串中的单词的排列</h2><p>给定字符串“Hello World!”,经过一段程序运行之后,得到输出结果“World! Hello”,也就是以单词<br>为单位,倒转输入“Hello World!”</p>
+<ul>
+<li>python解法: 不考虑编码格式</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">words = <span class="string">&quot;Hello World!&quot;</span></span><br><span class="line">print(<span class="string">&quot; &quot;</span>.join(reversed(words)))</span><br><span class="line">print(<span class="string">&quot; &quot;</span>.join(words.split(<span class="string">&quot; &quot;</span>)[::<span class="number">-1</span>]))</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Java 解法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReverseWords</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">reverseWords</span><span class="params">(String input)</span></span>&#123;</span><br><span class="line">        String[] words = input.split(<span class="string">&quot; &quot;</span>);</span><br><span class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = words.length-<span class="number">1</span>; i &gt;=<span class="number">0</span> ; i--) &#123;</span><br><span class="line">            sb.append(words[i]);</span><br><span class="line">            sb.append(<span class="string">&quot; &quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> sb.toString().trim();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(reverseWords(<span class="string">&quot;Hello World!&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="输出斐波那契数列"><a href="#输出斐波那契数列" class="headerlink" title="输出斐波那契数列"></a>输出斐波那契数列</h2><p>根据给定的值,输出相同数目的斐波那契列， 如如果给定是1， 则输出1;给定2,输出1,1;<br>给定3，输出1,1,2, 依次类推。</p>
+<ul>
+<li>python 解法</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n &lt;= <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> [<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> [<span class="number">1</span>, <span class="number">1</span>]</span><br><span class="line">    nums = [<span class="number">1</span>, <span class="number">1</span>]</span><br><span class="line">    temp1 = <span class="number">1</span></span><br><span class="line">    temp2 = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n - <span class="number">2</span>):</span><br><span class="line">        append_num = temp1 + temp2</span><br><span class="line">        nums.append(append_num)</span><br><span class="line">        temp1,temp2=temp2,append_num</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> nums</span><br><span class="line"></span><br><span class="line">print(f(<span class="number">3</span>))</span><br><span class="line">print(f(<span class="number">5</span>))</span><br><span class="line">print(f(<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>java 解法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getFibListByNum</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n&lt;=<span class="number">0</span>) <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">&quot;invalid input&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">1</span>) <span class="keyword">return</span> <span class="string">&quot;1&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">2</span>) <span class="keyword">return</span> <span class="string">&quot;1,1&quot;</span>;</span><br><span class="line">    <span class="keyword">int</span> temp1=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> temp2=<span class="number">1</span>;</span><br><span class="line">    String result = <span class="string">&quot;1,1&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">3</span>; i &lt;=n ; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> appendNum = temp1+temp2;</span><br><span class="line">        temp1=temp2;</span><br><span class="line">        temp2=appendNum;</span><br><span class="line">        result=result+<span class="string">&quot;,&quot;</span>+appendNum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/interview/">interview</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/interview/">interview</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

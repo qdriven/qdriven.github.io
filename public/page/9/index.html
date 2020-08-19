@@ -65,15 +65,15 @@
 
   
     
-    <h3 class="article-title"><a href="/2016/02/26/python/2016-02-26-zabbix_monitoring/"><span>zabbix 基础</span></a></h3>
+    <h3 class="article-title"><a href="/2019/12/01/shell/linux_fs/"><span></span></a></h3>
     
   
 
   <div class="article-top-meta">
     <span class="posted-on">
-      <a href="/2016/02/26/python/2016-02-26-zabbix_monitoring/" rel="bookmark">
-        <time class="entry-date published" datetime="2016-02-26T08:48:54.000Z">
-          2016-02-26
+      <a href="/2019/12/01/shell/linux_fs/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-12-01T13:27:38.000Z">
+          2019-12-01
         </time>
       </a>
     </span>
@@ -85,72 +85,31 @@
   <div class="article-content">
     <div class="entry">
       
-        <p>抽空花了1个小时看了一下Zabbix的界面和简单的手册，了解了一下Zabbix的基础知识，下面是一个小小的记录,后面就写一些Python的脚本来直接调用Zabbix的API在进行一些自动化的操作.</p>
-<h1 id="Zabbix-基础"><a href="#Zabbix-基础" class="headerlink" title="Zabbix 基础"></a>Zabbix 基础</h1><p>Zabbix 是一个开源的监控系统，由于需要帮助运维写一些调用ZABBIX API的代码，所以就开始了解一下ZABBIX的一些基本概念. 简单的看了一下Zabbix的一个手册，大致了解Zabbix监控的一些概念，以下是Zabbix中比较重要的概念或者可以认为一些抽象的实体资源:</p>
-<ul>
-<li><p>Configuration</p>
-<ul>
-<li>HOST</li>
-<li>HOST GROUP</li>
-<li>Templates</li>
-</ul>
-</li>
-<li><p>Monitor</p>
-<ul>
-<li>Application</li>
-<li>Items: keys</li>
-<li>Triggers</li>
-<li>Graphs</li>
-</ul>
-</li>
-</ul>
-<h2 id="Configuration-HOST"><a href="#Configuration-HOST" class="headerlink" title="Configuration:HOST"></a>Configuration:HOST</h2><p>HOST 就是Zabbix监控的对象，创建HOST可以通过一些预先定义好的模版来实现.<br>以Linux Group来说的话，HOST可能还有以下的一些属性：</p>
-<ul>
-<li>Agent Interface</li>
-<li>SNMP Interface</li>
-<li>JMX Interface</li>
-<li>IPMI Interface</li>
-<li>Monitory proxy</li>
-<li>Status</li>
-</ul>
-<h2 id="Configuration-HOST-GROUP"><a href="#Configuration-HOST-GROUP" class="headerlink" title="Configuration: HOST GROUP"></a>Configuration: HOST GROUP</h2><p>创建HOST的同时可以创建一个HOST GROUP，HOST GROUP实际上就是不同的HOST组合起来成一组.</p>
-<h2 id="Configuration-Templates"><a href="#Configuration-Templates" class="headerlink" title="Configuration: Templates"></a>Configuration: Templates</h2><p>Templates 就是一些HOST的模版，相似的HOST可以通过模版继承，组合的方式创建</p>
-<h2 id="Monitor"><a href="#Monitor" class="headerlink" title="Monitor"></a>Monitor</h2><p>从监控的层级来看，监控HOST的层级逻辑是：</p>
-<ul>
-<li>HOSTGROUP: HOST GROUP是可以认为不同HOST的容器</li>
-<li>HOST: 监控的实体,监控的实体实际上有不同的监控模版组合而成</li>
-</ul>
-<p>以下的APPLICATION，ITEM,TRIGGER,Graph 其实都是继承了模版的：</p>
-<ul>
-<li>APPLICATION,可以认为是一组监控的内容</li>
-<li>ITEM: item就是监控的具体的一个数值,比如<code>cl Loaded Class Count</code>他的key是<code>jmx[&quot;java.lang:type=ClassLoading&quot;,LoadedClassCount]</code><br>这个ITEM就是具体监控LoadedClass数目的一项，那么多个项目就可以组合成一个Application，ITEM 其实可以认为是采样数据的一个项</li>
-</ul>
-<p>一个Template可以通过多个Application来组合而成，一个Application可以由Items来组合而成，一个HOST包含有多个监控的Template，一个HOST Group可以有多个HOST.</p>
-<p>关于TEMPLATE的继承关系是： HOST 继承HOST GROUP的TEMPLATE</p>
-<ul>
-<li>Graph： 图表</li>
-<li>Trigger： 触发器<br>这两个可以设置到模版级别的</li>
-</ul>
-<h2 id="Monitor-Application"><a href="#Monitor-Application" class="headerlink" title="Monitor: Application"></a>Monitor: Application</h2><p>Application 可以认为是监控的一个大的项目，里面可能包括了不同的采样项目(item)<br>create Application，可以参考一下API文档就可以</p>
-<h2 id="Monitor-Item"><a href="#Monitor-Item" class="headerlink" title="Monitor: Item"></a>Monitor: Item</h2><p>Item创建首先需要创建一个key(在创建KEY之前可以先创建一个TEMPLATE)，key 相当于需要监控什么，如何设置？</p>
-<ul>
-<li>监控客户端设置, 在zabbix_agentd.conf中需要添加UserParameter</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep -v &#x27;#&#x27; /etc/zabbix/zabbix_agentd.conf|grep -v &quot;^$&quot;</span><br><span class="line">export UserParameter=&lt;key_name&gt;,&lt;shell_command&gt; &gt;&gt;  &lt;configure_file_location&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>ITEM的设置，可以设置ITEM的类型，同时使用一些表达是来完成需要的采样内容的设置</li>
-</ul>
-<h2 id="Graphs"><a href="#Graphs" class="headerlink" title="Graphs"></a>Graphs</h2><p>graph 就是图标，那么很明显，一个graph有x,y 轴，x轴一般总是时间序列，另外一个轴对应不同的item（采样项目），同时又一些graph的类型选择，以及图表大小的设置</p>
-<h2 id="Triggers"><a href="#Triggers" class="headerlink" title="Triggers"></a>Triggers</h2><p>Trigger 就是一个触发器，对于单独的一个item来说，如果设置了一些阀值,那么如果超过这个阀值，那么就会报警了.</p>
-<p>这是Zabbix的一些基本概念，其他还有如：</p>
-<ul>
-<li>Action, 遇到问题进行的操作</li>
-<li>Screens: 多个Graph就组合成一个Screen</li>
-<li>Slideshow: 多个Screen可以轮播</li>
-<li>Map: 网络路径图</li>
-<li>Discovery Rule: 发现安装Zabbix Agent的机器的规则</li>
-<li>其他：如一些各种interface的设置，大致有个了结，可能在后续中会使用</li>
-</ul>
+        <h2 id="linux的文件系统"><a href="#linux的文件系统" class="headerlink" title="linux的文件系统"></a>linux的文件系统</h2><h2 id="概述（个人描述）"><a href="#概述（个人描述）" class="headerlink" title="概述（个人描述）"></a>概述（个人描述）</h2><p>linux有个说法，一切皆文件，算是对IO的简化。<br>通常我们操作的目录+文件名是个逻辑上的概念，用以定位，目录也是文件。<br>物理上的概念是分区，分区需要挂载<code>mount</code>到特定目录上使用，挂载后就屏蔽了物理细节了。</p>
+<h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><p>这个用<code>ls -l</code>可以看到详细信息</p>
+<h3 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h3><pre><code>-rwxrwsrwT，三个类别读写执行权限。第一个字符表明文件类型。</code></pre>
+<h3 id="所有者和所属组"><a href="#所有者和所属组" class="headerlink" title="所有者和所属组"></a>所有者和所属组</h3><pre><code>权限是分所有者、所属组和其他人的。</code></pre>
+<h3 id="特殊位"><a href="#特殊位" class="headerlink" title="特殊位"></a>特殊位</h3><pre><code>SUID    u+s,文件执行时以文件所有者的身份执行
+SGID    g+s,文件执行时以文件所属组的身份执行
+SBIT    o+t,针对目录，删除目录中文件的只能是root和所有者</code></pre>
+<h3 id="修改命令"><a href="#修改命令" class="headerlink" title="修改命令"></a>修改命令</h3><pre><code>chown user file
+chgrp group file
+chmod a+x file</code></pre>
+<h3 id="umask"><a href="#umask" class="headerlink" title="umask"></a>umask</h3><pre><code>权限掩码，创建文件是默认权限由他的值控制，回取消其设置的相应权限</code></pre>
+<h2 id="单个文件系统的结构"><a href="#单个文件系统的结构" class="headerlink" title="单个文件系统的结构"></a>单个文件系统的结构</h2><p>linux大致把外部存储空间分为<strong>数据区</strong>和<strong>索引区</strong>，文件系统间独立。这个索引区就是inode了，存文件的大小、权限、拥有者、引用数、block块位置等信息。inode与block的对应是个多级列表的结构，有十几个block指针。</p>
+<p>inode的概念，在使用ln时有用，这个默认创建硬连接（只能是文件），这个时候两个文件指向同一个inode。</p>
+<h2 id="分区挂载"><a href="#分区挂载" class="headerlink" title="分区挂载"></a>分区挂载</h2><p>分区需要挂载才能使用，根<code>/</code>也是如此（这个不明白具体怎么做的）。<br>内核加载时，会根据<code>/etc/fstab</code>的内容加载分区。</p>
+<h2 id="NFS"><a href="#NFS" class="headerlink" title="NFS"></a>NFS</h2><pre><code>Ubuntu下面Ubuntu下的例子
+服务端:
+$apt-get install nfs-kernel-server
+vi /etc/exports 添加nfs目录: /personal/nfs_share 10.1.60.34(rw,sync,no_root_squash)
+$sudo exportfs -r
+$sudo /etc/init.d/portmap start
+$sudo /etc/init.d/nfs-kernel-server start
+客户端:
+$sudo apt-get install nfs-common
+$sudo mount 10.19.34.76:/personal/nfs_share ~/nfsshare</code></pre>
+<h2 id="特定目录含义"><a href="#特定目录含义" class="headerlink" title="特定目录含义"></a>特定目录含义</h2><p>markdown表格支持挫呀，左右都可编辑估计就解决问题了</p>
 
       
     </div>
@@ -161,21 +120,7 @@
     <div class="article-meta pull-left">
 
     
-      
 
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/python/">python</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/python/">python</a>
-    </span>
     
 
     </div>
@@ -190,15 +135,15 @@
 
   
     
-    <h3 class="article-title"><a href="/2016/02/13/python/2016-02-13-python-yaml/"><span>python yaml 使用介绍</span></a></h3>
+    <h3 class="article-title"><a href="/2019/12/01/shell/5.nginx/"><span></span></a></h3>
     
   
 
   <div class="article-top-meta">
     <span class="posted-on">
-      <a href="/2016/02/13/python/2016-02-13-python-yaml/" rel="bookmark">
-        <time class="entry-date published" datetime="2016-02-13T10:38:43.000Z">
-          2016-02-13
+      <a href="/2019/12/01/shell/5.nginx/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-12-01T13:27:18.000Z">
+          2019-12-01
         </time>
       </a>
     </span>
@@ -210,34 +155,50 @@
   <div class="article-content">
     <div class="entry">
       
-        <h1 id="Python-YAML-应用"><a href="#Python-YAML-应用" class="headerlink" title="Python YAML 应用"></a>Python YAML 应用</h1><p>YAML由于其可读性，越来越多的地方用它来做配置文件了来代替XML文件.下面就是用来介绍如何使用PYTHON来进行YAML的操作.<br>读取yaml或者写yaml，主要是用的是两个方法：</p>
+        <h1 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h1><p>file:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/nginx/nginx.conf</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>load 读</li>
-<li>dump 写</li>
+<li><p>work_processor</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux | grep nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>worker_cpu_affinity</p>
+</li>
+<li><p>gzip</p>
+</li>
 </ul>
-<h2 id="Read-YAML-to-List"><a href="#Read-YAML-to-List" class="headerlink" title="Read YAML to List"></a>Read YAML to List</h2><p>以下是读YAML 内容到python的list</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> yaml</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_list</span>():</span></span><br><span class="line">    content = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        - config</span></span><br><span class="line"><span class="string">        - domain</span></span><br><span class="line"><span class="string">        - repository</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> yaml.load(content)</span><br></pre></td></tr></table></figure>
-
-<h2 id="Read-YAML-TO-DICT"><a href="#Read-YAML-TO-DICT" class="headerlink" title="Read YAML TO DICT"></a>Read YAML TO DICT</h2><p>load yaml to dict or a nest dict:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> yaml</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_dict</span>():</span></span><br><span class="line">  content = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">      hello1: test</span></span><br><span class="line"><span class="string">      hello2: test2</span></span><br><span class="line"><span class="string">  &quot;&quot;&quot;</span></span><br><span class="line">  <span class="keyword">return</span> yaml.load(content)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_all_dict</span>():</span></span><br><span class="line">  contents = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    hero:</span></span><br><span class="line"><span class="string">      hp: 34</span></span><br><span class="line"><span class="string">      sp: 8</span></span><br><span class="line"><span class="string">      level: 4</span></span><br><span class="line"><span class="string">    orc:</span></span><br><span class="line"><span class="string">      hp: 12</span></span><br><span class="line"><span class="string">      sp: 0</span></span><br><span class="line"><span class="string">      level: 2</span></span><br><span class="line"><span class="string">  &quot;&quot;&quot;</span></span><br><span class="line">  <span class="keyword">return</span> yaml.load(contents)</span><br><span class="line"></span><br><span class="line">print(load_dict())</span><br><span class="line">print(load_all_dict())</span><br></pre></td></tr></table></figure>
-
-<h2 id="Read-YAML-auto-type-conversation"><a href="#Read-YAML-auto-type-conversation" class="headerlink" title="Read YAML: auto type conversation"></a>Read YAML: auto type conversation</h2><p>yaml 对于格式要求比较严格的，： 后面注意加空格，同时python的原始类型通过load函数可以自动转化的.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> yaml</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_with_type</span>():</span></span><br><span class="line">    contents = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        none: [~,null]</span></span><br><span class="line"><span class="string">        bool: [true,false,on,off]</span></span><br><span class="line"><span class="string">        int: 42</span></span><br><span class="line"><span class="string">        float: 3.1415</span></span><br><span class="line"><span class="string">        list: [test1,test2,test3]</span></span><br><span class="line"><span class="string">        dict: &#123;name: simon,sp: 5&#125;</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> yaml.load(contents)</span><br><span class="line"></span><br><span class="line">print(load_with_type())</span><br><span class="line"></span><br><span class="line"><span class="comment">## result:</span></span><br><span class="line">&#123;<span class="string">&#x27;dict&#x27;</span>: &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;simon&#x27;</span>, <span class="string">&#x27;sp&#x27;</span>: <span class="number">5</span>&#125;, <span class="string">&#x27;none&#x27;</span>: [<span class="literal">None</span>, <span class="literal">None</span>], <span class="string">&#x27;int&#x27;</span>: <span class="number">42</span>, <span class="string">&#x27;bool&#x27;</span>: [<span class="literal">True</span>, <span class="literal">False</span>, <span class="literal">True</span>, <span class="literal">False</span>], <span class="string">&#x27;list&#x27;</span>: [<span class="string">&#x27;test1&#x27;</span>, <span class="string">&#x27;test2&#x27;</span>, <span class="string">&#x27;test3&#x27;</span>], <span class="string">&#x27;float&#x27;</span>: <span class="number">3.1415</span>&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Dump-YAML-write-contents-to-a-yml-file"><a href="#Dump-YAML-write-contents-to-a-yml-file" class="headerlink" title="Dump YAML: write contents to a yml file"></a>Dump YAML: write contents to a yml file</h2><p>使用dump函数直接可以将dict 内容写入到yml文件，这里有两个参数：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    gzip on;</span><br><span class="line">    gzip_comp_level 3;</span><br><span class="line">    gzip_types application/javascript application/xml;</span><br><span class="line">    gzip_static on;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>default_flow_style: 设为false之后就<code>first_name: simon</code> 这种格式了</li>
-<li>default_style: 设为‘“’, first_name 就会加上“”</li>
+<li>IPVS: Internet Protocol Virtual Server</li>
+<li>Weighted Least Connection</li>
+<li>Worker Server</li>
+<li>ipvsadmin</li>
+<li>sysctl</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dump_file</span>():</span></span><br><span class="line">    contents = &#123;</span><br><span class="line">        <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;test&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;first_name&#x27;</span>: <span class="string">&#x27;simon&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;last_name&#x27;</span>: <span class="string">&#x27;kevin&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment"># return yaml.dump(contents)</span></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">&#x27;document.yaml&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">return</span> yaml.dump(contents, f, default_flow_style=<span class="literal">False</span>, default_style=<span class="string">&#x27;&quot;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># file result:</span></span><br><span class="line"><span class="string">&quot;first_name&quot;</span>: <span class="string">&quot;simon&quot;</span></span><br><span class="line"><span class="string">&quot;last_name&quot;</span>: <span class="string">&quot;kevin&quot;</span></span><br><span class="line"><span class="string">&quot;name&quot;</span>: <span class="string">&quot;test&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
 
-<h2 id="复杂一点的YAML格式"><a href="#复杂一点的YAML格式" class="headerlink" title="复杂一点的YAML格式"></a>复杂一点的YAML格式</h2><p>下面一个yaml文件表示了一个JAVA maven项目里面主要的一些目录</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">main:</span><br><span class="line">  - config</span><br><span class="line">  - domain</span><br><span class="line">  - repository</span><br><span class="line">  - service</span><br><span class="line">  - rest:</span><br><span class="line">    - controller</span><br><span class="line">    - dto</span><br><span class="line">    - exception</span><br><span class="line">  - exceptions</span><br><span class="line">  - utils</span><br><span class="line">resources:</span><br><span class="line">  - config</span><br><span class="line">test:</span><br><span class="line">  - config</span><br><span class="line">  - domain</span><br><span class="line">  - repository</span><br><span class="line">  - service</span><br><span class="line">  - rest:</span><br><span class="line">    - controller</span><br><span class="line">    - dto</span><br><span class="line">    - exception</span><br><span class="line">  - exceptions</span><br><span class="line">  - utils</span><br></pre></td></tr></table></figure>
+<ul>
+<li>route<ul>
+<li>Destination</li>
+<li>Gateway</li>
+<li>Flags</li>
+<li>Metric</li>
+<li>Ref</li>
+<li>use</li>
+<li>Iface</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route add default gw 192.168.1.4 eth1</span><br></pre></td></tr></table></figure>
 
-<p>读取此文件的python代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_yaml_file</span>():</span></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">&#x27;springboot-folders.yml&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        result = yaml.load(f)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">folders = read_yaml_file()</span><br><span class="line">print(folders[<span class="string">&#x27;main&#x27;</span>])</span><br><span class="line">print(folders[<span class="string">&#x27;test&#x27;</span>])</span><br><span class="line">print(folders[<span class="string">&#x27;resources&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># result:</span></span><br><span class="line">[<span class="string">&#x27;config&#x27;</span>, <span class="string">&#x27;domain&#x27;</span>, <span class="string">&#x27;repository&#x27;</span>, <span class="string">&#x27;service&#x27;</span>, &#123;<span class="string">&#x27;rest&#x27;</span>: [<span class="string">&#x27;controller&#x27;</span>, <span class="string">&#x27;dto&#x27;</span>, <span class="string">&#x27;exception&#x27;</span>]&#125;, <span class="string">&#x27;exceptions&#x27;</span>, <span class="string">&#x27;utils&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;config&#x27;</span>, <span class="string">&#x27;domain&#x27;</span>, <span class="string">&#x27;repository&#x27;</span>, <span class="string">&#x27;service&#x27;</span>, &#123;<span class="string">&#x27;rest&#x27;</span>: [<span class="string">&#x27;controller&#x27;</span>, <span class="string">&#x27;dto&#x27;</span>, <span class="string">&#x27;exception&#x27;</span>]&#125;, <span class="string">&#x27;exceptions&#x27;</span>, <span class="string">&#x27;utils&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;config&#x27;</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>以上已经非常清楚的表示了如何读取yml文件了， 至此简单的yml的使用介绍就到此为止. 更加详细的介绍请参考：<br><a target="_blank" rel="noopener" href="http://pyyaml.org/wiki/PyYAMLDocumentation">python yaml</a></p>
+<ul>
+<li>Round-Robin</li>
+<li>Weighted Round-Robin</li>
+<li>Least-Connection</li>
+<li>Weighted Least-Connections</li>
+<li>Locality-Based Least-Connections</li>
+<li>SSL/HTTPS: Number Factorization/Discreet Logarithm</li>
+</ul>
 
       
     </div>
@@ -248,21 +209,7 @@
     <div class="article-meta pull-left">
 
     
-      
 
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/python/">python</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/python/">python</a>
-    </span>
     
 
     </div>
@@ -277,15 +224,15 @@
 
   
     
-    <h3 class="article-title"><a href="/2015/11/15/python/2015-11-15-String-Format-in-Python/"><span>Python 中String的格式化</span></a></h3>
+    <h3 class="article-title"><a href="/2019/12/01/shell/1-dns/"><span></span></a></h3>
     
   
 
   <div class="article-top-meta">
     <span class="posted-on">
-      <a href="/2015/11/15/python/2015-11-15-String-Format-in-Python/" rel="bookmark">
-        <time class="entry-date published" datetime="2015-11-15T07:12:56.000Z">
-          2015-11-15
+      <a href="/2019/12/01/shell/1-dns/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-12-01T13:27:01.000Z">
+          2019-12-01
         </time>
       </a>
     </span>
@@ -297,18 +244,36 @@
   <div class="article-content">
     <div class="entry">
       
-        <p>python中对于string有些挺有意思操作,现在把他记录如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">output = <span class="string">&#x27;Hello &#123;0&#125;!&#x27;</span>.format(<span class="string">&#x27;World!&#x27;</span>)</span><br><span class="line">output1 = <span class="string">&#x27;Hello &#123;0&#125; &#123;1&#125; !&#x27;</span>.format(<span class="string">&#x27;Mr.&#x27;</span>,<span class="string">&#x27;World!&#x27;</span>)</span><br><span class="line">output2 = <span class="string">&#x27;Hello &#123;name&#125; !&#x27;</span>.format(name=<span class="string">&#x27;World&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print(output)</span><br><span class="line">print(output1)</span><br><span class="line">print(output2)</span><br></pre></td></tr></table></figure>
+        <h1 id="DNS-使用Tips"><a href="#DNS-使用Tips" class="headerlink" title="DNS 使用Tips"></a>DNS 使用Tips</h1><ul>
+<li>dig 工具使用</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dig  www.baidu.com</span><br></pre></td></tr></table></figure>
 
-<p>以上可读性最好的，个人认为是:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">output2 = <span class="string">&#x27;Hello &#123;name&#125; !&#x27;</span>.format(name=<span class="string">&#x27;World&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>result:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">; &lt;&lt;&gt;&gt; DiG 9.9.7-P3 &lt;&lt;&gt;&gt; www.baidu.com</span><br><span class="line">;; global options: +cmd</span><br><span class="line">;; Got answer:</span><br><span class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 16168</span><br><span class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 3, AUTHORITY: 0, ADDITIONAL: 1</span><br><span class="line"></span><br><span class="line">;; OPT PSEUDOSECTION:</span><br><span class="line">; EDNS: version: 0, flags:; udp: 4000</span><br><span class="line">;; QUESTION SECTION:</span><br><span class="line">;www.baidu.com.                 IN      A</span><br><span class="line"></span><br><span class="line">;; ANSWER SECTION:</span><br><span class="line">www.baidu.com.          907     IN      CNAME   www.a.shifen.com.</span><br><span class="line">www.a.shifen.com.       154     IN      A       61.135.169.121</span><br><span class="line">www.a.shifen.com.       154     IN      A       61.135.169.125</span><br><span class="line"></span><br><span class="line">;; Query time: 32 msec</span><br><span class="line">;; SERVER: 10.0.5.55<span class="comment">#53(10.0.5.55)</span></span><br><span class="line">;; WHEN: Tue Nov 28 15:28:20 CST 2017</span><br><span class="line">;; MSG SIZE  rcvd: 101</span><br></pre></td></tr></table></figure>
 
-<h2 id="时间，urlparser的一起使用"><a href="#时间，urlparser的一起使用" class="headerlink" title="时间，urlparser的一起使用"></a>时间，urlparser的一起使用</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">&#x27;It\&#x27;s &#123;0:%H:%M&#125;&#x27;</span>.format(datetime.today()))</span><br><span class="line">url = urlparse(<span class="string">&#x27;http://pocoo.org/&#x27;</span>)</span><br><span class="line">print(<span class="string">&#x27;&#123;0.netloc&#125; [&#123;0.scheme&#125;]&#x27;</span>.format(url))</span><br></pre></td></tr></table></figure>
+<p>CNAME: 事实服务器</p>
+<ul>
+<li>DNS Trace:</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dns www.baidu.com +trace</span><br></pre></td></tr></table></figure>
 
-<p>结果：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">It<span class="string">&#x27;s 15:16</span></span><br><span class="line"><span class="string">pocoo.org [http]</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>dns cache</li>
+</ul>
+<p>nscd in linux</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">nscd</span><br><span class="line">/etc/nscd.conf</span><br><span class="line"><span class="built_in">enable</span>-cache hosts yes</span><br><span class="line">/etc/init.d/nscd restart</span><br><span class="line">nscd -g</span><br><span class="line">nscd -i hosts <span class="comment"># clean cache</span></span><br></pre></td></tr></table></figure>
 
-<p>是不是很方便的.</p>
+<ul>
+<li>BIND9</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/etc/<span class="built_in">bind</span></span><br><span class="line">/etc/<span class="built_in">bind</span>/named</span><br><span class="line">/etc/named.conf</span><br><span class="line">named-checkzone</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>nslookup</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nslookup &lt;server to look <span class="keyword">for</span>&gt; &lt;dns server to use&gt;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -319,21 +284,7 @@
     <div class="article-meta pull-left">
 
     
-      
 
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/python/">python</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/python/">python</a>
-    </span>
     
 
     </div>

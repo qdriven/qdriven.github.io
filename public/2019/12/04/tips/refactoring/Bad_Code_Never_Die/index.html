@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span></span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/12/04/tips/refactoring/Bad_Code_Never_Die/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-12-04T01:52:28.000Z">
+          2019-12-04
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="Bad-Code-Never-Die"><a href="#Bad-Code-Never-Die" class="headerlink" title="Bad Code Never Die"></a>Bad Code Never Die</h1><p>坏代码到处都是，好代码其实也不少，了解坏在哪里，好在哪里才是最重要的.</p>
+<h2 id="Start-it"><a href="#Start-it" class="headerlink" title="Start it"></a>Start it</h2><p>Simplicity over common logic.</p>
+<p>A simple code to get has next or not as follow.These codes are following our logic thinking competely.It is good.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(db.next()) &#123;</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">true</span>;   </span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>But if we think twice, maybe there is a more abstract way, actually just use following codes:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> db.next()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>db.next() already represents the result whether hasNext or not. So sometimes abstract is simplicity.</p>
+<h2 id="What-is-the-if-else-really-used-for"><a href="#What-is-the-if-else-really-used-for" class="headerlink" title="What is the if/else really used for?"></a>What is the if/else really used for?</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="number">0</span>==retCode)&#123;</span><br><span class="line">  sendMessage(<span class="string">&quot;000&quot;</span>,<span class="string">&quot;Success&quot;</span>,returnCode);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">  sendMessage(<span class="string">&quot;000&quot;</span>,<span class="string">&quot;Fail&quot;</span>,returnCode);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The only difference is the Succecss or Fail message when call sendMessage, so actually if/else is only for message(Success or Fail),not for sendMessage.So:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String msg = <span class="number">0</span>==retCode?<span class="string">&quot;Success&quot;</span>:<span class="string">&quot;Fail&quot;</span>;</span><br><span class="line">sendMessage(<span class="string">&quot;000&quot;</span>,msg,returnCode);</span><br></pre></td></tr></table></figure>
+<p>And what if the difference is not only Success or Fail, also returnCode……; if so, it doesn’t change if/else’s scope at all, it is for the what message to send but not for<br>send message. so the codes might be :</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ResMsg msg = <span class="number">0</span>==retCode?<span class="keyword">new</span> ResMsg(<span class="string">&quot;123&quot;</span>,<span class="string">&quot;Success&quot;</span>,OK):<span class="keyword">new</span> ResMsg(<span class="string">&quot;234&quot;</span>,<span class="string">&quot;Fail&quot;</span>,Fail);</span><br><span class="line">sendMessage(msg);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Extract-Method"><a href="#Extract-Method" class="headerlink" title="Extract Method"></a>Extract Method</h2><p>There are a few checking for a.class, but why not putting all these type into a list, then for-loop this list? it is more readable.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">if</span>(a.class==String.class</span><br><span class="line">  ||a.class==Boolean.class</span><br><span class="line">  ||a.class==SelfDefined.class</span><br><span class="line">  ||a.class==Float.class</span><br><span class="line">  ......)&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="keyword">false</span>;</span><br></pre></td></tr></table></figure>
+
+<p>Changed to Following codes:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Class&gt; checkedClasses = Lists.newArrayList(String.class,Boolean.class,.....)</span><br><span class="line"><span class="keyword">for</span>(checkedClass in checkedClasses)&#123;</span><br><span class="line">  <span class="keyword">if</span> a.class.equals(checkedClass)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="keyword">false</span>;</span><br></pre></td></tr></table></figure>
+
+<p>Why is it good?</p>
+<ul>
+<li>it is more readable</li>
+<li>it is abstraction</li>
+<li>if add more checking class, just change the checkedClasses list, it is easy for plugin or hook</li>
+</ul>
+<p>sometimes, using map to replace some if/else logic is good too. The reason is quite similar.</p>
+<p>Extract Method is a refactor methodology. It is quite useful.</p>
+<h2 id="Naming"><a href="#Naming" class="headerlink" title="Naming"></a>Naming</h2><p>Naming is everything, if there is variable named a,b, after a while, everyone would be lost even the writer.<br>Name like XString,YString, it doesn’t make your look like a hacker, but a unprofessional developer.</p>
+<h2 id="不允许出现多层缩进"><a href="#不允许出现多层缩进" class="headerlink" title="不允许出现多层缩进"></a>不允许出现多层缩进</h2><p>A simple rule, but useful. Consider not use too many if else. maybe one if/else is enough.</p>
+<h2 id="SimpleDateFormat"><a href="#SimpleDateFormat" class="headerlink" title="SimpleDateFormat"></a>SimpleDateFormat</h2><p>SimpleDateFormat is not thread safe, so it is wrong when use it as a static variable in a class.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sample</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> DateFormat format = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy.MM.dd&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getCurrentDateText</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> format.format(<span class="keyword">new</span> Date());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第 38 页 | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2015/11/04/tips/thoughts/2015-11-03-Test-Tools/"><span>测试用例-一些有意思的工具</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/11/04/tips/thoughts/2015-11-03-Test-Tools/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-11-03T18:31:11.000Z">
+          2015-11-04
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="Automation-Test-Case-Generate-Tools"><a href="#Automation-Test-Case-Generate-Tools" class="headerlink" title="Automation Test Case Generate Tools"></a>Automation Test Case Generate Tools</h2><ul>
+<li><a target="_blank" rel="noopener" href="http://korat.sourceforge.net/">Korat(structurally complex tests)</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/randoop/randoop">Randoop (random testing)</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/CERTCC-Vulnerability-Analysis/certfuzz">CERT Basic Fuzzing Framework</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/samhocevar/zzuf.git">ZZUF</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cert.org/vulnerability-analysis/tools/triage.cfm">cert.org</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/osate">osate</a></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="http://mit.bme.hu/~micskeiz/pages/code_based_test_generation.html">link</a></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/testing/">testing</a>, <a href="/categories/testing/thoughts/">thoughts</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/testing/">testing</a><a href="/tags/thoughts/">thoughts</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2015/11/03/tips/refactoring/2015-10-26-refactoring-arrowhead-and-double-negative/"><span>Refactoring-9-ArrowHead AntiPattern and Remove Double Negative</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/11/03/tips/refactoring/2015-10-26-refactoring-arrowhead-and-double-negative/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-11-03T02:31:11.000Z">
+          2015-11-03
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="Arrowhead-AntiPattern"><a href="#Arrowhead-AntiPattern" class="headerlink" title="Arrowhead AntiPattern"></a>Arrowhead AntiPattern</h2><p>一下代码有一系列的if 判断，我们可以重新思考判断逻辑,合并一些逻辑判断<br>来让代码更可读:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasAccess</span><span class="params">(User user, Permission permission,</span></span></span><br><span class="line"><span class="function"><span class="params">                        List&lt;Permission&gt; exemptions)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">boolean</span> hasPermission = <span class="keyword">false</span>;</span><br><span class="line">      <span class="keyword">if</span> (user != <span class="keyword">null</span>) &#123;</span><br><span class="line">          <span class="keyword">if</span> (permission != <span class="keyword">null</span>) &#123;</span><br><span class="line">              <span class="keyword">if</span> (exemptions.Count() == <span class="number">0</span>) &#123;</span><br><span class="line">                  <span class="keyword">if</span> (SecurityChecker.CheckPermission(user,permission) ||</span><br><span class="line">                  exemptions.Contains(permission)) &#123;</span><br><span class="line">                      hasPermission = <span class="keyword">true</span>;</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">return</span> hasPermission;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>重构后:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (user == <span class="keyword">null</span> || permission == <span class="keyword">null</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"><span class="keyword">if</span> (exemptions.Contains(permission))</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"><span class="keyword">return</span> SecurityChecker.CheckPermission(user, permission);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Remove-Double-Negative"><a href="#Remove-Double-Negative" class="headerlink" title="Remove Double Negative"></a>Remove Double Negative</h2><p>remove double negative 实际上非常简单,代码如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">checkout</span><span class="params">()</span></span>&#123;</span><br><span class="line">       <span class="keyword">if</span>(!isNotNull())&#123;</span><br><span class="line">           System.out.println(<span class="string">&quot;checking ....&quot;</span>);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isNotNull</span><span class="params">()</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>重构后：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isNull</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">checkoutRefactored</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(isNull())&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;checking ....&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>改动虽小，是不是让你阅读代码更爽一点……</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/designpattern/">designpattern</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2015/11/03/tips/refactoring/2015-11-3-refactoring-introduce-method-object-and-replace-conditions-with-poly/"><span>Refactoring-10-introduce method object, replace conditions with polymorphism</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/11/03/tips/refactoring/2015-11-3-refactoring-introduce-method-object-and-replace-conditions-with-poly/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-11-03T02:31:11.000Z">
+          2015-11-03
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="将方法参数转化为类"><a href="#将方法参数转化为类" class="headerlink" title="将方法参数转化为类"></a>将方法参数转化为类</h2><p>有时一个方法的传入参数太多，就需要考虑是否需要引入新的类来解决的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Registration</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">create</span><span class="params">(<span class="keyword">double</span> amount,String name,</span></span></span><br><span class="line"><span class="function"><span class="params">                       <span class="keyword">double</span> credits)</span></span>&#123;</span><br><span class="line">        <span class="comment">//do work</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重构后:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//instroduce new Class</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RegistrationContext</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">double</span> amount;</span><br><span class="line">    String name;</span><br><span class="line">    <span class="keyword">double</span> credits;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//modify the method</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createRefactored</span><span class="params">(RegistrationContext context)</span></span>&#123;</span><br><span class="line">    <span class="comment">//do work</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="多态替代条件判断"><a href="#多态替代条件判断" class="headerlink" title="多态替代条件判断"></a>多态替代条件判断</h2><p>有时通过If…Else来判断不同的类型进行不同的处理，代码可读性不是很强，通过多态来替代这些<br>条件判断，同时抽取方法后，代码就会更加的具有可读性.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderProcessor</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">processOrder</span><span class="params">(Customer cu,List&lt;Product&gt; products)</span></span>&#123;</span><br><span class="line">        <span class="keyword">double</span> orderTotal = products.parallelStream().mapToDouble(Product::getPrice).sum();</span><br><span class="line">        <span class="keyword">if</span>(cu <span class="keyword">instanceof</span> Employee)&#123;</span><br><span class="line">            orderTotal-=orderTotal*<span class="number">0.15</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (cu <span class="keyword">instanceof</span> NonEmployee)&#123;</span><br><span class="line">            orderTotal-=orderTotal*<span class="number">0.10</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> orderTotal;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Customer</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Employee</span> <span class="keyword">extends</span> <span class="title">Customer</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NonEmployee</span> <span class="keyword">extends</span> <span class="title">Customer</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重构后:是不是代码更清楚了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Customer</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">double</span> <span class="title">tax</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Employee</span> <span class="keyword">extends</span> <span class="title">Customer</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">tax</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0.15</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NonEmployee</span> <span class="keyword">extends</span> <span class="title">Customer</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">tax</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0.10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">processOrderRefactor</span><span class="params">(Customer cu,List&lt;Product&gt; products)</span></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> orderTotal = products.parallelStream().mapToDouble(Product::getPrice).sum();</span><br><span class="line"></span><br><span class="line">    orderTotal-=orderTotal*cu.tax();</span><br><span class="line">    <span class="keyword">return</span> orderTotal;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/refactoring/">refactoring</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/refactoring/">refactoring</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+
+<nav class="pagination">
+  
+  <a href="/page/37/" class="pagination-prev">上一页</a>
+  
+  
+  <a href="/page/39/" class="pagination-next">下一页</a>
+  
+</nav>
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

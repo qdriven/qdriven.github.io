@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Shell Learning - 操作符号 | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="shell">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Shell Learning - 操作符号"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Shell Learning - 操作符号</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2014/08/24/shell/2014-08-24-shell_101_operator/" rel="bookmark">
+        <time class="entry-date published" datetime="2014-08-23T18:31:11.000Z">
+          2014-08-24
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>摘自：<a target="_blank" rel="noopener" href="http://wklken.me/posts/2014/01/12/shell-script-base.html">http://wklken.me/posts/2014/01/12/shell-script-base.html</a></p>
+<h3 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">no_1=4</span><br><span class="line">no_2=5</span><br><span class="line"><span class="built_in">let</span> result=no_1+no_2</span><br><span class="line"></span><br><span class="line"><span class="built_in">let</span> result--</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$result</span></span><br><span class="line"><span class="built_in">let</span> result++</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$result</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># expr(漏洞之源？？)</span></span><br><span class="line"></span><br><span class="line">result=`expr 3+4`</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$result</span></span><br><span class="line">result=`expr <span class="variable">$no_1</span>+345`</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$result</span></span><br><span class="line">result=$[ no_1 + no_2 ]</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$result</span></span><br><span class="line">result=$[ <span class="variable">$no_1</span> + 5 ]</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$result</span></span><br><span class="line">result=$(( no_1 + <span class="number">5</span> ))</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$result</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># result:</span></span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">3+4</span><br><span class="line">4+345</span><br><span class="line">9</span><br><span class="line">9</span><br><span class="line">9</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/shell/">shell</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

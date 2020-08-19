@@ -1,0 +1,307 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>VIM 使用小结 | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="shell">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="VIM 使用小结"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>VIM 使用小结</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/04/05/tips/2016-04-05-VIM-总结/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-04-05T10:31:42.000Z">
+          2016-04-05
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="VIM-用法"><a href="#VIM-用法" class="headerlink" title="VIM 用法"></a>VIM 用法</h1><p>日常会不经意间使用VIM编辑器来处理一些文本编辑的事情。所以整理VIM的基本使用如下：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>q</td>
+<td>退出</td>
+</tr>
+<tr>
+<td>i</td>
+<td>insert</td>
+</tr>
+<tr>
+<td>a</td>
+<td>append</td>
+</tr>
+<tr>
+<td>h</td>
+<td>左移</td>
+</tr>
+<tr>
+<td>k</td>
+<td>上移</td>
+</tr>
+<tr>
+<td>j</td>
+<td>下移</td>
+</tr>
+<tr>
+<td>l</td>
+<td>右移</td>
+</tr>
+<tr>
+<td>r</td>
+<td>替换</td>
+</tr>
+<tr>
+<td>u</td>
+<td>撤销</td>
+</tr>
+<tr>
+<td>x</td>
+<td>删除光标位置字符</td>
+</tr>
+<tr>
+<td>d^</td>
+<td>删除当前位置到行首</td>
+</tr>
+<tr>
+<td>dd</td>
+<td>删除当前行</td>
+</tr>
+<tr>
+<td>d$</td>
+<td>删除当前位置到行尾</td>
+</tr>
+<tr>
+<td>dw</td>
+<td>删除当前位置到一个word尾</td>
+</tr>
+<tr>
+<td>3dd</td>
+<td>删除当前行下三行</td>
+</tr>
+<tr>
+<td>p</td>
+<td>粘贴</td>
+</tr>
+<tr>
+<td>&lt;&lt;</td>
+<td>当前行左移一个宽度</td>
+</tr>
+<tr>
+<td>&gt;&gt;</td>
+<td>当前行右移一个宽度</td>
+</tr>
+<tr>
+<td>％</td>
+<td>匹配的括号</td>
+</tr>
+<tr>
+<td>^</td>
+<td>行的开始</td>
+</tr>
+<tr>
+<td>.</td>
+<td>匹配单字符</td>
+</tr>
+<tr>
+<td>*</td>
+<td>匹配0个或多个之前的字符</td>
+</tr>
+<tr>
+<td>$</td>
+<td>行的结束</td>
+</tr>
+<tr>
+<td>[</td>
+<td>还是一系列的匹配</td>
+</tr>
+<tr>
+<td>&lt;&gt;</td>
+<td>一个字的结束或开始,/&lt;the&gt; 只匹配the</td>
+</tr>
+<tr>
+<td>f</td>
+<td>向右移动到指定字符</td>
+</tr>
+<tr>
+<td>F</td>
+<td>向左移动到指定字符</td>
+</tr>
+<tr>
+<td>ctrl+b</td>
+<td>向后回滚一页</td>
+</tr>
+<tr>
+<td>ctrl＋d</td>
+<td>向前滚动半个窗口</td>
+</tr>
+<tr>
+<td>ctrl＋F</td>
+<td>向前滚动一页</td>
+</tr>
+<tr>
+<td>ctrl＋H</td>
+<td>左移一个空格</td>
+</tr>
+<tr>
+<td>ctrl＋J</td>
+<td>下移一个空格</td>
+</tr>
+<tr>
+<td>(</td>
+<td>移动到句子开头</td>
+</tr>
+<tr>
+<td>)</td>
+<td>移动到句子句尾</td>
+</tr>
+<tr>
+<td>{</td>
+<td>前一个段落</td>
+</tr>
+<tr>
+<td>+</td>
+<td>下一行非空字符</td>
+</tr>
+<tr>
+<td>-</td>
+<td>前一行非空字符</td>
+</tr>
+<tr>
+<td>_</td>
+<td>当前行的非空字符</td>
+</tr>
+</tbody></table>
+<p>其他命令</p>
+<ul>
+<li>y和d的作用类似，不同的是y只提取文字而不删除文字</li>
+<li>缩写：ab test “testing in tesitng”</li>
+<li>mapping, :map,:map!</li>
+<li>vim -r file_name.txt</li>
+</ul>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/shell/">shell</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

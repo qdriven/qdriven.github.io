@@ -1,0 +1,191 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Git 基本使用－2 | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="git">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Git 基本使用－2"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Git 基本使用－2</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/04/22/tips/2016-04-22-git-history/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-04-21T18:31:11.000Z">
+          2016-04-22
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="GIT-基本使用"><a href="#GIT-基本使用" class="headerlink" title="GIT 基本使用"></a>GIT 基本使用</h1><ul>
+<li>git log -p</li>
+<li>git diff</li>
+<li>git add</li>
+<li>git diff HEAD</li>
+<li>git commit -m “Add something”</li>
+<li>git branch</li>
+<li>git checkout -b feature-A</li>
+<li>git branch</li>
+<li>git merge –no-ff feature-A</li>
+<li>git log –graph</li>
+<li>git reset</li>
+<li>git reflog</li>
+<li>git merge –no-ff fix-b</li>
+<li>git rebase -i HEAD-2</li>
+<li>git remote add</li>
+<li>git push</li>
+<li>git push -u origin feature-D</li>
+<li>git fetch -all</li>
+<li>git fetch origin refspeec</li>
+</ul>
+<h2 id="GIT-Flow"><a href="#GIT-Flow" class="headerlink" title="GIT Flow"></a>GIT Flow</h2><h3 id="git-flow-cheatsheet"><a href="#git-flow-cheatsheet" class="headerlink" title="git-flow-cheatsheet"></a>git-flow-cheatsheet</h3><p>A cheatsheet on the usage of git flow, visit <a target="_blank" rel="noopener" href="http://danielkummer.github.com/git-flow-cheatsheet/">http://danielkummer.github.com/git-flow-cheatsheet/</a></p>
+<h3 id="GIT-FLOW"><a href="#GIT-FLOW" class="headerlink" title="GIT FLOW"></a>GIT FLOW</h3><p>Git extensions to provide high-level repository operations for Vincent Driessen’s branching model. <a target="_blank" rel="noopener" href="http://nvie.com/posts/a-successful-git-branching-model/">Read more</a></p>
+<p>INIT:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git flow init</span><br></pre></td></tr></table></figure>
+
+<h3 id="TRACK-DEVELOP-REMOTELY-ON-GITHUB"><a href="#TRACK-DEVELOP-REMOTELY-ON-GITHUB" class="headerlink" title="TRACK DEVELOP REMOTELY ON GITHUB:"></a>TRACK DEVELOP REMOTELY ON GITHUB:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin develop</span><br></pre></td></tr></table></figure>
+
+<p><strong>FEATURES:</strong></p>
+<p>Use to develop new features starting from the develop branch. Merge back into develop branch waiting for a reasonable amount of features to be there before declaring it a release.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git flow feature</span><br><span class="line">$ git flow feature start &lt;name&gt;</span><br><span class="line">$ git flow feature finish &lt;name&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">usage: git flow feature [list] [-v]</span><br><span class="line">       git flow feature start [-F] &lt;name&gt; [&lt;base&gt;]</span><br><span class="line">       git flow feature finish [-rFk] &lt;name|nameprefix&gt;</span><br><span class="line">       git flow feature publish &lt;name&gt;</span><br><span class="line">       git flow feature track &lt;name&gt;</span><br><span class="line">       git flow feature diff [&lt;name|nameprefix&gt;]</span><br><span class="line">       git flow feature rebase [-i] [&lt;name|nameprefix&gt;]</span><br><span class="line">       git flow feature checkout [&lt;name|nameprefix&gt;]</span><br><span class="line">       git flow feature pull &lt;remote&gt; [&lt;name&gt;]</span><br></pre></td></tr></table></figure>
+
+<p><strong>RELEASES:</strong></p>
+<p>Use to group together latest development (features) add a few finishing touches if necessary and send to production. All last changes will merge back to master and develop so new features will start from current release.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git flow release</span><br><span class="line">$ git flow release start &lt;release&gt; [&lt;base&gt;]</span><br><span class="line">$ git flow release finish &lt;release&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">usage: git flow release [list] [-v]</span><br><span class="line">       git flow release start [-F] &lt;version&gt;</span><br><span class="line">       git flow release finish [-Fsumpk] &lt;version&gt;</span><br><span class="line">       git flow release publish &lt;name&gt;</span><br><span class="line">       git flow release track &lt;name&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>HOTFIXES:</strong></p>
+<p>Similar to releases but the hotfix branch starts off master to avoid unvoluntary send to production of unwanted features that my be present in branches. The quick fix must be used when an important bug arises in production which must be fixed and can’t wait for other features to be ready. It merges back to master and develop.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git flow hotfix</span><br><span class="line">$ git flow hotfix start &lt;release&gt; [&lt;base&gt;]</span><br><span class="line">$ git flow hotfix finish &lt;release&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">usage: git flow hotfix [list] [-v]</span><br><span class="line">       git flow hotfix start [-F] &lt;version&gt; [&lt;base&gt;]</span><br><span class="line">       git flow hotfix finish [-Fsumpk] &lt;version&gt;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/git/">git</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/git/">git</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

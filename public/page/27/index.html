@@ -1,0 +1,382 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第 27 页 | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2016/04/05/tips/How_to_use_grafana_to_monitor_jmeter_non_gui_result/"><span>JMETER NON GUI模式的结果</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/04/05/tips/How_to_use_grafana_to_monitor_jmeter_non_gui_result/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-04-05T10:31:42.000Z">
+          2016-04-05
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="JMETER-NON-GUI模式的结果"><a href="#JMETER-NON-GUI模式的结果" class="headerlink" title="JMETER NON GUI模式的结果"></a>JMETER NON GUI模式的结果</h1><p><a target="_blank" rel="noopener" href="https://www.blazemeter.com/blog/how-to-use-grafana-to-monitor-jmeter-non-gui-results?utm_source=blog&utm_medium=BM_blog&utm_campaign=how-to-use-grafana-to-monitor-jmeter-non-gui-results2">reference source</a></p>
+<p>使用Jmeter的命令行模式运行压力测试，可以减少客户端机器的资源使用从而更轻便的模拟压力。凡事都有好坏，没有了JMETER的GUI，监控压力测试的指标就会显得有些困难。下面介绍几个方法来更好的使用JMETER NON GUI模式进行压力测试。</p>
+<h2 id="1-使用-o参数输出JMETER测试结果"><a href="#1-使用-o参数输出JMETER测试结果" class="headerlink" title="1. 使用-o参数输出JMETER测试结果"></a>1. 使用<code>-o</code>参数输出JMETER测试结果</h2><p>最简单的办法查看NON GUI的结果就是使用jmeter命令行的<code>-o</code>参数，可以输出一份比较漂亮的结果报告，具体使用方法如下：</p>
+<ul>
+<li>使用如下命令：</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh bin/jmeter.sh -n -t &lt;jmeter jmx file&gt; -l log.jtl -e -o result</span><br></pre></td></tr></table></figure>
+
+<p>使用以下命令，jmeter 运行时的log.jtl文件会被解析输出到result文件夹中，同时生成一份测试的报告，dashboard如下图：</p>
+<p><img src="../ref/jmeter_dashboard.jpg" alt="img"></p>
+<h2 id="2-使用grafana和influxdb进行实时监控测试结果"><a href="#2-使用grafana和influxdb进行实时监控测试结果" class="headerlink" title="2. 使用grafana和influxdb进行实时监控测试结果"></a>2. 使用grafana和influxdb进行实时监控测试结果</h2><p>使用grafana和influxdb最为后端的监控，可以实时的掌握测试的过程和结果，下面是关于influxdb和grafana的一个简介:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.influxdata.com/">influxdb</a>是一个时序数据库用来存储测试的时序数据，这里是作为grafana的数据源</li>
+<li><a target="_blank" rel="noopener" href="http://docs.grafana.org/guides/getting_started/">grafana</a>是一个开源的监控dashboard工具，可以接入不同种类的数据源来实时监控应用的各种不同指标</li>
+</ul>
+<ul>
+<li>安装grafana和influxdb，可以参考官方文档，如果是MAC的话，直接使用：</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brew update</span><br><span class="line">brew install grafana</span><br><span class="line">brew install influxdb</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>启动influxdb和grafana</li>
+</ul>
+<pre><code class="sh">influxd # 默认influx db,启动端口为8086，存储位置为：～／.influxdb/data
+influx # 启动influx客户端
+</code></pre>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/performance/">performance</a><a href="/tags/jmeter/">jmeter</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2016/03/30/tips/ansible/2016-03-30-ansible_basic/"><span>Ansible简单介绍</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/03/30/tips/ansible/2016-03-30-ansible_basic/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-03-29T21:15:11.000Z">
+          2016-03-30
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="Ansible-介绍"><a href="#Ansible-介绍" class="headerlink" title="Ansible 介绍"></a>Ansible 介绍</h1><p>Ansible 目前都是使用在python2上面.</p>
+<h2 id="installation"><a href="#installation" class="headerlink" title="installation"></a>installation</h2><p>在MAC 上面安装ansible有两种方式：</p>
+<ul>
+<li>pip</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install ansible</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>brew</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install ansible</span><br></pre></td></tr></table></figure>
+
+<h2 id="ansible-playbook-的简单使用"><a href="#ansible-playbook-的简单使用" class="headerlink" title="ansible playbook 的简单使用"></a>ansible playbook 的简单使用</h2><p>ansible 大概的一个框架图如下：<br><img src="/images/ansible.png" alt="img"></p>
+<p>下面简单介绍一个使用ansible的例子：</p>
+<ul>
+<li><p>配置hosts文件<br>在当前目录创建一个hosts文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[jenkins]</span><br><span class="line">192.168.3.50</span><br></pre></td></tr></table></figure></li>
+<li><p>配置ansible yml playbook文件<br>配置当前一个yml文件:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- hosts: jenkins</span><br><span class="line">  user: root</span><br><span class="line">  accelerate:true</span><br><span class="line">  tasks:</span><br><span class="line">    - name: restart_nginx</span><br><span class="line">      shell: sh /root/auto_publish_qadoc.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible-playbook playbook.yml -i hosts -vv</span><br></pre></td></tr></table></figure>
+
+<p>就可以运行这些命令了,最简单的ansible就是这样上手非常容易.<br>不过仔细看看他的帮助文档的话，其实对于python不熟的人还是会有一定难度，不过如果写过程序的人，写过python东西的人来说，其实<br>过一下这个document估计也就是1天时间就可以上手干活了.</p>
+</li>
+</ul>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/automation/">automation</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/automation/">automation</a><a href="/tags/ansible/">ansible</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2016/03/30/tips/automation/2016-03-30-jenkins_basic/"><span>Jenkins API的简单介绍</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/03/30/tips/automation/2016-03-30-jenkins_basic/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-03-29T21:15:11.000Z">
+          2016-03-30
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="Jenkins-介绍"><a href="#Jenkins-介绍" class="headerlink" title="Jenkins 介绍"></a>Jenkins 介绍</h1><p>Jenkins是一个非常有用的持续集成的工具，可以通过它完成代码的build，测试，发布等一系列的事情.</p>
+<p>From Jenkins Home Page</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Jenkins is an automation engine with an unparalleled plugin ecosystem to support all of your favorite tools in your delivery pipelines, whether your goal is continuous integration, automated testing, or continuous delivery.</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Jenkins-使用"><a href="#Jenkins-使用" class="headerlink" title="Jenkins 使用"></a>Jenkins 使用</h2><p>关于Jenkins的基本使用网上有很多的教程，基本使用其事没有太多说的，它是个平台，可以集成很多不同的工具，脚本等等.<br>总结下来这些东西包括：</p>
+<ul>
+<li>jenkins parameter setting, string, choice, ……</li>
+<li>JAVA 的maven, ant, gradle 等打包工具，其他语言也有类似的build，deploy，依赖管理的工具</li>
+<li>定制化的脚本，可以在一个Jenkins的build步骤中运行这些脚本如shell命令，python脚本</li>
+<li>定制插件来完成自己的特殊的目的</li>
+</ul>
+<p>这些内容非常庞大，自己也不可能完全都知道，如果遇到实际的一些问题需要解决的话,<br>大体的逻辑就是，如果遇到一些特殊需求，那么先去找插件看能不能完成，如果没有插件就再想shell，python脚本等不同的事情，或者自己开发插件.</p>
+<h2 id="Jenkins-的实践问题"><a href="#Jenkins-的实践问题" class="headerlink" title="Jenkins 的实践问题"></a>Jenkins 的实践问题</h2><p>随着Jenkins里面的任务越来越多，管理的环境越来越多，变更越来愈多，手工管理就会遇到一些问题：</p>
+<ul>
+<li>比如为了改一个IP地址，可能需要没一个任务都去改具体的配置，比如部署同一个war到不同的测试环境，就需要给不同的job改IP</li>
+<li>为了不同的环境配置不同的任务，需要很多的人工的配置修改等等</li>
+<li>如果需要迁移一个多应用的测试环境，那么需要很多的复制，修改工作</li>
+</ul>
+<p>那么为了解决这些问题，个人觉得可以改善的地方是：</p>
+<ul>
+<li>定义一些类型项目的模版，抽象一些参数出来给Jenkins里面的Job做参数话，当然有时需要修改的是默认值</li>
+<li>在定义了一些模版之后，就可以通过操作Jenkins API的方式来操作</li>
+<li>在尝试了一些Jenkins API之后，感觉纯粹通过API的方式去操作，不一定比复制Jenkins 任务，然后修改来的快，但是通过Jenkins API的方式<br>来操作Jenkins 的好处是，如果这些东西融入到运维的流程中，那么它会提高生产率</li>
+</ul>
+<p>一些体会是，可能代码方式的操作单个单个来看不一定会提高多少生产率(参数一样要设)，但是如果放在一个流程的角度看，那么他的效率是高的，比如你如果需要运维帮你建环境，那么你需要提供一些信息，而这些信息就可以直接建立Jenkins的Job了，那么作为用户你只提供一次信息，就可以完成你需要的所有事情，这样效率就高了.</p>
+<p>我对于自动化一切的看法是，也许对于单个任务来说，通过写代码的方式不一定是最优方式，但是如果放在一个流程中来看，那么一定是.所以平常可以积累点不同类型的脚本，代码，然后在某个时间点，也许连接你的这些脚本，代码，就可以流水线化一些你的工作了，不要以为这不会带来，我觉得这一天一定会有的。</p>
+<h2 id="Jenkins-API-的使用"><a href="#Jenkins-API-的使用" class="headerlink" title="Jenkins API 的使用"></a>Jenkins API 的使用</h2><p>对于Jenkins API来说，我使用过Java和Python的，总结下来大同小异，逻辑上可以分为几个层次：</p>
+<ul>
+<li>Job: 不同类型的Job<ul>
+<li>添加，修改，删除Job</li>
+<li>Job的详细信息</li>
+<li>可以通过Job的config.xml文件来修改配置</li>
+<li>Job创建属于哪个父类和Jenkins的URL有关系</li>
+</ul>
+</li>
+<li>View<br>基本功能和Job类似</li>
+</ul>
+<h3 id="Jenkins-API-JAVA"><a href="#Jenkins-API-JAVA" class="headerlink" title="Jenkins API - JAVA"></a>Jenkins API - JAVA</h3><p>我自己使用的是这个Jenkins的这个API client.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.offbytwo.jenkins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jenkins-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.3.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p> 这个包中最主要的两个类是：</p>
+<ul>
+<li>JenkinsServer: JenkinsServer 可以认为是一个JenkinsHttpClient的一个Wrapper，封装了一些常用的方法，如getJob，getJobXml等等，具体可以参考他<a target="_blank" rel="noopener" href="https://github.com/RisingOak/jenkins-client">github</a></li>
+<li>JenkinsHttpClient：可以通过这个HttpClient组装URL和参数来达到完成调用其他API的方法，提供的一些方法主要包括了:<ul>
+<li>post</li>
+<li>post_xml: 主要用来修改job的config.xml</li>
+</ul>
+</li>
+</ul>
+<p>大体的东西就是这些，那么通过这个Jenkins的API client，完成了一些一些功能：</p>
+<ul>
+<li>复制Job,根据参数修改复制出来的Job</li>
+<li>复制View，根据参数修改复制出来的View，同时包括了所有的子Job</li>
+<li>查询到使用了某个shell 命令或者某个配置的任务</li>
+</ul>
+<p>一些实例代码如下：</p>
+<p>复制任务：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JenkinsReplicator</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> String COPY_FROM_VIEW_URL = <span class="string">&quot;/view/%s/createItem?&quot;</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> String DEFAULT_VIEW = <span class="string">&quot;All&quot;</span>;</span><br><span class="line">  <span class="keyword">private</span> JenkinsInstance instance;</span><br><span class="line">  <span class="keyword">private</span> JenkinsHttpClient client;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">JenkinsReplicator</span><span class="params">(JenkinsInstance instance)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.instance = instance;</span><br><span class="line">      <span class="keyword">this</span>.client = instance.getJenkinsHttpClient();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> fromName: copied from issue</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> toName:   new Name</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> parentName: to View name</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">copyItem</span><span class="params">(String fromName, String toName, String parentName)</span> </span>&#123;</span><br><span class="line">      Map&lt;String, String&gt; formData = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">      formData.put(<span class="string">&quot;name&quot;</span>, toName);</span><br><span class="line">      formData.put(<span class="string">&quot;mode&quot;</span>, <span class="string">&quot;copy&quot;</span>);</span><br><span class="line">      formData.put(<span class="string">&quot;from&quot;</span>, fromName);</span><br><span class="line">      formData.put(<span class="string">&quot;json&quot;</span>, String.format(<span class="string">&quot;&#123;\&quot;name\&quot;: \&quot;%s\&quot;, \&quot;mode\&quot;: \&quot;copy\&quot;, \&quot;from\&quot;: \&quot;%s\&quot;&#125;&quot;</span>, toName, fromName));</span><br><span class="line">      formData.put(<span class="string">&quot;Submit&quot;</span>, <span class="string">&quot;OK&quot;</span>);</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">          <span class="keyword">this</span>.client.post_form(String.format(COPY_FROM_VIEW_URL, parentName), formData, <span class="keyword">false</span>);</span><br><span class="line">      &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> JenkinsBaseException(<span class="string">&quot;copy item &quot;</span>+ fromName+ <span class="string">&quot;to &quot;</span> + toName+<span class="string">&quot; in view &quot;</span> + parentName + <span class="string">&quot; failed&quot;</span>, e);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>update config file:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String configXml = jobDescription.jobConfigXml();</span><br><span class="line"><span class="keyword">this</span>.getJenkins().updateJob(jobDescription.getJobName(),configXml,<span class="keyword">false</span>);</span><br></pre></td></tr></table></figure>
+
+<p>复制整个view下面同时包括了不同的子Job:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> View <span class="title">copy</span><span class="params">(String fromName, String toName, String parentNameOrNull)</span> </span>&#123;</span><br><span class="line">       View fromView = getByName(fromName);</span><br><span class="line">       <span class="keyword">if</span> (fromView == <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> JenkinsViewException(fromName + <span class="string">&quot;view is not found,can&#x27;t copy from it!&quot;</span>);</span><br><span class="line">       View toView = getOrCreate(toName, fromName, parentNameOrNull);</span><br><span class="line">       Map&lt;String, Job&gt; viewJobs = jobController.getJobsByViewName(fromName);</span><br><span class="line">       <span class="keyword">for</span> (Map.Entry&lt;String, Job&gt; entry : viewJobs.entrySet()) &#123;</span><br><span class="line">           jobController.copy(entry.getKey(), toName + <span class="string">&quot;_&quot;</span> + entry.getKey(), toView.getName());</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">return</span> getByName(toName);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Python-API-使用"><a href="#Python-API-使用" class="headerlink" title="Python API 使用"></a>Python API 使用</h2><p>Python的Jenkins API client 可以通过以下命令安装：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install jenkinsapi</span><br></pre></td></tr></table></figure>
+
+<p>基本的python jenkins api client 和JAVA的概念比较类似，不过python 的这个jenkinsapi很明显要比java的这个客户端功能要丰富的多的多，后面会详细介绍这个python client api的使用.</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p><a target="_blank" rel="noopener" href="https://github.com/testless/jenkins-controller.git">GITHUB</a></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/automation/">automation</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/automation/">automation</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+
+<nav class="pagination">
+  
+  <a href="/page/26/" class="pagination-prev">上一页</a>
+  
+  
+  <a href="/page/28/" class="pagination-next">下一页</a>
+  
+</nav>
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>测试日志2020-2 Github Cli使用 | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="tips,java">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="测试日志2020-2 Github Cli使用"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>测试日志2020-2 Github Cli使用</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2020/07/30/tips/tips-github-cli/" rel="bookmark">
+        <time class="entry-date published" datetime="2020-07-30T04:12:00.000Z">
+          2020-07-30
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><a target="_blank" rel="noopener" href="https://github.com/cli/cli">Github Cli</a>,是一个命令行工具，可以让你在命令行中直接操作github的仓库.<br>那么命令行工具可以提高平常的效率吗? 我的答案是可以,原因如下:</p>
+<ol>
+<li>使用习惯: Dev/Test 工作中基本上和Code打交道，现代的IDE都可以terminal(命令行工具),不需要额外的切换浏览器操作github仓库</li>
+<li>一个命令实现一个目的: 浏览器操作需要点击几个页面，输入不同的数据进行创建，但是命令行中使用了默认参数，可以一个命令就完成你想要的操作</li>
+</ol>
+<a id="more"></a>
+
+<h2 id="0-Github-Cli-安装"><a href="#0-Github-Cli-安装" class="headerlink" title="0. Github Cli 安装"></a>0. Github Cli 安装</h2><p>安装Github Cli非常方便:</p>
+<ul>
+<li>Mac: <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">```sh </span><br><span class="line"><span class="comment"># Install: </span></span><br><span class="line">brew install github/gh/gh</span><br><span class="line"><span class="comment"># Upgrade: </span></span><br><span class="line">brew upgrade gh</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- Windows</span><br><span class="line">&#96;&#96;&#96;sh</span><br><span class="line">scoop bucket add github-gh https:&#x2F;&#x2F;github.com&#x2F;cli&#x2F;scoop-gh.git</span><br><span class="line">scoop install gh</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="1-Github-Cli-功能一览"><a href="#1-Github-Cli-功能一览" class="headerlink" title="1. Github Cli 功能一览"></a>1. Github Cli 功能一览</h2><p>使用Github Cli之前，先大致了解一下GitHub Cli的功能集合:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">2020-qa-advance (master●●)$ gh -h                                                               [ruby-2.4.1]</span><br><span class="line">Work seamlessly with GitHub from the <span class="built_in">command</span> line.</span><br><span class="line"></span><br><span class="line">GitHub CLI is <span class="keyword">in</span> early stages of development, and we<span class="string">&#x27;d love to hear your</span></span><br><span class="line"><span class="string">feedback at &lt;https://forms.gle/umxd3h31c7aMQFKG7&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Usage:</span></span><br><span class="line"><span class="string">  gh [command]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Available Commands:</span></span><br><span class="line"><span class="string">  completion  Generate shell completion scripts</span></span><br><span class="line"><span class="string">  help        Help about any command</span></span><br><span class="line"><span class="string">  issue       Create and view issues</span></span><br><span class="line"><span class="string">  pr          Create, view, and checkout pull requests</span></span><br><span class="line"><span class="string">  repo        Create, clone, fork, and view repositories</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Flags:</span></span><br><span class="line"><span class="string">      --help              Show help for command</span></span><br><span class="line"><span class="string">  -R, --repo OWNER/REPO   Select another repository using the OWNER/REPO format</span></span><br><span class="line"><span class="string">      --version           Show gh version</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Use &quot;gh [command] --help&quot; for more information about a command.</span></span><br></pre></td></tr></table></figure>
+<p>通过帮助可以看到Github Cli功能主要包括:</p>
+<ol>
+<li>issue: issue相关</li>
+<li>pr: pull request相关</li>
+<li>repo: repo相关</li>
+</ol>
+<h2 id="2-Github-Cli-Repo相关"><a href="#2-Github-Cli-Repo相关" class="headerlink" title="2. Github Cli Repo相关"></a>2. Github Cli Repo相关</h2><p>使用repo之前先了解一下github cli repo的功能:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">gh repo -h                                                          [ruby-2.4.1]</span><br><span class="line">Work with GitHub repositories.</span><br><span class="line"></span><br><span class="line">A repository can be supplied as an argument <span class="keyword">in</span> any of the following formats:</span><br><span class="line">- <span class="string">&quot;OWNER/REPO&quot;</span></span><br><span class="line">- by URL, e.g. <span class="string">&quot;https://github.com/OWNER/REPO&quot;</span></span><br><span class="line"></span><br><span class="line">Usage:</span><br><span class="line">  gh repo [<span class="built_in">command</span>]</span><br><span class="line"></span><br><span class="line">Available Commands:</span><br><span class="line">  <span class="built_in">clone</span>       Clone a repository locally</span><br><span class="line">  create      Create a new repository</span><br><span class="line">  fork        Create a fork of a repository</span><br><span class="line">  view        View a repository <span class="keyword">in</span> the browser</span><br><span class="line"></span><br><span class="line">Global Flags:</span><br><span class="line">      --<span class="built_in">help</span>              Show <span class="built_in">help</span> <span class="keyword">for</span> <span class="built_in">command</span></span><br><span class="line">  -R, --repo OWNER/REPO   Select another repository using the OWNER/REPO format</span><br><span class="line"></span><br><span class="line">Use <span class="string">&quot;gh repo [command] --help&quot;</span> <span class="keyword">for</span> more information about a <span class="built_in">command</span>.</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-1-Github-Cli创建Repo"><a href="#1-1-Github-Cli创建Repo" class="headerlink" title="1.1 Github Cli创建Repo"></a>1.1 Github Cli创建Repo</h3><p>安装好了Github Cli创建Repo非常方便, 下面是一个例子:</p>
+<ol>
+<li>创建目录</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir 2020-qa-adventure</span><br><span class="line"><span class="built_in">cd</span> 2020-qa-adventure</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>创建Repo</li>
+</ol>
+<p>使用以下命令，直接创建一个github仓库</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gh repo create --public</span><br></pre></td></tr></table></figure>
+
+<p>这样仓库就创建好了.</p>
+<h3 id="1-2-Github-Cli-创建Issue"><a href="#1-2-Github-Cli-创建Issue" class="headerlink" title="1.2 Github Cli 创建Issue"></a>1.2 Github Cli 创建Issue</h3><ol>
+<li>创建Github Issue <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gh issue create </span><br></pre></td></tr></table></figure></li>
+<li>获取Github Issue列表<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gh issue list</span><br></pre></td></tr></table></figure></li>
+<li>查看Github Issue 内容<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gh issue view 2</span><br></pre></td></tr></table></figure></li>
+<li>Open issue in Web</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gh issue view 2 --w </span><br></pre></td></tr></table></figure>
+<p>打开issue之后，然后就可以进行处理issue.</p>
+<h2 id="2-Github-Commit-Tips："><a href="#2-Github-Commit-Tips：" class="headerlink" title="2. Github Commit Tips："></a>2. Github Commit Tips：</h2><p>在commit中输入一些关键字，就可以直对github的issue进行处理，下面结合github cli和github自带的功能快速处理和更新issue状态.</p>
+<ol>
+<li>创建Issue<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gh issue create</span><br></pre></td></tr></table></figure></li>
+<li>修改代码处理好issue</li>
+<li>准备提交代码，但是在代码的Commit中如果加入</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">close <span class="comment">#3 fix Isseu #3</span></span><br></pre></td></tr></table></figure>
+
+<p>push之后 Issue #3会直接关闭.</p>
+<h2 id="3-参考使用"><a href="#3-参考使用" class="headerlink" title="3. 参考使用"></a>3. 参考使用</h2><p><a target="_blank" rel="noopener" href="https://help.github.com/en/enterprise/2.16/user/github/managing-your-work-on-github/closing-issues-using-keywords">github-enterprise</a></p>
+<h2 id="4-自己学习一个新工具思路"><a href="#4-自己学习一个新工具思路" class="headerlink" title="4. 自己学习一个新工具思路"></a>4. 自己学习一个新工具思路</h2><ul>
+<li>了解解决什么问题</li>
+<li>新工具的功能的大体结构和索引情况</li>
+<li>动手试试，确定是不是真的实用</li>
+<li>好的工具大体是思路和结构清楚的，只有思路和结构清楚才能清晰的解决问题；如果解决什么问题都不清楚<br>工具也就是玩具</li>
+</ul>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/backend/">backend</a>, <a href="/categories/backend/tips/">tips</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/tips/">tips</a><a href="/tags/java/">java</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

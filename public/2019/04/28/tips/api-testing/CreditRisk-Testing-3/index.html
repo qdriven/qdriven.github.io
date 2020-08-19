@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Rule Based Risk Engine Part 3 - The Easiest Mock, The highest ROI | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="productivity,real,think-different">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Rule Based Risk Engine Part 3 - The Easiest Mock, The highest ROI"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Rule Based Risk Engine Part 3 - The Easiest Mock, The highest ROI</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/04/28/tips/api-testing/CreditRisk-Testing-3/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-04-28T15:58:45.000Z">
+          2019-04-28
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="Rule-Based-Risk-Engine-Part-3-The-Easiest-Mock-The-highest-ROI"><a href="#Rule-Based-Risk-Engine-Part-3-The-Easiest-Mock-The-highest-ROI" class="headerlink" title="Rule Based Risk Engine Part 3 - The Easiest Mock, The highest ROI"></a>Rule Based Risk Engine Part 3 - The Easiest Mock, The highest ROI</h1><p>Actually it is not about how to test Rule Based Risk Engine, it is about how to use simple codes to improve the<br>daily productivities. </p>
+<p>The Risk Engine is in the middle of the whole system, The upstream and downstream modules leverage<br>the result of the Risk Engine by API call in their own business flow. When other modules’s tester want to execute their test cases,<br>they often wanted to get the different risk engine results on demand. That means I needed to support them for their cases<br>as I am the owner of risk engine. Everyday, I was interrupted serveral times. It really bothered me a lot. I can’t refuse, but<br>need to find a solution. Then the easiest mock came. </p>
+<h2 id="Mock-Get-What-You-Set"><a href="#Mock-Get-What-You-Set" class="headerlink" title="Mock- Get What You Set!"></a>Mock- Get What You Set!</h2><p>It is quite simple but it is worth to write because it represents the value of codes which a tester can implement. I implemented a new WebService in our repo, and used a Map to store what the client set for mocking<br>purpose. Then next API call against the setting URL, the response is what the client Set even without any deployment or restart.</p>
+<p>How can I achieve this? The most important thing is that we used the configuration center - <a target="_blank" rel="noopener" href="https://github.com/ctripcorp/apollo">Apollo</a>. But does this mean in real case? You never need to restart the server for changing application properties. It makes things easier. The whole process was that:</p>
+<ol>
+<li>Setup Mock by calling: <code>http://domain/mock/A/setup</code></li>
+<li>Change the Risk Engine Url to <code>http://domain/mock/A/getMock</code> in Apollo Portal </li>
+<li>Deploy the changes</li>
+<li>Other modules’ QA now can control the Risk Engine Response for any cases.<br>And even more, this actually can be  applied to any other Http service to decouple modules,free my time, and keep me focusing</li>
+</ol>
+<p>Here is the simple codes.It only takes 10 minutes to complete, but it saved me a lot of time in daily basis.</p>
+<ul>
+<li>GenericMockStore for store Mock</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Profile(&quot;test&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericMockMemStore</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> ConcurrentHashMap&lt;String, Object&gt; mockStore = <span class="keyword">new</span> ConcurrentHashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">saveMock</span><span class="params">(String key, Object value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.mockStore.put(key, value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getMock</span><span class="params">(String key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.mockStore.get(key);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>GenericMock Service</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/mock&quot;)</span></span><br><span class="line"><span class="meta">@Profile(&quot;test&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericMockController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowire</span></span><br><span class="line">    <span class="keyword">private</span> GenericMockMemStore mockMemStore;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/&#123;productName&#125;/setup&quot;)</span></span><br><span class="line">    <span class="meta">@PostMapping</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> MockSetupResponse <span class="title">setupMock</span><span class="params">(<span class="meta">@RequestBody</span> GenericMockResponse setupResponse,</span></span></span><br><span class="line"><span class="function"><span class="params">                                       <span class="meta">@PathVariable</span> String productName,</span></span></span><br><span class="line"><span class="function"><span class="params">                                       HttpServletRequest request)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        mockMemStore.saveMock(productName,setupResponse);</span><br><span class="line">        <span class="keyword">return</span> MockSetupResponse.success();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(value = &quot;/&#123;productName&#125;/getMock&quot;,method = &#123;RequestMethod.GET,</span></span><br><span class="line"><span class="meta">                                                                RequestMethod.POST,RequestMethod.PUT&#125;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getMock</span><span class="params">(<span class="meta">@PathVariable</span> String productName,</span></span></span><br><span class="line"><span class="function"><span class="params">                                       HttpServletRequest request)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">return</span>  mockMemStore.getMock(productName);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Here is an explaination for these codes:</p>
+<ol>
+<li>Two APIs:<ul>
+<li><code>POST /mock/&#123;productName&#125;/setup</code>  for setup mock for the <code>productName</code> you set</li>
+<li><code>/mock/&#123;productName&#125;/getMock</code> get the mock reponse which set previously</li>
+</ul>
+</li>
+<li><code>GenericMockMemStore</code>: Store the mocks by key: productName in memory</li>
+</ol>
+<p>Like I said before, the automation testing is not about automation, but about writing codes for testing,and productivity.<br>Automation is a conception, not an action. It is too big to accomplish. But Writing codes is actionable, and you can see what<br>you accomplished and what you improved immediately.</p>
+<p>And also know the infrastructure more, you will find the solution is in the upstream or low level.<br>This is a tip I used when I tested this project. Luckly it worked. But still it is not a perfect solution, there are qeustions over here:</p>
+<ol>
+<li>Is there any pain point to improve?</li>
+<li>How to make it happen?</li>
+<li>Don’t write any code, use exisitng tools like YAPI, can we achieve the same?</li>
+</ol>
+<p>Maybe you can find your answer, or stay tuned, I will write a post later.</p>
+<p>Finally It is honor to make these codes in the develop official repos.</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/productivity/">productivity</a><a href="/tags/real/">real</a><a href="/tags/think-different/">think-different</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

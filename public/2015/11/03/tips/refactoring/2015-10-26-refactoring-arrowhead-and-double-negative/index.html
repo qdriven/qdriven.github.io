@@ -1,0 +1,152 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Refactoring-9-ArrowHead AntiPattern and Remove Double Negative | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="designpattern">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Refactoring-9-ArrowHead AntiPattern and Remove Double Negative"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Refactoring-9-ArrowHead AntiPattern and Remove Double Negative</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/11/03/tips/refactoring/2015-10-26-refactoring-arrowhead-and-double-negative/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-11-03T02:31:11.000Z">
+          2015-11-03
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="Arrowhead-AntiPattern"><a href="#Arrowhead-AntiPattern" class="headerlink" title="Arrowhead AntiPattern"></a>Arrowhead AntiPattern</h2><p>一下代码有一系列的if 判断，我们可以重新思考判断逻辑,合并一些逻辑判断<br>来让代码更可读:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasAccess</span><span class="params">(User user, Permission permission,</span></span></span><br><span class="line"><span class="function"><span class="params">                        List&lt;Permission&gt; exemptions)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">boolean</span> hasPermission = <span class="keyword">false</span>;</span><br><span class="line">      <span class="keyword">if</span> (user != <span class="keyword">null</span>) &#123;</span><br><span class="line">          <span class="keyword">if</span> (permission != <span class="keyword">null</span>) &#123;</span><br><span class="line">              <span class="keyword">if</span> (exemptions.Count() == <span class="number">0</span>) &#123;</span><br><span class="line">                  <span class="keyword">if</span> (SecurityChecker.CheckPermission(user,permission) ||</span><br><span class="line">                  exemptions.Contains(permission)) &#123;</span><br><span class="line">                      hasPermission = <span class="keyword">true</span>;</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">return</span> hasPermission;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>重构后:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (user == <span class="keyword">null</span> || permission == <span class="keyword">null</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"><span class="keyword">if</span> (exemptions.Contains(permission))</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"><span class="keyword">return</span> SecurityChecker.CheckPermission(user, permission);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Remove-Double-Negative"><a href="#Remove-Double-Negative" class="headerlink" title="Remove Double Negative"></a>Remove Double Negative</h2><p>remove double negative 实际上非常简单,代码如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">checkout</span><span class="params">()</span></span>&#123;</span><br><span class="line">       <span class="keyword">if</span>(!isNotNull())&#123;</span><br><span class="line">           System.out.println(<span class="string">&quot;checking ....&quot;</span>);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isNotNull</span><span class="params">()</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>重构后：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isNull</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">checkoutRefactored</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(isNull())&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;checking ....&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>改动虽小，是不是让你阅读代码更爽一点……</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/designpattern/">designpattern</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第 35 页 | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2015/12/22/tips/refactoring/2015-12-22-design_pattern_overview/"><span>design pattern overview</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/12/22/tips/refactoring/2015-12-22-design_pattern_overview/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-12-22T15:00:24.000Z">
+          2015-12-22
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>Design Pattern overview, from GoF:</p>
+<ul>
+<li>Creational<br>Abstract Factory, Builder, Factory method, Prototype, Singleton</li>
+<li>Structural<br>Adapter, Bridge, Composite, Decorator, Façade, Flyweight, Proxy</li>
+<li>Behavioural<br>Chain of Responsibility, Command, Interpreter, Iterator, Mediator, Memento, Observer, State, Strategy, Template Method, Visitor</li>
+</ul>
+<h2 id="Design-Pattern"><a href="#Design-Pattern" class="headerlink" title="Design Pattern"></a>Design Pattern</h2><p><img src="../../assets/images/pics/designpattern_1.jpg" alt="img"><br><img src="../../assets/images/pics/designpattern_2.jpg" alt="img"><br><img src="../../assets/images/pics/designpattern_3.jpg" alt="img"><br><img src="../../assets/images/pics/designpattern_4.jpg" alt="img"><br><img src="../../assets/images/pics/designpattern_5.jpg" alt="img"><br><img src="../../assets/images/pics/designpattern_6.jpg" alt="img"><br><img src="../../assets/images/pics/designpattern_7.jpg" alt="img"><br><img src="../../assets/images/pics/designpattern_8.jpg" alt="img"></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/designpattern/">designpattern</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2015/12/08/tips/testing/2015-12-08-collect-performance-requirement/"><span>收集性能测试需求</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/12/08/tips/testing/2015-12-08-collect-performance-requirement/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-12-08T05:36:27.000Z">
+          2015-12-08
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>很多时候遇到一些关于性能测试的需求的时候，需求方实际上是给不出任何具体的需求，更多的是一下如下的抱怨:</p>
+<ul>
+<li>速度慢(具体哪个操作慢又很难给出)</li>
+<li>经常会出现系统过载(一般也不会自己看看监控的)</li>
+<li>反正就是慢，我也不知道哪里慢</li>
+<li>有一天突然系统响应时间慢，监控报警了</li>
+</ul>
+<p>遇到这样的问题时,突然发现测试其实挺悲惨的,因为和这样的同事打交道其实压力挺大了.按照这样的逻辑<br>其实背后的含义就是所有和测试有关的事情都是你测试的事情，然后当坐下来和他们沟通的时候，他们具体<br>的问题时，一般也很难收集到信息，我一般会问一下如下的问题：</p>
+<ul>
+<li>这个慢是经常出现的吗，还是那天突然有些运维的改动或者有些其他系统故障造成的？<br>我至少遇到过几次犹豫数据库的原因造成了整个系统都出问题了,然而还是会有人会提出这样的不叫思考的要求，响应慢了，你一定要去测性能。 回到问题本身来说，我已经遇到无数次问这样的问题的时候，答案是不知道；我一般还会去查看一个月，或者更长的时间来看应用的响应时间分布，看看有没有明显的变慢点</li>
+<li>同时会问能不能具体到那个API或者页面访问的时候慢，同样没有答案；答案就是确实慢，但是不知道那个业务慢，所以才要你来测试一下，然一个应用可能有数十个API，我们总是要了解客户使用场景的吧</li>
+<li>相关业务在某个时间段有没有特殊的并发操作，比如可能每个月底的时候需要突击一个什么东西，然后突然访问量就变大了，这样好歹也能推测一些访问的场景来看看，然获取的答案还是不知道</li>
+<li>你对于你自己应用大概需要的吞吐量是多少，或者具体到某些具体的API是多少？ 然还是没有答案</li>
+</ul>
+<p>诸如此类的问题其实经常是得不到回答的，而你有需要完成相关的性能测试和排查.唯一的好处就是你不要太当真，大家只是在踢这个球而已。不过既然做了技术，而且想做这个性能测试的话，只能自己想想办法去获得了一些数据了.一般需要如下数据：</p>
+<ul>
+<li>最高峰1个小时的访问量</li>
+<li>最高峰一个小时的PAGE VIEW</li>
+<li>最高峰一个小时的交易量(transaction量)，converation rate from visits</li>
+<li>APIs最高峰1个小时的访问量</li>
+<li>业务方对于活动人数的估计</li>
+</ul>
+<p>当然还有一些其他的应用的访问量，就不一一说明了,后面会再用一些数据计算来说明输入估算性能需求.</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/testing/">testing</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/testing/">testing</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2015/12/02/tips/2015-12-02-api_contract_design/"><span>True Stories: 从API的URL定义想到的</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/12/02/tips/2015-12-02-api_contract_design/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-12-02T05:26:07.000Z">
+          2015-12-02
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>关于REST API接口的设计没有了解太多，不过实际的测试中看到一些这样设计的接口资源路径URL，自己感觉就是怪怪的，<br>感觉这样的接口URL总是哪里不太对劲，所以自己就分析了一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;domain.org&#x2F;api&#x2F;v4&#x2F;＊＊&#x2F;coursePassed&#x2F;&#123;appCode&#125;&#x2F;&#123;courseId&#125;&#x2F;&#123;userCode&#125;</span><br></pre></td></tr></table></figure>
+
+<p>自己的思考是感觉这个东西不是很理想，无法通过一个路径了解大概是个什么事情，自己的感觉或许这样会更清楚一点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;domain.org&#x2F;api&#x2F;v4&#x2F;app&#x2F;&#123;appCode&#125;&#x2F;user&#x2F;course&#x2F;&#123;courseId&#125;</span><br></pre></td></tr></table></figure>
+
+<p>感觉这样的URL说清楚了：</p>
+<p>－ 哪个APP<br>－ 是用户的course的状态<br>－ usercode可能不需要，应为已经使用了oAuth认证了</p>
+<p>通过这样的命名的话，如果想获取一个用户所有的course的状态，或许就是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;domain.org&#x2F;api&#x2F;v4&#x2F;app&#x2F;&#123;appCode&#125;&#x2F;user&#x2F;course&#x2F;</span><br></pre></td></tr></table></figure>
+<p>而我加上user的目的是表示这个是用户的课程考核状态，而不是course本身的状态。</p>
+<p>原来的URL里面coursePassed上太具体了，可能本来这个接口其实是获取course的考核状态，如果写上这个coursePassed的话，或许只能返回true or false了，是不是有点太具体了，实际的实现和扩展非常有可能和这个有区别，而且如果有时需要一个接口提供的知识course考核的状态，那么难道再写一个API的接口来给状态，如果不是，那么coursePassed叫法就是值得商量的.</p>
+<p>然后自己查了一下关于REST API设计原则的文章:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2014/05/restful_api.html">rest api</a></li>
+</ul>
+<p>虽然没有直接说明如何设计，但是看完之后我自己觉得我的想法没有太大错误.感觉好的原则就是应该合乎一个常理的，通顺的，有上下文逻辑的.</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/truestories/">truestories</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/truestories/">truestories</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+
+<nav class="pagination">
+  
+  <a href="/page/34/" class="pagination-prev">上一页</a>
+  
+  
+  <a href="/page/36/" class="pagination-next">下一页</a>
+  
+</nav>
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

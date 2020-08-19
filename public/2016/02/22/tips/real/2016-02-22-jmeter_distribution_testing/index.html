@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JMETER 分布式测试 | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="performance">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="JMETER 分布式测试"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>JMETER 分布式测试</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/02/22/tips/real/2016-02-22-jmeter_distribution_testing/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-02-22T01:33:59.000Z">
+          2016-02-22
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="JMETER-DISTRIBUTION-TESTING"><a href="#JMETER-DISTRIBUTION-TESTING" class="headerlink" title="JMETER DISTRIBUTION TESTING"></a>JMETER DISTRIBUTION TESTING</h1><p>JMETER有时进行压力测试时，生成压力的机器性能不够，不能产生足够的压力，不过JMETER可以使用多个系统进行JMETER的压力测试，来解决这个问题. 使用多系统测试时需要注意：</p>
+<ul>
+<li>关闭防火墙</li>
+<li>client in the same subnet</li>
+<li>服务器在同一个字网</li>
+<li>Jmeter可以访问服务器</li>
+<li>JMeter是同一版本的</li>
+</ul>
+<h2 id="JMETER-Distribution-Setting"><a href="#JMETER-Distribution-Setting" class="headerlink" title="JMETER Distribution Setting"></a>JMETER Distribution Setting</h2><ul>
+<li>Master Setup<br>config remote address:<br>jmeter.properties: remote_host=ip1,ip2,ip3…..</li>
+<li>salve setup<ul>
+<li>running jmeter-server.bat/.sh 文件</li>
+<li>modify jmeter-server file to change the rmiregistry location</li>
+</ul>
+</li>
+<li>start TESTING</li>
+</ul>
+<h2 id="Additional-Resources"><a href="#Additional-Resources" class="headerlink" title="Additional Resources"></a>Additional Resources</h2><p><a target="_blank" rel="noopener" href="http://wiki.apache.org/jmeter/JMeterFAQ#How_to_do_remote_testing_the_.27proper_way.27.3F">JMETER FAQ</a> <a target="_blank" rel="noopener" href="http://jmeter.apache.org/usermanual/remote-test.html">REMOTE-TEST</a></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/performance/">performance</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

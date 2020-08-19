@@ -1,0 +1,201 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>12 factors Application | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="interview">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="12 factors Application"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>12 factors Application</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/04/24/tips/interview/2016-04-24-12factors/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-04-23T18:31:11.000Z">
+          2016-04-24
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="12-Factors-Application"><a href="#12-Factors-Application" class="headerlink" title="12 Factors Application"></a>12 Factors Application</h1><ul>
+<li><p>One Codebase，multiple deployments</p>
+<ul>
+<li>how to do that? Maven,Profile,Configuration</li>
+</ul>
+</li>
+<li><p>Dependency 依赖</p>
+<p>显示依赖第三方包.</p>
+</li>
+<li><p>配置 configuration</p>
+</li>
+</ul>
+<p>配置存储于环境变量，env，vars</p>
+<ul>
+<li><p>后端服务 backend as services 后端服务看成是资源，不管资源是什么，在哪里，都可以加入使用</p>
+</li>
+<li><p>build,deploy,run</p>
+<p>build, deploy,run 三个步骤严格区分，类似于capistrano发布工具</p>
+</li>
+<li><p>进程 process，一个或者多个无状态进程运行应用</p>
+<ul>
+<li>jammit</li>
+<li>django-compressor</li>
+<li>build</li>
+</ul>
+</li>
+<li><p>Port Binding</p>
+</li>
+<li><p>concurrency 并发 进程模型进行扩展，JVM提供了超级进程储备了大量资源，通过多线程管理. 进程需要无共享，水平分区特性</p>
+</li>
+<li><p>易处理</p>
+<ul>
+<li>最小启动时间</li>
+<li>终止信号 SIGTERM</li>
+<li>幂等</li>
+<li>Crash-only design</li>
+</ul>
+</li>
+<li><p>开发环境和线上环境等价</p>
+</li>
+<li><p>Logging 日志</p>
+<ul>
+<li>logging 是事件流</li>
+<li>Logplex,Fluent,Splunk,Hadoop/Hive</li>
+</ul>
+</li>
+<li><p>管理进程</p>
+<ul>
+<li>process formation</li>
+<li>数据迁移</li>
+<li>控制台</li>
+<li>依赖隔离，不同的技术采用不同的依赖隔离</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/interview/">interview</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/interview/">interview</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

@@ -65,15 +65,15 @@
 
   
     
-    <h3 class="article-title"><a href="/2015/05/16/python/2015-05-16-svn_reviewboard_python/"><span>Python完成简单的SVN Reviewboard Precommit的客户端</span></a></h3>
+    <h3 class="article-title"><a href="/2019/11/27/qa-thoughts/tech-is-all/"><span>测试陷阱3-自动化测试就是测试的技术</span></a></h3>
     
   
 
   <div class="article-top-meta">
     <span class="posted-on">
-      <a href="/2015/05/16/python/2015-05-16-svn_reviewboard_python/" rel="bookmark">
-        <time class="entry-date published" datetime="2015-05-15T18:31:11.000Z">
-          2015-05-16
+      <a href="/2019/11/27/qa-thoughts/tech-is-all/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-11-27T15:49:47.000Z">
+          2019-11-27
         </time>
       </a>
     </span>
@@ -85,85 +85,18 @@
   <div class="article-content">
     <div class="entry">
       
-        <p>最近公司需要使用review board进行代码pre-commit review(pre-commit:正式提交前review)，而公司的现状是：</p>
-<ol>
-<li>使用SVN作为代码版本管理工具</li>
-<li>开发工具有eclipse，idea</li>
-<li>MAC 和windows 机器居多</li>
-</ol>
-<p>考虑到开发eclipse和idea插件，连接review board我一个人无法完成，同时能力也不够来开发这两种插件，<br>所以就准备python写一个命令行工具，期间研究了一下taobao review board的插件，感觉有点复杂，这个也是<br>使用python来些命令行工具的一个理由,也考虑过使用node-webkit来写个客户端，不过由于时间上的限制也就先放弃了</p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>实现过程中，使用到主要的包和工具是：</p>
-<ol>
-<li>RBTools,review board 自带的工具，但是支持中文能力让人有点困惑</li>
-<li>python，cmd 包(python自带)，requests包使用 pip install requests 安装</li>
-<li>ConEmuPack(windows CMD的替代),主要为了支持window系统</li>
-<li>SVN</li>
-</ol>
-<p>最后实现了如下功能</p>
+        <p>随着自动化测试的风靡，测试同学们越来越觉得自动化就是全部，自动化就是自己的方向。<br>这些本身没有太大问题，但是如果认为自动化测试就是终极技术，那么我觉得这是一个很大的陷阱。<br>为什么？个人觉得大部分的测试把自动化和技术都定义的太狭小了,技术和自动化都是非常宽泛的定义,下面是我自己问自己的两个问题:</p>
 <ul>
-<li>选择更改的文件，提交Review Board 作为pre-commit review</li>
-<li>根据review request id 提交代码到SVN</li>
-<li>python直接操作svn命令,可以通过简单的命令就提交代码(由于使用习惯的问题,个人觉得命令行比UI效率更高)<br>svn命令有个问题就是如果操作delete或者add这种的话,如果文件没有直接放到svn work copy的话,提交需要两步操作,<br>而这个工具也解决了这个问题</li>
+<li>什么是自动化？测试讨论的自动化难道就是接口自动化，UI自动化测试吗？</li>
+<li>什么是技术？技术难道就是写代码吗？把测试用例代码化吗？</li>
 </ul>
-<h2 id="Review-Board-功能介绍"><a href="#Review-Board-功能介绍" class="headerlink" title="Review Board 功能介绍"></a>Review Board 功能介绍</h2><p>review board 是进行代码review的一个工具，目前公司主要用来做pre-commit的review，在review board针对pre-主要有如下概念：</p>
-<ul>
-<li>review request draft, draft里面包含了differ文件，描述，review的人等等</li>
-<li>review request，在这个review request上面review</li>
-<li>review完毕，才可以提交代码</li>
-</ul>
-<h2 id="安装和配置"><a href="#安装和配置" class="headerlink" title="安装和配置"></a>安装和配置</h2><h3 id="1-安装Python-和Requests包"><a href="#1-安装Python-和Requests包" class="headerlink" title="1.安装Python 和Requests包"></a>1.安装Python 和Requests包</h3><ul>
-<li>下载安装最新版本的Python，确保在命令行中可以执行Python命令，如果打开命令行工具，执行python -v 失败，需要在环境变量中设置Python的执行路径</li>
-<li>安装Python完成之后，在命令行中执行</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install requests</span><br></pre></td></tr></table></figure>
-
-<p>安装requests包到全局。MAC可能需要使用:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install requests</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-安装RBTools"><a href="#2-安装RBTools" class="headerlink" title="2. 安装RBTools"></a>2. 安装RBTools</h3><p>下载安装RBTool,RBTool有不同操作系统对应的版本，根据自身操作系统下载并安装，MAC和windows都是可执行文件，一路next就可以<br>安装完毕，在命令行检查是否安装成功:</p>
- <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rbt -v</span><br></pre></td></tr></table></figure>
-
-<p> 检查版本，如果有版本显示则成功</p>
-<h3 id="3-配置SVN"><a href="#3-配置SVN" class="headerlink" title="3. 配置SVN"></a>3. 配置SVN</h3><p>配置SVN，MAC自带了SVN，Windows需要将SVN，配置到环境变量里面，具体方法如下,命令行中执行</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn --version</span><br></pre></td></tr></table></figure>
-
-<p>如果返回版本信息，则忽略下面步骤:</p>
-<pre><code>下载SVN BIN文件，将BIN目录配置到环境变量PATH下面，命令行中执行svn --version如果返回版本信息则成功</code></pre>
-<h3 id="4-Windows-下载ComEmuPack"><a href="#4-Windows-下载ComEmuPack" class="headerlink" title="4. Windows 下载ComEmuPack"></a>4. Windows 下载ComEmuPack</h3><p>ComEmuPack是Windows Cmd的替代工具，主要为了解决中文输入和显示问题，Window上使用，如果MAC上使用终端工具就可以terminal或者iterm都可以</p>
-<h2 id="运行客户端"><a href="#运行客户端" class="headerlink" title="运行客户端"></a>运行客户端</h2><p>复制svnrbclient.py 到你本地SVN的目录下面，这个目录需要和Review Board上面的配置相对应，具体如下例说明：<br>1.review board配置某个repository是<a target="_blank" rel="noopener" href="https://scm.******.com:8443/svn/Test/automation">https://scm.******.com:8443/svn/Test/automation</a><br>2.repository的名字是：******-automation,假设你使用</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn checkout https://scm.******.com:8443/svn/******-automation</span><br></pre></td></tr></table></figure>
-
-<p>检出代码到**<strong><strong>-automation目录，那么你需要将svnrbclient.py复制到你本地的**</strong></strong>-automation下面.</p>
-<p>打开命令行工具，运行</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python svnrbclient.py</span><br></pre></td></tr></table></figure>
-
-<p>就可以，第一次使用会让你配置你的review board设置，如果嫌麻烦，可以创建如下内容的文件<br>到.reviewboardrc，不过复制之前需要修改，具体修改参考一下注释.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 不需要修改</span><br><span class="line">REVIEWBOARD_URL &#x3D; &quot;192.168.3.180&quot;</span><br><span class="line">&#x2F;&#x2F; 一般修改至你动作的目录名</span><br><span class="line">REPOSITORY &#x3D; &quot;******-automation&quot;</span><br><span class="line">&#x2F;&#x2F; 工号</span><br><span class="line">USERNAME&#x3D;110863</span><br><span class="line">&#x2F;&#x2F;review board密码，和LDAP密码一样</span><br><span class="line">PASSWORD&#x3D;&quot;*******&quot;</span><br><span class="line">&#x2F;&#x2F; 默认代码审查人的工号，可以是****，****格式，,间隔表示多人</span><br><span class="line">TARGET_PEOPLE&#x3D;****</span><br></pre></td></tr></table></figure>
-
-<h2 id="使用客户端"><a href="#使用客户端" class="headerlink" title="使用客户端"></a>使用客户端</h2><p>在运行客户端之后，可以看到如下内容：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> ****** Review Board Client, ? <span class="keyword">for</span> <span class="built_in">help</span>, and the total <span class="built_in">command</span> lists:</span><br><span class="line"> 1. setup:setup review board setting</span><br><span class="line"> 2. pre:precommit your changes to review board</span><br><span class="line"> 3. upre:update your precommit</span><br><span class="line"> 4. ss:svn status,find svn status <span class="keyword">for</span> the working copies</span><br><span class="line"> 5. sa:svn add,add files to <span class="built_in">local</span> svn</span><br><span class="line"> 6. sd:svn delete,delete svn file</span><br><span class="line"> 7. ci:svn commit,commit the changes by review request id</span><br><span class="line"> 8. sre: revert changes</span><br><span class="line"> 9. sdiff: generate differ file</span><br><span class="line"> 10.sci: commit the selected files directly</span><br><span class="line"> 11.exit: <span class="built_in">exit</span> the client</span><br><span class="line">(****** RB Client)</span><br></pre></td></tr></table></figure>
-
-<p>以上就是这个客户端的所有功能，重点是如下几个功能：</p>
-<ol>
-<li>pre: 创建review request</li>
-<li>upre： 更新review request</li>
-<li>ci: review通过之后，提交代码到SVN中央仓库，这个是根据review request id来作的提交<br>也就是你提交review request修改了什么文件，使用ci命令就帮你提交此review request修改过的文件<br>一般执行方法是：在(<strong>**</strong> RB Client)后面输入你需要的命令如：pre,然后按照提示一步一步操作就可以了.以下是输入的日志：</li>
-</ol>
-<p>以下是使用pre commit的一个完全的shell场景:</p>
-<ul>
-<li>输入命令pre</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">****** RB Client)pre</span><br><span class="line">&#x2F;&#x2F; 得到输出，需要选择此次修改的文件：</span><br><span class="line">pre-commit the changes</span><br><span class="line">svn status:</span><br><span class="line">Changed Files Status:</span><br><span class="line">ID |FILE SVN Status|File Name&#x2F;File Path</span><br><span class="line">0 | ? | .git</span><br><span class="line">1 | ? | .idea</span><br><span class="line">2 | ? | .ignorerc</span><br><span class="line">3 | A | .reviewboardrc</span><br><span class="line">4 | ? | automation-common&#x2F;automation-common.iml</span><br><span class="line">5 | M | automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;ITestProcessor.java</span><br><span class="line">6 | ? | automation-common&#x2F;target</span><br><span class="line">7 | A | automation-demo&#x2F;automation-demo.iml</span><br><span class="line">8 | ? | automation-demo&#x2F;target</span><br><span class="line">9 | A | differ_temp</span><br><span class="line">10 | A | differ_temp&#x2F;105</span><br><span class="line">11 | A | differ_temp&#x2F;105&#x2F;diff_105_latest.txt</span><br><span class="line">12 | A | differ_temp&#x2F;105&#x2F;differ_1432611692.92.txt</span><br><span class="line">13 | A | differ_temp&#x2F;105&#x2F;differ_1432612400.93.txt</span><br><span class="line">14 | A | differ_temp&#x2F;105&#x2F;notes.txt</span><br><span class="line">15 | A | differ_temp&#x2F;113</span><br><span class="line">16 | A | differ_temp&#x2F;113&#x2F;diff_113_latest.txt</span><br><span class="line">17 | A | differ_temp&#x2F;113&#x2F;differ_1432620381.6.txt</span><br><span class="line">18 | A | differ_temp&#x2F;113&#x2F;differ_1432620573.37.txt</span><br><span class="line">19 | A | differ_temp&#x2F;113&#x2F;notes.txt</span><br><span class="line">20 | A | differ_temp&#x2F;114</span><br><span class="line">21 | A | differ_temp&#x2F;114&#x2F;diff_114_latest.txt</span><br><span class="line">22 | A | differ_temp&#x2F;114&#x2F;differ_1432621517.49.txt</span><br><span class="line">23 | A | differ_temp&#x2F;114&#x2F;differ_1432621894.64.txt</span><br><span class="line">24 | ? | differ_temp&#x2F;114&#x2F;differ_1432622051.84.txt</span><br><span class="line">25 | A | differ_temp&#x2F;114&#x2F;notes.txt</span><br><span class="line">26 | ? | differ_temp&#x2F;115</span><br><span class="line">27 | ? | differ_temp&#x2F;116</span><br><span class="line">28 | ? | differ_temp&#x2F;125</span><br><span class="line">29 | ? | differ_temp&#x2F;132</span><br><span class="line">30 | ? | ******-automation.iml</span><br><span class="line">31 | A | rbtools_requests.py</span><br><span class="line">32 | M | svnrbtclient.py</span><br><span class="line">33 | A | +</span><br><span class="line">34 |  | &gt;</span><br><span class="line">35 | Summary | of</span><br><span class="line">36 |  | Tree</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>输入文件的ID， 可以是5,32，或者是5-32，34-90 表示5-32,34-90的文件</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Please select the files IDs which your want to commit,eg. 0,1,2,3, or Enter for All Files</span><br><span class="line">&lt;5,32</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;ITestProcessor.java svnrbtclient.py is ready to post to review board......</span><br><span class="line">Please input your reviewer ID,Entry for default Reviewer&gt;</span><br><span class="line">reviewer ID:</span><br><span class="line">Please input summary for your changes,it is nice to provide your Bug No:&gt;修改svnrbclient</span><br><span class="line">&lt;Response [201]&gt;</span><br><span class="line">None</span><br><span class="line">update draft timeout but it doesn&#39;t matter</span><br><span class="line">draft request review id :133</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;到这里review request 提交完毕</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>审核通过之后，输入ci命令，提交review request</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">(****** RB Client)ci</span><br><span class="line"></span><br><span class="line">last 5 review requests status:</span><br><span class="line">Request Review Id |Summary  | Status | Changed File List</span><br><span class="line">133 | 修改svnrbclient</span><br><span class="line"> | pending | automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;ITestProcessor.java svnrbtclient.py</span><br><span class="line"></span><br><span class="line">132 | 测试很多文件</span><br><span class="line"> | pending | README.md automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;Environment.java automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;ITestProcessor.java automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;drivers&#x2F;DriverFactory.java automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;helpers&#x2F;webdriver&#x2F;WebDriverHelper.java automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;listener&#x2F;testng&#x2F;SimpleWebDriverScreenShotTestListener.java automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;testscaffold&#x2F;BaseWebCurrencyTest.java automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;testscaffold&#x2F;BaseWebTest.java automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;testscaffold&#x2F;webtest&#x2F;WebTestContext.java automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;testscaffold&#x2F;webtest&#x2F;webUI&#x2F;elementloader&#x2F;locator&#x2F;CustomerElementLocatorFactory.java automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;testscaffold&#x2F;webtest&#x2F;webUI&#x2F;htmlelements&#x2F;HtmlElement.java automation-common&#x2F;src&#x2F;test&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;drivers&#x2F;DriverFactoryTest2.java automation-common&#x2F;src&#x2F;test&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;drivers&#x2F;DriverFactoryTest_Concurrency.java automation-common&#x2F;src&#x2F;test&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;drivers&#x2F;testng-test1.xml automation-common&#x2F;src&#x2F;test&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;helpers&#x2F;webdriver&#x2F;WebDriverHelperTest.java</span><br><span class="line"></span><br><span class="line">115 | 更新readme</span><br><span class="line"> | pending | ******rbclient_en.py README.md</span><br><span class="line"></span><br><span class="line">116 | 测试测试</span><br><span class="line"> | pending | ******rbclient.py</span><br><span class="line"></span><br><span class="line">125 | 修改中文注释</span><br><span class="line"> | pending | automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;Environment.java automation-common&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;******&#x2F;automation&#x2F;ITestProcessor.java</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;输入你要需要提交的 review request id号：  &#x2F;&#x2F;提交结束</span><br><span class="line">(****** RB Client)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="什么是自动化？测试讨论的自动化难道就是接口自动化，UI自动化测试吗？"><a href="#什么是自动化？测试讨论的自动化难道就是接口自动化，UI自动化测试吗？" class="headerlink" title="什么是自动化？测试讨论的自动化难道就是接口自动化，UI自动化测试吗？"></a>什么是自动化？测试讨论的自动化难道就是接口自动化，UI自动化测试吗？</h2><p>为什么先问这个问题，因为很多同学一开始没有接触过自动化，后来写了一些自动化用例之后，要么觉得高人一等，要么觉得一会就觉得没意思了，原因何在？因为写过自动化测试用例之后，要么觉得我技术很厉害了，基本可以把所有问题都解决了；要么马上一个疑问是这有技术含量吗？ 大量重复的代码，差不多的验证点，没有比设计测试用例和执行用例高级到多少,然后就有一种深深的幻灭的感觉？路在何方的问题又来了.</p>
+<p>其实什么都可以是自动化,把原来重复做的事情用代码实现是自动化的一种；把类似的事情用代码实现也是自动化的一种；把<br>日常工作用代码实现也是自动化；这些自动化都是在做了一次之后再用代码去实现，如果用时髦一点的时候machine learning/ai去把<br>没做过的事情自动实现了,也是自动化. 我甚至可以说，社会生产力的进步都是每一个自动化的结果。<br>如果从这个角度看的，那么自动化能做的事情太多了，自动化测试也好，测试自动化也好，你可以做的事情有很多很多，多到你无法想像，问题是你有<br>能力做吗？ 那些写接口自动化，web ui自动化的技能足够你去做更多的自动化吗？</p>
+<p>自动化的目的大致就是为了不让人去做差不多的事情，减少重复劳动。用一样的方法做一样的事情是重复劳动，用不一样的方法重新再做一遍一样的事情也是重复劳动；如果目标是减少重复劳动，那么自动化测试就不能停在把测试自动化这一步，还有很多很多的事情可以做。但是坦白说，有哪些事情，我也说不出来，但是我觉得用代码再去实现一遍测试过用例，也是一种重复劳动，只是还没有能力把这件事情不重复做，但是相信一定有一些办法，有一些方面是可以解决的。</p>
+<p>如果从上面的角度说，自动化的范围太广了，能做的事情太多了，会了接口自动化，UI自动化算什么呢？</p>
+<h2 id="什么是技术？技术难道就是写代码吗？把测试用例代码化吗？"><a href="#什么是技术？技术难道就是写代码吗？把测试用例代码化吗？" class="headerlink" title="什么是技术？技术难道就是写代码吗？把测试用例代码化吗？"></a>什么是技术？技术难道就是写代码吗？把测试用例代码化吗？</h2><p>个人觉得技术包括的范围也很广，不止是写代码，不仅仅是测试用例代码化，这些都只是技术的一块。讨论起代码来兴致很高，觉得技术含量很高，讨论起业务来，没有一点情绪。但是如果仔细想想，像一个会计问题，一个交易问题，一个合规问题，这些是业务，但是不也是技术吗？这些只要是专业问题，这些就也是技术的一种，就像你专业写代码，这些不能理解为计算机科学的业务吗？如果是这样的话，那有什么非要区分业务和技术的？放在现实中来说，业务就是处理实际问题的技术，代码就是解决计算机如何运行的技术，不是吗？既然是这样的化，那么问问自己业务了解的透彻了，各个流程节点了解透彻了吗？技术实现和业务的匹配对应关系了解透彻了？代码说到底只是一个产品成功的一部分，还有很多很多其他问题需要解决,如果非要说代码能占到产品上线或者成功的多少比例？或许50%都不到. 代码本身不是目的，实际业务问题才是。不用非要拘泥与代码，各种方式解决了业务问题，也是很有技术含量的。</p>
+<h2 id="自动化测试就是测试的技术？"><a href="#自动化测试就是测试的技术？" class="headerlink" title="自动化测试就是测试的技术？"></a>自动化测试就是测试的技术？</h2><p>自动化测试只是测试的一种技术, 决定你有没有价值的不是你用了什么技术手段，是你解决了什么问题。代码，自动化测试也只是测试的一个侧面，想想日常工作中有多少事情要处理，如果眼里只有自动化测试，那么是不是失去了很多其他方面的锻炼和成长。问问自己把问题说清楚了吗，问问自己<br>做到了有效沟通吗，问问自己了解业务吗，问问自己能快速了解需求吗？自动化测试只是那么一小块，需要做的事情还有很多。</p>
+<p>不过自动化测试如果你完全不会，那么现在的行情你肯定是不容易拿到高工资的；但是如果认为只有自动化测试，那么天花板也放在那边,也算给自己的一个提醒吧。</p>
 
       
     </div>
@@ -174,20 +107,13 @@
     <div class="article-meta pull-left">
 
     
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/python/">python</a>
-    </span>
-    
 
     
     
 
     <span class="post-tags">
       <i class="icon-tags"></i>
-        <a href="/tags/python/">python</a>
+        <a href="/tags/QATrap/">QATrap</a>
     </span>
     
 
@@ -203,15 +129,15 @@
 
   
     
-    <h3 class="article-title"><a href="/2014/11/24/python/2014-11-24-virtual_env/"><span>Python virtualenv in Mac</span></a></h3>
+    <h3 class="article-title"><a href="/2019/11/22/python/read_excel_yml/"><span>数据驱动测试- 测试用例加载</span></a></h3>
     
   
 
   <div class="article-top-meta">
     <span class="posted-on">
-      <a href="/2014/11/24/python/2014-11-24-virtual_env/" rel="bookmark">
-        <time class="entry-date published" datetime="2014-11-23T18:31:11.000Z">
-          2014-11-24
+      <a href="/2019/11/22/python/read_excel_yml/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-11-21T18:31:11.000Z">
+          2019-11-22
         </time>
       </a>
     </span>
@@ -223,39 +149,29 @@
   <div class="article-content">
     <div class="entry">
       
-        <p>virtualenv是一个创建python虚拟环境的工具,主要的解决的问题是,让在一个干净的Python环境中开发,不需要被不同的python<br>安装包烦恼,python3中实际已经内置了venv的,可以不使用virtualenv,以下是简要说明以下安装使用方法:</p>
-<p>ps: 关于Python3和Python2很有可能在同一台机器上都有安装,所以注意python命令对应的是那个版本.have fun :)</p>
-<h2 id="Python3-in-Mac"><a href="#Python3-in-Mac" class="headerlink" title="Python3 in Mac"></a>Python3 in Mac</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m venv todo_mvc</span><br></pre></td></tr></table></figure>
-<p>Done ……….</p>
-<h2 id="Python2-in-Mac"><a href="#Python2-in-Mac" class="headerlink" title="Python2 in Mac"></a>Python2 in Mac</h2><h3 id="Install-virtualenv-in-Mac"><a href="#Install-virtualenv-in-Mac" class="headerlink" title="Install virtualenv in Mac"></a>Install virtualenv in Mac</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install virtualenv</span><br></pre></td></tr></table></figure>
+        <p>使用pytest作为测试工具，有一个pytest.parameterized 的装饰器可以用来进行数据驱动测试，以下是一个最简单的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@pytest.mark.parametrize(&quot;id_num&quot;, (1, 2, 3, 4, 5))</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_issue_plain</span>(<span class="params">id_num</span>):</span></span><br><span class="line">    print(id_num)</span><br></pre></td></tr></table></figure>
 
-<p>此前确认pip已经安装了</p>
-<h3 id="Install-virtualenvwapper-in-Mac"><a href="#Install-virtualenvwapper-in-Mac" class="headerlink" title="Install virtualenvwapper in Mac"></a>Install virtualenvwapper in Mac</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install virtualenvwapper</span><br></pre></td></tr></table></figure>
+<p>test_issue方法有一个参数名称是 id_num, 这个值可以在测试过程中不断的被改变，但是实际中接口自动化中，有时我们会使用一些excel，yml作为外部测试用例来传入参数进行测试，那怎么样才能实现这个功能呢？</p>
+<h2 id="case-loader-例子说明"><a href="#case-loader-例子说明" class="headerlink" title="case loader 例子说明"></a>case loader 例子说明</h2><p>简单来说，一般我们测试用例传入的数据包括：</p>
+<ul>
+<li>test_desc: 测试用例描述</li>
+<li>inputs: 输入参数，可以作为json格式</li>
+<li>expected: 期望结果，可以是json格式</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@pytest.mark.parametrize(&quot;test_desc,input,expected&quot;, load_case_by_yml(&quot;testcases.yml&quot;))</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_issue_plain</span>(<span class="params">test_desc, input, expected</span>):</span></span><br><span class="line">    print(test_desc, input, expected)</span><br></pre></td></tr></table></figure>
 
-<h3 id="创建python开发环境"><a href="#创建python开发环境" class="headerlink" title="创建python开发环境"></a>创建python开发环境</h3><h4 id="直接使用virtualevn"><a href="#直接使用virtualevn" class="headerlink" title="直接使用virtualevn"></a>直接使用virtualevn</h4><ol>
-<li>创建目录</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir python_test</span><br><span class="line">virtualenv python_test</span><br></pre></td></tr></table></figure>
+<p>所以我们通过程序加载后的内容也就是load_case_by_yml返回的应该是这样的一个list：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(test_desc,inputs,expected),......]</span><br></pre></td></tr></table></figure>
 
-<ol start="2">
-<li>使用创建好的目录作为开发环境</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /bin/activate</span><br></pre></td></tr></table></figure>
+<h2 id="case-loader-实现"><a href="#case-loader-实现" class="headerlink" title="case loader 实现"></a>case loader 实现</h2><p>有了目标，我们就动手，使用yml包非常容易的下面的功能:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_case_by_yml</span>(<span class="params">path</span>):</span></span><br><span class="line">    <span class="keyword">with</span> open(path, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> stream:</span><br><span class="line">        raw_yaml_result = yaml.safe_load(stream)</span><br><span class="line">    cases = raw_yaml_result[<span class="string">&quot;tests&quot;</span>]</span><br><span class="line">    parameterized_case = []</span><br><span class="line">    <span class="keyword">for</span> case <span class="keyword">in</span> cases:</span><br><span class="line">        parameterized_case.append(tuple(case.values()))</span><br><span class="line">    <span class="keyword">return</span> parameterized_case</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>启动开发环境之后，可以使用pip安装需要的python依赖库，如selenium</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install selenium</span><br></pre></td></tr></table></figure>
+<p>对应测试用例的yaml如下:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">tests:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">test_desc:</span> <span class="string">test1</span></span><br><span class="line">    <span class="attr">input:</span> &#123;<span class="string">&quot;k1&quot;</span><span class="string">:&quot;v1&quot;</span>&#125;</span><br><span class="line">    <span class="attr">expected:</span> &#123;<span class="string">&quot;k1&quot;</span><span class="string">:&quot;v1&quot;</span>&#125;</span><br><span class="line">  <span class="bullet">-</span> <span class="attr">test_desc:</span> <span class="string">test2</span></span><br><span class="line">    <span class="attr">input:</span> &#123;<span class="string">&quot;k1&quot;</span><span class="string">:&quot;v2&quot;</span>&#125;</span><br><span class="line">    <span class="attr">expected:</span> &#123;<span class="string">&quot;k1&quot;</span><span class="string">:&quot;v2&quot;</span>&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>如果安装好了virtualenvwapper的话，可以使用如下命令使用开发环境：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkvirtualenv python_test</span><br></pre></td></tr></table></figure>
-
-<p>退出：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deactivate</span><br></pre></td></tr></table></figure>
-
-<p>切换：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">workon python-test</span><br></pre></td></tr></table></figure>
-
-<p>删除</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm virtualenv python-test</span><br></pre></td></tr></table></figure>
+<p>通过这个方式，就非常容易的实现了数据驱动，同时也可以让自己的测试数据更好的被阅读和管理.</p>
+<p>每天1小时，可以让你的效率更好. 明天可以自己试试如何从excel加载实现类似功能.</p>
 
       
     </div>
@@ -270,7 +186,7 @@
 
     <span class="post-categories">
       <i class="icon-categories"></i>
-        <a href="/categories/python/">python</a>
+        <a href="/categories/automation，python/">automation，python</a>, <a href="/categories/automation，python/daily-automation-tip/">daily-automation-tip</a>
     </span>
     
 
@@ -279,7 +195,7 @@
 
     <span class="post-tags">
       <i class="icon-tags"></i>
-        <a href="/tags/python/">python</a>
+        <a href="/tags/automation/">automation</a><a href="/tags/daily-automation-tip/">daily-automation-tip</a>
     </span>
     
 
@@ -295,15 +211,15 @@
 
   
     
-    <h3 class="article-title"><a href="/2014/11/24/python/2014-11-24-python_mirror/"><span>Python PIP mirror设置</span></a></h3>
+    <h3 class="article-title"><a href="/2019/10/31/qa-thoughts/things-matter/"><span>测试陷阱2-永远都在忙碌重要紧急的事情</span></a></h3>
     
   
 
   <div class="article-top-meta">
     <span class="posted-on">
-      <a href="/2014/11/24/python/2014-11-24-python_mirror/" rel="bookmark">
-        <time class="entry-date published" datetime="2014-11-23T18:31:11.000Z">
-          2014-11-24
+      <a href="/2019/10/31/qa-thoughts/things-matter/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-10-31T05:22:54.000Z">
+          2019-10-31
         </time>
       </a>
     </span>
@@ -315,16 +231,34 @@
   <div class="article-content">
     <div class="entry">
       
-        <p>使用默认的pip mirror速度实在太慢了，所以使用douban的pypi镜像.如何使用呢？很简单，以下几步：</p>
+        <p>测试永远都很忙，忙着回归测试，忙着各种各样的测试，各种各样的交付，但是这样忙碌了3年左右之后，<br>你发现你在确实是进步了，进步的主要方面我想大部分就是以下几个方面:</p>
 <ul>
-<li>修改~/.pip/pip.conf 文件，将index_url改成douban镜像地址:<code>http://pypi.douban.com/simple</code></li>
+<li>沟通能力增强了</li>
+<li>业务熟悉了非常多，开发测试流程熟悉了很多</li>
+<li>处理紧急事情能力提高了很多</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[<span class="keyword">global</span>]</span><br><span class="line">index-url=http://pypi.douban.com/simple</span><br><span class="line">timeout = <span class="number">30</span></span><br><span class="line">require-virtualenv = false</span><br><span class="line">download-cache = /tmp</span><br></pre></td></tr></table></figure>
-
-<p>当然记得把require-virtualenv 值改为false</p>
+<p>这已经很不错，可能有些测试同样的过了三年这些进步都没有，更多的在听指令，别人说测试就是做测试。</p>
+<p>但是又过了三年，那些快速进步的测试，发现貌似和前面三年的进步比起来，这三年的进步幅度没有那么明显了,<br>以前你没有办法参与决策，现在还是一样没有办法参与决策，这三年做的事情貌似没有太多变化，可能可以带<br>1，2个人进行测试，做的事情和以前又本质的区别吗？于是反思自己，到底哪方面还有欠缺，造成了这几年进步不大？<br>答案往往就是可能是技术方面还不够，那么就想加强技术吧。于是越来越焦虑，主要发现看了1个月一门语法，结果1个星期没有用，<br>都忘了；忙碌的工作让三个月一转眼就过了，回顾一下，发现貌似什么变化的没有发生？怎么办？再过三年还是和现在一样？怎么办，<br>一会就过30了，外面35岁的人就不要了，我怎么办？ 焦虑自然就越来越多了。</p>
+<p>这个问题我觉得没有答案，但是我只想说，说到底，技术提高是需要资源的，而时间是一个重要的资源，如果你在最初的三年提高很快，<br>那么我想学习能力这个资源你是不缺的，但是所有的提高都需要你的时间资源，而你自己的时间资源管理起来了吗？你把它用到一些你认为非常重要，但是可能又不是马上要做的事情上吗？你如果这么回头一看，我相信你可能1天1个小时时间都没有花到你认为很重要的事情上面。</p>
+<p>焦虑每个人都有，但是怎么应对，怎么解决自己的问题才是关键。</p>
+<h2 id="如何应对焦虑"><a href="#如何应对焦虑" class="headerlink" title="如何应对焦虑"></a>如何应对焦虑</h2><p>焦虑是要克服的，往往自我要求高的人越焦虑，对于如果应对焦虑，我觉得可以从下面两个方面想：</p>
 <ul>
-<li>关闭终端，重新使用pip命令就可以使用douban镜像了，速度超快</li>
+<li>努力会有结果，我假设这个是对的，但是可能短期(2-3)年有时不对的。<br>我觉得可以举一个很好的例子来说明,下面是巴菲特投资收益曲线</li>
 </ul>
+<p><img src="https://xqimg.imedao.com/16aaa851a878b3d3fc1fe4bd.jpg!custom660.jpg" alt="img"></p>
+<p>如果只看这个曲线的1-2年，我觉得一定有人比他的投资收益更高的，但是如果你放到40年这个维度，那么很明显每人比他高。<br>这我觉得就是一个很好的例子来说明，可能短期进步没有自己预期高。放到生活工作中，如果1年你比别人多进步20%，那么你就一定比别人多20%的工资吗？我觉得未必，但是如果你连续5年都比别人进步了20%，那么我想你一定比其他人的工资高的，也许没有2倍，但是高20-30%我觉得还是非常大机会的，如果以后5年持续高30%，那么你收益也不错。</p>
+<ul>
+<li>每个人不放弃追求自己的极限，但也要明白自己一定有上限的</li>
+</ul>
+<p>每个人一定都有自己的上限，无论你相不相信，他都在那里，所以不如问问自己尽力了吗？不问自己最终会在什么位置，问问现在想要做点什么可能会化解一定的焦虑，焦虑是越想越焦虑，但是越做会越少点。一方面做事情会减少一些想的时间，另外一方面焦虑的解决办法不在你想了多少，而是你做了什么，解决了那些你焦虑的地方。</p>
+<p>有些一时解决不了，那么想想每个人都有上限这半句话，如果有些能解决，那么多想想，多认可一下不放弃追求自己极限这句话。</p>
+<h2 id="重要而不紧急的事情可能决定了你的上限"><a href="#重要而不紧急的事情可能决定了你的上限" class="headerlink" title="重要而不紧急的事情可能决定了你的上限"></a>重要而不紧急的事情可能决定了你的上限</h2><p>回到测试人员焦虑，没有时间提高自己想要提高的东西，时间是你想要提高的重要的资源，那么时间管理上面有一个重要的4象限：<br><img src="https://pic4.zhimg.com/80/b555c21da20c33118a7d0309ad0642c2_hd.jpg" alt="img"></p>
+<p>如果你自己把你实际的事情填到这个象限里面，你发现你要提高的东西都是在重要不紧急这块，但是如果你统计一下你的时间，你<br>发现其实一天1个小时都做不到？这就是你觉得没有提高的很重要的原因，你想提高，但是没有去做，所以越来越焦虑。</p>
+<p>这个四个象限里面其实最重要的是花在重要不紧急上面的时间，你投入了，你就有回报，你就比一般人厉害些，就像上学时候有种书到用时方恨少的感觉，这个感觉就是你没有在重要不紧急的上面没有投入时间，没有积累，你的上限就是那么多，这个是毫无疑问的！</p>
+<p>说起来自然容易，但是做起来确实难，时间从哪里来，比如每天1个小时？对于测试人员来说，所谓技术，最短期的一个目标可能就是编程代码能力，当然21天可以熟练使用一门语言，但是你一年下来合计有21天时间投入在这个上面吗？每天1小时，一年365个小时，365/24其实都没有21天。一天1小时都不够21天，那更不要说你没有花这么多时间了。所以事情其实很清楚了，焦虑的原因不是你笨，而是你没做，不是吗？学习一门语言，不算很难，但也不是没有难度，熟练使用，21天是不够的(很多人骂21天精通XXXX，就是这个道理).能够坚持每天1个小时是最大的难度之一，遇到问题自己想办法解决，坚持遇到一个解决一个，坚持3个多月，我觉得你一定会觉得有些不一样的。</p>
+<p>很多人也会说学了又会怎么样呢？你马上涨工资吗？这个问题我觉得你可以回头看看巴菲特收益曲线。<br>很多说我学不下去，主要没有地方练手？那么就找地方练手<br>很多说我不想学这个，这个不是我的方向？那么就不做了</p>
+<p>如果想要做，那么我觉得，练手我觉得对于测试来说有大量大量的机会做，小到如果有python处理insert语句自动生成，合并一些<br>excel，或者批量修改文件名等等，这些都可以练手，所以简单又重复的事情都可以练，只是你没有想到.</p>
+<p>There is a will, there is a way! 不过是不是学会了编程技能了，就一定就是提高了呢？这是个问题，但是每一个阶段都有每一个阶段的问题，多一门技能，你可能看到更多的东西，看的更远一些，这个我觉得是一定的！</p>
 
       
     </div>
@@ -335,20 +269,13 @@
     <div class="article-meta pull-left">
 
     
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/python/">python</a>
-    </span>
-    
 
     
     
 
     <span class="post-tags">
       <i class="icon-tags"></i>
-        <a href="/tags/python/">python</a>
+        <a href="/tags/QATrap/">QATrap</a>
     </span>
     
 

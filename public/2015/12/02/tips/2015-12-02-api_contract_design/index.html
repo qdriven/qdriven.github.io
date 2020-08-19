@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>True Stories: 从API的URL定义想到的 | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="truestories">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="True Stories: 从API的URL定义想到的"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>True Stories: 从API的URL定义想到的</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/12/02/tips/2015-12-02-api_contract_design/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-12-02T05:26:07.000Z">
+          2015-12-02
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>关于REST API接口的设计没有了解太多，不过实际的测试中看到一些这样设计的接口资源路径URL，自己感觉就是怪怪的，<br>感觉这样的接口URL总是哪里不太对劲，所以自己就分析了一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;domain.org&#x2F;api&#x2F;v4&#x2F;＊＊&#x2F;coursePassed&#x2F;&#123;appCode&#125;&#x2F;&#123;courseId&#125;&#x2F;&#123;userCode&#125;</span><br></pre></td></tr></table></figure>
+
+<p>自己的思考是感觉这个东西不是很理想，无法通过一个路径了解大概是个什么事情，自己的感觉或许这样会更清楚一点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;domain.org&#x2F;api&#x2F;v4&#x2F;app&#x2F;&#123;appCode&#125;&#x2F;user&#x2F;course&#x2F;&#123;courseId&#125;</span><br></pre></td></tr></table></figure>
+
+<p>感觉这样的URL说清楚了：</p>
+<p>－ 哪个APP<br>－ 是用户的course的状态<br>－ usercode可能不需要，应为已经使用了oAuth认证了</p>
+<p>通过这样的命名的话，如果想获取一个用户所有的course的状态，或许就是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;domain.org&#x2F;api&#x2F;v4&#x2F;app&#x2F;&#123;appCode&#125;&#x2F;user&#x2F;course&#x2F;</span><br></pre></td></tr></table></figure>
+<p>而我加上user的目的是表示这个是用户的课程考核状态，而不是course本身的状态。</p>
+<p>原来的URL里面coursePassed上太具体了，可能本来这个接口其实是获取course的考核状态，如果写上这个coursePassed的话，或许只能返回true or false了，是不是有点太具体了，实际的实现和扩展非常有可能和这个有区别，而且如果有时需要一个接口提供的知识course考核的状态，那么难道再写一个API的接口来给状态，如果不是，那么coursePassed叫法就是值得商量的.</p>
+<p>然后自己查了一下关于REST API设计原则的文章:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2014/05/restful_api.html">rest api</a></li>
+</ul>
+<p>虽然没有直接说明如何设计，但是看完之后我自己觉得我的想法没有太大错误.感觉好的原则就是应该合乎一个常理的，通顺的，有上下文逻辑的.</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/truestories/">truestories</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/truestories/">truestories</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

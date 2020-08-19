@@ -1,0 +1,442 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第 26 页 | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2016/04/11/tips/refactoring/2016-04-11-prototype-pattern/"><span>Prototype Pattern</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/04/11/tips/refactoring/2016-04-11-prototype-pattern/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-04-11T15:35:45.000Z">
+          2016-04-11
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>prototype pattern 实际上是通过clone的方式创建出同一个类的不同对象.</p>
+<h1 id="Java-Prototype"><a href="#Java-Prototype" class="headerlink" title="Java Prototype"></a>Java Prototype</h1><p>一般Prototype模式中，又一个prototype的抽象类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Prototype</span> <span class="keyword">implements</span> <span class="title">Cloneable</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> Object <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个抽象类的不同子类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Beast</span> <span class="keyword">extends</span> <span class="title">Prototype</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Beast <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ElfBeast</span> <span class="keyword">extends</span> <span class="title">Beast</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ElfBeast</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ElfBeast</span><span class="params">(ElfBeast beast)</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Beast <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ElfBeast(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Elven eagle&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Adams</span> <span class="keyword">extends</span> <span class="title">Prototype</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Adams <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ElfAdams</span> <span class="keyword">extends</span> <span class="title">Adams</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ElfAdams</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ElfAdams</span><span class="params">(ElfAdams warlord)</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Adams <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ElfAdams(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Elven Adams&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Sam</span> <span class="keyword">extends</span> <span class="title">Prototype</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Sam <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过工厂方法来创建不同的prototype的实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Factory</span> </span>&#123;</span><br><span class="line">    <span class="function">Sam <span class="title">createSame</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function">Adams <span class="title">createAdams</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function">Beast <span class="title">createBeast</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FactoryImpl</span> <span class="keyword">implements</span> <span class="title">Factory</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Sam sam;</span><br><span class="line">    <span class="keyword">private</span> Beast beast;</span><br><span class="line">    <span class="keyword">private</span> Adams adams;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FactoryImpl</span><span class="params">(Sam sam, Beast beast, Adams adams)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.sam = sam;</span><br><span class="line">        <span class="keyword">this</span>.beast = beast;</span><br><span class="line">        <span class="keyword">this</span>.adams = adams;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Sam <span class="title">createSame</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> sam.clone();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (CloneNotSupportedException e) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Adams <span class="title">createAdams</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> adams.clone();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (CloneNotSupportedException e) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Beast <span class="title">createBeast</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> beast.clone();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (CloneNotSupportedException e) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端的调用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        Factory f=<span class="keyword">new</span> FactoryImpl(<span class="keyword">new</span> ElfSam(),</span><br><span class="line">                <span class="keyword">new</span> ElfBeast(),</span><br><span class="line">                <span class="keyword">new</span> ElfAdams());</span><br><span class="line">        Sam sam = f.createSame();</span><br><span class="line">        Adams adams = f.createAdams();</span><br><span class="line">        Beast beast = f.createBeast();</span><br><span class="line"></span><br><span class="line">        System.out.println(sam);</span><br><span class="line">        System.out.println(adams);</span><br><span class="line">        System.out.println(beast);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="python-prototype"><a href="#python-prototype" class="headerlink" title="python prototype"></a>python prototype</h1><p>以下是python中关于prototype的一个实现，代码量明显要比java少，不过起到了差不多的作用：</p>
+<ul>
+<li>Prototype 类，可以注册需要做prototype的类</li>
+<li>通过clone方法来复制和修改实例的属性</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> copy</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Prototype</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self._objects = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">register_object</span>(<span class="params">self, name, obj</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Register an object&quot;&quot;&quot;</span></span><br><span class="line">        self._objects[name] = obj</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">unregister_object</span>(<span class="params">self, name</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Unregister an object&quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">del</span> self._objects[name]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">clone</span>(<span class="params">self, name, **attr</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Clone a registered object and update inner attributes dictionary&quot;&quot;&quot;</span></span><br><span class="line">        obj = copy.deepcopy(self._objects.get(name))</span><br><span class="line">        obj.__dict__.update(attr)</span><br><span class="line">        <span class="keyword">return</span> obj</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.x = <span class="number">3</span></span><br><span class="line">        self.y = <span class="number">8</span></span><br><span class="line">        self.z = <span class="number">15</span></span><br><span class="line">        self.garbage = [<span class="number">38</span>, <span class="number">11</span>, <span class="number">19</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;&#123;&#125; &#123;&#125; &#123;&#125; &#123;&#125;&#x27;</span>.format(self.x, self.y, self.z, self.garbage)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    a = A()</span><br><span class="line">    prototype = Prototype()</span><br><span class="line">    prototype.register_object(<span class="string">&#x27;objecta&#x27;</span>, a)</span><br><span class="line">    b = prototype.clone(<span class="string">&#x27;objecta&#x27;</span>)</span><br><span class="line">    c = prototype.clone(<span class="string">&#x27;objecta&#x27;</span>, x=<span class="number">1</span>, y=<span class="number">2</span>, garbage=[<span class="number">88</span>, <span class="number">1</span>])</span><br><span class="line">    print([str(i) <span class="keyword">for</span> i <span class="keyword">in</span> (a, b, c)])</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">  main()</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/python/">python</a><a href="/tags/java/">java</a><a href="/tags/designpattern/">designpattern</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2016/04/11/tips/refactoring/2016-04-11-singleton/"><span>Java Singleton ENUM as instance HOLDER</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/04/11/tips/refactoring/2016-04-11-singleton/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-04-11T15:35:45.000Z">
+          2016-04-11
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="Singleton-单例设计模式"><a href="#Singleton-单例设计模式" class="headerlink" title="Singleton 单例设计模式"></a>Singleton 单例设计模式</h1><p>单例模式是产生一个类的唯一实例。</p>
+<h2 id="Java-Singleton"><a href="#Java-Singleton" class="headerlink" title="Java Singleton"></a>Java Singleton</h2><p>Java 的Singleton实际上有很多种写法的，下面一个是使用枚举方式写的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InitializingOnDemandHolderIdiom</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">HelperHolder</span> </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> InitializingOnDemandHolderIdiom INSTANCE = <span class="keyword">new</span> InitializingOnDemandHolderIdiom();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> InitializingOnDemandHolderIdiom <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> HelperHolder.INSTANCE;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">InitializingOnDemandHolderIdiom</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> Object <span class="title">readResolve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> getInstance();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/designpattern/">designpattern</a>, <a href="/categories/designpattern/java/">java</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/java/">java</a><a href="/tags/designpattern/">designpattern</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2016/04/05/tips/2016-04-05-VIM-总结/"><span>VIM 使用小结</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/04/05/tips/2016-04-05-VIM-总结/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-04-05T10:31:42.000Z">
+          2016-04-05
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="VIM-用法"><a href="#VIM-用法" class="headerlink" title="VIM 用法"></a>VIM 用法</h1><p>日常会不经意间使用VIM编辑器来处理一些文本编辑的事情。所以整理VIM的基本使用如下：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>q</td>
+<td>退出</td>
+</tr>
+<tr>
+<td>i</td>
+<td>insert</td>
+</tr>
+<tr>
+<td>a</td>
+<td>append</td>
+</tr>
+<tr>
+<td>h</td>
+<td>左移</td>
+</tr>
+<tr>
+<td>k</td>
+<td>上移</td>
+</tr>
+<tr>
+<td>j</td>
+<td>下移</td>
+</tr>
+<tr>
+<td>l</td>
+<td>右移</td>
+</tr>
+<tr>
+<td>r</td>
+<td>替换</td>
+</tr>
+<tr>
+<td>u</td>
+<td>撤销</td>
+</tr>
+<tr>
+<td>x</td>
+<td>删除光标位置字符</td>
+</tr>
+<tr>
+<td>d^</td>
+<td>删除当前位置到行首</td>
+</tr>
+<tr>
+<td>dd</td>
+<td>删除当前行</td>
+</tr>
+<tr>
+<td>d$</td>
+<td>删除当前位置到行尾</td>
+</tr>
+<tr>
+<td>dw</td>
+<td>删除当前位置到一个word尾</td>
+</tr>
+<tr>
+<td>3dd</td>
+<td>删除当前行下三行</td>
+</tr>
+<tr>
+<td>p</td>
+<td>粘贴</td>
+</tr>
+<tr>
+<td>&lt;&lt;</td>
+<td>当前行左移一个宽度</td>
+</tr>
+<tr>
+<td>&gt;&gt;</td>
+<td>当前行右移一个宽度</td>
+</tr>
+<tr>
+<td>％</td>
+<td>匹配的括号</td>
+</tr>
+<tr>
+<td>^</td>
+<td>行的开始</td>
+</tr>
+<tr>
+<td>.</td>
+<td>匹配单字符</td>
+</tr>
+<tr>
+<td>*</td>
+<td>匹配0个或多个之前的字符</td>
+</tr>
+<tr>
+<td>$</td>
+<td>行的结束</td>
+</tr>
+<tr>
+<td>[</td>
+<td>还是一系列的匹配</td>
+</tr>
+<tr>
+<td>&lt;&gt;</td>
+<td>一个字的结束或开始,/&lt;the&gt; 只匹配the</td>
+</tr>
+<tr>
+<td>f</td>
+<td>向右移动到指定字符</td>
+</tr>
+<tr>
+<td>F</td>
+<td>向左移动到指定字符</td>
+</tr>
+<tr>
+<td>ctrl+b</td>
+<td>向后回滚一页</td>
+</tr>
+<tr>
+<td>ctrl＋d</td>
+<td>向前滚动半个窗口</td>
+</tr>
+<tr>
+<td>ctrl＋F</td>
+<td>向前滚动一页</td>
+</tr>
+<tr>
+<td>ctrl＋H</td>
+<td>左移一个空格</td>
+</tr>
+<tr>
+<td>ctrl＋J</td>
+<td>下移一个空格</td>
+</tr>
+<tr>
+<td>(</td>
+<td>移动到句子开头</td>
+</tr>
+<tr>
+<td>)</td>
+<td>移动到句子句尾</td>
+</tr>
+<tr>
+<td>{</td>
+<td>前一个段落</td>
+</tr>
+<tr>
+<td>+</td>
+<td>下一行非空字符</td>
+</tr>
+<tr>
+<td>-</td>
+<td>前一行非空字符</td>
+</tr>
+<tr>
+<td>_</td>
+<td>当前行的非空字符</td>
+</tr>
+</tbody></table>
+<p>其他命令</p>
+<ul>
+<li>y和d的作用类似，不同的是y只提取文字而不删除文字</li>
+<li>缩写：ab test “testing in tesitng”</li>
+<li>mapping, :map,:map!</li>
+<li>vim -r file_name.txt</li>
+</ul>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/shell/">shell</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+
+<nav class="pagination">
+  
+  <a href="/page/25/" class="pagination-prev">上一页</a>
+  
+  
+  <a href="/page/27/" class="pagination-next">下一页</a>
+  
+</nav>
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>YUML Basic Usage | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="tips">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="YUML Basic Usage"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>YUML Basic Usage</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/12/24/python/yuml-usage/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-12-23T16:00:36.000Z">
+          2018-12-24
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="YUML-Syntax"><a href="#YUML-Syntax" class="headerlink" title="YUML Syntax"></a>YUML Syntax</h1><ul>
+<li>comments and directives</li>
+<li>class diagram</li>
+</ul>
+<h2 id="Comments-and-Directives"><a href="#Comments-and-Directives" class="headerlink" title="Comments and Directives"></a>Comments and Directives</h2><ul>
+<li>type: //{type:class}</li>
+<li>direction: // {direction:leftToRight}</li>
+<li>generate: // {generate:true}</li>
+</ul>
+<h2 id="Class-diagram"><a href="#Class-diagram" class="headerlink" title="Class diagram"></a>Class diagram</h2><p>cheetsheet for class diagram</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Class         [Customer]</span><br><span class="line">Directional   [Customer]-&gt;[Order]</span><br><span class="line">Bidirectional [Customer]&lt;-&gt;[Order]</span><br><span class="line">Aggregation   [Customer]+-[Order] or [Customer]&lt;&gt;-[Order]</span><br><span class="line">Composition   [Customer]++-[Order]</span><br><span class="line">Inheritance   [Customer]^[Cool Customer], [Customer]^[Uncool Customer]</span><br><span class="line">Dependencies  [Customer]uses-.-&gt;[PaymentStrategy]</span><br><span class="line">Cardinality   [Customer]&lt;1-1..2&gt;[Address]</span><br><span class="line">Labels        [Person]customer-billingAddress[Address]</span><br><span class="line">Notes         [Address]-[note: Value Object]</span><br><span class="line">Full Class    [Customer|Forename;Surname;Email|Save()]</span><br><span class="line">Color splash  [Customer&#123;<span class="built_in">bg</span>:orange&#125;]&lt;&gt;1-&gt;*[Order&#123;<span class="built_in">bg</span>:green&#125;]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Association-classes"><a href="#Association-classes" class="headerlink" title="Association classes"></a>Association classes</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Invoice]&lt;*-*&gt;[Products][Invoice Item]</span><br></pre></td></tr></table></figure>
+
+<h2 id="Use-cases-diagram"><a href="#Use-cases-diagram" class="headerlink" title="Use-cases diagram"></a>Use-cases diagram</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Use Case           (Login)</span><br><span class="line">Actor              [Customer]</span><br><span class="line">&lt;&lt;Extend&gt;&gt;         (Login)&lt;(Forgot Password)</span><br><span class="line">&lt;&lt;Include&gt;&gt;        (Register)&gt;(Confirm Email)</span><br><span class="line">Actor Inheritance  [Admin]^[User]</span><br><span class="line">Note               [Admin]-(note: Most privilidged user)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Activity-diagram"><a href="#Activity-diagram" class="headerlink" title="Activity diagram"></a>Activity diagram</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Start               (start)</span><br><span class="line">End                (end)</span><br><span class="line">Activity           (Find Products)</span><br><span class="line">Flow               (start)-&gt;(Find Products)</span><br><span class="line">Multiple Assoc.    (start)-&gt;(Find Products)-&gt;(end)</span><br><span class="line">Decisions          (start)-&gt;&lt;d1&gt;</span><br><span class="line">Decisions w/Label  (start)-&gt;&lt;d1&gt;logged <span class="keyword">in</span>-&gt;(Show Dashboard)   and   &lt;d1&gt;not logged <span class="keyword">in</span>-&gt;(Show Login Page)</span><br><span class="line">Parallel           (Action 1)-&gt;|a|   and   (Action 2)-&gt;|a|</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="State-diagram"><a href="#State-diagram" class="headerlink" title="State diagram"></a>State diagram</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Start             (start)</span><br><span class="line">End              (end)</span><br><span class="line">Activity         (Find Products)</span><br><span class="line">Flow             (start)-&gt;(Find Products)</span><br><span class="line">Multiple Assoc.  (start)-&gt;(Find Products)-&gt;(end)</span><br><span class="line">Complex <span class="keyword">case</span>     (Simulator running)[Pause]-&gt;(Simulator paused|<span class="keyword">do</span>/<span class="built_in">wait</span>)[Unpause]-&gt;(Simulator running)</span><br><span class="line">Note             (state)-(note: a note here)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Deployment-diagram"><a href="#Deployment-diagram" class="headerlink" title="Deployment diagram"></a>Deployment diagram</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Node           [node1]</span><br><span class="line">Association    [node1]-[node2]</span><br><span class="line">Labeled Assoc. [node1]label-[node2]</span><br><span class="line">Note           [node1]-[note: a note here]</span><br></pre></td></tr></table></figure>
+
+<h2 id="Sequence-diagram"><a href="#Sequence-diagram" class="headerlink" title="Sequence diagram"></a>Sequence diagram</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Object       [Patron]</span><br><span class="line">Message      [Patron]order food&gt;[Waiter]</span><br><span class="line">Response     [Waiter]serve wine.&gt;[Patron]</span><br><span class="line">Note         [Actor]-[note: a note message]</span><br><span class="line">Asynchronous [Patron]order food&gt;&gt;[Waiter]</span><br></pre></td></tr></table></figure>
+
+<h2 id="Package-diagram"><a href="#Package-diagram" class="headerlink" title="Package diagram"></a>Package diagram</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Package        [package1]</span><br><span class="line">Association    [package1]-&gt;[package2]</span><br><span class="line">Labeled assoc  [package1]label-&gt;[package2]</span><br><span class="line">Note           [package1]-[note: a note here]</span><br><span class="line"></span><br><span class="line">````</span><br><span class="line"></span><br><span class="line"><span class="comment">## Others</span></span><br><span class="line"></span><br><span class="line">- Color codes: form <span class="comment">#RRGGBB, X11 color coding</span></span><br><span class="line">- checkout [yuml.me](http://yuml.me)</span><br><span class="line"></span><br><span class="line"><span class="comment">## Tools</span></span><br><span class="line"></span><br><span class="line">[yuml-diagram](https://github.com/jaime-olivares/yuml-diagram)</span><br><span class="line"></span><br><span class="line">```sh</span><br><span class="line">npm install yuml-diagram</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/tips/">tips</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

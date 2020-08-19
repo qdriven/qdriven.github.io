@@ -1,0 +1,176 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Shell Learning - Scripting | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="shell">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Shell Learning - Scripting"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Shell Learning - Scripting</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2014/08/24/shell/2014-08-24-shell_101_scripting/" rel="bookmark">
+        <time class="entry-date published" datetime="2014-08-23T18:31:11.000Z">
+          2014-08-24
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="Shell-Script-sample"><a href="#Shell-Script-sample" class="headerlink" title="Shell Script sample"></a>Shell Script sample</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># do somthing</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Run-Shell-Script"><a href="#Run-Shell-Script" class="headerlink" title="Run Shell Script"></a>Run Shell Script</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sh script.sh</span><br><span class="line">chmod a+x script.sh</span><br><span class="line">./script.sh</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cmd1;cmd2</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">cmd1</span><br><span class="line">cmd2</span><br></pre></td></tr></table></figure>
+<h2 id="echo"><a href="#echo" class="headerlink" title="echo"></a>echo</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;welcome to bash&quot;</span></span><br><span class="line">ehco welcome to bash</span><br></pre></td></tr></table></figure>
+<p>不对单引号求值：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">╰─[:)] % <span class="built_in">echo</span> <span class="string">&#x27;$test&#x27;</span></span><br><span class="line"><span class="variable">$test</span></span><br></pre></td></tr></table></figure>
+<p>换行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">╰─[:)] % <span class="built_in">echo</span> <span class="string">&quot;test\ntest&quot;</span></span><br><span class="line"><span class="built_in">test</span></span><br><span class="line"><span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+<p>打印颜色：</p>
+<pre><code>文字颜色码
+    重置0
+    黑色30
+    红色31
+    绿色32
+    黄色33
+    蓝色34
+    洋红35
+    青色36
+    白色37
+
+echo -e &quot;\e[1;31m This is red test \e[0m&quot;
+
+背景颜色码
+    重置0
+    黑色40
+    红色41
+    绿色42
+    黄色43
+    蓝色44
+    洋红45
+    青色46
+    白色47
+
+echo -e &quot;\e[1;42m Green Background \e[0m&quot;</code></pre>
+<h3 id="printf"><a href="#printf" class="headerlink" title="printf"></a>printf</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span> <span class="string">&quot;hello world&quot;</span></span><br><span class="line"><span class="built_in">printf</span> <span class="string">&quot;%-5s %-10s %-4.2f\n&quot;</span> 3 Jeff 77.564</span><br><span class="line">3     Jeff       77.56</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/shell/">shell</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

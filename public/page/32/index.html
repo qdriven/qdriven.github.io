@@ -1,0 +1,331 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第 32 页 | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2016/01/10/tips/automation/2016-01-10-why_how_automation/"><span>为什么自动化，如何自动化</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/01/10/tips/automation/2016-01-10-why_how_automation/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-01-10T11:14:11.000Z">
+          2016-01-10
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>在做一件事情之前，问一句为什么是必要的.做自动化测试之前也是一样，不管如何总是要有一个理由的吗，哪怕是所有的人都做，我也要做这样的理由. 以下说说我觉得要做自动化的理由.</p>
+<h2 id="为什么自动化-Why-Automation-Testing"><a href="#为什么自动化-Why-Automation-Testing" class="headerlink" title="为什么自动化(Why Automation Testing)"></a>为什么自动化(Why Automation Testing)</h2><p><strong><em>为什么自动化,对于测试的而言的理由 VS 实际情况</em></strong></p>
+<ul>
+<li>自动化可以减少重复的回归测试(实际中的我问题:那么回归测试在你日常的测试中比例是多少)</li>
+<li>自动化测试可以提高自己的编码能力(这个原因无论如何是成立的)</li>
+<li>自动化测试可以进行更快的迭代（实际中的问题：自动化测试的不稳定可能不一定起到预想的作用）</li>
+<li>自动化测试可以做更多的回归测试内容，减少风险(实际中的问题：不稳定的测试可能不一定能够达到目的)</li>
+<li>不同的测试环境可以运行相同的测试(实际的问题： 可能没有那么多的环境，一般情况下都有测试环境，集成环境，预发布环境，生产环境，其实不是没个公司都需要这样做的……)</li>
+<li>对于被测系统有更深刻的理解.由于需要编写代码，有时需要更深刻的理解内部的代码实现原理(实际中因人而异……)</li>
+<li>自动化测试不仅仅包括进行测试，还包括一切去提高交付产品效率质量的东西，对于测试而言提出了新要求(always true if QA really does this)</li>
+<li>功能测试的业务知识可能在这家公司有用，到别家就没用了，但是会写代码可以积累自己(always true)</li>
+<li>无论是性能测试和安全测试都需要代码能力，通过自动化代码的编写可以更好的了解，掌握性能测试或者安全测试(实际情况：不是没个人都对编码感兴趣的)</li>
+</ul>
+<p><strong><em>为什么自动化,对于公司的而言的理由 VS 实际情况</em></strong></p>
+<ul>
+<li>测试用例通过代码的方式积累下来，自动化测试可能不会立竿见影，但是他有复利的效果（实际情况：遗留的测试代码真的有用吗？）</li>
+<li>系统如果重构那么通过自动化测试来完成很大一部分的功能测试（实际情况：遗留的测试代码真的有用吗？）</li>
+<li>减少回归测试少测漏测风险（实际情况：遗留的测试代码真的有用吗？）</li>
+<li>可以加速交付(交付流水线中不同的环境可以通过代码来跑，实际情况：遗留的测试代码真的有用吗？)</li>
+</ul>
+<h2 id="How-to-automation-test"><a href="#How-to-automation-test" class="headerlink" title="How to automation test"></a>How to automation test</h2><ul>
+<li>有统一的框架(框架一定要有IoC／DI的概念使用)</li>
+<li>有扩展性的框架</li>
+<li>方便实用，可以代码生产的工具链</li>
+<li>安装自动化测试金字塔（单元，接口，UI）方式</li>
+<li>千万不要使用自动化测试的anti-pattern</li>
+<li>有规划，一步一步优化，不要贪多</li>
+</ul>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/automation/">automation</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/automation/">automation</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2016/01/05/tips/testing/2016-01-05-sql-injection/"><span>sql injection, sql 注入</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/01/05/tips/testing/2016-01-05-sql-injection/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-01-05T15:37:49.000Z">
+          2016-01-05
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>SQL注入的问题由来以久,主要是针对于一些系统时通过拼接SQL的方式来处理程序.以下是关于JAVA WEB的一些SQL注入的介绍.</p>
+<p><a target="_blank" rel="noopener" href="https://www.owasp.org/index.php/Preventing_SQL_Injection_in_Java">来源OWASP</a></p>
+<h2 id="什么是SQL注入"><a href="#什么是SQL注入" class="headerlink" title="什么是SQL注入"></a>什么是SQL注入</h2><p>SQL injection vulnerabilities allow an attacker to inject (or execute) SQL commands within an application.<br>大意就是攻击者可以通过修改页面请求来执行sql达到自己的目的，比如拉数据，或者恶意的修改数据等等.</p>
+<h2 id="SQL-注入例子"><a href="#SQL-注入例子" class="headerlink" title="SQL 注入例子"></a>SQL 注入例子</h2><p>一下例子是有SQL注入漏洞的一段程序：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">conn = pool.getConnection( );</span><br><span class="line">String sql = <span class="string">&quot;select * from user where username=&#x27;&quot;</span> + username +<span class="string">&quot;&#x27; and password=&#x27;&quot;</span> + password + <span class="string">&quot;&#x27;&quot;</span>;</span><br><span class="line">stmt = conn.createStatement();</span><br><span class="line">rs = stmt.executeQuery(sql);</span><br><span class="line"><span class="keyword">if</span> (rs.next()) &#123;</span><br><span class="line">loggedIn = <span class="keyword">true</span>;</span><br><span class="line">    out.println(<span class="string">&quot;Successfully logged in&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    out.println(<span class="string">&quot;Username and/or password not recognized&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于SQL是拼接的，所有如果用户直接食用username，或者password中 使用了如:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin<span class="string">&#x27; OR &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>最后执行的SQL就是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from user where username=<span class="string">&#x27;admin&#x27;</span> OR <span class="string">&#x27;1&#x27;</span>=<span class="string">&#x27;1&#x27;</span> and password=<span class="string">&#x27; &#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>明显，这样就会把所有的用户信息拿到了</p>
+<h2 id="防范措施-Defense-Strategy"><a href="#防范措施-Defense-Strategy" class="headerlink" title="防范措施 Defense Strategy"></a>防范措施 Defense Strategy</h2><p>prevent SQL injection:</p>
+<ul>
+<li>All queries should be parametrized.</li>
+<li>All dynamic data should be explicitly bound to parametrized queries.</li>
+<li>String concatenation should never be used to create dynamic SQL.</li>
+</ul>
+<h2 id="Parameterized-Queries／Stored-Procedures"><a href="#Parameterized-Queries／Stored-Procedures" class="headerlink" title="Parameterized Queries／Stored Procedures"></a>Parameterized Queries／Stored Procedures</h2><p>参数化SQL，使用prepareStatement</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String selectStatement = <span class="string">&quot;SELECT * FROM User WHERE userId = ? &quot;</span>;</span><br><span class="line">PreparedStatement prepStmt = con.prepareStatement(selectStatement);</span><br><span class="line">prepStmt.setString(<span class="number">1</span>, userId);</span><br><span class="line">ResultSet rs = prepStmt.executeQuery();</span><br></pre></td></tr></table></figure>
+
+<p>存储过程基本上能够防止SQL注入</p>
+<h2 id="Hibernate-MyBatis"><a href="#Hibernate-MyBatis" class="headerlink" title="Hibernate/MyBatis"></a>Hibernate/MyBatis</h2><p>不要以为使用了ORM框架就没有SQL注入，其实不当使用也会有的.比如:</p>
+<ul>
+<li>Hibernate native SQL</li>
+<li>order by 没法使用绑定变量</li>
+<li>动态表名也无法使用</li>
+</ul>
+<h2 id="OWASP-JAVA-Project"><a href="#OWASP-JAVA-Project" class="headerlink" title="OWASP JAVA Project"></a>OWASP JAVA Project</h2><p><a target="_blank" rel="noopener" href="https://www.owasp.org/index.php/Category:OWASP_Java_Project#tab=Project_and_OWASP_Resources">OWASP_Java_Project</a></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/testing/">testing</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/testing/">testing</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2016/01/05/tips/testing/2016-01-05-static-code-analysis/"><span>静态代码检查</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/01/05/tips/testing/2016-01-05-static-code-analysis/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-01-05T15:00:55.000Z">
+          2016-01-05
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>静态代码检查有利于提高代码质量，同时也可以快速的发现一些问题. 常用的静态代码检查有一下几种，<br>checkstyle，pmd，findbugs. 刚好公司需要做一个mybatis SQL注入的检查，所以收集了一下关于这三个工具使用的介绍</p>
+<h2 id="checkstyle-PMD-findbugs-的是使用介绍"><a href="#checkstyle-PMD-findbugs-的是使用介绍" class="headerlink" title="checkstyle,PMD,findbugs 的是使用介绍"></a>checkstyle,PMD,findbugs 的是使用介绍</h2><ul>
+<li><strong>checkstyle</strong> enforce coding conventions and standards in code, missing/improper javadoc, naming conventions, placement of braces and parentheses, whitespace, line length, etc</li>
+<li><strong>PMD</strong> detect bad practices,PMD 支持不同语言，如JAVA，Ruby，XML等</li>
+<li><strong>findbugs</strong> really find potential bugs,比如NPE，equals，hashcode等的用法</li>
+</ul>
+<p>参考文章：<br><a target="_blank" rel="noopener" href="http://tirthalpatel.blogspot.com/2014/01/static-code-analyzers-checkstyle-pmd-findbugs.html">checkstyle vs pmd vs findbugs</a><br><a target="_blank" rel="noopener" href="http://www.sonarqube.org/sonar-to-identify-security-vulnerabilities/">sonar security</a><br><a target="_blank" rel="noopener" href="https://www.sparkred.com/blog/open-source-java-static-code-analyzers/">checkstyle vs pmd vs findbugs 2</a><br><a target="_blank" rel="noopener" href="https://www.ibm.com/developerworks/cn/java/j-findbug1/">findbugs</a><br><a target="_blank" rel="noopener" href="http://findbugs.sourceforge.net/bugDescriptions.html?cm_mc_uid=11877464828514517953725&cm_mc_sid_50200000=1452010453">findbugs bugs</a><br><a target="_blank" rel="noopener" href="http://findbugs.sourceforge.net/index.html">find bugs home page</a></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/testing/">testing</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/testing/">testing</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+
+<nav class="pagination">
+  
+  <a href="/page/31/" class="pagination-prev">上一页</a>
+  
+  
+  <a href="/page/33/" class="pagination-next">下一页</a>
+  
+</nav>
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

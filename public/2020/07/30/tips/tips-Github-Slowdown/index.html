@@ -1,0 +1,202 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>测试日志2020-3 Github 访问速度缓慢解决 | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="tips,git">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="测试日志2020-3 Github 访问速度缓慢解决"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>测试日志2020-3 Github 访问速度缓慢解决</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2020/07/30/tips/tips-Github-Slowdown/" rel="bookmark">
+        <time class="entry-date published" datetime="2020-07-30T04:12:00.000Z">
+          2020-07-30
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="1-Github-访问速度缓慢解决"><a href="#1-Github-访问速度缓慢解决" class="headerlink" title="1. Github 访问速度缓慢解决"></a>1. Github 访问速度缓慢解决</h2><p>不知道什么原因，老鸟家里访问Github仓库速度缓慢，下载GITHUB仓库速度也是缓慢。<br>这种缓慢慢慢已经给老鸟造成了一些困扰. 但是问题是实际存在的，老鸟心里想一定需要解决.<br>好在有了gitee，通过gitee fork github的项目，然后再通过gitee访问fork过来的github的项目快如闪电。</p>
+<p>同时通过下面的介绍，也希望测试同学们能够看到，其实自动化练手的机会很多，一点点小地方都可以提高一点效率.</p>
+<a id="more"></a>
+<h2 id="1-1-使用Gitee解决Github下载缓慢的方法"><a href="#1-1-使用Gitee解决Github下载缓慢的方法" class="headerlink" title="1.1. 使用Gitee解决Github下载缓慢的方法"></a>1.1. 使用Gitee解决Github下载缓慢的方法</h2><ol>
+<li>注册Gitee账户，可以直接使用Github账户授权登录，或者直接使用微信登录就可以</li>
+<li>通过GITHUB/GITLAB导入仓库创建新的项目<br><img src="/img/gitee/gitee-import.jpg" alt="img"><br><img src="/img/gitee/gitee_import.jpg" alt="img"></li>
+<li>创建仓库完成之后就可以通过git clone 文件</li>
+</ol>
+<p>仓库下载好了，速度也快了很多，但是又遇到新的问题了，<br>就是测试老鸟又遇到新的问题了，问题是，我现在clone的仓库是gitee的仓库，我如何将我的提交同步到两个不同的仓库呢？</p>
+<h2 id="1-2-GIT-仓库添加多个远程仓库"><a href="#1-2-GIT-仓库添加多个远程仓库" class="headerlink" title="1.2. GIT 仓库添加多个远程仓库"></a>1.2. GIT 仓库添加多个远程仓库</h2><p>上面的问题用文绉绉的话描述就是，如果给一个本地仓库添加多个remote(远程)仓库，这样一次提交就可以同时更新两个仓库. </p>
+<p>具体时候方法如下:</p>
+<ol>
+<li>查看目前仓库remote有几个</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/gitee/git-remote-v.jpg" alt="img"></p>
+<p>可以看到目前的远程仓库是gitee</p>
+<ol start="2">
+<li>添加github的远程仓库到本地仓库</li>
+</ol>
+<p>使用以下命令添加一个名字叫github的远程仓库，这样就把两个远程仓库同时添加到本地仓库了:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># git remote add &lt;name&gt; &lt;github_url&gt;</span></span><br><span class="line">git remote add github git@github.com:qdriven/intelligent-test-platform.git</span><br></pre></td></tr></table></figure>
+
+<p>再次查看remote 仓库:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+
+<p><img src="img/gitee/two-remote.jpg" alt="img"></p>
+<p>可以看到目前的remote已经有两个了.</p>
+<ol start="3">
+<li>同时更新两个远程仓库</li>
+</ol>
+<p>目前已经有两个remote，两个分别是:</p>
+<ul>
+<li>origin</li>
+<li>github</li>
+</ul>
+<p>因此在Commit之后使用如下两个命令就可以同时更新所有的仓库了</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git push origin master</span><br><span class="line">git push github master</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>更新多个远程仓库脚本化</li>
+</ol>
+<p>每次输入两个push，很明显也是比较麻烦的，因此老鸟觉得使用shell来自动化这些事情:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#! /bin/sh</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;current path: &quot;</span>`<span class="built_in">pwd</span>`</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;<span class="variable">$1</span>&quot;</span></span><br><span class="line">remotes=`git remote`</span><br><span class="line"><span class="keyword">for</span> repo <span class="keyword">in</span> <span class="variable">$&#123;remotes&#125;</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    git push <span class="variable">$&#123;repo&#125;</span> master</span><br><span class="line">    <span class="comment"># echo $&#123;repo&#125;</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>将以上的命令放到commit.sh文件中.然后使用:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh commit.sh <span class="string">&quot;&lt;comments&gt;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>就可以同时push 两个仓库了. </p>
+<h2 id="1-3-小结"><a href="#1-3-小结" class="headerlink" title="1.3. 小结"></a>1.3. 小结</h2><ul>
+<li>通过gitee和github的同步，可以快速解决github访问速度慢的问题</li>
+<li>使用git命令和shell命令可以自动化提交流程: 自动化的事情到处都有不缺练手机会</li>
+<li>又多学了几个关于git命令，尤其是git remote的使用</li>
+</ul>
+<h2 id="1-4-优化"><a href="#1-4-优化" class="headerlink" title="1.4 优化"></a>1.4 优化</h2><p>其实老鸟觉得还有优化的空间，老鸟先卖个关子，后面再说这个话题.</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/git/">git</a>, <a href="/categories/git/tips/">tips</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/tips/">tips</a><a href="/tags/git/">git</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

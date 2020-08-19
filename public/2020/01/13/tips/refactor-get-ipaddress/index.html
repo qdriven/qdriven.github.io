@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>一次获取IP地址的小重构 | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="10Minutes,refactor">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="一次获取IP地址的小重构"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>一次获取IP地址的小重构</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2020/01/13/tips/refactor-get-ipaddress/" rel="bookmark">
+        <time class="entry-date published" datetime="2020-01-12T18:19:56.000Z">
+          2020-01-13
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>原始代码不好的地方：</p>
+<ul>
+<li>有很多if/else</li>
+<li>扩展需要增加内部的if/else判断</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getIpAddr</span><span class="params">(HttpServletRequest request)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (request == <span class="keyword">null</span>)</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="string">&quot;unknown&quot;</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       String ip = request.getHeader(<span class="string">&quot;x-forwarded-for&quot;</span>);</span><br><span class="line">       <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">&quot;unknown&quot;</span>.equalsIgnoreCase(ip))</span><br><span class="line">       &#123;</span><br><span class="line">           ip = request.getHeader(<span class="string">&quot;Proxy-Client-IP&quot;</span>);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">&quot;unknown&quot;</span>.equalsIgnoreCase(ip))</span><br><span class="line">       &#123;</span><br><span class="line">           ip = request.getHeader(<span class="string">&quot;X-Forwarded-For&quot;</span>);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">&quot;unknown&quot;</span>.equalsIgnoreCase(ip))</span><br><span class="line">       &#123;</span><br><span class="line">           ip = request.getHeader(<span class="string">&quot;WL-Proxy-Client-IP&quot;</span>);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">&quot;unknown&quot;</span>.equalsIgnoreCase(ip))</span><br><span class="line">       &#123;</span><br><span class="line">           ip = request.getHeader(<span class="string">&quot;X-Real-IP&quot;</span>);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">&quot;unknown&quot;</span>.equalsIgnoreCase(ip))</span><br><span class="line">       &#123;</span><br><span class="line">           ip = request.getRemoteAddr();</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">return</span> <span class="string">&quot;0:0:0:0:0:0:0:1&quot;</span>.equals(ip) ? <span class="string">&quot;127.0.0.1&quot;</span> : ip;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>重构后代码:</p>
+<ol>
+<li>代码精简</li>
+<li>取header部分只要传入参数就可以</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String UNKNOWN = <span class="string">&quot;UNKNOWN&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getIpAddressFromReq</span><span class="params">(HttpServletRequest request,String... headerNames)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (ObjectUtil.isNotNull(request)) &#123;</span><br><span class="line">    String ip = request.getHeader(<span class="string">&quot;x-forwarded-for&quot;</span>);</span><br><span class="line">    List&lt;String&gt; headers = Arrays.asList(<span class="string">&quot;Proxy-Client-IP&quot;</span>,</span><br><span class="line">                                         <span class="string">&quot;X-Forwarded-For&quot;</span>,</span><br><span class="line">                                         <span class="string">&quot;WL-Proxy-Client-IP&quot;</span>,<span class="string">&quot;X-Real-IP&quot;</span>);</span><br><span class="line">    headers.addAll(Arrays.asList(headerNames));</span><br><span class="line">    <span class="keyword">for</span> (String header : headers) &#123;</span><br><span class="line">      <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || UNKNOWN.equalsIgnoreCase(ip)) &#123;</span><br><span class="line">        ip = request.getHeader(header);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">&quot;unknown&quot;</span>.equalsIgnoreCase(ip)) &#123;</span><br><span class="line">      ip = request.getRemoteAddr();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;0:0:0:0:0:0:0:1&quot;</span>.equals(ip) ? <span class="string">&quot;127.0.0.1&quot;</span> : ip;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> UNKNOWN;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/10Minutes/">10Minutes</a><a href="/tags/refactor/">refactor</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

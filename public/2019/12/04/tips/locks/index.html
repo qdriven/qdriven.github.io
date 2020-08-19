@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span></span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/12/04/tips/locks/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-12-04T01:53:00.000Z">
+          2019-12-04
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="0-JAVA-Locks"><a href="#0-JAVA-Locks" class="headerlink" title="0. JAVA Locks"></a>0. JAVA Locks</h1><p>锁在JAVA 并发编程中是一个重要的概念，而且是一些比较难懂的概念，一下是学习Lock概念的时候的一些记录。</p>
+<ul>
+<li>ReadWriteLock，ReentrantReadWriteLock</li>
+</ul>
+<h2 id="1-ReadWriteLock-ReentrantReadWriteLock"><a href="#1-ReadWriteLock-ReentrantReadWriteLock" class="headerlink" title="1. ReadWriteLock: ReentrantReadWriteLock"></a>1. ReadWriteLock: ReentrantReadWriteLock</h2><ul>
+<li>ReadWriteLock 基本概念<br>读写锁，分读锁和写锁，多个读锁不互斥，读锁和写锁互斥；上了读锁，不能写；修改数据，只能一个人写，但是不能读，就上写锁；<br>所以就是读的时候上读锁，写的时候上写锁；ReentrantReadWriteLock使用两把锁：<ul>
+<li>读锁： 进入读锁的条件<ol>
+<li>没有其他线程写</li>
+<li>没有写请求，调用线程和持有锁的线程是同一个</li>
+</ol>
+</li>
+<li>写锁： 进入写锁条件<ol>
+<li>没有其他线程的读锁</li>
+<li>没有其他线程的写锁</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-ReentrantReadWriteLock-实例说明"><a href="#2-ReentrantReadWriteLock-实例说明" class="headerlink" title="2. ReentrantReadWriteLock: 实例说明"></a>2. ReentrantReadWriteLock: 实例说明</h2><ul>
+<li>读锁条件1: 没有其他线程写，进入读锁</li>
+<li>读锁条件2: 没有写请求，调用线程和持有锁的线程是同一个</li>
+<li>写锁条件1； 没有其他线程的读锁</li>
+<li>写锁条件2； 没有其他线程的写锁</li>
+<li>读写锁混用案例</li>
+</ul>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

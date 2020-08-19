@@ -1,0 +1,299 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第 33 页 | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2016/01/01/tips/thoughts/2016-01-01-2016-looking-forword/"><span>2016-looking-forword</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/01/01/tips/thoughts/2016-01-01-2016-looking-forword/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-01-01T09:42:38.000Z">
+          2016-01-01
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>2015 就这样过去了，回顾这一年说说其实也是平平谈谈，主要几件事情是：</p>
+<ul>
+<li>前前后后拒绝了5个offer，有BAT的，有创业公司的，有很好的Offer，无论如何在目前这家公司干了快1年</li>
+<li>做了一个自动化框架，包括了UI，接口，給公司的人做了无数的培训，运用到了数个项目中</li>
+</ul>
+<p>2016 年要做什么呢？</p>
+<ul>
+<li>持续改进框架，开源并产品化</li>
+<li>集成性能测试,安全测试</li>
+<li>移动测试</li>
+<li>DevOps工具</li>
+</ul>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/thoughts/">thoughts</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/thoughts/">thoughts</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2015/12/28/tips/tester-ops/2015-12-28-docker-usage-container/"><span>docker usage: container</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/12/28/tips/tester-ops/2015-12-28-docker-usage-container/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-12-28T14:08:39.000Z">
+          2015-12-28
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>Docker container 的常用命令。</p>
+<h2 id="Docker-information"><a href="#Docker-information" class="headerlink" title="Docker information"></a>Docker information</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker info</span><br></pre></td></tr></table></figure>
+
+<p>如果docker没有安装，则下载docker tools,如果权限不过就使用如下方法：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果还没有docker group就添加一个：</span></span><br><span class="line">$ sudo groupadd docker</span><br><span class="line"><span class="comment"># 将用户加入该group内。然后退出并重新登录即可生效。</span></span><br><span class="line">$ sudo gpasswd -a <span class="variable">$&#123;USER&#125;</span> docker</span><br><span class="line"><span class="comment"># 重启docker</span></span><br><span class="line">$ sudo service docker restart</span><br></pre></td></tr></table></figure>
+
+<h2 id="working-with-docker"><a href="#working-with-docker" class="headerlink" title="working with docker"></a>working with docker</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Usage:  [sudo] docker [flags] [command] [arguments] ..</span></span><br><span class="line"><span class="comment"># Example:</span></span><br><span class="line">$ docker run -i -t ubuntu /bin/bash</span><br></pre></td></tr></table></figure>
+
+<h2 id="运行交互shell"><a href="#运行交互shell" class="headerlink" title="运行交互shell"></a>运行交互shell</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -i -t ubuntu /bin/bash</span><br></pre></td></tr></table></figure>
+
+<h2 id="绑定Docker到另外的主机-端口或者Unix-socket"><a href="#绑定Docker到另外的主机-端口或者Unix-socket" class="headerlink" title="绑定Docker到另外的主机/端口或者Unix socket"></a>绑定Docker到另外的主机/端口或者Unix socket</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker -H 0.0.0.0:5555 -d &amp;</span><br><span class="line">sudo docker -H :5555 pull ubuntu</span><br><span class="line"># 进程模式下运行docker</span><br><span class="line">$ sudo &lt;path to&gt;&#x2F;docker -H tcp:&#x2F;&#x2F;127.0.0.1:2375 -H unix:&#x2F;&#x2F;&#x2F;var&#x2F;run&#x2F;docker.sock -d &amp;</span><br><span class="line"># 使用默认的unix socker来下载ubuntu镜像</span><br><span class="line">$ sudo docker pull ubuntu</span><br><span class="line"># 或者使用TCP端口</span><br><span class="line">$ sudo docker -H tcp:&#x2F;&#x2F;127.0.0.1:2375 pull ubuntu</span><br></pre></td></tr></table></figure>
+
+<h2 id="开始一个长时间运行的工作进程"><a href="#开始一个长时间运行的工作进程" class="headerlink" title="开始一个长时间运行的工作进程"></a>开始一个长时间运行的工作进程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 开始一个非常有用的长时间运行的进程</span><br><span class="line">$ JOB&#x3D;$(sudo docker run -d ubuntu &#x2F;bin&#x2F;sh -c &quot;while true; do echo Hello world; sleep 1; done&quot;)</span><br><span class="line"></span><br><span class="line"># 到目前为止收集的输出工作</span><br><span class="line">$ sudo docker logs $JOB</span><br><span class="line"></span><br><span class="line"># 关闭这项进程</span><br><span class="line">$ sudo docker kill $JOB</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="列出容器"><a href="#列出容器" class="headerlink" title="列出容器"></a>列出容器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker ps # Lists only running containers</span><br><span class="line">$ sudo docker ps -a # Lists all containers</span><br><span class="line">$ sudo docker ps -l # List the last running container</span><br></pre></td></tr></table></figure>
+
+<h2 id="控制容器"><a href="#控制容器" class="headerlink" title="控制容器"></a>控制容器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># 开始一个新的容器</span><br><span class="line">$ JOB&#x3D;$(sudo docker run -d ubuntu &#x2F;bin&#x2F;sh -c &quot;while true; do echo Hello world; sleep 1; done&quot;)</span><br><span class="line"></span><br><span class="line"># 停止容器</span><br><span class="line">$ docker stop $JOB</span><br><span class="line"></span><br><span class="line"># 开始容器</span><br><span class="line">$ docker start $JOB</span><br><span class="line"></span><br><span class="line"># 重启容器</span><br><span class="line">$ docker restart $JOB</span><br><span class="line"></span><br><span class="line"># 杀死一个工作</span><br><span class="line">$ docker kill $JOB</span><br><span class="line"></span><br><span class="line"># 删除一个容器</span><br><span class="line">$ docker stop $JOB # Container must be stopped to remove it</span><br><span class="line">$ docker rm $JOB</span><br></pre></td></tr></table></figure>
+
+<h2 id="绑定服务到TCP端口"><a href="#绑定服务到TCP端口" class="headerlink" title="绑定服务到TCP端口"></a>绑定服务到TCP端口</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#让容器绑定4444端口，并通知netcat监听它。</span><br><span class="line">$ JOB&#x3D;$(sudo docker run -d -p 4444 ubuntu:12.10 &#x2F;bin&#x2F;nc -l 4444)</span><br><span class="line"></span><br><span class="line"># 查看容器转发的公共端口</span><br><span class="line">$ PORT&#x3D;$(sudo docker port $JOB 4444 | awk -F: &#39;&#123; print $2 &#125;&#39;)</span><br><span class="line"></span><br><span class="line"># 连接这个公共端口</span><br><span class="line">$ echo hello world | nc 127.0.0.1 $PORT</span><br><span class="line"></span><br><span class="line"># 确认网络连接工作</span><br><span class="line">$ echo &quot;Daemon received: $(sudo docker logs $JOB)&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="Delete-Docker-images"><a href="#Delete-Docker-images" class="headerlink" title="Delete Docker images"></a>Delete Docker images</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 停止所有容器</span><br><span class="line">$ docker stop $(docker ps -a -q)</span><br><span class="line"></span><br><span class="line"># 删除指定镜像</span><br><span class="line">$ docker rmi $image</span><br><span class="line"></span><br><span class="line"># 删除无标示镜像，即id为&lt;None&gt;的镜像</span><br><span class="line">$ docker rmi $(docker images | grep &quot;^&lt;none&gt;&quot; | awk &quot;&#123;print $3&#125;&quot;)</span><br><span class="line"></span><br><span class="line"># 删除所有镜像</span><br><span class="line">$ docker rmi $(docker images -q)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/test-ops/">test-ops</a><a href="/tags/docker/">docker</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2015/12/28/tips/tester-ops/2015-12-28-docker_usage/"><span>docker usage: images</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/12/28/tips/tester-ops/2015-12-28-docker_usage/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-12-28T13:49:22.000Z">
+          2015-12-28
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>Some Basic Command usage for docker</p>
+<h2 id="images"><a href="#images" class="headerlink" title="images"></a>images</h2><p>大部分的命令就是如下的思路：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># install image</span><br><span class="line">docker pull image_name</span><br><span class="line"># search image</span><br><span class="line">docker search &lt;image_name&gt;</span><br><span class="line"># get images</span><br><span class="line">docker images</span><br><span class="line"># run images as a container</span><br><span class="line">docker -it &lt;image_name&gt; &lt;command&gt;</span><br><span class="line"># example:</span><br><span class="line">docker run -t -i ubuntu:12.04 &#x2F;bin&#x2F;bash</span><br><span class="line"># commit changes</span><br><span class="line">docker commit -m&#x3D;&quot;added what&quot; -a&#x3D;&quot;author_name&quot; &lt;image_id&gt; &lt;new_image_name&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h2><p>Dockerfile是申明docker container的一个文件，通过此文件来描述今镜像（image）的属性.</p>
+<p>Dockerfile的每一个指令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSTRUCTION statement</span><br></pre></td></tr></table></figure>
+
+<p>docker build:<br>我们使用 docker build 命令并指定 -t 标识(flag)来标示属于 ouruser ，镜像名称为 sinatra,标签是 v2。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t ouruser&#x2F;sinatra:v2 .</span><br></pre></td></tr></table></figure>
+
+<p>run as container:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -t -i ouruser&#x2F;sinatra:v2 &#x2F;bin&#x2F;bash</span><br></pre></td></tr></table></figure>
+
+<h2 id="remove-image"><a href="#remove-image" class="headerlink" title="remove image"></a>remove image</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi &lt;image_name&gt;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/test-ops/">test-ops</a><a href="/tags/docker/">docker</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+
+<nav class="pagination">
+  
+  <a href="/page/32/" class="pagination-prev">上一页</a>
+  
+  
+  <a href="/page/34/" class="pagination-next">下一页</a>
+  
+</nav>
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

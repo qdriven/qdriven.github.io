@@ -1,0 +1,199 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Build API Testing Framework-1 - Learn Http Api | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="java,API Testing,patterns,testing">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Build API Testing Framework-1 - Learn Http Api"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Build API Testing Framework-1 - Learn Http Api</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/04/20/tips/api-testing/APITesting-Intro/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-04-20T15:58:45.000Z">
+          2019-04-20
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="Build-API-Testing-Framework-1-Learn-Http-Api"><a href="#Build-API-Testing-Framework-1-Learn-Http-Api" class="headerlink" title="Build API Testing Framework-1 - Learn Http Api"></a>Build API Testing Framework-1 - Learn Http Api</h1><p>API now, in most cases, it is a HTTP API which over http protocol. It is hard to explain without a example, so let’s start with a HelloWorld API sample.<br>The main purposes of these apis are to do the CRUD(Create/Read/Update/Delete) against the resouce <code>HelloWorld</code>.<br>Here are HTTP Methods mapping to CRUD:</p>
+<table>
+<thead>
+<tr>
+<th>HTTP Method</th>
+<th>CRUD</th>
+<th>Resource</th>
+<th>Response</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GET</td>
+<td>Read</td>
+<td>/HelloWorld/{id}</td>
+<td>200:success/404: not found</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>Create</td>
+<td>/HelloWorld</td>
+<td>200:success/404: not found</td>
+</tr>
+<tr>
+<td>Update</td>
+<td>Update</td>
+<td>/HelloWorld/{id}</td>
+<td>200:success/404: not found</td>
+</tr>
+<tr>
+<td>Delete</td>
+<td>Delete</td>
+<td>/HelloWorld/{id}</td>
+<td>200:success/404: not found</td>
+</tr>
+</tbody></table>
+<p>It is easy to implement a sets of APIs against resource HelloWorld based on SpringBoot, here comes demo codes:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorldController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/HelloWorld/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> BaseResponse <span class="title">getHelloWorld</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> BaseResponse.OK().data(HelloWorldDTO.builder().id(id).msg(<span class="string">&quot;Hello World&quot;</span>).build());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostMapping(&quot;/HelloWorld&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> BaseResponse&lt;HelloWorldDTO&gt; <span class="title">createHelloWorld</span><span class="params">(<span class="meta">@RequestBody</span> HelloWorldDTO requestBody)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> BaseResponse.OK().data(requestBody);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PutMapping(&quot;/HelloWorld/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> BaseResponse&lt;HelloWorldDTO&gt; <span class="title">updateHelloWorld</span><span class="params">(<span class="meta">@PathVariable</span> Long id, <span class="meta">@RequestBody</span> HelloWorldDTO updateData)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> BaseResponse.OK().data(updateData);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@DeleteMapping(&quot;/HelloWorld/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> BaseResponse&lt;HelloWorldDTO&gt; <span class="title">deleteHelloWorld</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> BaseResponse.OK().data(HelloWorldDTO.builder().id(id).msg(<span class="string">&quot;deleted!&quot;</span>).build());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Start the web server, actaully there are 4 apis with different HTTP methods, GET/DELETE/POST/PUT, use postman to check what happened:</p>
+<p><img src="https://raw.githubusercontent.com/evenhumble/hustle-player/maste/img/postman-get.jpg" alt="img"><br><img src="https://raw.githubusercontent.com/evenhumble/hustle-player/maste/img/postman-post.jpg" alt="img"></p>
+<p>It represents how the api work, and how to use postman to invoke the http api to get a result.</p>
+<p>So the api testing is simple, a client send a http request, then get the http response to check if the response is correct. </p>
+<p><img src="https://raw.githubusercontent.com/evenhumble/hustle-player/maste/img/api_response.png" alt="img"></p>
+<p>In this case, if you want to start a api automation testing, what kind of codes need to write? In this case, it is very simple:</p>
+<ol>
+<li>A clint to invoke http api: Client</li>
+<li>Data builder to build input data: InputData</li>
+<li>Verify the response: OutputData</li>
+</ol>
+<p>the code example generated bu postman(java and OkHttpClient) is :</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">OkHttpClient client = new OkHttpClient();</span><br><span class="line"></span><br><span class="line">MediaType mediaType = MediaType.parse(<span class="string">&quot;application/json&quot;</span>);</span><br><span class="line">RequestBody body = RequestBody.create(mediaType, <span class="string">&quot;&#123;\&quot;msg\&quot;:123&#125;&quot;</span>);</span><br><span class="line">Request request = new Request.Builder()</span><br><span class="line">  .url(<span class="string">&quot;http://localhost:9090/HelloWorld&quot;</span>)</span><br><span class="line">  .post(body)</span><br><span class="line">  .addHeader(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>)</span><br><span class="line">  .addHeader(<span class="string">&quot;cache-control&quot;</span>, <span class="string">&quot;no-cache&quot;</span>)</span><br><span class="line">  .addHeader(<span class="string">&quot;Postman-Token&quot;</span>, <span class="string">&quot;ac6e83d3-8446-4ae7-81ea-59316ca5cce7&quot;</span>)</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line">Response response = client.newCall(request).execute();</span><br></pre></td></tr></table></figure>
+
+<p>Copy these codes, and run in maven project, your first API automation code is completed.</p>
+<p>By the way, there are several questions for HTTP API:</p>
+<ul>
+<li>What is Idempotent Methods? GET/HEAD/PUT/DELETE are declared idemponten</li>
+<li>What Option method used for? </li>
+<li>Is http api stateless? What does the stateless mean? All the information is in the request.</li>
+</ul>
+<p>In Next Chapter, let’s write code and go through these cases.</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/java/">java</a><a href="/tags/API-Testing/">API Testing</a><a href="/tags/patterns/">patterns</a><a href="/tags/testing/">testing</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

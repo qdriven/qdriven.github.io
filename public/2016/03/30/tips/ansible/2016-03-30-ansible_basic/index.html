@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Ansible简单介绍 | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="automation,ansible">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Ansible简单介绍"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Ansible简单介绍</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/03/30/tips/ansible/2016-03-30-ansible_basic/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-03-29T21:15:11.000Z">
+          2016-03-30
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="Ansible-介绍"><a href="#Ansible-介绍" class="headerlink" title="Ansible 介绍"></a>Ansible 介绍</h1><p>Ansible 目前都是使用在python2上面.</p>
+<h2 id="installation"><a href="#installation" class="headerlink" title="installation"></a>installation</h2><p>在MAC 上面安装ansible有两种方式：</p>
+<ul>
+<li>pip</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install ansible</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>brew</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install ansible</span><br></pre></td></tr></table></figure>
+
+<h2 id="ansible-playbook-的简单使用"><a href="#ansible-playbook-的简单使用" class="headerlink" title="ansible playbook 的简单使用"></a>ansible playbook 的简单使用</h2><p>ansible 大概的一个框架图如下：<br><img src="/images/ansible.png" alt="img"></p>
+<p>下面简单介绍一个使用ansible的例子：</p>
+<ul>
+<li><p>配置hosts文件<br>在当前目录创建一个hosts文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[jenkins]</span><br><span class="line">192.168.3.50</span><br></pre></td></tr></table></figure></li>
+<li><p>配置ansible yml playbook文件<br>配置当前一个yml文件:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- hosts: jenkins</span><br><span class="line">  user: root</span><br><span class="line">  accelerate:true</span><br><span class="line">  tasks:</span><br><span class="line">    - name: restart_nginx</span><br><span class="line">      shell: sh /root/auto_publish_qadoc.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible-playbook playbook.yml -i hosts -vv</span><br></pre></td></tr></table></figure>
+
+<p>就可以运行这些命令了,最简单的ansible就是这样上手非常容易.<br>不过仔细看看他的帮助文档的话，其实对于python不熟的人还是会有一定难度，不过如果写过程序的人，写过python东西的人来说，其实<br>过一下这个document估计也就是1天时间就可以上手干活了.</p>
+</li>
+</ul>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/automation/">automation</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/automation/">automation</a><a href="/tags/ansible/">ansible</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

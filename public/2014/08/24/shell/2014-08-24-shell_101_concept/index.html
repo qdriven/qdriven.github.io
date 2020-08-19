@@ -1,0 +1,202 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Shell Learning - Concept | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="shell">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Shell Learning - Concept"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Shell Learning - Concept</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2014/08/24/shell/2014-08-24-shell_101_concept/" rel="bookmark">
+        <time class="entry-date published" datetime="2014-08-23T18:31:11.000Z">
+          2014-08-24
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>摘自：<a target="_blank" rel="noopener" href="http://wklken.me/posts/2014/01/12/shell-script-base.html">http://wklken.me/posts/2014/01/12/shell-script-base.html</a></p>
+<h3 id="标准IO"><a href="#标准IO" class="headerlink" title="标准IO"></a>标准IO</h3><pre><code>文件描述符
+0 标准输入 默认键盘
+1 标准输出 默认终端
+2 标准错误 默认终端</code></pre>
+<h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><pre><code>&gt; 输出重定向
+&gt;&gt; 追加到输出重定向
+&lt; 输入重定向
+&lt;&lt; 追加到输入重定向
+
+ls -l &gt; /tmp/a
+
+cmd &gt;/dev/null #输出到垃圾桶</code></pre>
+<p>dev是设备(device)的英文缩写。/dev这个目录对所有的用户都十分重要。因为在这个目录中包含了所有Linux系统中使用的外部设备。但是这里并不是放的外部设备的驱动程序，这一点和windows,dos操作系统不一样。它实际上是一个访问这些外部设备的端口。我们可以非常方便地去访问这些外部设备，和访问一个文件，一个目录没有任何区别。</p>
+<p>/dev/null 它是空设备，也称为位桶（bit bucket）或者黑洞(black hole)。你可以向它输入任何数据，但任何写入它的数据都会被抛弃。通常用于处理不需要的输出流。（当然，它也可以作为空的输入流</p>
+<p>dev/zero 该设备无穷尽地提供空字符（ASCII NUL, 0x00），可以使用任何你需要的数目。它通常用于向设备或文件写入字符串0，用于初始化数据存储。（当然，也可作为输出流的接受容器）</p>
+<h3 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h3><p>前后连接两个命令</p>
+<pre><code>ls -l | grep test</code></pre>
+<h3 id="引号"><a href="#引号" class="headerlink" title="引号"></a>引号</h3><pre><code>双引号：可以除了字符$`\外地任何字符或字符串
+单引号：忽略任何引用值，将引号里的所有字符作为一个字符串 $var 不能被解析
+反引号：设置系统命令输出到变量</code></pre>
+<h3 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h3><p>shell脚本识别三种基本命令：内建命令，shell函数和外部命令</p>
+<p>基本的命令查找:shell会沿着查找路径$PATH来寻找命令</p>
+<pre><code>echo $PATH</code></pre>
+<p>可以在.profile文件中修改</p>
+<pre><code>export PATH=$PATH:$HOME/bin</code></pre>
+<p>and/or</p>
+<pre><code>expression1 &amp;&amp; expression2 &amp;&amp; expression3
+只有前面一条命令执行成功，才执行下一条
+expression1执行成功，才执行expression2
+串联的
+
+expression1 || expression2 || expression3
+执行命令，直到有一条成功为止</code></pre>
+<h1 id="Linux运维常用工具"><a href="#Linux运维常用工具" class="headerlink" title="Linux运维常用工具"></a>Linux运维常用工具</h1><ul>
+<li>Cobbler</li>
+<li>sshd</li>
+<li>iptables</li>
+<li>sysctl</li>
+<li>puppet agent</li>
+<li>limits</li>
+<li>ntp</li>
+<li>Ganglia</li>
+<li>Cacti</li>
+<li>Nagios</li>
+<li>Zabbix</li>
+<li>PlayBanch Watch</li>
+<li>Scribe Hadoop</li>
+<li>ScatterQ</li>
+<li>Yum Repository</li>
+<li>package</li>
+<li>Configuration/Change/Service/Custom</li>
+</ul>
+<h2 id="Puppet中服务配置"><a href="#Puppet中服务配置" class="headerlink" title="Puppet中服务配置"></a>Puppet中服务配置</h2><ul>
+<li>Systemg</li>
+<li>sshd</li>
+<li>iptables</li>
+<li>sysctrl</li>
+<li>ntp</li>
+<li>nginx</li>
+<li>zabbix</li>
+<li>scribe</li>
+</ul>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/shell/">shell</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

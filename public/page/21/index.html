@@ -1,0 +1,418 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第 21 页 | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2018/08/13/python/jmespath/"><span>jmespath 使用，jsonpath外的另外一种选择</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/08/13/python/jmespath/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-08-13T14:35:32.000Z">
+          2018-08-13
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>在测试过程中，经常会去JSON中的某个值，<a target="_blank" rel="noopener" href="http://jmespath.org/tutorial.html">jmespath</a>可以是除了jsonpath的另外一种选择.<br>下面通过几个例子来说明jmespath在python的使用</p>
+<h2 id="jmespath-python安装"><a href="#jmespath-python安装" class="headerlink" title="jmespath python安装"></a>jmespath python安装</h2><p>非常简单直接pip,</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install jmespth</span><br></pre></td></tr></table></figure>
+
+<h2 id="查询一个key值"><a href="#查询一个key值" class="headerlink" title="查询一个key值"></a>查询一个key值</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">source=&#123;<span class="string">&quot;a&quot;</span>: <span class="string">&quot;foo&quot;</span>, <span class="string">&quot;b&quot;</span>: <span class="string">&quot;bar&quot;</span>, <span class="string">&quot;c&quot;</span>: <span class="string">&quot;baz&quot;</span>&#125;</span><br><span class="line">result = jmespath.search(<span class="string">&quot;a&quot;</span>,source)</span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
+
+<h2 id="subexpression"><a href="#subexpression" class="headerlink" title="subexpression"></a>subexpression</h2><p>类似于jsonpath，通过**<em>.**</em>来表示路径的层级</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">source_1=&#123;<span class="string">&quot;a&quot;</span>: &#123;<span class="string">&quot;b&quot;</span>: &#123;<span class="string">&quot;c&quot;</span>: &#123;<span class="string">&quot;d&quot;</span>: <span class="string">&quot;value&quot;</span>&#125;&#125;&#125;&#125;</span><br><span class="line">sub_result = jmespath.search(<span class="string">&quot;a.b.c&quot;</span>,source_1)</span><br><span class="line">print(sub_result)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>这个例子的结果为：{‘d’: ‘value’}</p>
+<h2 id="index-expressions"><a href="#index-expressions" class="headerlink" title="index expressions"></a>index expressions</h2><p>index expression主要使用在数组上</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">source_2 = [<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>, <span class="string">&quot;d&quot;</span>, <span class="string">&quot;e&quot;</span>, <span class="string">&quot;f&quot;</span>]</span><br><span class="line">index_result = jmespath.search(<span class="string">&quot;[1]&quot;</span>,source_2)</span><br><span class="line">print(index_result)</span><br></pre></td></tr></table></figure>
+
+<p>这个例子的结果为:b</p>
+<h2 id="多个表达式综合使用"><a href="#多个表达式综合使用" class="headerlink" title="多个表达式综合使用"></a>多个表达式综合使用</h2><p>以上几种表达式可以合起来一期使用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">composite_exp = <span class="string">&quot;a.b.c[0].d[1][0]&quot;</span></span><br><span class="line">source_3= &#123;<span class="string">&quot;a&quot;</span>: &#123;</span><br><span class="line">  <span class="string">&quot;b&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;c&quot;</span>: [</span><br><span class="line">      &#123;<span class="string">&quot;d&quot;</span>: [<span class="number">0</span>, [<span class="number">1</span>, <span class="number">2</span>]]&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;d&quot;</span>: [<span class="number">3</span>, <span class="number">4</span>]&#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;&#125;</span><br><span class="line"></span><br><span class="line">composite_result = jmespath.search(composite_exp,source_3)</span><br><span class="line">print(composite_result)</span><br></pre></td></tr></table></figure>
+
+<p>这个例子的结果为1</p>
+<h2 id="Slicing-切片"><a href="#Slicing-切片" class="headerlink" title="Slicing 切片"></a>Slicing 切片</h2><p>slicing 和python本身的slicing比较像，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">source_4=[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br><span class="line">slicing_exp = <span class="string">&quot;[0:5]&quot;</span></span><br><span class="line">slicing_result = jmespath.search(slicing_exp,source_4)</span><br><span class="line">print(slicing_result)</span><br></pre></td></tr></table></figure>
+
+<p>这个例子的结果为： [0, 1, 2, 3, 4]</p>
+<p>slicing实际上和python自己的机制基本一样，同样这个也是主要给数组使用.<br>有一点需要记住，基本的slicing的格式其实是： [start:stop:step]</p>
+<h2 id="Projections"><a href="#Projections" class="headerlink" title="Projections"></a>Projections</h2><p>projection不知道怎么翻译，就先叫做投影吧，具体通过例子来说比较好理解.<br>projections主要包含一下几种情况:</p>
+<ul>
+<li>List Projections</li>
+<li>Slice Projections</li>
+<li>Object Projections</li>
+<li>Flatten Projections</li>
+<li>Filter Projections</li>
+</ul>
+<h3 id="Projections-例子"><a href="#Projections-例子" class="headerlink" title="Projections- 例子"></a>Projections- 例子</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">list_exp=<span class="string">&quot;people[*].first&quot;</span></span><br><span class="line">source_5 = &#123;</span><br><span class="line">  <span class="string">&quot;people&quot;</span>: [</span><br><span class="line">    &#123;<span class="string">&quot;first&quot;</span>: <span class="string">&quot;James&quot;</span>, <span class="string">&quot;last&quot;</span>: <span class="string">&quot;d&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;first&quot;</span>: <span class="string">&quot;Jacob&quot;</span>, <span class="string">&quot;last&quot;</span>: <span class="string">&quot;e&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;first&quot;</span>: <span class="string">&quot;Jayden&quot;</span>, <span class="string">&quot;last&quot;</span>: <span class="string">&quot;f&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;missing&quot;</span>: <span class="string">&quot;different&quot;</span>&#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">&quot;foo&quot;</span>: &#123;<span class="string">&quot;bar&quot;</span>: <span class="string">&quot;baz&quot;</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">proj_result1= jmespath.search(list_exp,source_5)</span><br><span class="line">print(proj_result1) <span class="comment"># [&#x27;James&#x27;, &#x27;Jacob&#x27;, &#x27;Jayden&#x27;]</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">obj_exp =<span class="string">&quot;reservations[*].instances[*].state&quot;</span></span><br><span class="line">source_6= &#123;</span><br><span class="line">  <span class="string">&quot;reservations&quot;</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">&quot;instances&quot;</span>: [</span><br><span class="line">        &#123;<span class="string">&quot;state&quot;</span>: <span class="string">&quot;running&quot;</span>&#125;,</span><br><span class="line">        &#123;<span class="string">&quot;state&quot;</span>: <span class="string">&quot;stopped&quot;</span>&#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">&quot;instances&quot;</span>: [</span><br><span class="line">        &#123;<span class="string">&quot;state&quot;</span>: <span class="string">&quot;terminated&quot;</span>&#125;,</span><br><span class="line">        &#123;<span class="string">&quot;state&quot;</span>: <span class="string">&quot;runnning&quot;</span>&#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">proj_result2=jmespath.search(obj_exp,source_6)</span><br><span class="line">print(proj_result2) <span class="comment">#[[&#x27;running&#x27;, &#x27;stopped&#x27;], [&#x27;terminated&#x27;, &#x27;runnning&#x27;]]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Flatten projections</span></span><br><span class="line"></span><br><span class="line">source_7=[</span><br><span class="line">  [<span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line">  <span class="number">2</span>,</span><br><span class="line">  [<span class="number">3</span>],</span><br><span class="line">  <span class="number">4</span>,</span><br><span class="line">  [<span class="number">5</span>, [<span class="number">6</span>, <span class="number">7</span>]]</span><br><span class="line">]</span><br><span class="line">flat_exp =<span class="string">&quot;[]&quot;</span></span><br><span class="line">flat_result = jmespath.search(flat_exp,source_7)</span><br><span class="line">print(flat_result) <span class="comment"># [0, 1, 2, 3, 4, 5, [6, 7]]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># filter</span></span><br><span class="line"></span><br><span class="line">filter_exp=<span class="string">&quot;machines[?state==&#x27;running&#x27;].name&quot;</span></span><br><span class="line">filter_source =&#123;</span><br><span class="line">  <span class="string">&quot;machines&quot;</span>: [</span><br><span class="line">    &#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;a&quot;</span>, <span class="string">&quot;state&quot;</span>: <span class="string">&quot;running&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;b&quot;</span>, <span class="string">&quot;state&quot;</span>: <span class="string">&quot;stopped&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;b&quot;</span>, <span class="string">&quot;state&quot;</span>: <span class="string">&quot;running&quot;</span>&#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line">filter_result = jmespath.search(filter_exp,filter_source)</span><br><span class="line">print(filter_result)</span><br><span class="line"></span><br><span class="line"><span class="comment"># pipe expression</span></span><br><span class="line"></span><br><span class="line">pipe_exp= <span class="string">&quot;people[*].first | [0]&quot;</span></span><br><span class="line">pipe_source= &#123;</span><br><span class="line">  <span class="string">&quot;people&quot;</span>: [</span><br><span class="line">    &#123;<span class="string">&quot;first&quot;</span>: <span class="string">&quot;James&quot;</span>, <span class="string">&quot;last&quot;</span>: <span class="string">&quot;d&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;first&quot;</span>: <span class="string">&quot;Jacob&quot;</span>, <span class="string">&quot;last&quot;</span>: <span class="string">&quot;e&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;first&quot;</span>: <span class="string">&quot;Jayden&quot;</span>, <span class="string">&quot;last&quot;</span>: <span class="string">&quot;f&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;missing&quot;</span>: <span class="string">&quot;different&quot;</span>&#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">&quot;foo&quot;</span>: &#123;<span class="string">&quot;bar&quot;</span>: <span class="string">&quot;baz&quot;</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">pipe_result = jmespath.search(pipe_exp,pipe_source)</span><br><span class="line">print(pipe_result)  <span class="comment"># James</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># multiselect</span></span><br><span class="line">multi_exp=<span class="string">&quot;people[].[first,last]&quot;</span></span><br><span class="line">multiselect_result = jmespath.search(multi_exp,pipe_source)</span><br><span class="line">print(multiselect_result) <span class="comment"># [[&#x27;James&#x27;, &#x27;d&#x27;], [&#x27;Jacob&#x27;, &#x27;e&#x27;], [&#x27;Jayden&#x27;, &#x27;f&#x27;], [None, None]]</span></span><br></pre></td></tr></table></figure>
+
+<p>基本上把网站上例子试了一下，总体感觉功能是相当强大(怀疑比jsonpath还要厉害一点).<br>从简单到复杂，都还是比较好用.</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/python/">python</a><a href="/tags/tips/">tips</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2018/08/13/python/loan-calculation/"><span>jLoan Calculation</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/08/13/python/loan-calculation/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-08-13T14:35:32.000Z">
+          2018-08-13
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="Loan-Calculation-Example"><a href="#Loan-Calculation-Example" class="headerlink" title="Loan Calculation Example"></a>Loan Calculation Example</h2><ul>
+<li>Loan Rule Defintion</li>
+<li>Installment Calculation</li>
+<li>Overdue Calculation</li>
+<li>IRR Calculation</li>
+</ul>
+<h2 id="Loan-Rule-Definition"><a href="#Loan-Rule-Definition" class="headerlink" title="Loan Rule Definition"></a>Loan Rule Definition</h2><p><img src="/images/loan/loan_definition.jpg" alt="img"></p>
+<h2 id="Installments-Calculation"><a href="#Installments-Calculation" class="headerlink" title="Installments Calculation"></a>Installments Calculation</h2><ul>
+<li>repayment-Principal: ROUND(10000/3,2)</li>
+<li>repayment-interest: ROUND(10000*2%,2)</li>
+</ul>
+<p><img src="/images/loan/normal_installment.jpg" alt="img"></p>
+<h2 id="Advanced-Repayment-calculation"><a href="#Advanced-Repayment-calculation" class="headerlink" title="Advanced Repayment calculation"></a>Advanced Repayment calculation</h2><p>Overall Payment = Current Term Repayment + Remain Principal+ default penalty(10000*1%)</p>
+<p><img src="/images/loan/advanced_repayment.jpg" alt="img"></p>
+<h2 id="Overdue-Repayment-calculation"><a href="#Overdue-Repayment-calculation" class="headerlink" title="Overdue Repayment calculation"></a>Overdue Repayment calculation</h2><p>For example: </p>
+<p>Last Term: 4-1 is the repayment day, but actually repayment is occurred in 4-10, then it is default. And the default fee is over your imagination.</p>
+<ul>
+<li>Term1 Default Penalty: ROUND(3333.33*(0.02/30)<em>1.5</em>(60+9),2)</li>
+<li>Term2 Default Penalty: ROUND(3333.33*(0.02/30)<em>1.5</em>(30+9),2)</li>
+<li>Term3 Default Penalty: ROUND(3333.34*(0.02/30)<em>1.5</em>(0+9),2)</li>
+</ul>
+<p><img src="/images/loan/overdue_repayment.jpg" alt="img"></p>
+<p>Don’t be default, man!!</p>
+<h2 id="IRR-Calculation"><a href="#IRR-Calculation" class="headerlink" title="IRR Calculation"></a>IRR Calculation</h2><p><img src="/images/loan/IRR.jpg" alt="img"></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/python/">python</a><a href="/tags/tips/">tips</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2018/07/24/tips/1-junit-perf/"><span>junit-perf</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/07/24/tips/1-junit-perf/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-07-24T14:11:05.000Z">
+          2018-07-24
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="使用JunitPerf进行性能测试"><a href="#使用JunitPerf进行性能测试" class="headerlink" title="使用JunitPerf进行性能测试"></a>使用JunitPerf进行性能测试</h1><p>以下简单介绍一下如何使用JunitPerf进行性能测试，JunitPerf是基于JUnit4的一个单元性能测试插件，对于会远程调用API测试比较合适，如果想要比较nanosecond 延迟的则需要使用<a target="_blank" rel="noopener" href="http://openjdk.java.net/projects/code-tools/jmh/">JMH</a>.</p>
+<h2 id="JunitPerf-依赖声明"><a href="#JunitPerf-依赖声明" class="headerlink" title="JunitPerf 依赖声明"></a>JunitPerf 依赖声明</h2><p>此例子假设使用MAVEN管理项目，所以在POM文件中添加：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.12<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.noconnor<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junitperf<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.9.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="构建压力测试类"><a href="#构建压力测试类" class="headerlink" title="构建压力测试类"></a>构建压力测试类</h2><p>假设你想衡量DemoPerfService 类中的getServiceId方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoPerfService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getServiceId</span><span class="params">(String userId)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> UUID.randomUUID().toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那么你可以构建如下的测试类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoServiceTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Rule</span></span><br><span class="line">    <span class="keyword">public</span> JUnitPerfRule perfTestRule = <span class="keyword">new</span> JUnitPerfRule();</span><br><span class="line">    DemoPerfService demoPerfService;</span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setupService</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.demoPerfService = <span class="keyword">new</span> DemoPerfService();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="meta">@JUnitPerfTest(threads = 50,durationMs = 1200,warmUpMs = 100,maxExecutionsPerSecond = 110)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getServiceId_withoutTestRequirement</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        String result =demoPerfService.getServiceId(<span class="string">&quot;userid&quot;</span>);</span><br><span class="line">        System.out.println(result);</span><br><span class="line">        Assert.assertNotNull(result);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>直接运行就可以进行压力测试,默认的测试报告可以在build/reports 目录下获取：</p>
+<p><img src="/images/ut/junitperf_1.jpg" alt="img"></p>
+<p>以下是对于测试类的几点说明：</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>定义说明</th>
+<th>Default值或说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@Rule</td>
+<td>申明为JUnit 的Rule类</td>
+<td></td>
+</tr>
+<tr>
+<td>JUnitPerfRule</td>
+<td>JUnitPerf 测试规则类</td>
+<td></td>
+</tr>
+<tr>
+<td>@JunitPerfTest</td>
+<td>声明为性能测试方法</td>
+<td></td>
+</tr>
+<tr>
+<td>threads</td>
+<td>测试使用的线程数</td>
+<td></td>
+</tr>
+<tr>
+<td>durationMs</td>
+<td>测试持续时间</td>
+<td></td>
+</tr>
+<tr>
+<td>warmUpMs</td>
+<td>测试热身时间</td>
+<td>热身时间的测试数据不会计算进最后的测试结果</td>
+</tr>
+<tr>
+<td>maxExecutionsPerSecond</td>
+<td>方法执行的上限</td>
+<td>RateLimiter，控制TPS上限</td>
+</tr>
+</tbody></table>
+<h2 id="对自己的测试设置期望值"><a href="#对自己的测试设置期望值" class="headerlink" title="对自己的测试设置期望值"></a>对自己的测试设置期望值</h2><p>使用@JUnitPerfTestRequirement 可以给性能测试设置期望值，这个annotation的属性有:</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>percentits</td>
+<td>设置例如90%/95%/50% 响应时间的期望</td>
+</tr>
+<tr>
+<td>executionsPerSec</td>
+<td>期望每秒执行测试(TPS)</td>
+</tr>
+<tr>
+<td>allowedErrorPercentage</td>
+<td>允许错误比例</td>
+</tr>
+<tr>
+<td>minLatency</td>
+<td>期望最小延时，如果实际最小延时超过这个数，则失败</td>
+</tr>
+<tr>
+<td>maxLatency</td>
+<td>期望最大延时，如果实际最大延时超过这个，则失败</td>
+</tr>
+<tr>
+<td>meanLatency</td>
+<td>期望中位数延时</td>
+</tr>
+</tbody></table>
+<p>下面是使用了JUnitPerfTestRequirement的一个测试方法,需要和@JUnitPerfTest一起使用：</p>
+<ul>
+<li>@JUnitPerfTest 定义了压测的运行参数</li>
+<li>@JUnitPerfTestRequirement定义了压测的期望值</li>
+</ul>
+<p>具体代码如下例:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">  <span class="meta">@JUnitPerfTest(threads = 50,durationMs = 1200,warmUpMs = 100,maxExecutionsPerSecond = 110)</span></span><br><span class="line">  <span class="meta">@JUnitPerfTestRequirement(percentiles = &quot;90:7,95:7,98:7,99:8&quot;, executionsPerSec = 10_000, allowedErrorPercentage = 0.10f)</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getServiceId</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">      String result =demoPerfService.getServiceId(<span class="string">&quot;userid&quot;</span>);</span><br><span class="line">      System.out.println(result);</span><br><span class="line">      Assert.assertNotNull(result);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行之后，如果发现没有满足JUnitPerfTestRequirement定义，则报错:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">java.lang.AssertionError: Test throughput threshold not achieved</span><br><span class="line">Expected: is &lt;<span class="keyword">true</span>&gt;</span><br><span class="line">     but: was &lt;<span class="keyword">false</span>&gt;</span><br><span class="line">Expected :is &lt;<span class="keyword">true</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p>是不是很简单！</p>
+<h2 id="设置测试报告地址"><a href="#设置测试报告地址" class="headerlink" title="设置测试报告地址"></a>设置测试报告地址</h2><p>JUnitPerf 有不同的测试报告，个人觉得HTML的测试报告比较实用，具体只需要:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Rule</span></span><br><span class="line"><span class="keyword">public</span> JUnitPerfRule perfTestRule = <span class="keyword">new</span> JUnitPerfRule(<span class="keyword">new</span> HtmlReportGenerator(<span class="string">&quot;perf/report.html&quot;</span>));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="完整的例子"><a href="#完整的例子" class="headerlink" title="完整的例子"></a>完整的例子</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoServiceTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Rule</span></span><br><span class="line"><span class="comment">//    public JUnitPerfRule perfTestRule = new JUnitPerfRule(new HtmlReportGenerator(&quot;perf/report.html&quot;));</span></span><br><span class="line">    <span class="keyword">public</span> JUnitPerfRule perfTestRule = <span class="keyword">new</span> JUnitPerfRule();</span><br><span class="line">    DemoPerfService demoPerfService;</span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setupService</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.demoPerfService = <span class="keyword">new</span> DemoPerfService();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="meta">@JUnitPerfTest(threads = 50,durationMs = 1200,warmUpMs = 100,maxExecutionsPerSecond = 110)</span></span><br><span class="line">    <span class="meta">@JUnitPerfTestRequirement(percentiles = &quot;90:7,95:7,98:7,99:8&quot;, executionsPerSec = 10_000, allowedErrorPercentage = 0.10f)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getServiceId</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        String result =demoPerfService.getServiceId(<span class="string">&quot;userid&quot;</span>);</span><br><span class="line">        System.out.println(result);</span><br><span class="line">        Assert.assertNotNull(result);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="meta">@JUnitPerfTest(threads = 50,durationMs = 1200,warmUpMs = 100,maxExecutionsPerSecond = 110)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getServiceId_withoutTestRequirement</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        String result =demoPerfService.getServiceId(<span class="string">&quot;userid&quot;</span>);</span><br><span class="line">        System.out.println(result);</span><br><span class="line">        Assert.assertNotNull(result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后可以再设定的目录中查看测试报告，测试报告和默认的HTML 测试报告是一致的.</p>
+<h2 id="一点问题"><a href="#一点问题" class="headerlink" title="一点问题"></a>一点问题</h2><p>压力测试过程中，有时数据不能复用，举个例子来说，如果想测试完全没有访问redis缓存情况下，通过userid查询的user信息速度，那么压测的时候userid就不能复用，因为一旦访问了就会放入redis缓存而影响结果，这个可以通过使用其他的方法解决，比如曾今使用过BlockingQueue的方法进行过尝试，具体方法如下：</p>
+<ol>
+<li>读取所有userid的文件</li>
+<li>把userid放到一个BlockingQueue中</li>
+<li>压测时获取userid通过BlockingQueue去获取</li>
+</ol>
+<p>这样就解决了数据不能重复的方法，具体方法可以参考如下代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">static</span> BlockingQueue&lt;String&gt; distinctIdQueue ;</span><br><span class="line">    <span class="meta">@Rule</span></span><br><span class="line">    <span class="keyword">public</span> JUnitPerfRule perfTestRule =</span><br><span class="line">            <span class="keyword">new</span> JUnitPerfRule(<span class="keyword">new</span> HtmlReportGenerator(<span class="string">&quot;data/report_test.html&quot;</span>));</span><br><span class="line"></span><br><span class="line">    <span class="meta">@BeforeClass</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">setupQueue</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">        distinctIdQueue = <span class="keyword">new</span> LinkedBlockingQueue&lt;&gt;();</span><br><span class="line">        Files.readAllLines(</span><br><span class="line">                Paths.get(<span class="string">&quot;data/userid.txt&quot;</span>)</span><br><span class="line">        ).parallelStream().forEach(</span><br><span class="line">                item-&gt; &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        distinctIdQueue.put(item);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">     <span class="meta">@Test</span></span><br><span class="line">    <span class="meta">@JUnitPerfTest(threads = 50,durationMs = 1200,warmUpMs = 100,maxExecutionsPerSecond = 110)</span></span><br><span class="line">    <span class="meta">@JUnitPerfTestRequirement(percentiles = &quot;90:7,95:7,98:7,99:8&quot;, executionsPerSec = 10_000, allowedErrorPercentage = 0.10f)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getServiceId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String uesrId = distinctIdQueue.take();</span><br><span class="line">        String result =demoPerfService.getServiceId(userId);</span><br><span class="line">        System.out.println(result);</span><br><span class="line">        Assert.assertNotNull(result);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/junit/">junit</a><a href="/tags/performance/">performance</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+
+<nav class="pagination">
+  
+  <a href="/page/20/" class="pagination-prev">上一页</a>
+  
+  
+  <a href="/page/22/" class="pagination-next">下一页</a>
+  
+</nav>
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

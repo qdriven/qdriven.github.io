@@ -1,0 +1,356 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第 22 页 | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2018/07/01/tips/ansible/1-ansible-in-10-minutes/"><span>ansible In 30 Minutes</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/07/01/tips/ansible/1-ansible-in-10-minutes/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-07-01T13:34:04.000Z">
+          2018-07-01
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="Ansible-Basic-Concept"><a href="#Ansible-Basic-Concept" class="headerlink" title="Ansible Basic Concept"></a>Ansible Basic Concept</h1><p>ansible 是一个操作机器的工具,可以通过编排不同的inventory,组合不同的命令来将日常运维的操作<br>变成可运行的脚本资产,同时也可以积累常用的脚本以便复用.</p>
+<p>下面是关于ansible的一些基础概念的脑图,总体而言ansible包括了以下几个概念：</p>
+<ul>
+<li>inventory: 定义主机,定义操作对象<ul>
+<li>Host:主机</li>
+<li>Group：不同的主机组合成一个组，一个组下面可以有子组，于是就构成了一个树形结构</li>
+</ul>
+</li>
+<li>variable： 变量，主要用来定义对于操作机器时使用的可变参数</li>
+</ul>
+<h1 id="Ansible-Installation"><a href="#Ansible-Installation" class="headerlink" title="Ansible Installation"></a>Ansible Installation</h1><ul>
+<li>install in MAC</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew unisntall ansible</span><br><span class="line">brew install ansible</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>install in centos</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install epel-release</span><br><span class="line">sudo yum install ansible -y</span><br></pre></td></tr></table></figure>
+
+<h1 id="Configure-hosts-for-ansible-ssh-connector"><a href="#Configure-hosts-for-ansible-ssh-connector" class="headerlink" title="Configure hosts for ansible ssh connector"></a>Configure hosts for ansible ssh connector</h1><ul>
+<li>copy ssh key to different hosts</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ssh-keygen</span><br><span class="line">ssh-copy-id remoteuser@remote.server</span><br><span class="line">ssh-keyscan remote.server &gt;&gt; ~/.ssh/known_hosts</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>check ssh connection</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh remoteuser@remote.server</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>it is done.</p>
+<h1 id="Ansible-Ad-hoc-Commands"><a href="#Ansible-Ad-hoc-Commands" class="headerlink" title="Ansible Ad-hoc Commands"></a>Ansible Ad-hoc Commands</h1><p>ansible 命令的pattern 如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible &lt;host-pattern&gt; [options]</span><br></pre></td></tr></table></figure>
+
+<p>具体查看ansible 的使用帮助是：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="ansible-ad-hoc-command-检查安装环境"><a href="#ansible-ad-hoc-command-检查安装环境" class="headerlink" title="ansible ad-hoc command - 检查安装环境"></a>ansible ad-hoc command - 检查安装环境</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible all -m ping -u root</span><br></pre></td></tr></table></figure>
+
+<h2 id="ansible-ad-hoc-command-执行命令"><a href="#ansible-ad-hoc-command-执行命令" class="headerlink" title="ansible ad-hoc command - 执行命令"></a>ansible ad-hoc command - 执行命令</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible all -a <span class="string">&quot;/bin/sh echo hello world&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="ansible-ad-hoc-command-copy-files"><a href="#ansible-ad-hoc-command-copy-files" class="headerlink" title="ansible ad-hoc command - copy files"></a>ansible ad-hoc command - copy files</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible web -m copy -a <span class="string">&quot;src=/etc/hosts dest=/tmp/hosts&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="ansible-ad-hoc-command-yum-install"><a href="#ansible-ad-hoc-command-yum-install" class="headerlink" title="ansible ad-hoc command - yum install"></a>ansible ad-hoc command - yum install</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible web -m yum -a <span class="string">&quot;name=acme state=present&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="ansible-ad-hoc-command-add-user"><a href="#ansible-ad-hoc-command-add-user" class="headerlink" title="ansible ad-hoc command - add user"></a>ansible ad-hoc command - add user</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible all -m user -a <span class="string">&quot;name=foo passsword=&lt;crypted password here&gt;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="ansible-ad-hoc-command-download-git-包"><a href="#ansible-ad-hoc-command-download-git-包" class="headerlink" title="ansible ad-hoc command - download git 包"></a>ansible ad-hoc command - download git 包</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible web -m git -a <span class="string">&quot;repo=git://foo.example.io/repo.git dest=/src/myapp&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="ansible-ad-hoc-command-start-service"><a href="#ansible-ad-hoc-command-start-service" class="headerlink" title="ansible ad-hoc command - start service"></a>ansible ad-hoc command - start service</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible web -m service -a <span class="string">&quot;name=httpd state=started&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="ansible-ad-hoc-command-并行运行"><a href="#ansible-ad-hoc-command-并行运行" class="headerlink" title="ansible ad-hoc command - 并行运行"></a>ansible ad-hoc command - 并行运行</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible web -a <span class="string">&quot;/sbin/reboot&quot;</span> -f 10</span><br></pre></td></tr></table></figure>
+
+<h2 id="ansible-ad-hoc-command-查看全部系统信息"><a href="#ansible-ad-hoc-command-查看全部系统信息" class="headerlink" title="ansible ad-hoc command - 查看全部系统信息"></a>ansible ad-hoc command - 查看全部系统信息</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible all -m setup</span><br></pre></td></tr></table></figure>
+
+<h2 id="ansible-ad-hoc-command-小结"><a href="#ansible-ad-hoc-command-小结" class="headerlink" title="ansible ad-hoc command 小结"></a>ansible ad-hoc command 小结</h2><p>从以上的例子中我们可以看到ansible的命令一般都会使用如下几点：</p>
+<ul>
+<li>module: -m </li>
+<li>module_args: -a </li>
+<li>hosts: all/web/……</li>
+</ul>
+<p>以上三个组合成为了下面的一个命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible all -m service -a <span class="string">&quot;name=httpd state=started&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>从python的角度看,可以用伪代码的方式:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">def copy(args=&#123;&#125;):</span><br><span class="line">    <span class="keyword">for</span> kwarg, v <span class="keyword">in</span> args.items():</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;&#123;key&#125;=&#123;value&#125;&quot;</span>.format(key=kwarg, value=v))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def <span class="built_in">test</span>(args=&#123;&#125;):</span><br><span class="line">    <span class="keyword">for</span> kwarg, v <span class="keyword">in</span> args.items():</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;&#123;key&#125;=&#123;value&#125;&quot;</span>.format(key=kwarg, value=v))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">module_mapping = &#123;</span><br><span class="line">    <span class="string">&quot;copy&quot;</span>: copy,</span><br><span class="line">    <span class="string">&quot;test&quot;</span>: <span class="built_in">test</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def ansible(module, module_args):</span><br><span class="line">    func = module_mapping.get(module)</span><br><span class="line">    parsed = module_args.split(<span class="string">&quot; &quot;</span>)</span><br><span class="line">    args = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> module_arg <span class="keyword">in</span> parsed:</span><br><span class="line">        kv = module_arg.split(<span class="string">&quot;=&quot;</span>)</span><br><span class="line">        args[kv[0]] = kv[1]</span><br><span class="line">    func(args)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    ansible(module=<span class="string">&#x27;copy&#x27;</span>, module_args=<span class="string">&quot;name=name test=test&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/ansible/">ansible</a><a href="/tags/CI-CD/">CI/CD</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2018/06/08/tips/0-word-frequency/"><span>Word Frequency - Use JDK Methods</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/06/08/tips/0-word-frequency/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-06-07T17:50:03.000Z">
+          2018-06-08
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="What-is-the-problem"><a href="#What-is-the-problem" class="headerlink" title="What is the problem"></a>What is the problem</h2><p>Be confidence to the JDK, in most case, it is enough to solve problem. Here is a case, an issue to solve:</p>
+<ul>
+<li>There are over 10000 files in a dir</li>
+<li>Try to find out the top 100 most frequency words in these files, estimate 10 millions words out there</li>
+<li>Try to use </li>
+</ul>
+<p>I didn’t sovle it in 40 mintues, the failure part is just think too much about the data structure and algorithm. I just did some investigation then, and find out actually JDK methods are enough.</p>
+<p>Here is my thought, and I think need to implement my own algorithm to solve, actually I am wrong, JDK is enough</p>
+<ul>
+<li>Read the files</li>
+<li>Put word and count to a concurrent map</li>
+<li>get the top 100 from the map</li>
+</ul>
+<p>Because I am a fraid the memory and other resource issue, but later I had my try, it looks like worked if only use JDK methods. Here comes my solution.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>First of all, I try to create 10000 files with some random string(word),all strings are less than 18 characters, the codes are :</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> String <span class="title">getSaltString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    String SALTCHARS = <span class="string">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890&quot;</span>;</span><br><span class="line">    StringBuilder salt = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">    Random rnd = <span class="keyword">new</span> Random();</span><br><span class="line">    <span class="keyword">int</span> strLength = rnd.nextInt(<span class="number">10</span>);</span><br><span class="line">    <span class="keyword">if</span>(strLength&lt;=<span class="number">2</span>)&#123;</span><br><span class="line">      strLength =<span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (salt.length() &lt; strLength) &#123; <span class="comment">// length of the random string.</span></span><br><span class="line">      <span class="keyword">int</span> index = (<span class="keyword">int</span>) (rnd.nextFloat() * SALTCHARS.length());</span><br><span class="line">      salt.append(SALTCHARS.charAt(index));</span><br><span class="line">    &#125;</span><br><span class="line">    String saltStr = salt.toString();</span><br><span class="line">    <span class="keyword">return</span> saltStr;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> List&lt;String&gt; <span class="title">createRandomFile</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    List&lt;String&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">      List&lt;String&gt; listString = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">50</span>; j++) &#123;</span><br><span class="line"></span><br><span class="line">        listString.add(getSaltString());</span><br><span class="line">      &#125;</span><br><span class="line">      StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">      <span class="keyword">for</span> (String s : listString) &#123;</span><br><span class="line">        sb.append(<span class="string">&quot; &quot;</span>).append(s);</span><br><span class="line">      &#125;</span><br><span class="line">      result.add(sb.toString());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">createFile</span><span class="params">(<span class="keyword">int</span> i, List&lt;String&gt; values)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    Files.write(Paths.get(<span class="string">&quot;tmp/&quot;</span> + i), values);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">createFiles</span><span class="params">(<span class="keyword">int</span> fileNum)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; fileNum; i++) &#123;</span><br><span class="line">      createFile(i, createRandomFile());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>then I tried use to read files and put words into frequency map,and here multiple threads are used</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">readAndPutTo</span><span class="params">(Path path)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">    List&lt;String&gt; lines = Files.readAllLines(path);</span><br><span class="line">    <span class="keyword">for</span> (String line : lines) &#123;</span><br><span class="line">      String[] words = line.split(<span class="string">&quot;\\s+&quot;</span>);</span><br><span class="line">      <span class="keyword">for</span> (String word : words) &#123;</span><br><span class="line">        frenquncyMap.put(word, frenquncyMap.getOrDefault(word, <span class="number">0</span>) + <span class="number">1</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(args[])</span></span>&#123;</span><br><span class="line">ExecutorService es = Executors.newFixedThreadPool(<span class="number">30</span>);</span><br><span class="line">    System.out.println(Files.list(Paths.get(<span class="string">&quot;tmp&quot;</span>)).count());</span><br><span class="line">    Files.list(Paths.get(<span class="string">&quot;tmp&quot;</span>)).forEach(</span><br><span class="line">        path -&gt; &#123;</span><br><span class="line">          count.getAndIncrement();</span><br><span class="line">          <span class="keyword">try</span> &#123;</span><br><span class="line">            readAndPutTo(path);</span><br><span class="line">          &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    );</span><br><span class="line">    System.out.println(<span class="string">&quot;completed tasks: &quot;</span>+count);</span><br><span class="line">    <span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">    System.out.println(end - start);</span><br><span class="line">    es.shutdown();</span><br><span class="line">    System.out.println(es.awaitTermination(<span class="number">120</span>, TimeUnit.SECONDS);</span><br><span class="line">    System.out.println(System.currentTimeMillis() - start);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Use shutdown() to make sure every tasks are completed, and print the task count to check if all tasks had be invoked.</p>
+<p>At last use stream api to list top 100 work frequency.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">List result = frenquncyMap.entrySet().stream()</span><br><span class="line">    .sorted(Map.Entry.comparingByValue())</span><br><span class="line">    .limit(<span class="number">100</span>).collect(Collectors.toList());</span><br><span class="line">System.out.println(result);</span><br><span class="line">System.out.println(System.currentTimeMillis() - start);</span><br><span class="line"></span><br><span class="line">Files.delete(Paths.get(<span class="string">&quot;tmp/&quot;</span>));</span><br><span class="line">Files.createDirectories(Paths.get(<span class="string">&quot;tmp/&quot;</span>));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>That’s it, let’s run and see what happened:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Later I willl jump into JDK, to understand what the algorithm used in JDK. </p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/interview/">interview</a><a href="/tags/word-frequency/">word_frequency</a><a href="/tags/algorithm/">algorithm</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2016/05/11/python/2016-05-11-pythonic/"><span>Pythonic,What is it</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/05/11/python/2016-05-11-pythonic/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-05-11T02:41:15.000Z">
+          2016-05-11
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="Pythonic-Style"><a href="#Pythonic-Style" class="headerlink" title="Pythonic Style"></a>Pythonic Style</h1><p>Pythonic 是种很有趣的风格，有些实际上python的惯用方法和特有方法。</p>
+<h2 id="Switch-Two-variables"><a href="#Switch-Two-variables" class="headerlink" title="Switch Two variables"></a>Switch Two variables</h2><p>python 通过tuple进行pack，unpack就不需要temp变量</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a,b=b,a</span><br></pre></td></tr></table></figure>
+<p>如果其他语言需要swap的话，就需要一个temp变量，然后再置换。</p>
+<h2 id="P-VS-NP"><a href="#P-VS-NP" class="headerlink" title="P VS NP"></a>P VS NP</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># P</span></span><br><span class="line">a=<span class="number">3</span></span><br><span class="line">b=<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span>&lt;=b&lt;=a <span class="keyword">and</span> a&lt;<span class="number">10</span> <span class="comment"># return True</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## NP</span></span><br><span class="line">b&gt;=<span class="number">1</span> <span class="keyword">and</span> b&lt;=a <span class="keyword">and</span> a&lt;<span class="number">10</span> <span class="comment"># True</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>reverse string</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reverse_str</span>(<span class="params">s</span>):</span></span><br><span class="line">  <span class="keyword">return</span> s[::<span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reverse_str</span>(<span class="params">s</span>):</span></span><br><span class="line">  t=<span class="string">&#x27;&#x27;</span></span><br><span class="line">  <span class="keyword">for</span> x <span class="keyword">in</span> xrange(len(s)<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>):</span><br><span class="line">    t+=s[x]</span><br><span class="line">  <span class="keyword">return</span> t</span><br><span class="line"></span><br><span class="line"><span class="comment"># join the strList</span></span><br><span class="line">str_list=[<span class="string">&quot;Python&quot;</span>,<span class="string">&quot;is&quot;</span>,<span class="string">&quot;good&quot;</span>]</span><br><span class="line">res=<span class="string">&#x27;,&#x27;</span>.join(str_list) <span class="comment"># pythonic</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># NP:</span></span><br><span class="line">res = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> strList:</span><br><span class="line">    res += s + <span class="string">&#x27; &#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># P</span></span><br><span class="line">numList = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]   </span><br><span class="line"></span><br><span class="line">sum = sum(numList)  <span class="comment">#sum = 15</span></span><br><span class="line">maxNum = max(numList) <span class="comment">#maxNum = 5</span></span><br><span class="line">minNum = min(numList) <span class="comment">#minNum = 1</span></span><br><span class="line"><span class="keyword">from</span> operator <span class="keyword">import</span> mul</span><br><span class="line"><span class="comment"># reduce is interesting</span></span><br><span class="line">prod = reduce(mul, numList, <span class="number">1</span>) <span class="comment">##prod = 120 默认值传1以防空列表报错</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># NP</span></span><br><span class="line">sum = <span class="number">0</span></span><br><span class="line">maxNum = -float(<span class="string">&#x27;inf&#x27;</span>)</span><br><span class="line">minNum = float(<span class="string">&#x27;inf&#x27;</span>)</span><br><span class="line">prod = <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> numList:</span><br><span class="line">    <span class="keyword">if</span> num &gt; maxNum:</span><br><span class="line">        maxNum = num</span><br><span class="line">    <span class="keyword">if</span> num &lt; minNum:</span><br><span class="line">        minNum = num</span><br><span class="line">    sum += num</span><br><span class="line">    prod *= num</span><br><span class="line"><span class="comment"># sum = 15 maxNum = 5 minNum = 1 prod = 120</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="列表推导式"><a href="#列表推导式" class="headerlink" title="列表推导式"></a>列表推导式</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">l = [x*x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10</span>) <span class="keyword">if</span> x % <span class="number">3</span> == <span class="number">0</span>]</span><br><span class="line"><span class="comment">#l = [0, 9, 36, 81]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">##NP</span></span><br><span class="line">l = []</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    <span class="keyword">if</span> x % <span class="number">3</span> == <span class="number">0</span>:</span><br><span class="line">        l.append(x*x)</span><br><span class="line"><span class="comment">#l = [0, 9, 36, 81]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/python/">python</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/python/">python</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+
+<nav class="pagination">
+  
+  <a href="/page/21/" class="pagination-prev">上一页</a>
+  
+  
+  <a href="/page/23/" class="pagination-next">下一页</a>
+  
+</nav>
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>01-微服务框架－Springboot/Flask,Hello World | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="test-ops">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="01-微服务框架－Springboot/Flask,Hello World"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>01-微服务框架－Springboot/Flask,Hello World</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/02/01/tips/tester-ops/2016-02-01-microservice-try/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-02-01T15:57:29.000Z">
+          2016-02-01
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>现在有很多的微服务框架，这里试用一下Java Springboot和Python的Flask.<br>本文分别试用SpringBoot和Flask完成了一个简单的Hello World服务来展示如何使用Springboot和Flask构建<br>一个简单的服务. 同时用AB进行了一个简单的压力测试。</p>
+<h2 id="SpringBoot-Hello-World-Web-Application"><a href="#SpringBoot-Hello-World-Web-Application" class="headerlink" title="SpringBoot Hello World Web Application"></a>SpringBoot Hello World Web Application</h2><ul>
+<li><p>Create a SpringBoot Application entry point</p>
+</li>
+<li><p>add Beans into springboot startup life cycle</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">利用command-line runner的这个特性，再配合依赖注入，可以在应用程序启动时后首先引入一些依赖bean，例如data source、rpc服务或者其他模块等等，这些对象的初始化可以放在run方法中。不过，需要注意的是，在run方法中执行初始化动作的时候一旦遇到任何异常，都会使得应用程序停止运行，因此最好利用try&#x2F;catch语句处理可能遇到的异常。</span><br></pre></td></tr></table></figure></li>
+<li><p>create HelloWorld Service</p>
+</li>
+</ul>
+<h2 id="All-Codes-for-the-simple-hello-world-Service"><a href="#All-Codes-for-the-simple-hello-world-Service" class="headerlink" title="All Codes for the simple hello world Service"></a>All Codes for the simple <strong><em>hello world</em></strong> Service</h2><p>以下代码的一些说明：</p>
+<ul>
+<li>Web 应用的执行入口： main方法，里面的SpringApplication.run</li>
+<li>StartupRunner 可以在SpringBoot Application启动过程中一些事情</li>
+<li>RestController注解表示了这个类是个Rest 风格的Controller</li>
+</ul>
+<p>pom.xml 中的唯一依赖，请指定版本或者parent指定为        <code>&lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorldEndPoint</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(HelloWorldEndPoint.class,args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">StartupRunner</span> <span class="keyword">implements</span> <span class="title">CommandLineRunner</span></span>&#123;</span><br><span class="line">        <span class="keyword">protected</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(StartupRunner.class);</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(String... strings)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">            logger.info(<span class="string">&quot;startup command is running ........&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//inject into spring start lifecycle</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@Order(value = 1)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> StartupRunner <span class="title">runner</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> StartupRunner();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@Order(value = 2)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> StartupRunner <span class="title">runner2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> StartupRunner()&#123;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(String... strings)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;start up 2 command is running......&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/&quot;)</span></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">home</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;hello world!&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="启动springboot-应用"><a href="#启动springboot-应用" class="headerlink" title="启动springboot 应用"></a>启动springboot 应用</h2><p>运行如下命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn spring-boot:run</span><br></pre></td></tr></table></figure>
+
+<p>就可以启动springboot的应用，默认是tomcat的容器，如果又需要修改tomcat的配置，再后面文章中说明。</p>
+<h2 id="curl测试"><a href="#curl测试" class="headerlink" title="curl测试"></a>curl测试</h2><p>使用curl简单测试一下，可以访问，是不是简单呀……</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl http://localhost:8080/                                                            </span><br><span class="line">hello world!%</span><br></pre></td></tr></table></figure>
+
+<h1 id="HelloWorld-In-Flask"><a href="#HelloWorld-In-Flask" class="headerlink" title="HelloWorld In Flask"></a>HelloWorld In Flask</h1><p>构建Flask的Micro Service 系列的第一篇，Hello World Service</p>
+<h2 id="Flask-环境设置"><a href="#Flask-环境设置" class="headerlink" title="Flask 环境设置"></a>Flask 环境设置</h2><ul>
+<li>安装Python3</li>
+<li>创建干净的web 应用的python3 环境,python3 可以不用virtualevn，直接用一下命令就可以了<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m venv &lt;your_application_name&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="Flask-HelloWorld-Service"><a href="#Flask-HelloWorld-Service" class="headerlink" title="Flask HelloWorld Service"></a>Flask HelloWorld Service</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"></span><br><span class="line">hello_world=Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@hello_world.rooter(&#x27;/&#x27;)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello_world</span>():</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;hello world!&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    hello_world.run()</span><br></pre></td></tr></table></figure>
+
+<h2 id="运行Flask-HelloWorld-Service"><a href="#运行Flask-HelloWorld-Service" class="headerlink" title="运行Flask HelloWorld Service"></a>运行Flask HelloWorld Service</h2><p>直接运行次文件就可以了</p>
+<h2 id="使用AB-进行简单的性能测试"><a href="#使用AB-进行简单的性能测试" class="headerlink" title="使用AB 进行简单的性能测试"></a>使用AB 进行简单的性能测试</h2><p>AB的脚本如下： -n 表述总数，－c 表述并发</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># $1 is a parameter for java or python to record different performance result</span></span><br><span class="line">ab -n 3000 -c 30 http://127.0.0.1:8080/ &gt; <span class="variable">$1</span>-3K-30C.txt</span><br><span class="line">ab -n 6000 -c 50 http://127.0.0.1:8080/ &gt; <span class="variable">$1</span>-6K-50C.txt</span><br><span class="line">ab -n 12000 -c 100 http://127.0.0.1:8080/ &gt; <span class="variable">$1</span>-12K-100C.txt</span><br></pre></td></tr></table></figure>
+
+<p>最后的结果：</p>
+<p>30 Currents:</p>
+<p>SpringBoot:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">Concurrency Level:      30</span><br><span class="line">Time taken for tests:   5.828 seconds</span><br><span class="line">Complete requests:      3000</span><br><span class="line">Failed requests:        0</span><br><span class="line">Total transferred:      522000 bytes</span><br><span class="line">HTML transferred:       36000 bytes</span><br><span class="line">Requests per second:    514.71 [#&#x2F;sec] (mean)</span><br><span class="line">Time per request:       58.285 [ms] (mean)</span><br><span class="line">Time per request:       1.943 [ms] (mean, across all concurrent requests)</span><br><span class="line">Transfer rate:          87.46 [Kbytes&#x2F;sec] received</span><br><span class="line"></span><br><span class="line">Connection Times (ms)</span><br><span class="line">              min  mean[+&#x2F;-sd] median   max</span><br><span class="line">Connect:        0   42 443.0      2    5092</span><br><span class="line">Processing:     0    4   2.7      4      19</span><br><span class="line">Waiting:        0    3   2.4      3      19</span><br><span class="line">Total:          1   46 442.9      6    5100</span><br><span class="line"></span><br><span class="line">Percentage of the requests served within a certain time (ms)</span><br><span class="line">  50%      6</span><br><span class="line">  66%      7</span><br><span class="line">  75%      8</span><br><span class="line">  80%      9</span><br><span class="line">  90%     12</span><br><span class="line">  95%     15</span><br><span class="line">  98%     19</span><br><span class="line">  99%     30</span><br><span class="line"> 100%   5100 (longest request)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> Concurrency Level:      50</span><br><span class="line">Time taken for tests:   1.161 seconds</span><br><span class="line">Complete requests:      6000</span><br><span class="line">Failed requests:        0</span><br><span class="line">Total transferred:      1044000 bytes</span><br><span class="line">HTML transferred:       72000 bytes</span><br><span class="line">Requests per second:    5166.09 [#&#x2F;sec] (mean)</span><br><span class="line">Time per request:       9.678 [ms] (mean)</span><br><span class="line">Time per request:       0.194 [ms] (mean, across all concurrent requests)</span><br><span class="line">Transfer rate:          877.83 [Kbytes&#x2F;sec] received</span><br><span class="line"></span><br><span class="line">Connection Times (ms)</span><br><span class="line">              min  mean[+&#x2F;-sd] median   max</span><br><span class="line">Connect:        0    3   2.4      3      18</span><br><span class="line">Processing:     1    6   3.3      6      32</span><br><span class="line">Waiting:        0    5   3.0      4      30</span><br><span class="line">Total:          3   10   4.0      8      33</span><br><span class="line"></span><br><span class="line">Percentage of the requests served within a certain time (ms)</span><br><span class="line">  50%      8</span><br><span class="line">  66%      9</span><br><span class="line">  75%     11</span><br><span class="line">  80%     11</span><br><span class="line">  90%     14</span><br><span class="line">  95%     17</span><br><span class="line">  98%     24</span><br><span class="line">  99%     27</span><br><span class="line"> 100%     33 (longest request)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Flask: Current Level 100的时候没有timeout出现，不过springboot有而不能完成实验.<br>在100个并发前，SpringBoot比Flask略快，但是不知道什么原因springboot在100个并发的时候不能完成，这个会在后续使用中再做分析</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line">Concurrency Level:      30</span><br><span class="line">Time taken for tests:   2.598 seconds</span><br><span class="line">Complete requests:      3000</span><br><span class="line">Failed requests:        0</span><br><span class="line">Total transferred:      498000 bytes</span><br><span class="line">HTML transferred:       36000 bytes</span><br><span class="line">Requests per second:    1154.77 [#&#x2F;sec] (mean)</span><br><span class="line">Time per request:       25.979 [ms] (mean)</span><br><span class="line">Time per request:       0.866 [ms] (mean, across all concurrent requests)</span><br><span class="line">Transfer rate:          187.20 [Kbytes&#x2F;sec] received</span><br><span class="line"></span><br><span class="line">Connection Times (ms)</span><br><span class="line">              min  mean[+&#x2F;-sd] median   max</span><br><span class="line">Connect:        0    0   0.1      0       3</span><br><span class="line">Processing:     1   26   5.8     24      67</span><br><span class="line">Waiting:        1   26   5.7     24      67</span><br><span class="line">Total:          2   26   5.8     24      67</span><br><span class="line"></span><br><span class="line">Percentage of the requests served within a certain time (ms)</span><br><span class="line">  50%     24</span><br><span class="line">  66%     25</span><br><span class="line">  75%     25</span><br><span class="line">  80%     27</span><br><span class="line">  90%     32</span><br><span class="line">  95%     37</span><br><span class="line">  98%     45</span><br><span class="line">  99%     52</span><br><span class="line"> 100%     67 (longest request)</span><br><span class="line"></span><br><span class="line"> Concurrency Level:      50</span><br><span class="line"> Time taken for tests:   4.731 seconds</span><br><span class="line"> Complete requests:      6000</span><br><span class="line"> Failed requests:        0</span><br><span class="line"> Total transferred:      996000 bytes</span><br><span class="line"> HTML transferred:       72000 bytes</span><br><span class="line"> Requests per second:    1268.30 [#&#x2F;sec] (mean)</span><br><span class="line"> Time per request:       39.423 [ms] (mean)</span><br><span class="line"> Time per request:       0.788 [ms] (mean, across all concurrent requests)</span><br><span class="line"> Transfer rate:          205.60 [Kbytes&#x2F;sec] received</span><br><span class="line"></span><br><span class="line"> Connection Times (ms)</span><br><span class="line">               min  mean[+&#x2F;-sd] median   max</span><br><span class="line"> Connect:        0    0   0.2      0       3</span><br><span class="line"> Processing:     2   39   3.2     39      50</span><br><span class="line"> Waiting:        2   39   3.2     39      50</span><br><span class="line"> Total:          5   39   3.1     39      50</span><br><span class="line"></span><br><span class="line"> Percentage of the requests served within a certain time (ms)</span><br><span class="line">   50%     39</span><br><span class="line">   66%     40</span><br><span class="line">   75%     40</span><br><span class="line">   80%     40</span><br><span class="line">   90%     41</span><br><span class="line">   95%     46</span><br><span class="line">   98%     48</span><br><span class="line">   99%     49</span><br><span class="line">  100%     50 (longest request)</span><br><span class="line"></span><br><span class="line">  Concurrency Level:      100</span><br><span class="line">  Time taken for tests:   32.135 seconds</span><br><span class="line">  Complete requests:      12000</span><br><span class="line">  Failed requests:        0</span><br><span class="line">  Total transferred:      1992000 bytes</span><br><span class="line">  HTML transferred:       144000 bytes</span><br><span class="line">  Requests per second:    373.43 [#&#x2F;sec] (mean)</span><br><span class="line">  Time per request:       267.790 [ms] (mean)</span><br><span class="line">  Time per request:       2.678 [ms] (mean, across all concurrent requests)</span><br><span class="line">  Transfer rate:          60.54 [Kbytes&#x2F;sec] received</span><br><span class="line"></span><br><span class="line">  Connection Times (ms)</span><br><span class="line">                min  mean[+&#x2F;-sd] median   max</span><br><span class="line">  Connect:        0  167 1816.4      0   20069</span><br><span class="line">  Processing:     1  101 149.1     74    1559</span><br><span class="line">  Waiting:        1  100 149.0     74    1559</span><br><span class="line">  Total:          1  267 1816.7     75   20070</span><br><span class="line"></span><br><span class="line">  Percentage of the requests served within a certain time (ms)</span><br><span class="line">    50%     75</span><br><span class="line">    66%     79</span><br><span class="line">    75%     81</span><br><span class="line">    80%     86</span><br><span class="line">    90%     98</span><br><span class="line">    95%    180</span><br><span class="line">    98%    720</span><br><span class="line">    99%   1543</span><br><span class="line">   100%  20070 (longest request)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/test-ops/">test-ops</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>
