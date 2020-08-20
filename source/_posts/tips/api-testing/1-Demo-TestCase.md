@@ -150,6 +150,3 @@ So the example test cases is:
 ![img](/images/jinja2_filter.jpg)
 
 and again, there is no re-invention, just use the exiting jinja2 template
-
-
-Detail please find the the codes in [github](https://github.com/evenhumble/integration-executor-py)

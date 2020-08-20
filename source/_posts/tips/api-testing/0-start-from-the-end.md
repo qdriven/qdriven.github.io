@@ -1,5 +1,5 @@
 ---
-title: Implement A Integration Libs in two days
+title: Implement A Integration Testing Libs in two days
 date: 2019-07-28 23:58:45
 tags:
 	- real
@@ -351,9 +351,3 @@ jinja2 can achieve it.
 Now every tiny thing is ready for Executor. And everything is ready.
 
 For Detail please refer the demo.
-
-
-
-
-
-
