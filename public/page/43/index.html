@@ -65,86 +65,6 @@
 
   
     
-    <h3 class="article-title"><a href="/2015/10/22/tips/interview/2015-10-22-python_interview_questions/"><span>Python 面试题</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2015/10/22/tips/interview/2015-10-22-python_interview_questions/" rel="bookmark">
-        <time class="entry-date published" datetime="2015-10-21T18:31:11.000Z">
-          2015-10-22
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>测试有的时候出去会遇到一些编程面试题,以下是用python来解决两个简单面试题.</p>
-<h2 id="倒转字符串中的单词的排列"><a href="#倒转字符串中的单词的排列" class="headerlink" title="倒转字符串中的单词的排列"></a>倒转字符串中的单词的排列</h2><p>给定字符串“Hello World!”,经过一段程序运行之后,得到输出结果“World! Hello”,也就是以单词<br>为单位,倒转输入“Hello World!”</p>
-<ul>
-<li>python解法: 不考虑编码格式</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">words = <span class="string">&quot;Hello World!&quot;</span></span><br><span class="line">print(<span class="string">&quot; &quot;</span>.join(reversed(words)))</span><br><span class="line">print(<span class="string">&quot; &quot;</span>.join(words.split(<span class="string">&quot; &quot;</span>)[::<span class="number">-1</span>]))</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Java 解法</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReverseWords</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">reverseWords</span><span class="params">(String input)</span></span>&#123;</span><br><span class="line">        String[] words = input.split(<span class="string">&quot; &quot;</span>);</span><br><span class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = words.length-<span class="number">1</span>; i &gt;=<span class="number">0</span> ; i--) &#123;</span><br><span class="line">            sb.append(words[i]);</span><br><span class="line">            sb.append(<span class="string">&quot; &quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> sb.toString().trim();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(reverseWords(<span class="string">&quot;Hello World!&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="输出斐波那契数列"><a href="#输出斐波那契数列" class="headerlink" title="输出斐波那契数列"></a>输出斐波那契数列</h2><p>根据给定的值,输出相同数目的斐波那契列， 如如果给定是1， 则输出1;给定2,输出1,1;<br>给定3，输出1,1,2, 依次类推。</p>
-<ul>
-<li>python 解法</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n &lt;= <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> [<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> [<span class="number">1</span>, <span class="number">1</span>]</span><br><span class="line">    nums = [<span class="number">1</span>, <span class="number">1</span>]</span><br><span class="line">    temp1 = <span class="number">1</span></span><br><span class="line">    temp2 = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n - <span class="number">2</span>):</span><br><span class="line">        append_num = temp1 + temp2</span><br><span class="line">        nums.append(append_num)</span><br><span class="line">        temp1,temp2=temp2,append_num</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> nums</span><br><span class="line"></span><br><span class="line">print(f(<span class="number">3</span>))</span><br><span class="line">print(f(<span class="number">5</span>))</span><br><span class="line">print(f(<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>java 解法</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getFibListByNum</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n&lt;=<span class="number">0</span>) <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">&quot;invalid input&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">1</span>) <span class="keyword">return</span> <span class="string">&quot;1&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">2</span>) <span class="keyword">return</span> <span class="string">&quot;1,1&quot;</span>;</span><br><span class="line">    <span class="keyword">int</span> temp1=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> temp2=<span class="number">1</span>;</span><br><span class="line">    String result = <span class="string">&quot;1,1&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">3</span>; i &lt;=n ; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> appendNum = temp1+temp2;</span><br><span class="line">        temp1=temp2;</span><br><span class="line">        temp2=appendNum;</span><br><span class="line">        result=result+<span class="string">&quot;,&quot;</span>+appendNum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/interview/">interview</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/interview/">interview</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
     <h3 class="article-title"><a href="/2015/10/22/tips/thoughts/2015-10-22-Random-TestCaseDesign/"><span>测试用例设计- 随机指定一个产品的测试</span></a></h3>
     
   
@@ -325,6 +245,76 @@
 <li>工厂的设计模式同时也带了了灵活程度,在创建页面或者页面元素的时候,可以开始添加统一的前置或者后置的处理</li>
 </ul>
 <p>但是可惜的是Selenium并没有提供开发的接口来让用户定制,所以如果自己定制PageFactory模式,则需要自己去实现Selenium这<br>一套方法,同时加入自己特殊的实现</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/automation/">automation</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/automation/">automation</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2015/09/24/tips/automation/2015-09-24-testng-simple-report/"><span>TestNG 报告定制最简单的原理</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/09/24/tips/automation/2015-09-24-testng-simple-report/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-09-23T18:31:11.000Z">
+          2015-09-24
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>如果需要定制TestNG的测试报告,可以先想一下首先需要什么的数据,其实最简单的数据就是测试用例成功失败的数据,<br>那么实际上TestNG提供了ITestListener的接口可以让你获取这些测试数据.<br>同时IReporter 接口可以让用户在调用最后自己生成测试报告.</p>
+<p>所以其实只要用一个类实现ITestListener,IReporter就可以了.</p>
+<h2 id="ITestListener-IReporter实现"><a href="#ITestListener-IReporter实现" class="headerlink" title="ITestListener,IReporter实现"></a>ITestListener,IReporter实现</h2><p>一下是我一个最简单的实现, 实际上TestNG开放出来的这些监听器,主要是让你可以获取TestNG 测试容器中运行测试的数据,上下文.<br>关于代码里面的ITestResult, xmlSuites,suites 可以自行查找</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestNGSimpleReport</span> <span class="keyword">implements</span> <span class="title">ITestListener</span>, <span class="title">IReporter</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> List&lt;String&gt; testPassed = Lists.newArrayList();</span><br><span class="line">    <span class="keyword">private</span> List&lt;String&gt; testFailed = Lists.newArrayList();</span><br><span class="line">    <span class="keyword">private</span> List&lt;String&gt; testSkipped = Lists.newArrayList();</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">generateReport</span><span class="params">(List&lt;XmlSuite&gt; xmlSuites, List&lt;ISuite&gt; suites,</span></span></span><br><span class="line"><span class="function"><span class="params">                               String outputDirectory)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Passed Case: &quot;</span> + testPassed.size());</span><br><span class="line">        System.out.println(<span class="string">&quot;testFailed Case: &quot;</span> + testFailed.size());</span><br><span class="line">        System.out.println(<span class="string">&quot;testSkipped Case: &quot;</span> + testSkipped.size());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (String passed : testPassed) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;passed case:&quot;</span> + passed);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (String passed : testFailed) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;failed case:&quot;</span> + passed);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (String passed : testSkipped) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;skipped case:&quot;</span> + passed);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onTestStart</span><span class="params">(ITestResult result)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onTestSuccess</span><span class="params">(ITestResult result)</span> </span>&#123;</span><br><span class="line">        testPassed.add(result.getMethod().getMethodName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onTestFailure</span><span class="params">(ITestResult result)</span> </span>&#123;</span><br><span class="line">        testFailed.add(result.getMethod().getMethodName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onTestSkipped</span><span class="params">(ITestResult result)</span> </span>&#123;</span><br><span class="line">        testSkipped.add(result.getMethod().getMethodName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onTestFailedButWithinSuccessPercentage</span><span class="params">(ITestResult result)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onStart</span><span class="params">(ITestContext context)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFinish</span><span class="params">(ITestContext context)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="编写TestNG的测试"><a href="#编写TestNG的测试" class="headerlink" title="编写TestNG的测试"></a>编写TestNG的测试</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestNGTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test_pass</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;passed_case&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test_failed</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Assert.assertTrue(<span class="keyword">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test_pass_2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;passed_case_2&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="将监听器放入Testng-xml文件"><a href="#将监听器放入Testng-xml文件" class="headerlink" title="将监听器放入Testng.xml文件"></a>将监听器放入Testng.xml文件</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">suite</span> <span class="attr">name</span>=<span class="string">&quot;SimpleReport&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">listeners</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">listener</span> <span class="attr">class-name</span>=<span class="string">&quot;com.hedwig.testng.TestNGSimpleReport&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">listeners</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">test</span> <span class="attr">verbose</span>=<span class="string">&quot;1&quot;</span> <span class="attr">name</span>=<span class="string">&quot;simple test&quot;</span> &gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">classes</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">&quot;com.hedwig.testng.TestNGTest&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">classes</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">test</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">suite</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="运行Testng-xml文件-查看结果"><a href="#运行Testng-xml文件-查看结果" class="headerlink" title="运行Testng.xml文件,查看结果"></a>运行Testng.xml文件,查看结果</h2><p>结果如下,是不是很简单? 如果想做的cool一点,可以将这些数据写到一个html模版,写入文件就可以了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">===============================================</span><br><span class="line">SimpleReport</span><br><span class="line">Total tests run: <span class="number">3</span>, Failures: <span class="number">1</span>, Skips: <span class="number">0</span></span><br><span class="line">===============================================</span><br><span class="line"></span><br><span class="line">Passed Case: <span class="number">2</span></span><br><span class="line">testFailed Case: <span class="number">1</span></span><br><span class="line">testSkipped Case: <span class="number">0</span></span><br><span class="line">passed <span class="keyword">case</span>:test_pass</span><br><span class="line">passed <span class="keyword">case</span>:test_pass_2</span><br><span class="line">failed <span class="keyword">case</span>:test_failed</span><br></pre></td></tr></table></figure>
 
       
     </div>

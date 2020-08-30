@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ansible In 30 Minutes | Learning Testing/QA in Hardway | Just Do It</title>
+
+  
+  <meta name="author" content="qmeta">
+  
+
+  
+  <meta name="description" content="allround tester">
+  
+
+  
+  
+  <meta name="keywords" content="ansible,CI/CD">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="ansible In 30 Minutes"/>
+
+  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Learning Testing/QA in Hardway</a>
+    </h1>
+    <p class="site-description">Just Do It</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>ansible In 30 Minutes</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/07/01/tips/ansible/1-ansible-in-10-minutes/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-07-01T13:34:04.000Z">
+          2018-07-01
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="Ansible-Basic-Concept"><a href="#Ansible-Basic-Concept" class="headerlink" title="Ansible Basic Concept"></a>Ansible Basic Concept</h1><p>ansible 是一个操作机器的工具,可以通过编排不同的inventory,组合不同的命令来将日常运维的操作<br>变成可运行的脚本资产,同时也可以积累常用的脚本以便复用.</p>
+<p>下面是关于ansible的一些基础概念的脑图,总体而言ansible包括了以下几个概念：</p>
+<ul>
+<li>inventory: 定义主机,定义操作对象<ul>
+<li>Host:主机</li>
+<li>Group：不同的主机组合成一个组，一个组下面可以有子组，于是就构成了一个树形结构</li>
+</ul>
+</li>
+<li>variable： 变量，主要用来定义对于操作机器时使用的可变参数</li>
+</ul>
+<h1 id="Ansible-Installation"><a href="#Ansible-Installation" class="headerlink" title="Ansible Installation"></a>Ansible Installation</h1><ul>
+<li>install in MAC</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew unisntall ansible</span><br><span class="line">brew install ansible</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>install in centos</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install epel-release</span><br><span class="line">sudo yum install ansible -y</span><br></pre></td></tr></table></figure>
+
+<h1 id="Configure-hosts-for-ansible-ssh-connector"><a href="#Configure-hosts-for-ansible-ssh-connector" class="headerlink" title="Configure hosts for ansible ssh connector"></a>Configure hosts for ansible ssh connector</h1><ul>
+<li>copy ssh key to different hosts</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ssh-keygen</span><br><span class="line">ssh-copy-id remoteuser@remote.server</span><br><span class="line">ssh-keyscan remote.server &gt;&gt; ~/.ssh/known_hosts</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>check ssh connection</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh remoteuser@remote.server</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>it is done.</p>
+<h1 id="Ansible-Ad-hoc-Commands"><a href="#Ansible-Ad-hoc-Commands" class="headerlink" title="Ansible Ad-hoc Commands"></a>Ansible Ad-hoc Commands</h1><p>ansible 命令的pattern 如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible &lt;host-pattern&gt; [options]</span><br></pre></td></tr></table></figure>
+
+<p>具体查看ansible 的使用帮助是：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="ansible-ad-hoc-command-检查安装环境"><a href="#ansible-ad-hoc-command-检查安装环境" class="headerlink" title="ansible ad-hoc command - 检查安装环境"></a>ansible ad-hoc command - 检查安装环境</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible all -m ping -u root</span><br></pre></td></tr></table></figure>
+
+<h2 id="ansible-ad-hoc-command-执行命令"><a href="#ansible-ad-hoc-command-执行命令" class="headerlink" title="ansible ad-hoc command - 执行命令"></a>ansible ad-hoc command - 执行命令</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible all -a <span class="string">&quot;/bin/sh echo hello world&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="ansible-ad-hoc-command-copy-files"><a href="#ansible-ad-hoc-command-copy-files" class="headerlink" title="ansible ad-hoc command - copy files"></a>ansible ad-hoc command - copy files</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible web -m copy -a <span class="string">&quot;src=/etc/hosts dest=/tmp/hosts&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="ansible-ad-hoc-command-yum-install"><a href="#ansible-ad-hoc-command-yum-install" class="headerlink" title="ansible ad-hoc command - yum install"></a>ansible ad-hoc command - yum install</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible web -m yum -a <span class="string">&quot;name=acme state=present&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="ansible-ad-hoc-command-add-user"><a href="#ansible-ad-hoc-command-add-user" class="headerlink" title="ansible ad-hoc command - add user"></a>ansible ad-hoc command - add user</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible all -m user -a <span class="string">&quot;name=foo passsword=&lt;crypted password here&gt;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="ansible-ad-hoc-command-download-git-包"><a href="#ansible-ad-hoc-command-download-git-包" class="headerlink" title="ansible ad-hoc command - download git 包"></a>ansible ad-hoc command - download git 包</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible web -m git -a <span class="string">&quot;repo=git://foo.example.io/repo.git dest=/src/myapp&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="ansible-ad-hoc-command-start-service"><a href="#ansible-ad-hoc-command-start-service" class="headerlink" title="ansible ad-hoc command - start service"></a>ansible ad-hoc command - start service</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible web -m service -a <span class="string">&quot;name=httpd state=started&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="ansible-ad-hoc-command-并行运行"><a href="#ansible-ad-hoc-command-并行运行" class="headerlink" title="ansible ad-hoc command - 并行运行"></a>ansible ad-hoc command - 并行运行</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible web -a <span class="string">&quot;/sbin/reboot&quot;</span> -f 10</span><br></pre></td></tr></table></figure>
+
+<h2 id="ansible-ad-hoc-command-查看全部系统信息"><a href="#ansible-ad-hoc-command-查看全部系统信息" class="headerlink" title="ansible ad-hoc command - 查看全部系统信息"></a>ansible ad-hoc command - 查看全部系统信息</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible all -m setup</span><br></pre></td></tr></table></figure>
+
+<h2 id="ansible-ad-hoc-command-小结"><a href="#ansible-ad-hoc-command-小结" class="headerlink" title="ansible ad-hoc command 小结"></a>ansible ad-hoc command 小结</h2><p>从以上的例子中我们可以看到ansible的命令一般都会使用如下几点：</p>
+<ul>
+<li>module: -m </li>
+<li>module_args: -a </li>
+<li>hosts: all/web/……</li>
+</ul>
+<p>以上三个组合成为了下面的一个命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible all -m service -a <span class="string">&quot;name=httpd state=started&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>从python的角度看,可以用伪代码的方式:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">def copy(args=&#123;&#125;):</span><br><span class="line">    <span class="keyword">for</span> kwarg, v <span class="keyword">in</span> args.items():</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;&#123;key&#125;=&#123;value&#125;&quot;</span>.format(key=kwarg, value=v))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def <span class="built_in">test</span>(args=&#123;&#125;):</span><br><span class="line">    <span class="keyword">for</span> kwarg, v <span class="keyword">in</span> args.items():</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;&#123;key&#125;=&#123;value&#125;&quot;</span>.format(key=kwarg, value=v))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">module_mapping = &#123;</span><br><span class="line">    <span class="string">&quot;copy&quot;</span>: copy,</span><br><span class="line">    <span class="string">&quot;test&quot;</span>: <span class="built_in">test</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def ansible(module, module_args):</span><br><span class="line">    func = module_mapping.get(module)</span><br><span class="line">    parsed = module_args.split(<span class="string">&quot; &quot;</span>)</span><br><span class="line">    args = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> module_arg <span class="keyword">in</span> parsed:</span><br><span class="line">        kv = module_arg.split(<span class="string">&quot;=&quot;</span>)</span><br><span class="line">        args[kv[0]] = kv[1]</span><br><span class="line">    func(args)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    ansible(module=<span class="string">&#x27;copy&#x27;</span>, module_args=<span class="string">&quot;name=name test=test&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/ansible/">ansible</a><a href="/tags/CI-CD/">CI/CD</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 qmeta
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

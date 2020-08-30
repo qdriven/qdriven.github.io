@@ -65,15 +65,15 @@
 
   
     
-    <h3 class="article-title"><a href="/2015/11/03/tips/refactoring/2015-10-26-remove-god-class/"><span>Refactoring-8-remove God Class</span></a></h3>
+    <h3 class="article-title"><a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-EncapsulateCollection/"><span>Refactoring-1-Encapsulate Collection</span></a></h3>
     
   
 
   <div class="article-top-meta">
     <span class="posted-on">
-      <a href="/2015/11/03/tips/refactoring/2015-10-26-remove-god-class/" rel="bookmark">
-        <time class="entry-date published" datetime="2015-11-02T18:31:11.000Z">
-          2015-11-03
+      <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-EncapsulateCollection/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-10-25T18:31:11.000Z">
+          2015-10-26
         </time>
       </a>
     </span>
@@ -85,8 +85,112 @@
   <div class="article-content">
     <div class="entry">
       
-        <p>God Class 就是一个类里面有一大堆不相干的方法放在一起,一般<br>情况下很多的工具类，或者manager有可能会有这样的情况.不是说不能有<br>工具类或者manager类，这个的关键是不相干的放在一个类里面。</p>
-<p>不相干就违反了Single Responsibility的原则.</p>
+        <p>关于重构的第一篇，后续会在这个话题继续讨论</p>
+<h2 id="What-is-Encapsulate-Collection"><a href="#What-is-Encapsulate-Collection" class="headerlink" title="What is Encapsulate Collection"></a>What is Encapsulate Collection</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">In certain scenarios it is beneficial to not expose a full collection to consumers of a class. Some of these circumstances is when there is additional logic associated with adding&#x2F;removing items from a collection. Because of this reason, it is a good idea to only expose the collection as something you can iterate over without modifying the collection. Let’s take a look at some code</span><br></pre></td></tr></table></figure>
+
+<p>这种重构方式主要是将直接操纵集合类的操作直接暴露出简单的函数，同时修改函数名到<br>更有意义的名字</p>
+<h2 id="Code-Sample"><a href="#Code-Sample" class="headerlink" title="Code Sample"></a>Code Sample</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Order</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> List&lt;Item&gt; itemList = Lists.newArrayList();</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addItem</span><span class="params">(Item item)</span></span>&#123;</span><br><span class="line">      itemList.add(item);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeItem</span><span class="params">(<span class="keyword">final</span> Item item)</span></span>&#123;</span><br><span class="line">      itemList.remove(item);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeItems</span><span class="params">(List&lt;Item&gt; items)</span></span>&#123;</span><br><span class="line">      itemList.removeAll(items);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">total</span><span class="params">()</span></span>&#123;</span><br><span class="line">      <span class="keyword">return</span> itemList.size();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">distinctItemCount</span><span class="params">()</span></span>&#123;</span><br><span class="line">      <span class="keyword">int</span> result=<span class="number">0</span>;</span><br><span class="line">      List&lt;String&gt; itemNames=Lists.newArrayList();</span><br><span class="line">      Set&lt;String&gt; names = Sets.newHashSet();</span><br><span class="line">      itemList.stream().forEach(element -&gt;</span><br><span class="line">              names.add(element.getName()));</span><br><span class="line">      <span class="keyword">return</span> names.size();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+
+<h2 id="关于有什么好处的思考"><a href="#关于有什么好处的思考" class="headerlink" title="关于有什么好处的思考"></a>关于有什么好处的思考</h2><p>考虑一下如上的写法有哪些好处呢？个人觉得：</p>
+<p>－ 将一些集合操作整合成函数，减少每个人不同写法出错<br>－ 将集合操作编程有意义的业务函数，提高了代码业务层的可读性</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/refactoring/">refactoring</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/refactoring/">refactoring</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-Extract-Interface-Method/"><span>Refactoring-7-Extract-Interface,Method,Sub Class,Supper Class</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-Extract-Interface-Method/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-10-25T18:31:11.000Z">
+          2015-10-26
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>Extract-Interface,Method,Sub Class,Supper Class</p>
+<p>以上重构的方式主要是通过提起接口,方法,为了让代码有更好的可读性,可测性.</p>
+<h2 id="开始-实例代码"><a href="#开始-实例代码" class="headerlink" title="开始:实例代码"></a>开始:实例代码</h2><p>以下是一个需要重构的实例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Receipt</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;Double&gt; discounts= Lists.newArrayList();</span><br><span class="line">    <span class="keyword">private</span> List&lt;Double&gt; itemTotals=Lists.newArrayList();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">calculateGradTotal</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">double</span> subTotal =<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (Double itemTotal : itemTotals) &#123;</span><br><span class="line">            subTotal+=itemTotal;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(discounts.size()&gt;<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">for</span> (Double discount : discounts) &#123;</span><br><span class="line">                subTotal-=discount;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">double</span> tax=subTotal*<span class="number">0.065</span>;</span><br><span class="line">        subTotal+=tax;</span><br><span class="line">        <span class="keyword">return</span> subTotal;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="抽取方法"><a href="#抽取方法" class="headerlink" title="抽取方法"></a>抽取方法</h2><p>阅读代码,根据计算方法的步骤,可以通过如下尝试抽取方法:</p>
+<ul>
+<li>calculateSubTotal</li>
+<li>calculateDiscounts</li>
+<li>calculateTax</li>
+</ul>
+<p>最后calculateGrandTotal 调用着三个方法. 由于实例代码比较简单,所以还看不出有多少优点.<br>但是如果想像calculateGrandTotal这个方法是很长的话，那么通过这种方式重构可以让计算calculateGrandTotal<br>的逻辑更加清晰.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">calculateGrandTotal</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> subTotal=calculateSubTotal();</span><br><span class="line">    subTotal=calculateDiscounts(subTotal);</span><br><span class="line">    subTotal=calculateTax(subTotal);</span><br><span class="line">    <span class="keyword">return</span> subTotal;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">calculateTax</span><span class="params">(<span class="keyword">double</span> subTotal)</span></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> tax=subTotal*<span class="number">0.065</span>;</span><br><span class="line">    subTotal+=tax;</span><br><span class="line">    <span class="keyword">return</span> subTotal;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">calculateDiscounts</span><span class="params">(<span class="keyword">double</span> subTotal)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(discounts.size()&gt;<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">for</span> (Double discount : discounts) &#123;</span><br><span class="line">            subTotal-=discount;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> subTotal;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">calculateSubTotal</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> subTotal=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (Double itemTotal : itemTotals) &#123;</span><br><span class="line">        subTotal+=itemTotal;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> subTotal;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="抽取接口"><a href="#抽取接口" class="headerlink" title="抽取接口"></a>抽取接口</h2><p>接口的好处想来大家都不叫清楚，所以有时有不同的实现出现时，抽取一个接口定义来也是一个不错的重构<br>时间。</p>
+<ul>
+<li>假设ClassRegistration 如下:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassRegistration</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">double</span> total;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">create</span><span class="params">()</span></span>&#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;create&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transfer</span><span class="params">()</span></span>&#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;transfer&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>有一个新的ClassRegistration，所以抽取接口</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IClassRegistration</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">create</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">transfer</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后修改ClassRegistration 使他实现IClassRegistration</p>
+<ul>
+<li>客户端代码在增加一个实现之后实际上不需要修改了,或者只需要修改方法签名就可以</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RegistrationProcessor</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">processRegistration</span><span class="params">(IClassRegistration registration)</span></span>&#123;</span><br><span class="line">        registration.create();</span><br><span class="line">        <span class="keyword">return</span> registration.total();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Extract-SubClass-SupperClass"><a href="#Extract-SubClass-SupperClass" class="headerlink" title="Extract SubClass SupperClass"></a>Extract SubClass SupperClass</h2><p>这两个实际上就是合并子类，或者分解类.将方法，属性放到更合适的位置。</p>
+<h2 id="一些小结"><a href="#一些小结" class="headerlink" title="一些小结"></a>一些小结</h2><p>通过移动方法，分解方法，合并子类，分离大类，个人认为实际上完成了一些目的:</p>
+<ul>
+<li>将大方法分解到小方法，更好的维护</li>
+<li>分解不必要的依赖，可以通过新的实现来完成而不需要修改客户端代码</li>
+<li>大方法分解之后,方法负责的任务更加小，更加清楚</li>
+<li>小方法实际有更好的复用</li>
+</ul>
 
       
     </div>
@@ -156,73 +260,6 @@
 <h2 id="After-Move-Method"><a href="#After-Move-Method" class="headerlink" title="After Move Method"></a>After Move Method</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountInterestRefactored</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> BankAccountRefactored ba;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> interestRate =calculateInterestRate();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> introductorRate;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AccountInterestRefactored</span><span class="params">(BankAccountRefactored ba)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.ba = ba;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isIntroductorRate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> calculateInterestRate()&lt;<span class="number">0.05</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">double</span> <span class="title">calculateInterestRate</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(ba.getCreditScore()&gt;<span class="number">800</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0.02</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(ba.getAccountAge()&gt;<span class="number">10</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0.03</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0.05</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="关于有什么好处的思考"><a href="#关于有什么好处的思考" class="headerlink" title="关于有什么好处的思考"></a>关于有什么好处的思考</h2><p>Move Method just move method to different location.<br>本身其实很难说有多少好处.经常整理自己抽屉的孩子，也不会把床搞得太乱.可能就是<br>这个道理。</p>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/refactoring/">refactoring</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/refactoring/">refactoring</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-EncapsulateCollection/"><span>Refactoring-1-Encapsulate Collection</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-EncapsulateCollection/" rel="bookmark">
-        <time class="entry-date published" datetime="2015-10-25T18:31:11.000Z">
-          2015-10-26
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>关于重构的第一篇，后续会在这个话题继续讨论</p>
-<h2 id="What-is-Encapsulate-Collection"><a href="#What-is-Encapsulate-Collection" class="headerlink" title="What is Encapsulate Collection"></a>What is Encapsulate Collection</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">In certain scenarios it is beneficial to not expose a full collection to consumers of a class. Some of these circumstances is when there is additional logic associated with adding&#x2F;removing items from a collection. Because of this reason, it is a good idea to only expose the collection as something you can iterate over without modifying the collection. Let’s take a look at some code</span><br></pre></td></tr></table></figure>
-
-<p>这种重构方式主要是将直接操纵集合类的操作直接暴露出简单的函数，同时修改函数名到<br>更有意义的名字</p>
-<h2 id="Code-Sample"><a href="#Code-Sample" class="headerlink" title="Code Sample"></a>Code Sample</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Order</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> List&lt;Item&gt; itemList = Lists.newArrayList();</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addItem</span><span class="params">(Item item)</span></span>&#123;</span><br><span class="line">      itemList.add(item);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeItem</span><span class="params">(<span class="keyword">final</span> Item item)</span></span>&#123;</span><br><span class="line">      itemList.remove(item);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeItems</span><span class="params">(List&lt;Item&gt; items)</span></span>&#123;</span><br><span class="line">      itemList.removeAll(items);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">total</span><span class="params">()</span></span>&#123;</span><br><span class="line">      <span class="keyword">return</span> itemList.size();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">distinctItemCount</span><span class="params">()</span></span>&#123;</span><br><span class="line">      <span class="keyword">int</span> result=<span class="number">0</span>;</span><br><span class="line">      List&lt;String&gt; itemNames=Lists.newArrayList();</span><br><span class="line">      Set&lt;String&gt; names = Sets.newHashSet();</span><br><span class="line">      itemList.stream().forEach(element -&gt;</span><br><span class="line">              names.add(element.getName()));</span><br><span class="line">      <span class="keyword">return</span> names.size();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
-
-<h2 id="关于有什么好处的思考"><a href="#关于有什么好处的思考" class="headerlink" title="关于有什么好处的思考"></a>关于有什么好处的思考</h2><p>考虑一下如上的写法有哪些好处呢？个人觉得：</p>
-<p>－ 将一些集合操作整合成函数，减少每个人不同写法出错<br>－ 将集合操作编程有意义的业务函数，提高了代码业务层的可读性</p>
 
       
     </div>

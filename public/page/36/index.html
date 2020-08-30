@@ -65,83 +65,6 @@
 
   
     
-    <h3 class="article-title"><a href="/2015/12/02/tips/real/2015-12-02-singleton/"><span>Singleton 的不同写法</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2015/12/02/tips/real/2015-12-02-singleton/" rel="bookmark">
-        <time class="entry-date published" datetime="2015-12-02T04:42:18.000Z">
-          2015-12-02
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>Singleton是JAVA的一个非常常见的方式，不过不同写的方式会有不同的想法，下面就介绍一下这个模式</p>
-<h2 id="Singleton-懒汉式模式，线程不安全"><a href="#Singleton-懒汉式模式，线程不安全" class="headerlink" title="Singleton 懒汉式模式，线程不安全"></a>Singleton 懒汉式模式，线程不安全</h2><p>一个基本的写法如下:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> LazySingleton instance;</span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="title">LazySingleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> LazySingleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(instance==<span class="keyword">null</span>)&#123;</span><br><span class="line">          instance=<span class="keyword">new</span> LazySingleton();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> instance;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>这个的一个问题是线程不安全，就是当instance是null的时候，可能有两个线程同时满足，这样就是两个实例产生</p>
-<p>那么一个改进就是,加入synchronized</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> LazySingleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(instance==<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (LazySingleton.class)&#123;</span><br><span class="line">                instance=<span class="keyword">new</span> LazySingleton();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>来自网上的解释说这个也是有问题的:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">这段代码看起来很完美，很可惜，它是有问题。主要在于instance &#x3D; new Singleton()这句，这并非是一个原子操作，事实上在 JVM 中这句话大概做了下面 3 件事情。</span><br><span class="line"></span><br><span class="line">给 instance 分配内存</span><br><span class="line">调用 Singleton 的构造函数来初始化成员变量</span><br><span class="line">将instance对象指向分配的内存空间（执行完这步 instance 就为非 null 了）</span><br><span class="line">但是在 JVM 的即时编译器中存在指令重排序的优化。也就是说上面的第二步和第三步的顺序是不能保证的，最终的执行顺序可能是 1-2-3 也可能是 1-3-2。如果是后者，则在 3 执行完毕、2 未执行之前，被线程二抢占了，这时 instance 已经是非 null 了（但却没有初始化），所以线程二会直接返回 instance，然后使用，然后顺理成章地报错。</span><br></pre></td></tr></table></figure>
-
-<p>那么将instace定义为:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton instance; <span class="comment">//声明成 volatile</span></span><br></pre></td></tr></table></figure>
-
-<p>使用 volatile 的原因是可见性，也就是可以保证线程在本地不会存有instance 的副本，每次都是去主内存中读取。但其实是不对的。使用 volatile 的主要原因是其另一个特性：禁止指令重排序优化<br>读操作不会被重排序到内存屏障之前,从「先行发生原则」的角度理解的话，就是对于一个 volatile 变量的写操作都先行发生于后面对这个变量的读操作（这里的“后面”是时间上的先后顺序.</p>
-<h2 id="Singleton-饿汉式-static-final-field"><a href="#Singleton-饿汉式-static-final-field" class="headerlink" title="Singleton 饿汉式 static final field"></a>Singleton 饿汉式 static final field</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> HungarySingleton instance = <span class="keyword">new</span> HungarySingleton();</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="title">HungarySingleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> HungarySingleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> instance;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="内部静态类"><a href="#内部静态类" class="headerlink" title="内部静态类"></a>内部静态类</h2><p>内部静态类实现的方式：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonHolderModel</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonHolder</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> SingletonHolderModel INSTANCE = <span class="keyword">new</span> SingletonHolderModel();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingletonHolderModel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> SingletonHolderModel <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> SingletonHolderModel.SingletonHolder.INSTANCE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><p>我们可以通过EasySingleton.INSTANCE来访问实例，这比调用getInstance()方法简单多了。创建枚举默认就是线程安全的.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> EasySingleton&#123;</span><br><span class="line">    INSTANCE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="source"><a href="#source" class="headerlink" title="source"></a>source</h2><ul>
-<li><a target="_blank" rel="noopener" href="http://javarevisited.blogspot.sg/2014/05/double-checked-locking-on-singleton-in-java.html">English</a></li>
-</ul>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/java/">java</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
     <h3 class="article-title"><a href="/2015/11/27/tips/automation/2015-11-27-webservice-automation/"><span>自动化测试－接口测试</span></a></h3>
     
   
@@ -404,6 +327,92 @@
     <span class="post-tags">
       <i class="icon-tags"></i>
         <a href="/tags/truestories/">truestories</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2015/11/16/tips/testing/2015-11-16-error_toleration/"><span>软件容错</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/11/16/tips/testing/2015-11-16-error_toleration/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-11-16T15:24:33.000Z">
+          2015-11-16
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>软件的世界已经变的及其复杂，在互联网的世界中一个个知道不知道的API将世界连接起来，如蜘蛛网一般,一个看的到的功能可能依赖了好几个看不到的API,所以中间出点错误实在不能说是个意外了。但是出错归出错，出错了软件也是一样要处理这些问题，下面就讲讲我学到遇到的一点容错的小知识。</p>
+<h2 id="容错的目标"><a href="#容错的目标" class="headerlink" title="容错的目标"></a>容错的目标</h2><p>降低或者最小化对系统可用性，可靠性的影响，举个例子来说就是单点故障，如果一个地方出现错误<br>而把整个系统网络都拖垮了，这个显然是不能接受的。可以用一下几个来形容错误：</p>
+<ul>
+<li>fault(缺陷) 一些bug</li>
+<li>error(错误) 一些业务无法正常执行</li>
+<li>failure(故障) 业务较长时间无法正常执行</li>
+</ul>
+<h2 id="容错的方法"><a href="#容错的方法" class="headerlink" title="容错的方法"></a>容错的方法</h2><ul>
+<li>硬件容错：多备份,系统冗余，主备</li>
+<li>软件容错：避免严重业务错误，降级，异常处理,侦测，监控，重启……</li>
+<li>系统容错</li>
+</ul>
+<h2 id="常见机遇鲁棒性"><a href="#常见机遇鲁棒性" class="headerlink" title="常见机遇鲁棒性"></a>常见机遇鲁棒性</h2><ul>
+<li>Process Pairs</li>
+<li>Graceful Degradation:降级</li>
+<li>Selective Retry</li>
+<li>state handling</li>
+<li>Linking Process</li>
+<li>Rejuvenation: 不可重现问题</li>
+<li>Checkpoint</li>
+<li>update lost</li>
+<li>application state scrubbing</li>
+<li>process pools</li>
+<li>recovery block</li>
+<li>micro reboot</li>
+<li>state correction</li>
+</ul>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/testing/">testing</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/testing/">testing</a>
     </span>
     
 

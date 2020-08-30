@@ -65,6 +65,119 @@
 
   
     
+    <h3 class="article-title"><a href="/2019/12/13/python/2020-07-01-generate-tps-chart/"><span>快速生成简单的TPS报告</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/12/13/python/2020-07-01-generate-tps-chart/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-12-12T18:19:56.000Z">
+          2019-12-13
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>练手的机会无处不在，不需要太久，也许只要10分钟半个小时就可以.<br>测试人员来说每天重复的事情其实不少，比如今天这件，大体时期如下:</p>
+<ul>
+<li>要做压力测试，需要提供一个TPS时间序列报告</li>
+<li>压力测试工具是开发自己写的，TPS的数据从日志里面拿</li>
+<li>不同的并发数下面需要重复好几次整理收集的事情，不同的版本下面又需要做好多次这样的事情</li>
+</ul>
+<p>那么先让我们改进一下吧。</p>
+<h2 id="原材料和最终结果"><a href="#原材料和最终结果" class="headerlink" title="原材料和最终结果:"></a>原材料和最终结果:</h2><p>原材料TPS的日志大体如下:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2019/12/11 17:36:15.810881 [0;31m[ERROR][m GID 2324, vbft actor SaveBlockCompleteMsg receives block complete event. block height=2, numtx=236</span><br><span class="line">2019/12/11 17:36:17.027152 [0;31m[ERROR][m GID 16478, vbft actor SaveBlockCompleteMsg receives block complete event. block height=3, numtx=1341</span><br><span class="line">2019/12/11 17:36:18.595527 [0;31m[ERROR][m GID 52389, checkUpdateChainConfig err:not found</span><br><span class="line">2019/12/11 17:36:18.745932 [0;31m[ERROR][m GID 63065, vbft actor SaveBlockCompleteMsg receives block complete event. block height=4, numtx=5495</span><br></pre></td></tr></table></figure>
+
+<p>需要从日志中收集的数据是，commit_time(日志中一开始的这个时间,如2019/12/11 17:36:15.810881),block height(块的高度，有点神秘，不用管它就是了Who cares)，numtx(交易比数)数量</p>
+<p>最终结果，其实需要绘制如如下图:</p>
+<p><img src="/images/chains/TPS.jpg" alt="img"></p>
+<h2 id="开始解题"><a href="#开始解题" class="headerlink" title="开始解题"></a>开始解题</h2><p>很明显题目可以分解为一下几个步骤:</p>
+<ul>
+<li>从日志中获取需要的数据(日志不大)</li>
+<li>将数据加工转化为图表，EXCEl其实就有图标功能，直接用EXCEL就好<ul>
+<li>X轴是时间，X轴起点是0，每一个TPS点就是从0计算的时间偏移量，也就是第二行日志的时间，减去第一行日志的时间</li>
+<li>Y轴是TPS的数量</li>
+</ul>
+</li>
+</ul>
+<p>问题定义了，动作分解了，那么就动手了.</p>
+<h3 id="解析日志文件"><a href="#解析日志文件" class="headerlink" title="解析日志文件"></a>解析日志文件</h3><p>其实就是获取commit_time, height,num_tx, 解析日志就是</p>
+<ul>
+<li>先用空格切割成数组，第一个和第二个合并变成提交时间</li>
+<li>倒数第二个用=切成数组，然后获取数组第二个元素就是height值了</li>
+<li>倒数第一个用=切成数组，然后获取数组第二个元素就是提交时间是提交的交易总数量了</li>
+<li>最后返回一个数组，就是在不同时间点上提交的交易数量</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">MetricSample = namedtuple(<span class="string">&#x27;MetricsData&#x27;</span>, <span class="string">&#x27;commit_time height num_tx&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_metric_file</span>(<span class="params">path=<span class="string">&quot;metrics.log&quot;</span></span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Read and Parse Metric Log</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">with</span> open(path, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> raw_metric:</span><br><span class="line">        lines = raw_metric.readlines()</span><br><span class="line">    metrics_data = []</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            parsed_data = line.split(<span class="string">&quot; &quot;</span>)</span><br><span class="line">            start_time = <span class="string">&quot; &quot;</span>.join(parsed_data[<span class="number">0</span>:<span class="number">2</span>])</span><br><span class="line">            height = parsed_data[<span class="number">-2</span>:][<span class="number">0</span>].split(<span class="string">&quot;=&quot;</span>)[<span class="number">1</span>][<span class="number">0</span>]</span><br><span class="line">            num_tx = parsed_data[<span class="number">-1</span>:][<span class="number">0</span>].split(<span class="string">&quot;=&quot;</span>)[<span class="number">1</span>]</span><br><span class="line">            metrics_sample = MetricSample(commit_time=start_time,</span><br><span class="line">                                          height=int(height),</span><br><span class="line">                                          num_tx=int(num_tx))</span><br><span class="line">            metrics_data.append(metrics_sample)</span><br><span class="line">        <span class="keyword">except</span> IndexError <span class="keyword">as</span> e:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> metrics_data</span><br></pre></td></tr></table></figure>
+
+<p>不过namedtuple用的有点好玩，其实是一个不错的学习点，可以让代码看的更好懂点，所以又练了一次手，熟悉了一个新的库用法.<br>怎么用，其实查文档看看就好，或者查查<a target="_blank" rel="noopener" href="https://pymotw.com/3/">python module of week</a>.<br>为什么代码更好懂呢？至少每个变量名代表的含义看的很清楚了，自然就好懂了。</p>
+<h3 id="保存到EXCEL并且生成图表"><a href="#保存到EXCEL并且生成图表" class="headerlink" title="保存到EXCEL并且生成图表"></a>保存到EXCEL并且生成图表</h3><p>保存到EXCEl需要加工一下数据，计算一下TPS(Transaction Per Senconds).</p>
+<p>公式其实就是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TPS &#x3D; num_tx&#x2F;(这次提交时间-上一次提交时间) </span><br></pre></td></tr></table></figure>
+
+<p>以下就是实现代码，当然如何操作excel，其实<a target="_blank" rel="noopener" href="https://openpyxl.readthedocs.io/en/stable/">openpyxl</a>还是很方便的,<br>怎么用？RTFM，其实还是很好理解的，chart这块稍微麻烦点，不过一样，文档里面也有示例代码，抄抄，然后自己打开一个EXCEL自己添加一个line chart<br>看看，总体意思其实是:</p>
+<ul>
+<li>chart要用的数据通过什么方式在程序里面给</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data = Reference(ws, min_col=<span class="number">3</span>, min_row=<span class="number">1</span>,</span><br><span class="line">                    max_col=<span class="number">3</span>, max_row=max_row)</span><br><span class="line">   lc.add_data(data, titles_from_data=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>X轴的数据怎么设定</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x_timeoffset = Reference(ws,min_col=<span class="number">2</span>,</span><br><span class="line">                               max_col =<span class="number">2</span>,</span><br><span class="line">                               min_row=<span class="number">2</span>,</span><br><span class="line">                               max_row=max_row)</span><br><span class="line">   lc.set_categories(x_timeoffset)</span><br></pre></td></tr></table></figure>
+
+<p>关于操作EXCEL里面的内容:</p>
+<ul>
+<li>cell是什么鬼,excel的cell就是一个表格，怎么定位要设定值的表格呢，<br>其实就是几行几列，所以就是col=1,row=1就是第一行第一列的那个表格</li>
+<li>Reference里面的min_col,min_row,max_col,max_row是什么鬼？<br>给图表用的数据，需要设定从那行开始到那行结束，如果是多列的话，还要说明从那列开始到那列结束.所以这个是取那些数据，excel里面俗称拉一下</li>
+</ul>
+<p>下面是完整的代码实现:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">metrics_to_excel</span>(<span class="params">metrics, excel_path=<span class="string">&quot;metrics.xlsx&quot;</span></span>):</span></span><br><span class="line">    wb = Workbook()</span><br><span class="line">    ws = wb.create_sheet(<span class="string">&quot;metric&quot;</span>, <span class="number">0</span>)</span><br><span class="line">    ws.cell(<span class="number">1</span>, <span class="number">1</span>, <span class="string">&quot;duration&quot;</span>)</span><br><span class="line">    ws.cell(<span class="number">1</span>, <span class="number">2</span>, <span class="string">&quot;time_offset&quot;</span>)</span><br><span class="line">    ws.cell(<span class="number">1</span>, <span class="number">3</span>, <span class="string">&quot;tps&quot;</span>)</span><br><span class="line">    ws.cell(<span class="number">1</span>, <span class="number">4</span>, <span class="string">&quot;height&quot;</span>)</span><br><span class="line">    ws.cell(<span class="number">1</span>, <span class="number">5</span>, <span class="string">&quot;num_tx&quot;</span>)</span><br><span class="line">    row_num = len(metrics)</span><br><span class="line">    time_offset = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> index <span class="keyword">in</span> range(row_num):</span><br><span class="line">        ws.cell(index + <span class="number">2</span>, <span class="number">4</span>, metrics[index].height)</span><br><span class="line">        ws.cell(index + <span class="number">2</span>, <span class="number">5</span>, metrics[index].num_tx)</span><br><span class="line">        <span class="keyword">if</span> index == <span class="number">0</span>:</span><br><span class="line">            ws.cell(index + <span class="number">2</span>, <span class="number">1</span>, <span class="number">0</span>)</span><br><span class="line">            ws.cell(index + <span class="number">2</span>, <span class="number">2</span>, <span class="number">0</span>)</span><br><span class="line">            ws.cell(index + <span class="number">2</span>, <span class="number">3</span>, <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            start_time = datetime.datetime.strptime(metrics_data[index - <span class="number">1</span>].start_time,</span><br><span class="line">                                                    <span class="string">&quot;%Y/%m/%d %H:%M:%S.%f&quot;</span>)</span><br><span class="line"></span><br><span class="line">            end_time = datetime.datetime.strptime(metrics_data[index].start_time,</span><br><span class="line">                                                  <span class="string">&quot;%Y/%m/%d %H:%M:%S.%f&quot;</span>)</span><br><span class="line">            duration = (end_time - start_time).seconds</span><br><span class="line">            time_offset = time_offset + duration</span><br><span class="line">            ws.cell(index + <span class="number">2</span>, <span class="number">1</span>, duration)</span><br><span class="line">            ws.cell(index + <span class="number">2</span>, <span class="number">2</span>, time_offset)</span><br><span class="line">            ws.cell(index + <span class="number">2</span>, <span class="number">3</span>, metrics[index].num_tx / duration)</span><br><span class="line">    add_chart(ws, row_num)</span><br><span class="line">    wb.save(excel_path)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_chart</span>(<span class="params">ws, max_row</span>):</span></span><br><span class="line">    lc = LineChart()</span><br><span class="line">    lc.title = <span class="string">&quot;Chain TPS&quot;</span></span><br><span class="line">    lc.style = <span class="number">15</span></span><br><span class="line">    lc.y_axis.title = <span class="string">&quot;TPS&quot;</span></span><br><span class="line">    lc.x_axis.title = <span class="string">&quot;Time&quot;</span></span><br><span class="line">    data = Reference(ws, min_col=<span class="number">3</span>, min_row=<span class="number">1</span>,</span><br><span class="line">                     max_col=<span class="number">3</span>, max_row=max_row)</span><br><span class="line">    lc.add_data(data, titles_from_data=<span class="literal">True</span>)</span><br><span class="line">    x_timeoffset = Reference(ws,min_col=<span class="number">2</span>,</span><br><span class="line">                                max_col =<span class="number">2</span>,</span><br><span class="line">                                min_row=<span class="number">2</span>,</span><br><span class="line">                                max_row=max_row)</span><br><span class="line">    lc.set_categories(x_timeoffset)</span><br><span class="line">    ws.add_chart(lc,<span class="string">&quot;G13&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    metrics_data = read_metric_file()</span><br><span class="line">    metrics_to_excel(metrics_data)</span><br></pre></td></tr></table></figure>
+
+<p>然后运行这段程序，上面的那个TPS图表就生成好了，同时简历里面可以写上:</p>
+<ul>
+<li>构建自动生成性能测试报告的工具平台</li>
+<li>熟练使用Python 标准库中的namedtuple和EXCEL openpyxl库操作EXCEl，自动生成漂亮的报告</li>
+</ul>
+<p>当然重点不是简历上写什么，重点是有时间可以看看这两个库的用法，说不定哪天又用到了。<br>时间节约了，事情完成了，东西学到了. It’s a perfect day! 大概合计用了1个小时完成，但是学到东西也不少哇！<br>原来这个报告整理一下，1次需要个2个小时，现在花了一个小时写代码，其他就没有额外时间了。这也算不上什么自动化测试，但是投入产出比不是很高吗？</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/python/">python</a><a href="/tags/10Minutes/">10Minutes</a><a href="/tags/productivity/">productivity</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2019/12/13/qa-thoughts/comfortable-zone/"><span>测试陷阱4-跳出舒适区</span></a></h3>
     
   
@@ -147,77 +260,6 @@
     <div class="entry">
       
         <h1 id="Shell-Daily-Commands"><a href="#Shell-Daily-Commands" class="headerlink" title="Shell Daily Commands"></a>Shell Daily Commands</h1><h2 id="MAC-Mac-Port-Listener"><a href="#MAC-Mac-Port-Listener" class="headerlink" title="[MAC] Mac Port Listener"></a>[MAC] Mac Port Listener</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof -Pni4 | grep LISTEN</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2019/12/04/tips/locks/"><span></span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/12/04/tips/locks/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-12-04T01:53:00.000Z">
-          2019-12-04
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h1 id="0-JAVA-Locks"><a href="#0-JAVA-Locks" class="headerlink" title="0. JAVA Locks"></a>0. JAVA Locks</h1><p>锁在JAVA 并发编程中是一个重要的概念，而且是一些比较难懂的概念，一下是学习Lock概念的时候的一些记录。</p>
-<ul>
-<li>ReadWriteLock，ReentrantReadWriteLock</li>
-</ul>
-<h2 id="1-ReadWriteLock-ReentrantReadWriteLock"><a href="#1-ReadWriteLock-ReentrantReadWriteLock" class="headerlink" title="1. ReadWriteLock: ReentrantReadWriteLock"></a>1. ReadWriteLock: ReentrantReadWriteLock</h2><ul>
-<li>ReadWriteLock 基本概念<br>读写锁，分读锁和写锁，多个读锁不互斥，读锁和写锁互斥；上了读锁，不能写；修改数据，只能一个人写，但是不能读，就上写锁；<br>所以就是读的时候上读锁，写的时候上写锁；ReentrantReadWriteLock使用两把锁：<ul>
-<li>读锁： 进入读锁的条件<ol>
-<li>没有其他线程写</li>
-<li>没有写请求，调用线程和持有锁的线程是同一个</li>
-</ol>
-</li>
-<li>写锁： 进入写锁条件<ol>
-<li>没有其他线程的读锁</li>
-<li>没有其他线程的写锁</li>
-</ol>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="2-ReentrantReadWriteLock-实例说明"><a href="#2-ReentrantReadWriteLock-实例说明" class="headerlink" title="2. ReentrantReadWriteLock: 实例说明"></a>2. ReentrantReadWriteLock: 实例说明</h2><ul>
-<li>读锁条件1: 没有其他线程写，进入读锁</li>
-<li>读锁条件2: 没有写请求，调用线程和持有锁的线程是同一个</li>
-<li>写锁条件1； 没有其他线程的读锁</li>
-<li>写锁条件2； 没有其他线程的写锁</li>
-<li>读写锁混用案例</li>
-</ul>
 
       
     </div>

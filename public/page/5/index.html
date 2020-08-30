@@ -65,6 +65,119 @@
 
   
     
+    <h3 class="article-title"><a href="/2020/03/11/shell/2020-03-11-nginx/"><span>devops nginx 使用tips</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2020/03/11/shell/2020-03-11-nginx/" rel="bookmark">
+        <time class="entry-date published" datetime="2020-03-11T00:50:24.000Z">
+          2020-03-11
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="为什么使用nginx"><a href="#为什么使用nginx" class="headerlink" title="为什么使用nginx"></a>为什么使用nginx</h2><p>使用nginx来进行web服务的反向代理，举个例子来说，目前有两个vue的前端项目，使用同一个nginx，通过路径或者端口的不同访问不同的项目入口.<br><img src="https://levonfly.github.io/p/7245bfc7/1.jpg" alt="img"></p>
+<p>先从nginx安装开始吧：</p>
+<ul>
+<li>MAC 安装Nginx:</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install nginx</span><br></pre></td></tr></table></figure>
+<ul>
+<li>启动Nginx</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew services start nginx</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>nginx 配置目录说明:</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## nginx安装文件目录</span></span><br><span class="line">/usr/<span class="built_in">local</span>/Cellar/nginx</span><br><span class="line"><span class="comment">## nginx配置文件目录</span></span><br><span class="line">/usr/<span class="built_in">local</span>/etc/nginx</span><br><span class="line"><span class="comment">## config文件目录</span></span><br><span class="line">/usr/<span class="built_in">local</span>/etc/nginx/nginx.conf</span><br><span class="line"><span class="comment">## 系统hosts位置</span></span><br><span class="line">/private/etc/hosts</span><br></pre></td></tr></table></figure>
+<h2 id="如何使用nginx"><a href="#如何使用nginx" class="headerlink" title="如何使用nginx"></a>如何使用nginx</h2><p>nginx的常用命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">patrick@pwlocal ~/workspace/startup/fe $ nginx -h                                  [ruby-2.4.1]</span><br><span class="line">nginx version: nginx/1.17.8</span><br><span class="line">Usage: nginx [-?hvVtTq] [-s signal] [-c filename] [-p prefix] [-g directives]</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -?,-h         : this <span class="built_in">help</span></span><br><span class="line">  -v            : show version and <span class="built_in">exit</span></span><br><span class="line">  -V            : show version and configure options <span class="keyword">then</span> <span class="built_in">exit</span></span><br><span class="line">  -t            : <span class="built_in">test</span> configuration and <span class="built_in">exit</span></span><br><span class="line">  -T            : <span class="built_in">test</span> configuration, dump it and <span class="built_in">exit</span></span><br><span class="line">  -q            : suppress non-error messages during configuration testing</span><br><span class="line">  -s signal     : send signal to a master process: stop, quit, reopen, reload</span><br><span class="line">  -p prefix     : <span class="built_in">set</span> prefix path (default: /usr/<span class="built_in">local</span>/Cellar/nginx/1.17.8/)</span><br><span class="line">  -c filename   : <span class="built_in">set</span> configuration file (default: /usr/<span class="built_in">local</span>/etc/nginx/nginx.conf)</span><br><span class="line">  -g directives : <span class="built_in">set</span> global directives out of configuration file</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="nginx示例"><a href="#nginx示例" class="headerlink" title="nginx示例"></a>nginx示例</h2><p>从一个例子来说明如何使用和配置nginx, 目前有两个项目：</p>
+<ol>
+<li>vue-project-1</li>
+<li>vue-project-2</li>
+</ol>
+<p>同时在目录 ～/workspace下面，如何配置nginx，从达到能够同时访问这两个项目的目的呢？</p>
+<ul>
+<li>首先我们先自己配置一个主页html尝试</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;nginx&#x2F;1.17.8&#x2F;html</span><br></pre></td></tr></table></figure>
+<p>修改以上目录的index.html文件，添加一个helloworld这样的说明，这样<br>**<a target="_blank" rel="noopener" href="http://localhost:8080/**%E9%A1%B5%E9%9D%A2%E5%B0%B1%E4%BC%9A%E6%8A%8Ahelloworld%E5%B1%95%E7%A4%BA%E5%88%B0%E9%A1%B5%E9%9D%A2%EF%BC%8C%E8%AF%B4%E6%98%8Enginx%E5%B7%A5%E4%BD%9C%E6%AD%A3%E5%B8%B8%E7%9A%84">http://localhost:8080/**页面就会把helloworld展示到页面，说明nginx工作正常的</a></p>
+<ul>
+<li>修改nginx配置文件，访问vue-project-1</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/etc/nginx</span><br></pre></td></tr></table></figure>
+
+<p>修改这个目录下的nginx.conf 文件,添加一个访问路径到一个server的配置中，然后访问**/project1**,就可以看到一个新的页面可以展示了</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location /project1 &#123;</span><br><span class="line">     <span class="built_in">alias</span> /Users/patrick/workspace/startup/fe/qa-daily;</span><br><span class="line">     index index.html;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改nginx配置文件，访问vue-project-2</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location /project2 &#123;</span><br><span class="line">     <span class="built_in">alias</span> /Users/patrick/workspace/startup/fe;</span><br><span class="line">     index index.html;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="如何使用程序来控制ngxin-配置文件的生成"><a href="#如何使用程序来控制ngxin-配置文件的生成" class="headerlink" title="如何使用程序来控制ngxin 配置文件的生成"></a>如何使用程序来控制ngxin 配置文件的生成</h2><p>在实际的使用中，一个新的前端VUE项目部署之后，还需要根据上面的方式来修改项目，那么问题来了，部署一个新的环境都需要修改一下，有没有好的办法简化这个流程呢？当然你可以说用docker，或者什么k8s之类的来进行部署，不过小公司一般没有能力来做这个事情，下面就介绍一下自己尝试的一个土方法.<br>首先实际的想达到的效果如下：</p>
+<ol>
+<li>jenkins 配置前端发布任务，首次运行</li>
+<li>前端发布任务完成后，自动更新ngixn配置</li>
+</ol>
+<p>下面是实现的一个思路：</p>
+<ol>
+<li>定义好nginx vue项目前端发布的项目名称和路径</li>
+<li>使用nginx config build生成nginx.conf文件</li>
+<li>使用fastapi构建最简单一个接口服务，接收请求，运行nginx -s reload</li>
+</ol>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/automation，devops/">automation，devops</a>, <a href="/categories/automation，devops/daily-automation-tip/">daily-automation-tip</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/daily-automation-tip/">daily-automation-tip</a><a href="/tags/devops/">devops</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2020/01/20/tips/git-tips-git-stash/"><span>git stash 使用</span></a></h3>
     
   
@@ -199,77 +312,6 @@
     <span class="post-tags">
       <i class="icon-tags"></i>
         <a href="/tags/10Minutes/">10Minutes</a><a href="/tags/refactor/">refactor</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2020/01/13/tips/ssh-login/"><span>服务器免密登录</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2020/01/13/tips/ssh-login/" rel="bookmark">
-        <time class="entry-date published" datetime="2020-01-12T18:19:56.000Z">
-          2020-01-13
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>使用下例中<code>ssh-keygen</code>和<code>ssh-copy-id</code>，仅需通过3个步骤的简单设置而无需输入密码就能登录远程Linux主机。 </p>
-<ul>
-<li><code>ssh-keygen</code> 创建公钥和密钥。 </li>
-<li><code>ssh-copy-id</code> 把本地主机的公钥复制到远程主机的<code>authorized_keys</code>文件上。</li>
-<li><code>ssh-copy-id</code> 也会给远程主机的用户主目录（home）和<code>~/.ssh</code>, 和<code>~/.ssh/authorized_keys</code>设置合适的权限 。</li>
-</ul>
-<p>####步骤1: 用 <code>ssh-key-gen</code> 在本地主机上创建公钥和密钥</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa</span><br><span class="line">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key (/home/sub/.ssh/id_rsa):[Enter key] </span><br><span class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase): [Press enter key]</span><br><span class="line">Enter same passphrase again: [Pess enter key]</span><br><span class="line">Your identification has been saved <span class="keyword">in</span> /home/sub/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved <span class="keyword">in</span> /home/sub/.ssh/id_rsa.pub. </span><br><span class="line">The key fingerprint is: 35:a4:b9:2f:c1:53:2a:42:88:df:89:dc:c1:e3:b8:a2 </span><br></pre></td></tr></table></figure>
-
-<p>####步骤2: 用 <code>ssh-copy-id</code> 把公钥复制到远程主机上</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-copy-id root@10.79.53.164</span><br><span class="line">Could not open a connection to your authentication agent.</span><br><span class="line">root@10.79.53.164<span class="string">&#x27;s password:</span></span><br><span class="line"><span class="string">Now try logging into the machine, with &quot;ssh &#x27;</span>root@10.79.53.164<span class="string">&#x27;&quot;, and check in:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  .ssh/authorized_keys</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">to make sure we haven&#x27;</span>t added extra keys that you weren<span class="string">&#x27;t expecting.</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注: <code>ssh-copy-id</code> 把公钥分发即追加到远程主机的 <code>.ssh/authorized_key</code> 上.</p>
-</blockquote>
-<p>####步骤3: 直接登录远程主机</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ssh root@10.79.53.164</span><br><span class="line">Last login: Thu May 21 02:46:19 2015 from 10.140.80.223</span><br><span class="line">root@vbox$ </span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注: 无需输入密码</p>
-</blockquote>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/10Minutes/">10Minutes</a><a href="/tags/productivity/">productivity</a><a href="/tags/devops/">devops</a>
     </span>
     
 

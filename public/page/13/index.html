@@ -65,15 +65,15 @@
 
   
     
-    <h3 class="article-title"><a href="/2019/08/26/tips/thoughts/manage-people/"><span>测试人员管理</span></a></h3>
+    <h3 class="article-title"><a href="/2019/10/01/tips/tester-ops/3-SONAR-Installation/"><span>SONAR环境建立</span></a></h3>
     
   
 
   <div class="article-top-meta">
     <span class="posted-on">
-      <a href="/2019/08/26/tips/thoughts/manage-people/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-08-26T01:25:03.000Z">
-          2019-08-26
+      <a href="/2019/10/01/tips/tester-ops/3-SONAR-Installation/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-09-30T16:58:45.000Z">
+          2019-10-01
         </time>
       </a>
     </span>
@@ -85,15 +85,19 @@
   <div class="article-content">
     <div class="entry">
       
-        <p>如何带领测试人员？先分析以下测试人员的痛点吧：</p>
-<ol>
-<li>很多重复的事情，慢慢变枯燥，同时工作量大又不被尊重</li>
-<li>价值不能直接体现，更多是开发，产品的附属物</li>
-<li>广度有，但是深入程度不够</li>
-</ol>
-<p>解决了痛点，至少让测试小朋友是开心的，我说说我的实践.</p>
-<h2 id="如何正视很多重复的事情，慢慢变枯燥，同时工作量大又不被尊重"><a href="#如何正视很多重复的事情，慢慢变枯燥，同时工作量大又不被尊重" class="headerlink" title="如何正视很多重复的事情，慢慢变枯燥，同时工作量大又不被尊重"></a>如何正视很多重复的事情，慢慢变枯燥，同时工作量大又不被尊重</h2><p>很多重复的事情，其实不是真的完全一样的事情，而是大体相似，有点小变化的内容；工作量大又不被尊重，由于大部分的工作是可以被普通人看懂的，而工作量大这件事有不会被大家所看到，最后看到的就是工作没有技术含量。这里有个误区就是工作量大不被认为是技术难题，而实际上工作量大造成的难度，被低估了。从古到今，工作量大其实就是最大的需求</p>
-<p>市场稀缺性来说，深入程度高的更稀缺，广度的可以被不同的人分解而替代</p>
+        <h2 id="postgresql-初始化"><a href="#postgresql-初始化" class="headerlink" title="postgresql 初始化"></a>postgresql 初始化</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm -Uvh https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm</span><br><span class="line">sudo yum -y install postgresql96-server postgresql96-contrib</span><br><span class="line">sudo /usr/pgsql-9.6/bin/postgresql96-setup initdb</span><br><span class="line">sudo systemctl start postgresql-9.6</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> postgresql-9.6</span><br></pre></td></tr></table></figure>
+
+<h2 id="切换用户"><a href="#切换用户" class="headerlink" title="切换用户"></a>切换用户</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo su postgres</span><br><span class="line">psql</span><br><span class="line">createuser sonar</span><br><span class="line">ALTER USER sonar WITH ENCRYPTED password <span class="string">&#x27;sonar&#x27;</span>;</span><br><span class="line">CREATE DATABASE sonar WITH ENCODING <span class="string">&#x27;UTF8&#x27;</span> OWNER sonar TEMPLATE=template0;</span><br><span class="line">CREATE DATABASE sonar OWNER sonar;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="设置postgresql密码验证"><a href="#设置postgresql密码验证" class="headerlink" title="设置postgresql密码验证"></a>设置postgresql密码验证</h2><p>/var/lib/pgsql/9.6/data/pg_hba.conf 文件中修改 peer to trust and idnet to md5.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># TYPE  DATABASE        USER            ADDRESS                 METHOD</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># &quot;local&quot; is for Unix domain socket connections only</span></span><br><span class="line"><span class="built_in">local</span>   all             all                                     trust</span><br><span class="line"><span class="comment"># IPv4 local connections:</span></span><br><span class="line">host    all             all             127.0.0.1/32            md5</span><br><span class="line"><span class="comment"># IPv6 local connections:</span></span><br><span class="line">host    all             all             ::1/128                 md5</span><br></pre></td></tr></table></figure>
+
+<h2 id="postgresql-登陆"><a href="#postgresql-登陆" class="headerlink" title="postgresql 登陆"></a>postgresql 登陆</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">psql -h localhost -d sonar -U sonar -W</span><br></pre></td></tr></table></figure>
+
+<h2 id="sonar-config-文件配置"><a href="#sonar-config-文件配置" class="headerlink" title="sonar config 文件配置"></a>sonar config 文件配置</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sonar.jdbc.username=sonar</span><br><span class="line">sonar.jdbc.password=sonar</span><br><span class="line">sonar.jdbc.url=jdbc:postgresql://localhost/sonar</span><br></pre></td></tr></table></figure>
+
+<h2 id="启动sonar"><a href="#启动sonar" class="headerlink" title="启动sonar"></a>启动sonar</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/sonar.sh start</span><br></pre></td></tr></table></figure>
+
+<p>去logs目录先观察 web.log,如果启动有报错，那么需要再修改报错的问题，一般按照以上步骤就可以启动SONAR.</p>
 
       
     </div>
@@ -110,7 +114,7 @@
 
     <span class="post-tags">
       <i class="icon-tags"></i>
-        <a href="/tags/thoughts/">thoughts</a>
+        <a href="/tags/test-ops/">test-ops</a><a href="/tags/code-analysis/">code analysis</a>
     </span>
     
 

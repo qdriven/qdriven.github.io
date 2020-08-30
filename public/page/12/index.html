@@ -65,6 +65,69 @@
 
   
     
+    <h3 class="article-title"><a href="/2019/10/07/tips/bugs/lagou-search-bug/"><span>lagou PC版搜索选项工作经验选择应届后，取消应届后，不能返回原来的工作经验选项</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/10/07/tips/bugs/lagou-search-bug/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-10-07T13:32:43.000Z">
+          2019-10-07
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="Bug-描述"><a href="#Bug-描述" class="headerlink" title="Bug 描述"></a>Bug 描述</h2><p>lagou PC版搜索选项工作经验选择应届后，取消应届后，不能返回原来的工作经验选项<br>步骤:</p>
+<ol>
+<li>进入首页，选择地区上海，关键字输入软件测试</li>
+<li>待搜索结果显示之后，工作经验选择为应届毕业生</li>
+<li>所有结果出现后，取消应届的选择，不能再回退到工作经验的选项</li>
+</ol>
+<ul>
+<li>期望结果: 取消应届选择后，回退到有工作经验的所有选项</li>
+<li>疑问: 这是一个Bug吗？还是产品经理的一个设计?<br>有方便的地方，也有不方便的地方，如果测试人员不知道这个需求,你要怎么处理这个事情?</li>
+</ul>
+<p><img src="/images/bugs/lagou-search-bug-1/lagou-search-bug-1.jpg" alt="img"><br><img src="/images/bugs/lagou-search-bug-1/lagou-search-bug-2.jpg" alt="img"><br><img src="/images/bugs/lagou-search-bug-1/lagou-search-bug-3.jpg" alt="img"></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/real-bug/">real-bug</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2019/10/01/tips/tester-ops/1-install-python3/"><span>Install Python3.7 in Centos</span></a></h3>
     
   
@@ -190,71 +253,6 @@
     <span class="post-tags">
       <i class="icon-tags"></i>
         <a href="/tags/test-ops/">test-ops</a><a href="/tags/linux/">linux</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2019/10/01/tips/tester-ops/3-SONAR-Installation/"><span>SONAR环境建立</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/10/01/tips/tester-ops/3-SONAR-Installation/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-09-30T16:58:45.000Z">
-          2019-10-01
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h2 id="postgresql-初始化"><a href="#postgresql-初始化" class="headerlink" title="postgresql 初始化"></a>postgresql 初始化</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm -Uvh https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm</span><br><span class="line">sudo yum -y install postgresql96-server postgresql96-contrib</span><br><span class="line">sudo /usr/pgsql-9.6/bin/postgresql96-setup initdb</span><br><span class="line">sudo systemctl start postgresql-9.6</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> postgresql-9.6</span><br></pre></td></tr></table></figure>
-
-<h2 id="切换用户"><a href="#切换用户" class="headerlink" title="切换用户"></a>切换用户</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo su postgres</span><br><span class="line">psql</span><br><span class="line">createuser sonar</span><br><span class="line">ALTER USER sonar WITH ENCRYPTED password <span class="string">&#x27;sonar&#x27;</span>;</span><br><span class="line">CREATE DATABASE sonar WITH ENCODING <span class="string">&#x27;UTF8&#x27;</span> OWNER sonar TEMPLATE=template0;</span><br><span class="line">CREATE DATABASE sonar OWNER sonar;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="设置postgresql密码验证"><a href="#设置postgresql密码验证" class="headerlink" title="设置postgresql密码验证"></a>设置postgresql密码验证</h2><p>/var/lib/pgsql/9.6/data/pg_hba.conf 文件中修改 peer to trust and idnet to md5.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># TYPE  DATABASE        USER            ADDRESS                 METHOD</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># &quot;local&quot; is for Unix domain socket connections only</span></span><br><span class="line"><span class="built_in">local</span>   all             all                                     trust</span><br><span class="line"><span class="comment"># IPv4 local connections:</span></span><br><span class="line">host    all             all             127.0.0.1/32            md5</span><br><span class="line"><span class="comment"># IPv6 local connections:</span></span><br><span class="line">host    all             all             ::1/128                 md5</span><br></pre></td></tr></table></figure>
-
-<h2 id="postgresql-登陆"><a href="#postgresql-登陆" class="headerlink" title="postgresql 登陆"></a>postgresql 登陆</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">psql -h localhost -d sonar -U sonar -W</span><br></pre></td></tr></table></figure>
-
-<h2 id="sonar-config-文件配置"><a href="#sonar-config-文件配置" class="headerlink" title="sonar config 文件配置"></a>sonar config 文件配置</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sonar.jdbc.username=sonar</span><br><span class="line">sonar.jdbc.password=sonar</span><br><span class="line">sonar.jdbc.url=jdbc:postgresql://localhost/sonar</span><br></pre></td></tr></table></figure>
-
-<h2 id="启动sonar"><a href="#启动sonar" class="headerlink" title="启动sonar"></a>启动sonar</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/sonar.sh start</span><br></pre></td></tr></table></figure>
-
-<p>去logs目录先观察 web.log,如果启动有报错，那么需要再修改报错的问题，一般按照以上步骤就可以启动SONAR.</p>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/test-ops/">test-ops</a><a href="/tags/code-analysis/">code analysis</a>
     </span>
     
 

@@ -118,13 +118,13 @@
 
   
     
-    <h3 class="article-title"><a href="/2014/08/24/shell/2014-08-24-shell_101_concept/"><span>Shell Learning - Concept</span></a></h3>
+    <h3 class="article-title"><a href="/2014/08/24/shell/2014-08-24-shell_101_env/"><span>Shell Learning - 环境变量</span></a></h3>
     
   
 
   <div class="article-top-meta">
     <span class="posted-on">
-      <a href="/2014/08/24/shell/2014-08-24-shell_101_concept/" rel="bookmark">
+      <a href="/2014/08/24/shell/2014-08-24-shell_101_env/" rel="bookmark">
         <time class="entry-date published" datetime="2014-08-23T18:31:11.000Z">
           2014-08-24
         </time>
@@ -139,68 +139,14 @@
     <div class="entry">
       
         <p>摘自：<a target="_blank" rel="noopener" href="http://wklken.me/posts/2014/01/12/shell-script-base.html">http://wklken.me/posts/2014/01/12/shell-script-base.html</a></p>
-<h3 id="标准IO"><a href="#标准IO" class="headerlink" title="标准IO"></a>标准IO</h3><pre><code>文件描述符
-0 标准输入 默认键盘
-1 标准输出 默认终端
-2 标准错误 默认终端</code></pre>
-<h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><pre><code>&gt; 输出重定向
-&gt;&gt; 追加到输出重定向
-&lt; 输入重定向
-&lt;&lt; 追加到输入重定向
+<h3 id="env"><a href="#env" class="headerlink" title="env"></a>env</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">env |grep keyword</span><br></pre></td></tr></table></figure>
 
-ls -l &gt; /tmp/a
-
-cmd &gt;/dev/null #输出到垃圾桶</code></pre>
-<p>dev是设备(device)的英文缩写。/dev这个目录对所有的用户都十分重要。因为在这个目录中包含了所有Linux系统中使用的外部设备。但是这里并不是放的外部设备的驱动程序，这一点和windows,dos操作系统不一样。它实际上是一个访问这些外部设备的端口。我们可以非常方便地去访问这些外部设备，和访问一个文件，一个目录没有任何区别。</p>
-<p>/dev/null 它是空设备，也称为位桶（bit bucket）或者黑洞(black hole)。你可以向它输入任何数据，但任何写入它的数据都会被抛弃。通常用于处理不需要的输出流。（当然，它也可以作为空的输入流</p>
-<p>dev/zero 该设备无穷尽地提供空字符（ASCII NUL, 0x00），可以使用任何你需要的数目。它通常用于向设备或文件写入字符串0，用于初始化数据存储。（当然，也可作为输出流的接受容器）</p>
-<h3 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h3><p>前后连接两个命令</p>
-<pre><code>ls -l | grep test</code></pre>
-<h3 id="引号"><a href="#引号" class="headerlink" title="引号"></a>引号</h3><pre><code>双引号：可以除了字符$`\外地任何字符或字符串
-单引号：忽略任何引用值，将引号里的所有字符作为一个字符串 $var 不能被解析
-反引号：设置系统命令输出到变量</code></pre>
-<h3 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h3><p>shell脚本识别三种基本命令：内建命令，shell函数和外部命令</p>
-<p>基本的命令查找:shell会沿着查找路径$PATH来寻找命令</p>
-<pre><code>echo $PATH</code></pre>
-<p>可以在.profile文件中修改</p>
-<pre><code>export PATH=$PATH:$HOME/bin</code></pre>
-<p>and/or</p>
-<pre><code>expression1 &amp;&amp; expression2 &amp;&amp; expression3
-只有前面一条命令执行成功，才执行下一条
-expression1执行成功，才执行expression2
-串联的
-
-expression1 || expression2 || expression3
-执行命令，直到有一条成功为止</code></pre>
-<h1 id="Linux运维常用工具"><a href="#Linux运维常用工具" class="headerlink" title="Linux运维常用工具"></a>Linux运维常用工具</h1><ul>
-<li>Cobbler</li>
-<li>sshd</li>
-<li>iptables</li>
-<li>sysctl</li>
-<li>puppet agent</li>
-<li>limits</li>
-<li>ntp</li>
-<li>Ganglia</li>
-<li>Cacti</li>
-<li>Nagios</li>
-<li>Zabbix</li>
-<li>PlayBanch Watch</li>
-<li>Scribe Hadoop</li>
-<li>ScatterQ</li>
-<li>Yum Repository</li>
-<li>package</li>
-<li>Configuration/Change/Service/Custom</li>
-</ul>
-<h2 id="Puppet中服务配置"><a href="#Puppet中服务配置" class="headerlink" title="Puppet中服务配置"></a>Puppet中服务配置</h2><ul>
-<li>Systemg</li>
-<li>sshd</li>
-<li>iptables</li>
-<li>sysctrl</li>
-<li>ntp</li>
-<li>nginx</li>
-<li>zabbix</li>
-<li>scribe</li>
-</ul>
+<h3 id="修改环境变量"><a href="#修改环境变量" class="headerlink" title="修改环境变量"></a>修改环境变量</h3><p>未在当前进程中定义，而是从父进程中继承而来的变量<br>export 设置环境变量,之后,从当前shell 执行的任何程序都会继承这个变量</p>
+<p>PATH 查找可执行文件路径, 通常定义在/etc/environment or /ect/profile or ~/.bashrc</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PYTHONPATH=<span class="variable">$PYTHONPATH</span>:/home/ken/workspace</span><br><span class="line"> <span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/new/path/</span><br></pre></td></tr></table></figure>
+<p>常用的环境变量名：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$HOME</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$PWD</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$USER</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$UID</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$SHELL</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Result</span></span><br><span class="line">╰─[:)] % sh env_variant.sh</span><br><span class="line">/Users/patrick</span><br><span class="line">/Users/patrick/workspace/works/shell_learning</span><br><span class="line">patrick</span><br><span class="line">501</span><br><span class="line">/bin/zsh</span><br></pre></td></tr></table></figure>
+<h3 id="检查是否是root"><a href="#检查是否是root" class="headerlink" title="检查是否是root"></a>检查是否是root</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># root的UID=0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$UID</span> -ne 0 ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;not root user&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;root&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#result:</span></span><br><span class="line">╰─[:)] % sh is_root.sh</span><br><span class="line">not root user</span><br><span class="line">╭─[~/workspace/works/shell_learning]─[patrick@patrickdeMacBook-Pro]─[0]─[10192]</span><br><span class="line">╰─[:)] % su root</span><br><span class="line">Password:</span><br><span class="line">sh-3.2<span class="comment"># sh is_root.sh</span></span><br><span class="line">yes I am root</span><br><span class="line">sh-3.2<span class="comment">#</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -233,13 +179,13 @@ expression1 || expression2 || expression3
 
   
     
-    <h3 class="article-title"><a href="/2014/08/24/shell/2014-08-24-shell_101_env/"><span>Shell Learning - 环境变量</span></a></h3>
+    <h3 class="article-title"><a href="/2014/08/24/shell/2014-08-24-shell_101_operator/"><span>Shell Learning - 操作符号</span></a></h3>
     
   
 
   <div class="article-top-meta">
     <span class="posted-on">
-      <a href="/2014/08/24/shell/2014-08-24-shell_101_env/" rel="bookmark">
+      <a href="/2014/08/24/shell/2014-08-24-shell_101_operator/" rel="bookmark">
         <time class="entry-date published" datetime="2014-08-23T18:31:11.000Z">
           2014-08-24
         </time>
@@ -254,14 +200,7 @@ expression1 || expression2 || expression3
     <div class="entry">
       
         <p>摘自：<a target="_blank" rel="noopener" href="http://wklken.me/posts/2014/01/12/shell-script-base.html">http://wklken.me/posts/2014/01/12/shell-script-base.html</a></p>
-<h3 id="env"><a href="#env" class="headerlink" title="env"></a>env</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">env |grep keyword</span><br></pre></td></tr></table></figure>
-
-<h3 id="修改环境变量"><a href="#修改环境变量" class="headerlink" title="修改环境变量"></a>修改环境变量</h3><p>未在当前进程中定义，而是从父进程中继承而来的变量<br>export 设置环境变量,之后,从当前shell 执行的任何程序都会继承这个变量</p>
-<p>PATH 查找可执行文件路径, 通常定义在/etc/environment or /ect/profile or ~/.bashrc</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PYTHONPATH=<span class="variable">$PYTHONPATH</span>:/home/ken/workspace</span><br><span class="line"> <span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/new/path/</span><br></pre></td></tr></table></figure>
-<p>常用的环境变量名：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$HOME</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$PWD</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$USER</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$UID</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$SHELL</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Result</span></span><br><span class="line">╰─[:)] % sh env_variant.sh</span><br><span class="line">/Users/patrick</span><br><span class="line">/Users/patrick/workspace/works/shell_learning</span><br><span class="line">patrick</span><br><span class="line">501</span><br><span class="line">/bin/zsh</span><br></pre></td></tr></table></figure>
-<h3 id="检查是否是root"><a href="#检查是否是root" class="headerlink" title="检查是否是root"></a>检查是否是root</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># root的UID=0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$UID</span> -ne 0 ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;not root user&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;root&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#result:</span></span><br><span class="line">╰─[:)] % sh is_root.sh</span><br><span class="line">not root user</span><br><span class="line">╭─[~/workspace/works/shell_learning]─[patrick@patrickdeMacBook-Pro]─[0]─[10192]</span><br><span class="line">╰─[:)] % su root</span><br><span class="line">Password:</span><br><span class="line">sh-3.2<span class="comment"># sh is_root.sh</span></span><br><span class="line">yes I am root</span><br><span class="line">sh-3.2<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<h3 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">no_1=4</span><br><span class="line">no_2=5</span><br><span class="line"><span class="built_in">let</span> result=no_1+no_2</span><br><span class="line"></span><br><span class="line"><span class="built_in">let</span> result--</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$result</span></span><br><span class="line"><span class="built_in">let</span> result++</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$result</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># expr(漏洞之源？？)</span></span><br><span class="line"></span><br><span class="line">result=`expr 3+4`</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$result</span></span><br><span class="line">result=`expr <span class="variable">$no_1</span>+345`</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$result</span></span><br><span class="line">result=$[ no_1 + no_2 ]</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$result</span></span><br><span class="line">result=$[ <span class="variable">$no_1</span> + 5 ]</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$result</span></span><br><span class="line">result=$(( no_1 + <span class="number">5</span> ))</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$result</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># result:</span></span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">3+4</span><br><span class="line">4+345</span><br><span class="line">9</span><br><span class="line">9</span><br><span class="line">9</span><br></pre></td></tr></table></figure>
 
       
     </div>

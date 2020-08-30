@@ -65,6 +65,81 @@
 
   
     
+    <h3 class="article-title"><a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-Pull-Up-Method/"><span>Refactoring-3-Pull Up Method</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-Pull-Up-Method/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-10-25T18:31:11.000Z">
+          2015-10-26
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>Pull Up Method 顾名思义,就是把方法向上拉,向上拉是个什么意思呢?在面向<br>对象中向上就是向父类，或者接口拉,是不是很形象？</p>
+<h2 id="Pull-Up-Method实例"><a href="#Pull-Up-Method实例" class="headerlink" title="Pull Up Method实例"></a>Pull Up Method实例</h2><p>假设这样一个场景,目前有:</p>
+<ul>
+<li>抽象类－Vehicle</li>
+<li>继承了Vehicle的离散类－ Car</li>
+<li>继承了Vehicle的离散类－ Motorcycle</li>
+</ul>
+<p>而turn方法目前只有在Car中有，那么我们把turn方法防盗Vehicle中<br>这样Motocyle也可以公用turn方法，这就是Pull Up Method.是不是很简单。。。。</p>
+<p>以下是代码实例:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Vehicle</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> <span class="keyword">extends</span> <span class="title">Vehicle</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">turn</span><span class="params">(Direction d)</span></span>&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;turing to &quot;</span>+d);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Motorcycle</span> <span class="keyword">extends</span> <span class="title">Vehicle</span></span>&#123;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">turn</span><span class="params">(Direction d)</span></span>&#123;</span><br><span class="line">          System.out.println(<span class="string">&quot;turing to &quot;</span>+d);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">enum</span> Direction &#123;</span><br><span class="line">        Left,Right</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用IDE refactor的pull up member 重构后再稍作修改后，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">VehicleRefactor</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">turn</span><span class="params">(Direction d)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;turing to &quot;</span> + d);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> <span class="keyword">extends</span> <span class="title">VehicleRefactor</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Motorcycle</span> <span class="keyword">extends</span> <span class="title">VehicleRefactor</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">enum</span> Direction &#123;</span><br><span class="line">        Left, Right</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样一个pull up method就完成了.是不是高大上的名次变成了现实的easy模式了。</p>
+<p>Dirty your hand,then you may know the truth.</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/refactoring/">refactoring</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/refactoring/">refactoring</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-PullUpField-PushDownField/"><span>Refactoring-4-Push Down Method and Pull Up and Posh Down Field</span></a></h3>
     
   
@@ -132,13 +207,13 @@
 
   
     
-    <h3 class="article-title"><a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-Extract-Interface-Method/"><span>Refactoring-7-Extract-Interface,Method,Sub Class,Supper Class</span></a></h3>
+    <h3 class="article-title"><a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-rename/"><span>Refactoring-5-rename</span></a></h3>
     
   
 
   <div class="article-top-meta">
     <span class="posted-on">
-      <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-Extract-Interface-Method/" rel="bookmark">
+      <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-rename/" rel="bookmark">
         <time class="entry-date published" datetime="2015-10-25T18:31:11.000Z">
           2015-10-26
         </time>
@@ -152,120 +227,7 @@
   <div class="article-content">
     <div class="entry">
       
-        <p>Extract-Interface,Method,Sub Class,Supper Class</p>
-<p>以上重构的方式主要是通过提起接口,方法,为了让代码有更好的可读性,可测性.</p>
-<h2 id="开始-实例代码"><a href="#开始-实例代码" class="headerlink" title="开始:实例代码"></a>开始:实例代码</h2><p>以下是一个需要重构的实例代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Receipt</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;Double&gt; discounts= Lists.newArrayList();</span><br><span class="line">    <span class="keyword">private</span> List&lt;Double&gt; itemTotals=Lists.newArrayList();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">calculateGradTotal</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">double</span> subTotal =<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (Double itemTotal : itemTotals) &#123;</span><br><span class="line">            subTotal+=itemTotal;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(discounts.size()&gt;<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">for</span> (Double discount : discounts) &#123;</span><br><span class="line">                subTotal-=discount;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">double</span> tax=subTotal*<span class="number">0.065</span>;</span><br><span class="line">        subTotal+=tax;</span><br><span class="line">        <span class="keyword">return</span> subTotal;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="抽取方法"><a href="#抽取方法" class="headerlink" title="抽取方法"></a>抽取方法</h2><p>阅读代码,根据计算方法的步骤,可以通过如下尝试抽取方法:</p>
-<ul>
-<li>calculateSubTotal</li>
-<li>calculateDiscounts</li>
-<li>calculateTax</li>
-</ul>
-<p>最后calculateGrandTotal 调用着三个方法. 由于实例代码比较简单,所以还看不出有多少优点.<br>但是如果想像calculateGrandTotal这个方法是很长的话，那么通过这种方式重构可以让计算calculateGrandTotal<br>的逻辑更加清晰.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">calculateGrandTotal</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> subTotal=calculateSubTotal();</span><br><span class="line">    subTotal=calculateDiscounts(subTotal);</span><br><span class="line">    subTotal=calculateTax(subTotal);</span><br><span class="line">    <span class="keyword">return</span> subTotal;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">calculateTax</span><span class="params">(<span class="keyword">double</span> subTotal)</span></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> tax=subTotal*<span class="number">0.065</span>;</span><br><span class="line">    subTotal+=tax;</span><br><span class="line">    <span class="keyword">return</span> subTotal;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">calculateDiscounts</span><span class="params">(<span class="keyword">double</span> subTotal)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(discounts.size()&gt;<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">for</span> (Double discount : discounts) &#123;</span><br><span class="line">            subTotal-=discount;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> subTotal;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">calculateSubTotal</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> subTotal=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (Double itemTotal : itemTotals) &#123;</span><br><span class="line">        subTotal+=itemTotal;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> subTotal;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="抽取接口"><a href="#抽取接口" class="headerlink" title="抽取接口"></a>抽取接口</h2><p>接口的好处想来大家都不叫清楚，所以有时有不同的实现出现时，抽取一个接口定义来也是一个不错的重构<br>时间。</p>
-<ul>
-<li>假设ClassRegistration 如下:</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassRegistration</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">double</span> total;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">create</span><span class="params">()</span></span>&#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;create&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transfer</span><span class="params">()</span></span>&#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;transfer&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>有一个新的ClassRegistration，所以抽取接口</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IClassRegistration</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">create</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">transfer</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后修改ClassRegistration 使他实现IClassRegistration</p>
-<ul>
-<li>客户端代码在增加一个实现之后实际上不需要修改了,或者只需要修改方法签名就可以</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RegistrationProcessor</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">processRegistration</span><span class="params">(IClassRegistration registration)</span></span>&#123;</span><br><span class="line">        registration.create();</span><br><span class="line">        <span class="keyword">return</span> registration.total();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Extract-SubClass-SupperClass"><a href="#Extract-SubClass-SupperClass" class="headerlink" title="Extract SubClass SupperClass"></a>Extract SubClass SupperClass</h2><p>这两个实际上就是合并子类，或者分解类.将方法，属性放到更合适的位置。</p>
-<h2 id="一些小结"><a href="#一些小结" class="headerlink" title="一些小结"></a>一些小结</h2><p>通过移动方法，分解方法，合并子类，分离大类，个人认为实际上完成了一些目的:</p>
-<ul>
-<li>将大方法分解到小方法，更好的维护</li>
-<li>分解不必要的依赖，可以通过新的实现来完成而不需要修改客户端代码</li>
-<li>大方法分解之后,方法负责的任务更加小，更加清楚</li>
-<li>小方法实际有更好的复用</li>
-</ul>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/refactoring/">refactoring</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/refactoring/">refactoring</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-Pull-Up-Method/"><span>Refactoring-3-Pull Up Method</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-Pull-Up-Method/" rel="bookmark">
-        <time class="entry-date published" datetime="2015-10-25T18:31:11.000Z">
-          2015-10-26
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>Pull Up Method 顾名思义,就是把方法向上拉,向上拉是个什么意思呢?在面向<br>对象中向上就是向父类，或者接口拉,是不是很形象？</p>
-<h2 id="Pull-Up-Method实例"><a href="#Pull-Up-Method实例" class="headerlink" title="Pull Up Method实例"></a>Pull Up Method实例</h2><p>假设这样一个场景,目前有:</p>
-<ul>
-<li>抽象类－Vehicle</li>
-<li>继承了Vehicle的离散类－ Car</li>
-<li>继承了Vehicle的离散类－ Motorcycle</li>
-</ul>
-<p>而turn方法目前只有在Car中有，那么我们把turn方法防盗Vehicle中<br>这样Motocyle也可以公用turn方法，这就是Pull Up Method.是不是很简单。。。。</p>
-<p>以下是代码实例:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Vehicle</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> <span class="keyword">extends</span> <span class="title">Vehicle</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">turn</span><span class="params">(Direction d)</span></span>&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;turing to &quot;</span>+d);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Motorcycle</span> <span class="keyword">extends</span> <span class="title">Vehicle</span></span>&#123;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">turn</span><span class="params">(Direction d)</span></span>&#123;</span><br><span class="line">          System.out.println(<span class="string">&quot;turing to &quot;</span>+d);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">enum</span> Direction &#123;</span><br><span class="line">        Left,Right</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用IDE refactor的pull up member 重构后再稍作修改后，代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">VehicleRefactor</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">turn</span><span class="params">(Direction d)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;turing to &quot;</span> + d);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> <span class="keyword">extends</span> <span class="title">VehicleRefactor</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Motorcycle</span> <span class="keyword">extends</span> <span class="title">VehicleRefactor</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">enum</span> Direction &#123;</span><br><span class="line">        Left, Right</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样一个pull up method就完成了.是不是高大上的名次变成了现实的easy模式了。</p>
-<p>Dirty your hand,then you may know the truth.</p>
+        <p>rename也是一个重构方式，对的，你没有看错，他确实是个重构的方法.<br>不要小看了命名，命名不是个简单活哦，他背后可能包含了历史，人文，幽默，<br>风格，立场。。。。。。。， 起个让大部分人都懂的名字可不是个容易活。</p>
 
       
     </div>

@@ -65,6 +65,206 @@
 
   
     
+    <h3 class="article-title"><a href="/2020/08/28/tips/tester-ops/5-docker-onepage/"><span>Docker One Page</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2020/08/28/tips/tester-ops/5-docker-onepage/" rel="bookmark">
+        <time class="entry-date published" datetime="2020-08-28T13:49:22.000Z">
+          2020-08-28
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="Docker-In-One-Page-30-minutes"><a href="#Docker-In-One-Page-30-minutes" class="headerlink" title="Docker In One Page(30 minutes)"></a>Docker In One Page(30 minutes)</h1><ul>
+<li>Docker Overview</li>
+<li>Docker Process</li>
+<li>Docker image</li>
+<li>Docker Components</li>
+</ul>
+<h2 id="5-Docker-Usage"><a href="#5-Docker-Usage" class="headerlink" title="5. Docker Usage"></a>5. Docker Usage</h2><ul>
+<li>Data</li>
+<li>Networking</li>
+<li>Security</li>
+<li>Configuration</li>
+<li>Monitoring</li>
+</ul>
+<p>Requirements for Container Cloud:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">• Scalability</span><br><span class="line">• Isolation</span><br><span class="line">• Dynamics</span><br><span class="line">• Virtual address (IP, Port) • Service Discovery</span><br><span class="line">• QoS</span><br><span class="line">• Integration</span><br><span class="line">• And ...</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="5-1-Data"><a href="#5-1-Data" class="headerlink" title="5.1 Data"></a>5.1 Data</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/var/lib/docker </span><br><span class="line">• aufs:UFS storage</span><br><span class="line">• containers: Information of each container</span><br><span class="line">• execdriver/native: Running container information</span><br><span class="line">• graph: Images information</span><br><span class="line">• init: docker init binary versions</span><br><span class="line">• linkgraph.db:  SQLite db file keeping the links between containers</span><br><span class="line">• repositories-aufs: Info for images</span><br><span class="line">• trust: signatures</span><br><span class="line">• volumes:Randomly created volumes on host</span><br><span class="line">• -s to select one</span><br><span class="line">• Device Mapper: Thin provisioning/loopback mounted spare file</span><br><span class="line">• Btrfs: Docker upstream/no selinux/no page caching sharing</span><br><span class="line">• OverlayFS: supported by linux upstream</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-2-Networking"><a href="#5-2-Networking" class="headerlink" title="5.2 Networking"></a>5.2 Networking</h2><ul>
+<li>veth</li>
+<li>macvlan</li>
+<li>namespace</li>
+<li>iptables</li>
+<li>DHCP:<ul>
+<li>assign IP when init/restart</li>
+</ul>
+</li>
+<li>bridge,routing table and /etc/resolve.conf</li>
+<li>DHCP service: fast</li>
+<li>iptables NAT rules/slow</li>
+<li>nftables</li>
+<li>Networking: k8s-flannel</li>
+</ul>
+<p>Solutions:</p>
+<ul>
+<li>Libnetwork</li>
+<li>SDN: Neutron Core concepts</li>
+<li>Flannel?</li>
+<li>Weave?</li>
+<li>Calico</li>
+<li>Kubernetes</li>
+</ul>
+<p>Two basic questions:</p>
+<ul>
+<li>How to Access the network?</li>
+<li>How to design the network?</li>
+</ul>
+<h2 id="5-3-Security"><a href="#5-3-Security" class="headerlink" title="5.3 Security"></a>5.3 Security</h2><ul>
+<li>container as application</li>
+<li>validate external images</li>
+<li>mutually-trusted containers on the same host</li>
+<li>Use AppArmor/SELinux</li>
+<li>Minimize privileges/Limit Resources using CGroups<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker run -it –rm –u user1 --cap-drop SETUID --cap-drop SETGID ...</span><br><span class="line">docker run -it --rm --cpuset=0,1 -c 2 -m 128m ...</span><br><span class="line">docker -d --storage-opt dm.basesize=5G</span><br></pre></td></tr></table></figure></li>
+<li>mount volume with permission</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/GDSSecurity/Docker-Secure-Deployment-Guidelines">docker security guide</a></li>
+</ul>
+<h2 id="5-4-Configuration"><a href="#5-4-Configuration" class="headerlink" title="5.4 Configuration"></a>5.4 Configuration</h2><ul>
+<li>YML configuration</li>
+<li>Decouple from application itself</li>
+<li>Configuration= Key+Value<br>store in db or env options</li>
+</ul>
+<h2 id="5-5-Monitoring"><a href="#5-5-Monitoring" class="headerlink" title="5.5 Monitoring"></a>5.5 Monitoring</h2><ul>
+<li>Container<ul>
+<li>CPU</li>
+<li>Memory</li>
+<li>IO</li>
+<li>Network</li>
+<li>FD</li>
+</ul>
+</li>
+<li>Root Tracing<ul>
+<li>docker logs</li>
+<li>Tools like ELK</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-6-Miscellaneous"><a href="#5-6-Miscellaneous" class="headerlink" title="5.6 Miscellaneous"></a>5.6 Miscellaneous</h2><ul>
+<li>Supervisor</li>
+<li>Discovery</li>
+<li>Boot order</li>
+<li>Fat Container</li>
+<li>Zoombie-reaping,syslog-ng,ssh,cron,runit</li>
+</ul>
+<h2 id="5-7-Toolings"><a href="#5-7-Toolings" class="headerlink" title="5.7 Toolings"></a>5.7 Toolings</h2><ul>
+<li>Docker Compose/Machine/Swarm</li>
+<li>K8S</li>
+<li>Mesos/Openstck?</li>
+</ul>
+<h2 id="6-Principles"><a href="#6-Principles" class="headerlink" title="6. Principles"></a>6. Principles</h2><ul>
+<li>Don’t Use Container Before understanding enough</li>
+<li>transient, stateless, and fault-tolerant</li>
+<li>IO or Security trade-off</li>
+</ul>
+<h2 id="6-Container-Ecosystem"><a href="#6-Container-Ecosystem" class="headerlink" title="6. Container Ecosystem"></a>6. Container Ecosystem</h2><ul>
+<li>Runtime</li>
+<li>packing &amp; distribution</li>
+<li>service composition</li>
+<li>machine management </li>
+<li>clustering</li>
+<li>networking - Docker Networking</li>
+<li>extensibility - Docker Plugin</li>
+</ul>
+<h2 id="6-1-Docker-Machine"><a href="#6-1-Docker-Machine" class="headerlink" title="6.1 Docker Machine"></a>6.1 Docker Machine</h2><ul>
+<li>create docker host on computer or cloud providers</li>
+<li>multiple drivers: vm,host,cloud platform</li>
+<li>docker-machine</li>
+</ul>
+<h2 id="6-2-Docker-Compose"><a href="#6-2-Docker-Compose" class="headerlink" title="6.2 Docker Compose"></a>6.2 Docker Compose</h2><ul>
+<li>Define and run mutiple-container application</li>
+<li>YAML Template to define cluster and manager it with compose</li>
+</ul>
+<h2 id="6-3-Docker-Swarm"><a href="#6-3-Docker-Swarm" class="headerlink" title="6.3 Docker Swarm"></a>6.3 Docker Swarm</h2><ul>
+<li>Docker Swarm is native clusting </li>
+<li>Serves the standard Docker API</li>
+<li>Pluggable backends</li>
+</ul>
+<h2 id="6-4-Docker-Distribution"><a href="#6-4-Docker-Distribution" class="headerlink" title="6.4 Docker Distribution"></a>6.4 Docker Distribution</h2><ul>
+<li>Registry: Habor</li>
+<li>Docker-hub</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/theupdateframework/notary">noaty</a></li>
+</ul>
+<h2 id="6-5-Docker-Security"><a href="#6-5-Docker-Security" class="headerlink" title="6.5 Docker Security"></a>6.5 Docker Security</h2><p>-<a href="dockerbench.com">dickerbench</a></p>
+<h2 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h2><ul>
+<li>CoreOS</li>
+<li>Rancher</li>
+<li>Cloud Native Application<ul>
+<li>One Codee base</li>
+<li>Dependencies</li>
+<li>Config</li>
+<li>Backing Services</li>
+<li>Build,Release,Run</li>
+<li>Processes</li>
+<li>Port Binding</li>
+<li>Concurrency</li>
+<li>Disposablity</li>
+<li>Dev/Prod Parity</li>
+<li>Logs</li>
+<li>Admin Process</li>
+</ul>
+</li>
+<li>LibContainer,appC,runC</li>
+<li>Panamax/Shipyard,cadvisor</li>
+<li>Flynn/Denis/solumn.io</li>
+<li>Drone.io/Travis</li>
+</ul>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/test-ops/">test-ops</a><a href="/tags/docker/">docker</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2020/08/12/daily/20-08-12-baeldung/"><span>一个几乎包含了大部分JAVA开发相关的教程的网站</span></a></h3>
     
   
@@ -171,68 +371,6 @@
     <span class="post-tags">
       <i class="icon-tags"></i>
         <a href="/tags/qa-thoughts/">qa-thoughts</a><a href="/tags/tiny-things/">tiny-things</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2020/08/10/qa-thoughts/decision-making/"><span>做决定，负责任</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2020/08/10/qa-thoughts/decision-making/" rel="bookmark">
-        <time class="entry-date published" datetime="2020-08-10T13:50:47.000Z">
-          2020-08-10
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>为什么突然想起这个做决定，负责任的话题？因为日常工作中，我慢慢发现很多很多的开发同学不喜欢做决定，明明很多事情再我看来可以下决定，却非要请示上级，而每一次的请示有时会有很长一个等待时间，而有时这个等待时间往往在下班前后，叫人下班也不是，不下班也不是，只能单纯的等待请示结果.</p>
-<p>举个实际的例子来说，下班前的我们测试说测试完成了，可以上线了。然后负责这个功能的开发就是准备上线，问运维什么是否可以今天上线？运维回答说明天可以上线吗？开发马上把问题给了他老板，让他老板同不同意？而他的老板由于出差，等了三个多小时才回复可以介绍今天不上线。</p>
-<p>这个只是一件事情，但是我遇到过不少类似的事情。 我不能说这样的事情有什么大的不对，但是有时细细想想，十分不是滋味。</p>
-<p>为什么呢？首先这个时候支持开发上线的测试和运维中间这三个小时是下班好还是不下班好？第二个问题，为什么开发不知道老板对这个事情的期望，事实上老板的期望的时间并不是当天晚上就一定要上线.</p>
-<p>那么对于这件事情来说，我对我们测试人员的要求就是:</p>
-<ol>
-<li>计划: 确定和同步所有人对于上线时间点的预期，让所有人都知道什么时候上线，什么时候开始做准备，如果需要在非工作时间上线，那么提前说明，兄弟部门不是不愿意加班，而是不愿意莫名其妙的加班</li>
-<li>应对变化: 如果上线出现了点意料之外的情况，那么首先判断的是是不是非要今天上线这个时间点上线，匆忙中有没有额外的风险；如果不是，那就换到明天稳妥的时间段上线，生产的稳定一定是比其他东西更重要的；不管是从KPI的角度来说，你上线一个充满着不确定的新功能而造成生产事故，这是丢了西瓜捡了芝麻的事情</li>
-<li>一定要有决定，无论上线还是不上线，一定要下决定，判断的依据其实就是，是不是事先已经计划好了，是不是重要的非要带着重大的风险上线，是不是需要所有部门都要加班支持你的程度？每个部门都有自己重要的事情，凡事不能到滥用的地步</li>
-</ol>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/qa-thoughts，tiny-things/">qa-thoughts，tiny-things</a>
     </span>
     
 

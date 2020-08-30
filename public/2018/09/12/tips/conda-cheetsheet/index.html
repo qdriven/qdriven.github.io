@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>测试人员管理 | Learning Testing/QA in Hardway | Just Do It</title>
+  <title>conda-cheatsheet | Learning Testing/QA in Hardway | Just Do It</title>
 
   
   <meta name="author" content="qmeta">
@@ -15,14 +15,14 @@
 
   
   
-  <meta name="keywords" content="thoughts">
+  <meta name="keywords" content="cheatsheet">
   
 
   <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <meta property="og:title" content="测试人员管理"/>
+  <meta property="og:title" content="conda-cheatsheet"/>
 
   <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
 
@@ -67,15 +67,15 @@
 
   
     
-    <h3 class="article-title"><span>测试人员管理</span></h3>
+    <h3 class="article-title"><span>conda-cheatsheet</span></h3>
     
   
 
   <div class="article-top-meta">
     <span class="posted-on">
-      <a href="/2019/08/26/tips/thoughts/manage-people/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-08-26T01:25:03.000Z">
-          2019-08-26
+      <a href="/2018/09/12/tips/conda-cheetsheet/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-09-12T05:49:17.000Z">
+          2018-09-12
         </time>
       </a>
     </span>
@@ -87,15 +87,79 @@
   <div class="article-content">
     <div class="entry">
       
-        <p>如何带领测试人员？先分析以下测试人员的痛点吧：</p>
-<ol>
-<li>很多重复的事情，慢慢变枯燥，同时工作量大又不被尊重</li>
-<li>价值不能直接体现，更多是开发，产品的附属物</li>
-<li>广度有，但是深入程度不够</li>
-</ol>
-<p>解决了痛点，至少让测试小朋友是开心的，我说说我的实践.</p>
-<h2 id="如何正视很多重复的事情，慢慢变枯燥，同时工作量大又不被尊重"><a href="#如何正视很多重复的事情，慢慢变枯燥，同时工作量大又不被尊重" class="headerlink" title="如何正视很多重复的事情，慢慢变枯燥，同时工作量大又不被尊重"></a>如何正视很多重复的事情，慢慢变枯燥，同时工作量大又不被尊重</h2><p>很多重复的事情，其实不是真的完全一样的事情，而是大体相似，有点小变化的内容；工作量大又不被尊重，由于大部分的工作是可以被普通人看懂的，而工作量大这件事有不会被大家所看到，最后看到的就是工作没有技术含量。这里有个误区就是工作量大不被认为是技术难题，而实际上工作量大造成的难度，被低估了。从古到今，工作量大其实就是最大的需求</p>
-<p>市场稀缺性来说，深入程度高的更稀缺，广度的可以被不同的人分解而替代</p>
+        <p>CONDA Cheat Sheet</p>
+<h2 id="Conda-Basics"><a href="#Conda-Basics" class="headerlink" title="Conda Basics"></a>Conda Basics</h2><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>conda info</td>
+<td>version</td>
+</tr>
+<tr>
+<td>conda update conda</td>
+<td>update conda</td>
+</tr>
+<tr>
+<td>conda install <package_name></td>
+<td>install package</td>
+</tr>
+<tr>
+<td>spyder</td>
+<td>run a package after installed</td>
+</tr>
+<tr>
+<td>conda update <package_name></td>
+<td>update package</td>
+</tr>
+</tbody></table>
+<h2 id="Using-Environment"><a href="#Using-Environment" class="headerlink" title="Using Environment"></a>Using Environment</h2><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>conda create –name py36 python=3.6</td>
+<td>create a new python3.6 environment</td>
+</tr>
+<tr>
+<td>source activate py36</td>
+<td>activate env</td>
+</tr>
+<tr>
+<td>conda env list</td>
+<td>list all environment</td>
+</tr>
+<tr>
+<td>conda create –clone <source> –name <target></td>
+<td>clone project</td>
+</tr>
+<tr>
+<td>conda list –explicit &gt; py36.txt</td>
+<td>save environment to a text file</td>
+</tr>
+<tr>
+<td>conda env create –file py36.txt</td>
+<td>creat environment from a text file</td>
+</tr>
+<tr>
+<td>pip install boltons</td>
+<td>pip install to the activate environment</td>
+</tr>
+<tr>
+<td>conda search PACKAGENAME</td>
+<td>search packages</td>
+</tr>
+<tr>
+<td>conda env remove –name env_name</td>
+<td>remove environment</td>
+</tr>
+</tbody></table>
 
       
     </div>
@@ -112,7 +176,7 @@
 
     <span class="post-tags">
       <i class="icon-tags"></i>
-        <a href="/tags/thoughts/">thoughts</a>
+        <a href="/tags/cheatsheet/">cheatsheet</a>
     </span>
     
 
