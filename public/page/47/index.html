@@ -65,6 +65,60 @@
 
   
     
+    <h3 class="article-title"><a href="/2014/08/24/shell/2014-08-24-shell_101_operator/"><span>Shell Learning - 操作符号</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2014/08/24/shell/2014-08-24-shell_101_operator/" rel="bookmark">
+        <time class="entry-date published" datetime="2014-08-23T18:31:11.000Z">
+          2014-08-24
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>摘自：<a target="_blank" rel="noopener" href="http://wklken.me/posts/2014/01/12/shell-script-base.html">http://wklken.me/posts/2014/01/12/shell-script-base.html</a></p>
+<h3 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">no_1=4</span><br><span class="line">no_2=5</span><br><span class="line"><span class="built_in">let</span> result=no_1+no_2</span><br><span class="line"></span><br><span class="line"><span class="built_in">let</span> result--</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$result</span></span><br><span class="line"><span class="built_in">let</span> result++</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$result</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># expr(漏洞之源？？)</span></span><br><span class="line"></span><br><span class="line">result=`expr 3+4`</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$result</span></span><br><span class="line">result=`expr <span class="variable">$no_1</span>+345`</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$result</span></span><br><span class="line">result=$[ no_1 + no_2 ]</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$result</span></span><br><span class="line">result=$[ <span class="variable">$no_1</span> + 5 ]</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$result</span></span><br><span class="line">result=$(( no_1 + <span class="number">5</span> ))</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$result</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># result:</span></span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">3+4</span><br><span class="line">4+345</span><br><span class="line">9</span><br><span class="line">9</span><br><span class="line">9</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/shell/">shell</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2014/08/24/shell/2014-08-24-shell_101_scripting/"><span>Shell Learning - Scripting</span></a></h3>
     
   
@@ -567,144 +621,6 @@ echo -e &quot;\e[1;42m Green Background \e[0m&quot;</code></pre>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_mulipliers</span>():</span></span><br><span class="line">  <span class="keyword">return</span> [<span class="keyword">lambda</span> x : i * x <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> create_mulipliers():</span><br><span class="line">      <span class="keyword">print</span> n(<span class="number">2</span>)  </span><br></pre></td></tr></table></figure>
 
 <p>Python’s closures are late binding. This means that the values of variables used in closures are looked up at the time<br>the inner function is called.</p>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/python/">python</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/python/">python</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2013/11/24/python/2013-11-24-python_libs/"><span>Python 常用包</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2013/11/24/python/2013-11-24-python_libs/" rel="bookmark">
-        <time class="entry-date published" datetime="2013-11-23T18:31:11.000Z">
-          2013-11-24
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>python常用包介绍</p>
-<h1 id="Network-Application"><a href="#Network-Application" class="headerlink" title="Network Application"></a>Network Application</h1><ul>
-<li>HTTP</li>
-<li>Requests</li>
-</ul>
-<h1 id="Distrbuted-systems"><a href="#Distrbuted-systems" class="headerlink" title="Distrbuted systems"></a>Distrbuted systems</h1><ul>
-<li>ZeroMQ</li>
-<li>RabbitMQ</li>
-</ul>
-<h1 id="Web-applications"><a href="#Web-applications" class="headerlink" title="Web applications"></a>Web applications</h1><ul>
-<li>WSGI</li>
-<li>Flask</li>
-<li>URL routing</li>
-<li>Template Engine</li>
-<li>development Web Server</li>
-<li>Django</li>
-<li>Werkzeug</li>
-<li>Tornado</li>
-<li>Pyramid</li>
-<li>Nginx</li>
-<li>WSGI Server</li>
-<li>Gunicorn</li>
-<li>uWSGI</li>
-</ul>
-<p>The majority of self-hosted Python applications today are hosted with a WSGI server such as Gunicorn, either directly or behind a lightweight web server such as nginx.<br>The WSGI servers serve the Python applications while the web server handles tasks better suited for it such as static file serving, request routing, DDoS protection, and basic authentication.</p>
-<ul>
-<li>Jinja2</li>
-<li>Chameleon</li>
-<li>lxml and Requests</li>
-<li>curl</li>
-<li>grep</li>
-<li>httpie</li>
-<li>git</li>
-<li>clint</li>
-<li>click</li>
-<li>docopt</li>
-<li>plac</li>
-<li>cliff</li>
-<li>camelot</li>
-<li>cocoa</li>
-<li>GTK</li>
-<li>kivy</li>
-<li>pyobjc</li>
-<li>pyside</li>
-<li>pyqt</li>
-<li>pyjamasDesktop</li>
-<li>DB-API</li>
-<li>SQLAlchemy</li>
-<li>Django ORM</li>
-<li>peewee</li>
-<li>ponyORM</li>
-<li>SQLObject</li>
-</ul>
-<h2 id="Networking"><a href="#Networking" class="headerlink" title="Networking"></a>Networking</h2><ul>
-<li>twisted</li>
-<li>pyzmq</li>
-<li>gevent</li>
-</ul>
-<h2 id="System-Administration"><a href="#System-Administration" class="headerlink" title="System Administration"></a>System Administration</h2><ul>
-<li>Fabric</li>
-<li>Salt</li>
-<li>Psutil</li>
-<li>Ansible</li>
-<li>Chef</li>
-<li>Puppet</li>
-<li>BluePrint</li>
-<li>Buildout</li>
-</ul>
-<h2 id="CI"><a href="#CI" class="headerlink" title="CI"></a>CI</h2><ul>
-<li>Jenkins</li>
-<li>Tox</li>
-<li>Buildout</li>
-<li>Mule</li>
-<li>Travis-CI</li>
-</ul>
-<h2 id="Context-And-Tools"><a href="#Context-And-Tools" class="headerlink" title="Context And Tools"></a>Context And Tools</h2><ul>
-<li>the GIL</li>
-<li>Numba</li>
-</ul>
 
       
     </div>

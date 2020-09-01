@@ -65,6 +65,75 @@
 
   
     
+    <h3 class="article-title"><a href="/2016/05/11/python/2016-05-11-pythonic/"><span>Pythonic,What is it</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/05/11/python/2016-05-11-pythonic/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-05-11T02:41:15.000Z">
+          2016-05-11
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="Pythonic-Style"><a href="#Pythonic-Style" class="headerlink" title="Pythonic Style"></a>Pythonic Style</h1><p>Pythonic 是种很有趣的风格，有些实际上python的惯用方法和特有方法。</p>
+<h2 id="Switch-Two-variables"><a href="#Switch-Two-variables" class="headerlink" title="Switch Two variables"></a>Switch Two variables</h2><p>python 通过tuple进行pack，unpack就不需要temp变量</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a,b=b,a</span><br></pre></td></tr></table></figure>
+<p>如果其他语言需要swap的话，就需要一个temp变量，然后再置换。</p>
+<h2 id="P-VS-NP"><a href="#P-VS-NP" class="headerlink" title="P VS NP"></a>P VS NP</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># P</span></span><br><span class="line">a=<span class="number">3</span></span><br><span class="line">b=<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span>&lt;=b&lt;=a <span class="keyword">and</span> a&lt;<span class="number">10</span> <span class="comment"># return True</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## NP</span></span><br><span class="line">b&gt;=<span class="number">1</span> <span class="keyword">and</span> b&lt;=a <span class="keyword">and</span> a&lt;<span class="number">10</span> <span class="comment"># True</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>reverse string</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reverse_str</span>(<span class="params">s</span>):</span></span><br><span class="line">  <span class="keyword">return</span> s[::<span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reverse_str</span>(<span class="params">s</span>):</span></span><br><span class="line">  t=<span class="string">&#x27;&#x27;</span></span><br><span class="line">  <span class="keyword">for</span> x <span class="keyword">in</span> xrange(len(s)<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>):</span><br><span class="line">    t+=s[x]</span><br><span class="line">  <span class="keyword">return</span> t</span><br><span class="line"></span><br><span class="line"><span class="comment"># join the strList</span></span><br><span class="line">str_list=[<span class="string">&quot;Python&quot;</span>,<span class="string">&quot;is&quot;</span>,<span class="string">&quot;good&quot;</span>]</span><br><span class="line">res=<span class="string">&#x27;,&#x27;</span>.join(str_list) <span class="comment"># pythonic</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># NP:</span></span><br><span class="line">res = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> strList:</span><br><span class="line">    res += s + <span class="string">&#x27; &#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># P</span></span><br><span class="line">numList = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]   </span><br><span class="line"></span><br><span class="line">sum = sum(numList)  <span class="comment">#sum = 15</span></span><br><span class="line">maxNum = max(numList) <span class="comment">#maxNum = 5</span></span><br><span class="line">minNum = min(numList) <span class="comment">#minNum = 1</span></span><br><span class="line"><span class="keyword">from</span> operator <span class="keyword">import</span> mul</span><br><span class="line"><span class="comment"># reduce is interesting</span></span><br><span class="line">prod = reduce(mul, numList, <span class="number">1</span>) <span class="comment">##prod = 120 默认值传1以防空列表报错</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># NP</span></span><br><span class="line">sum = <span class="number">0</span></span><br><span class="line">maxNum = -float(<span class="string">&#x27;inf&#x27;</span>)</span><br><span class="line">minNum = float(<span class="string">&#x27;inf&#x27;</span>)</span><br><span class="line">prod = <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> numList:</span><br><span class="line">    <span class="keyword">if</span> num &gt; maxNum:</span><br><span class="line">        maxNum = num</span><br><span class="line">    <span class="keyword">if</span> num &lt; minNum:</span><br><span class="line">        minNum = num</span><br><span class="line">    sum += num</span><br><span class="line">    prod *= num</span><br><span class="line"><span class="comment"># sum = 15 maxNum = 5 minNum = 1 prod = 120</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="列表推导式"><a href="#列表推导式" class="headerlink" title="列表推导式"></a>列表推导式</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">l = [x*x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10</span>) <span class="keyword">if</span> x % <span class="number">3</span> == <span class="number">0</span>]</span><br><span class="line"><span class="comment">#l = [0, 9, 36, 81]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">##NP</span></span><br><span class="line">l = []</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    <span class="keyword">if</span> x % <span class="number">3</span> == <span class="number">0</span>:</span><br><span class="line">        l.append(x*x)</span><br><span class="line"><span class="comment">#l = [0, 9, 36, 81]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/python/">python</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/python/">python</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2016/04/24/tips/interview/2016-04-24-12factors/"><span>12 factors Application</span></a></h3>
     
   
@@ -268,136 +337,6 @@
     <span class="post-tags">
       <i class="icon-tags"></i>
         <a href="/tags/git/">git</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2016/04/21/tips/interview/2016-04-20-Linux基础/"><span>Linux 基础</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2016/04/21/tips/interview/2016-04-20-Linux基础/" rel="bookmark">
-        <time class="entry-date published" datetime="2016-04-20T18:31:11.000Z">
-          2016-04-21
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h1 id="Linux-的使用的一些基本知识"><a href="#Linux-的使用的一些基本知识" class="headerlink" title="Linux 的使用的一些基本知识"></a>Linux 的使用的一些基本知识</h1><ul>
-<li>Linux LVM 硬盘挂载</li>
-<li>Linux 的用户安全</li>
-<li>Linux 网络监控</li>
-</ul>
-<h2 id="Linux-LVM-硬盘挂载"><a href="#Linux-LVM-硬盘挂载" class="headerlink" title="Linux LVM 硬盘挂载"></a>Linux LVM 硬盘挂载</h2><p>使用sda硬盘挂在到/var 目录，当硬盘用完之后就没有办法再挂载到/var 下面了，那么如何解决呢？ 使用LVM. LVM是磁盘分区和文件系统之间添加一个逻辑层，来为文件系统屏蔽磁盘分区布局，提供一个抽象的盘卷。</p>
-<p>LVM术语：</p>
-<ul>
-<li>physical media,/dev/hda1,/dev/sda，物理存储介质</li>
-<li>physical volume, 物理卷，和物力存储介质相比较包含了LVM的管理参数</li>
-<li>volume group,LVM 卷组类似非LVM系统的物理硬盘，可以创建多个物理卷</li>
-<li>logic volume，逻辑卷LVM逻辑卷类似于非LVM系统的硬盘分区</li>
-<li>physical extend：一个物理卷physical extends的基本单元，LVM寻址的最小单位</li>
-<li>logic extend：逻辑卷被划分为称为LE的可被寻址的基本单位</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PV:是物理的磁盘分区</span><br><span class="line">VG:LVM中的物理的磁盘分区，也就是PV，必须加入VG，可以将VG理解为一个仓库或者是几个大的硬盘。</span><br><span class="line">LV：也就是从VG中划分的逻辑分区</span><br></pre></td></tr></table></figure>
-
-<h2 id="Linux-的用户安全"><a href="#Linux-的用户安全" class="headerlink" title="Linux 的用户安全"></a>Linux 的用户安全</h2><ul>
-<li>root</li>
-<li>sudo</li>
-<li>分组</li>
-<li>权限 Linux的-rwxrwxrwx权限管理也可谓人尽皆知 先rwx的权限管理是基于用户和组的，并且只是大致的分为owner|group|other这三类，无法再作更加细粒度的划分。有鉴于此，Linux目前默认是有ACL(Access Control List)管理的，所谓ACL就是能够提供更加细粒度的用户和组管理，比如可以明确哪个user可以有什么样的权限。如下示例</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getfacl abcd</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>PAM</li>
-</ul>
-<p>PAM只需要简单了解就行，是一个可插拔的认证模块,开发Linux的极客们搞出来的可复用的一个组件。举个例子，现在有一个app，想要验证当前的登录用户是否有权限操作某个目录，那么在PAM里面有现成的模块，app只需要include这个模块，给出一个配置文件，就可以了。有一个非常好的关于PAM的视频教程，请看这里</p>
-<p>PAM是应用程序用来进行身份验证的。早期的身份验证和应用程序本身耦合，后来把身份验证单独抽出来，通过PAM来进行管理 /etc/pam.d/xxx 是能用pam来进行管理的应用程序PAM设置，在安装应用程序的时候安装。/etc/security/mmm, /lib/security/pam_mmm是一套。</p>
-<h2 id="Linux-网络监控"><a href="#Linux-网络监控" class="headerlink" title="Linux 网络监控"></a>Linux 网络监控</h2><ul>
-<li>iptables</li>
-<li>router</li>
-<li>netstat</li>
-</ul>
-<h2 id="Linux的文件系统"><a href="#Linux的文件系统" class="headerlink" title="Linux的文件系统"></a>Linux的文件系统</h2><h2 id="Linux的Service"><a href="#Linux的Service" class="headerlink" title="Linux的Service"></a>Linux的Service</h2><ul>
-<li>/etc/init.d</li>
-<li>/usr/bin,/usr/sbin,/usr/local/bin</li>
-<li>log /var/log/messages</li>
-</ul>
-<h2 id="Linux-Disk"><a href="#Linux-Disk" class="headerlink" title="Linux Disk"></a>Linux Disk</h2><ul>
-<li>df -lah</li>
-<li>fdisk -l</li>
-<li>LVM</li>
-<li>vmstat,top</li>
-</ul>
-<h2 id="Linux-网络"><a href="#Linux-网络" class="headerlink" title="Linux 网络"></a>Linux 网络</h2><p>网络的坑很多，需要把网络搞通没个3，4年很难。下面从网络的配置文件着手，简单理一下网络方面的内容。网络最难的方面应该是如何搭建一个合理的高效的局域网或者城域网，这个需要有专业的网络知识。</p>
-<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p>/etc/hosts私有IP对应主机名 /etc/resolv.confnameserver DNS的IP /etc/sysconfig/network其中NETWORKING=要不要有网络，HOSTNAME=主机名，NETWORKING_IPV6=支持ipv6 /etc/sysconfig/network-scripts/ifcfg-xxx其中DEVICE=网卡代号，BOOTPROTO=是否使用dhcp，HWADDR，IPADDR，NETMASK，ONBOOT，GATEWAY</p>
-<h3 id="与网络有关的一些命令"><a href="#与网络有关的一些命令" class="headerlink" title="与网络有关的一些命令"></a>与网络有关的一些命令</h3><ul>
-<li>router -n查看路由的命令，特别是要看带G的，表示gateway，而带U的表示up。</li>
-<li>netstat -anp查看所有启动的tcp,udp,unix stream的应用程序，以及他们的状态，具体可以参考TCP/IP,JavaSocket简单分析一文。</li>
-</ul>
-<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><p><a target="_blank" rel="noopener" href="http://linuxtools-rst.readthedocs.org/zh_CN/latest/base/index.html">一个好的Linux命令参考网站</a></p>
-<h3 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h3><ul>
-<li>top 特别注意load</li>
-<li>ps aux和ps -ef 特别注意进程状态</li>
-<li>vmstat 1表示每秒采集一次</li>
-<li>sar -u 1 查看所有cpu相关的运行时间</li>
-</ul>
-<h3 id="Memory"><a href="#Memory" class="headerlink" title="Memory"></a>Memory</h3><ul>
-<li>free</li>
-<li>vmstat 1 注意其中的swap ram block之间的关系</li>
-<li>sar -r 1 内存使用率</li>
-<li>sar -W 1 查看swap，查询是否由于内存不足产生大量内存交换</li>
-</ul>
-<h3 id="IO"><a href="#IO" class="headerlink" title="IO"></a>IO</h3><ul>
-<li>lsof -i:port 查询哪个进程占用了这个端口号</li>
-<li>lsof -u username 用户打开的文件</li>
-<li>lsof -p pid 进程打开的文件</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">################################################</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   author  huachao</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   date    2015-12-09</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   email   i@huachao.me</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   web     blog.huachao.me</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">################################################</span></span></span><br><span class="line"></span><br><span class="line">flagFile=&quot;/root/centos6-init.executed&quot;</span><br><span class="line"></span><br><span class="line">precheck()&#123;</span><br><span class="line"></span><br><span class="line">    if [[ &quot;$(whoami)&quot; != &quot;root&quot; ]]; then</span><br><span class="line">    echo &quot;please run this script as root .&quot; &gt;&amp;2</span><br><span class="line">    exit 1</span><br><span class="line">    fi</span><br><span class="line"></span><br><span class="line">    if [ -f &quot;$flagFile&quot; ]; then</span><br><span class="line">    echo &quot;this script had been executed, please do not execute again!!&quot; &gt;&amp;2</span><br><span class="line">    exit 1</span><br><span class="line">    fi</span><br><span class="line"></span><br><span class="line">    echo -e &quot;\033[31m WARNING! THIS SCRIPT WILL \033[0m\n&quot;</span><br><span class="line">    echo -e &quot;\033[31m *1 update the system; \033[0m\n&quot;</span><br><span class="line">    echo -e &quot;\033[31m *2 setup security permissions; \033[0m\n&quot;</span><br><span class="line">    echo -e &quot;\033[31m *3 stop irrelevant services; \033[0m\n&quot;</span><br><span class="line">    echo -e &quot;\033[31m *4 reconfig kernel parameters; \033[0m\n&quot;</span><br><span class="line">    echo -e &quot;\033[31m *5 setup timezone and sync time periodically; \033[0m\n&quot;</span><br><span class="line">    echo -e &quot;\033[31m *6 setup tcp_wrapper and netfilter firewall; \033[0m\n&quot;</span><br><span class="line">    echo -e &quot;\033[31m *7 setup vsftpd; \033[0m\n&quot;</span><br><span class="line">    sleep 5</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">yum_update()&#123;</span><br><span class="line">    yum -y update</span><br><span class="line">    #update system at 5:40pm daily</span><br><span class="line">    echo &quot;40 3 * * * root yum -y update &amp;&amp; yum clean packages&quot; &gt;&gt; /etc/crontab</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">permission_config()&#123;</span><br><span class="line">    #chattr +i /etc/shadow</span><br><span class="line">    #chattr +i /etc/passwd</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">selinux()&#123;</span><br><span class="line">    sed -i &#x27;s/SELINUX=disabled/SELINUX=enforcing/g&#x27; /etc/sysconfig/selinux</span><br><span class="line">    setenforce 1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">stop_services()&#123;</span><br><span class="line">    for server in `chkconfig --list |grep 3:on|awk &#x27;&#123;print $1&#125;&#x27;`</span><br><span class="line">    do</span><br><span class="line">        chkconfig --level 3 $server off</span><br><span class="line">    done</span><br><span class="line"></span><br><span class="line">    for server in crond network rsyslog sshd iptables</span><br><span class="line">    do</span><br><span class="line">       chkconfig --level 3 $server on</span><br><span class="line">    done</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">limits_config()&#123;</span><br><span class="line">cat &gt;&gt; /etc/security/limits.conf &lt;&lt;EOF</span><br><span class="line">* soft nproc 65535</span><br><span class="line">* hard nproc 65535</span><br><span class="line">* soft nofile 65535</span><br><span class="line">* hard nofile 65535</span><br><span class="line">EOF</span><br><span class="line">echo &quot;ulimit -SH 65535&quot; &gt;&gt; /etc/rc.local</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sysctl_config()&#123;</span><br><span class="line">sed -i &#x27;s/net.ipv4.tcp_syncookies.*$/net.ipv4.tcp_syncookies = 1/g&#x27; /etc/sysctl.conf</span><br><span class="line">sed -i &#x27;s/net.ipv4.ip_forward.*$/net.ipv4.ip_forward = 1/g&#x27; /etc/sysctl.conf</span><br><span class="line">cat &gt;&gt; /etc/sysctl.conf &lt;&lt;EOF</span><br><span class="line">net.ipv4.tcp_max_syn_backlog = 65536</span><br><span class="line">net.core.netdev_max_backlog =  32768</span><br><span class="line">net.core.somaxconn = 32768</span><br><span class="line">net.core.wmem_default = 8388608</span><br><span class="line">net.core.rmem_default = 8388608</span><br><span class="line">net.core.rmem_max = 16777216</span><br><span class="line">net.core.wmem_max = 16777216</span><br><span class="line">net.ipv4.tcp_timestamps = 0</span><br><span class="line">net.ipv4.tcp_synack_retries = 2</span><br><span class="line">net.ipv4.tcp_syn_retries = 2</span><br><span class="line">net.ipv4.tcp_tw_recycle = 1</span><br><span class="line">net.ipv4.tcp_tw_reuse = 1</span><br><span class="line">net.ipv4.tcp_mem = 94500000 915000000 927000000</span><br><span class="line">net.ipv4.tcp_max_orphans = 3276800</span><br><span class="line">net.ipv4.ip_local_port_range = 1024  65535</span><br><span class="line">EOF</span><br><span class="line">sysctl -p</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sshd_config()&#123;</span><br><span class="line">    if [ ! -f &quot;/root/.ssh/id_rsa.pub&quot; ]; then</span><br><span class="line">    ssh-keygen -t rsa -P &#x27;&#x27; -f /root/.ssh/id_rsa</span><br><span class="line">    cat /root/.ssh/id_rsa.pub &gt;&gt; /root/.ssh/authorized_keys</span><br><span class="line">    chmod 600 /root/.ssh/authorized_keys</span><br><span class="line">    fi</span><br><span class="line"></span><br><span class="line">    #sed -i &#x27;/^#Port/s/#Port 22/Port 65535/g&#x27; /etc/ssh/sshd_config</span><br><span class="line">    sed -i &#x27;/^#UseDNS/s/#UseDNS no/UseDNS yes/g&#x27; /etc/ssh/sshd_config</span><br><span class="line">    #sed -i &#x27;s/#PermitRootLogin yes/PermitRootLogin no/g&#x27; /etc/ssh/sshd_config</span><br><span class="line">    sed -i &#x27;s/#PermitEmptyPasswords yes/PermitEmptyPasswords no/g&#x27; /etc/ssh/sshd_config</span><br><span class="line">    sed -i &#x27;s/PasswordAuthentication yes/PasswordAuthentication no/g&#x27; /etc/ssh/sshd_config</span><br><span class="line">    /etc/init.d/sshd restart</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">time_config()&#123;</span><br><span class="line">    #timezone</span><br><span class="line">    echo &quot;TZ=&#x27;Asia/Shanghai&#x27;; export TZ&quot; &gt;&gt; /etc/profile</span><br><span class="line"></span><br><span class="line">    # Update time</span><br><span class="line">    if [! -f &quot;/usr/sbin/ntpdate&quot;]; then</span><br><span class="line">        yum -y install ntpdate</span><br><span class="line">    fi</span><br><span class="line"></span><br><span class="line">    /usr/sbin/ntpdate pool.ntp.org</span><br><span class="line">    echo &quot;30 3 * * * root (/usr/sbin/ntpdate pool.ntp.org &amp;&amp; /sbin/hwclock -w) &amp;&gt; /dev/null&quot; &gt;&gt; /etc/crontab</span><br><span class="line">    /sbin/service crond restart</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">iptables()&#123;</span><br><span class="line">cat &gt; /etc/sysconfig/iptables &lt;&lt; EOF</span><br><span class="line"><span class="meta">#</span><span class="bash"> Firewall configuration written by system-config-securitylevel</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Manual customization of this file is not recommended.</span></span><br><span class="line">*filter</span><br><span class="line">:INPUT DROP [0:0]</span><br><span class="line">:FORWARD ACCEPT [0:0]</span><br><span class="line">:OUTPUT ACCEPT [0:0]</span><br><span class="line">:syn-flood - [0:0]</span><br><span class="line">-A INPUT -i lo -j ACCEPT</span><br><span class="line">-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT</span><br><span class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT</span><br><span class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT</span><br><span class="line">-A INPUT -p icmp -m limit --limit 100/sec --limit-burst 100 -j ACCEPT</span><br><span class="line">-A INPUT -p icmp -m limit --limit 1/s --limit-burst 10 -j ACCEPT</span><br><span class="line">-A INPUT -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -j syn-flood</span><br><span class="line">-A INPUT -j REJECT --reject-with icmp-host-prohibited</span><br><span class="line">-A syn-flood -p tcp -m limit --limit 3/sec --limit-burst 6 -j RETURN</span><br><span class="line">-A syn-flood -j REJECT --reject-with icmp-port-unreachable</span><br><span class="line">COMMIT</span><br><span class="line">EOF</span><br><span class="line">/sbin/service iptables restart</span><br><span class="line">source /etc/profile</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">other()&#123;</span><br><span class="line">    # initdefault</span><br><span class="line">    sed -i &#x27;s/^id:.*$/id:3:initdefault:/&#x27; /etc/inittab</span><br><span class="line">    /sbin/init q</span><br><span class="line"></span><br><span class="line">    # PS1</span><br><span class="line">    #echo &#x27;PS1=&quot;\[\e[32m\][\[\e[35m\]\u\[\e[m\]@\[\e[36m\]\h \[\e[31m\]\w\[\e[32m\]]\[\e[36m\]$\[\e[m\]&quot;&#x27; &gt;&gt; /etc/profile</span><br><span class="line"></span><br><span class="line">    # Wrong password five times locked 180s</span><br><span class="line">    sed -i &#x27;4a auth        required      pam_tally2.so deny=5 unlock_time=180&#x27; /etc/pam.d/system-auth</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vsftpd_setup()&#123;</span><br><span class="line">    yum -y install vsftpd</span><br><span class="line">    mv /etc/vsftpd/vsftpd.conf /etc/vsftpd/vsftpd.conf.bak</span><br><span class="line">    touch /etc/vsftpd/chroot_list</span><br><span class="line">    setsebool -P ftp_home_dir=1</span><br><span class="line">cat &gt;&gt; /etc/vsftpd/vsftpd.conf &lt;&lt;EOF</span><br><span class="line"><span class="meta">#</span><span class="bash"> normal user settings</span></span><br><span class="line">local_enable=YES</span><br><span class="line">write_enable=YES</span><br><span class="line">local_umask=022</span><br><span class="line">chroot_local_user=YES</span><br><span class="line">chroot_list_enable=YES</span><br><span class="line">chroot_list_file=/etc/vsftpd/chroot_list</span><br><span class="line">local_max_rate=10000000</span><br><span class="line"><span class="meta">#</span><span class="bash"> anonymous settings</span></span><br><span class="line">anonymous_enable=YES</span><br><span class="line">no_anon_password=YES</span><br><span class="line">anon_max_rate=1000000</span><br><span class="line">data_connection_timeout=60</span><br><span class="line">idle_session_timeout=600</span><br><span class="line"><span class="meta">#</span><span class="bash"> ssl settings</span></span><br><span class="line"><span class="meta">#</span><span class="bash">ssl_enable=YES             </span></span><br><span class="line"><span class="meta">#</span><span class="bash">allow_anon_ssl=NO           </span></span><br><span class="line"><span class="meta">#</span><span class="bash">force_local_data_ssl=YES    </span></span><br><span class="line"><span class="meta">#</span><span class="bash">force_local_logins_ssl=YES  </span></span><br><span class="line"><span class="meta">#</span><span class="bash">ssl_tlsv1=YES               </span></span><br><span class="line"><span class="meta">#</span><span class="bash">ssl_sslv2=NO</span></span><br><span class="line"><span class="meta">#</span><span class="bash">ssl_sslv3=NO</span></span><br><span class="line"><span class="meta">#</span><span class="bash">rsa_cert_file=/etc/vsftpd/vsftpd.pem</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> server settings</span></span><br><span class="line">max_clients=50</span><br><span class="line">max_per_ip=5</span><br><span class="line">use_localtime=YES</span><br><span class="line">dirmessage_enable=YES</span><br><span class="line">xferlog_enable=YES</span><br><span class="line">connect_from_port_20=YES</span><br><span class="line">xferlog_std_format=YES</span><br><span class="line">listen=YES</span><br><span class="line">pam_service_name=vsftpd</span><br><span class="line">tcp_wrappers=YES</span><br><span class="line"><span class="meta">#</span><span class="bash">banner_file=/etc/vsftpd/welcome.txt</span></span><br><span class="line">dual_log_enable=YES</span><br><span class="line">pasv_min_port=65400</span><br><span class="line">pasv_max_port=65410</span><br><span class="line">EOF</span><br><span class="line">    chkconfig --level 3 vsftpd on</span><br><span class="line">    service vsftpd restart</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main()&#123;</span><br><span class="line">    precheck</span><br><span class="line"></span><br><span class="line">    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;updating the system            &quot;</span><br><span class="line">    yum_update</span><br><span class="line"></span><br><span class="line">    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;re-config permission           &quot;</span><br><span class="line">    permission_config</span><br><span class="line"></span><br><span class="line">    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;enabling selinux               &quot;</span><br><span class="line">    selinux</span><br><span class="line"></span><br><span class="line">    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;stopping irrelevant services   &quot;</span><br><span class="line">    stop_services</span><br><span class="line"></span><br><span class="line">    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;/etc/security/limits.config    &quot;</span><br><span class="line">    limits_config</span><br><span class="line"></span><br><span class="line">    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;/etc/sysctl.conf               &quot;</span><br><span class="line">    sysctl_config</span><br><span class="line"></span><br><span class="line">    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;sshd re-configuring            &quot;</span><br><span class="line">    sshd_config</span><br><span class="line"></span><br><span class="line">    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;configuring time               &quot;</span><br><span class="line">    time_config</span><br><span class="line"></span><br><span class="line">    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;configuring firewall           &quot;</span><br><span class="line"><span class="meta">#</span><span class="bash">   iptables</span></span><br><span class="line"></span><br><span class="line">    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;someother stuff                &quot;</span><br><span class="line">    other</span><br><span class="line"></span><br><span class="line">    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;done! rebooting                &quot;</span><br><span class="line">    touch &quot;$flagFile&quot;</span><br><span class="line">    sleep 5</span><br><span class="line">    reboot</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/interview/">interview</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/interview/">interview</a>
     </span>
     
 

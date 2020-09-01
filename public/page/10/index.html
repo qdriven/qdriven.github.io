@@ -65,6 +65,95 @@
 
   
     
+    <h3 class="article-title"><a href="/2019/12/01/shell/5.nginx/"><span></span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/12/01/shell/5.nginx/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-12-01T13:27:18.000Z">
+          2019-12-01
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h1><p>file:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/nginx/nginx.conf</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>work_processor</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux | grep nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>worker_cpu_affinity</p>
+</li>
+<li><p>gzip</p>
+</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    gzip on;</span><br><span class="line">    gzip_comp_level 3;</span><br><span class="line">    gzip_types application/javascript application/xml;</span><br><span class="line">    gzip_static on;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>IPVS: Internet Protocol Virtual Server</li>
+<li>Weighted Least Connection</li>
+<li>Worker Server</li>
+<li>ipvsadmin</li>
+<li>sysctl</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>route<ul>
+<li>Destination</li>
+<li>Gateway</li>
+<li>Flags</li>
+<li>Metric</li>
+<li>Ref</li>
+<li>use</li>
+<li>Iface</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route add default gw 192.168.1.4 eth1</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Round-Robin</li>
+<li>Weighted Round-Robin</li>
+<li>Least-Connection</li>
+<li>Weighted Least-Connections</li>
+<li>Locality-Based Least-Connections</li>
+<li>SSL/HTTPS: Number Factorization/Discreet Logarithm</li>
+</ul>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2019/12/01/shell/1-dns/"><span></span></a></h3>
     
   
@@ -189,88 +278,6 @@
     <span class="post-tags">
       <i class="icon-tags"></i>
         <a href="/tags/QATrap/">QATrap</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2019/11/22/python/read_excel_yml/"><span>数据驱动测试- 测试用例加载</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/11/22/python/read_excel_yml/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-11-21T18:31:11.000Z">
-          2019-11-22
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>使用pytest作为测试工具，有一个pytest.parameterized 的装饰器可以用来进行数据驱动测试，以下是一个最简单的例子：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@pytest.mark.parametrize(&quot;id_num&quot;, (1, 2, 3, 4, 5))</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_issue_plain</span>(<span class="params">id_num</span>):</span></span><br><span class="line">    print(id_num)</span><br></pre></td></tr></table></figure>
-
-<p>test_issue方法有一个参数名称是 id_num, 这个值可以在测试过程中不断的被改变，但是实际中接口自动化中，有时我们会使用一些excel，yml作为外部测试用例来传入参数进行测试，那怎么样才能实现这个功能呢？</p>
-<h2 id="case-loader-例子说明"><a href="#case-loader-例子说明" class="headerlink" title="case loader 例子说明"></a>case loader 例子说明</h2><p>简单来说，一般我们测试用例传入的数据包括：</p>
-<ul>
-<li>test_desc: 测试用例描述</li>
-<li>inputs: 输入参数，可以作为json格式</li>
-<li>expected: 期望结果，可以是json格式</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@pytest.mark.parametrize(&quot;test_desc,input,expected&quot;, load_case_by_yml(&quot;testcases.yml&quot;))</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_issue_plain</span>(<span class="params">test_desc, input, expected</span>):</span></span><br><span class="line">    print(test_desc, input, expected)</span><br></pre></td></tr></table></figure>
-
-<p>所以我们通过程序加载后的内容也就是load_case_by_yml返回的应该是这样的一个list：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(test_desc,inputs,expected),......]</span><br></pre></td></tr></table></figure>
-
-<h2 id="case-loader-实现"><a href="#case-loader-实现" class="headerlink" title="case loader 实现"></a>case loader 实现</h2><p>有了目标，我们就动手，使用yml包非常容易的下面的功能:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_case_by_yml</span>(<span class="params">path</span>):</span></span><br><span class="line">    <span class="keyword">with</span> open(path, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> stream:</span><br><span class="line">        raw_yaml_result = yaml.safe_load(stream)</span><br><span class="line">    cases = raw_yaml_result[<span class="string">&quot;tests&quot;</span>]</span><br><span class="line">    parameterized_case = []</span><br><span class="line">    <span class="keyword">for</span> case <span class="keyword">in</span> cases:</span><br><span class="line">        parameterized_case.append(tuple(case.values()))</span><br><span class="line">    <span class="keyword">return</span> parameterized_case</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>对应测试用例的yaml如下:</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">tests:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">test_desc:</span> <span class="string">test1</span></span><br><span class="line">    <span class="attr">input:</span> &#123;<span class="string">&quot;k1&quot;</span><span class="string">:&quot;v1&quot;</span>&#125;</span><br><span class="line">    <span class="attr">expected:</span> &#123;<span class="string">&quot;k1&quot;</span><span class="string">:&quot;v1&quot;</span>&#125;</span><br><span class="line">  <span class="bullet">-</span> <span class="attr">test_desc:</span> <span class="string">test2</span></span><br><span class="line">    <span class="attr">input:</span> &#123;<span class="string">&quot;k1&quot;</span><span class="string">:&quot;v2&quot;</span>&#125;</span><br><span class="line">    <span class="attr">expected:</span> &#123;<span class="string">&quot;k1&quot;</span><span class="string">:&quot;v2&quot;</span>&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>通过这个方式，就非常容易的实现了数据驱动，同时也可以让自己的测试数据更好的被阅读和管理.</p>
-<p>每天1小时，可以让你的效率更好. 明天可以自己试试如何从excel加载实现类似功能.</p>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/automation，python/">automation，python</a>, <a href="/categories/automation，python/daily-automation-tip/">daily-automation-tip</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/daily-automation-tip/">daily-automation-tip</a><a href="/tags/automation/">automation</a>
     </span>
     
 

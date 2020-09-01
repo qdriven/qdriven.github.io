@@ -65,6 +65,52 @@
 
   
     
+    <h3 class="article-title"><a href="/2019/12/04/shell/mac_lsof/"><span></span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/12/04/shell/mac_lsof/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-12-04T01:53:54.000Z">
+          2019-12-04
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="Shell-Daily-Commands"><a href="#Shell-Daily-Commands" class="headerlink" title="Shell Daily Commands"></a>Shell Daily Commands</h1><h2 id="MAC-Mac-Port-Listener"><a href="#MAC-Mac-Port-Listener" class="headerlink" title="[MAC] Mac Port Listener"></a>[MAC] Mac Port Listener</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof -Pni4 | grep LISTEN</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2019/12/04/tips/locks/"><span></span></a></h3>
     
   
@@ -190,154 +236,6 @@
 <h2 id="不允许出现多层缩进"><a href="#不允许出现多层缩进" class="headerlink" title="不允许出现多层缩进"></a>不允许出现多层缩进</h2><p>A simple rule, but useful. Consider not use too many if else. maybe one if/else is enough.</p>
 <h2 id="SimpleDateFormat"><a href="#SimpleDateFormat" class="headerlink" title="SimpleDateFormat"></a>SimpleDateFormat</h2><p>SimpleDateFormat is not thread safe, so it is wrong when use it as a static variable in a class.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sample</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> DateFormat format = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy.MM.dd&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getCurrentDateText</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> format.format(<span class="keyword">new</span> Date());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2019/12/01/shell/iptable-nat/"><span></span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/12/01/shell/iptable-nat/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-12-01T13:28:08.000Z">
-          2019-12-01
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h1 id="iptables"><a href="#iptables" class="headerlink" title="iptables"></a>iptables</h1><ol>
-<li><p>kernel modules</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">modprobe ip_tables</span><br><span class="line">modprobe iptable_nat</span><br><span class="line">modprobe iptable_filter</span><br><span class="line">modprobe ip_conntrack</span><br><span class="line">modprobe ip_conntrack_ftp</span><br><span class="line">modprobe ip_nat_ftp</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>ip_forward</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -w net.ipv4.ip_forward=1</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>iptables.service</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">yum install -y iptables</span><br><span class="line"></span><br><span class="line">systemctl restart iptables.service</span><br><span class="line"></span><br><span class="line"><span class="comment"># show rules</span></span><br><span class="line">iptables -t nat -L</span><br><span class="line"></span><br><span class="line"><span class="comment"># clear rules</span></span><br><span class="line">iptables -t nat -F</span><br><span class="line"></span><br><span class="line"><span class="comment"># save rules</span></span><br><span class="line">iptables-save &gt; /etc/sysconfig/iptables</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h2 id="Hosts-Information"><a href="#Hosts-Information" class="headerlink" title="Hosts Information"></a>Hosts Information</h2><ul>
-<li><p>Jumpbox/Gatewaybox:</p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Interface</th>
-<th>IP Address</th>
-<th>Netmask</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Public</td>
-<td>eth0</td>
-<td>10.123.10.99</td>
-<td>255.255.255.0</td>
-</tr>
-<tr>
-<td>Internal</td>
-<td>eth1</td>
-<td>192.168.1.99</td>
-<td>255.255.255.0</td>
-</tr>
-</tbody></table>
-<p>  路由表: <code>route -n</code></p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Destination     Gateway         Genmask         Flags Metric Ref    Use Iface</span><br><span class="line">0.0.0.0         10.123.10.1     0.0.0.0         UG    0      0        0 eth0</span><br><span class="line">10.123.10.0     0.0.0.0         255.255.255.0   U     0      0        0 eth0</span><br><span class="line">192.168.1.0     0.0.0.0         255.255.255.0   U     0      0        0 eth1</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Internal Boxes: <code>192.168.1.0/24</code></p>
-</li>
-</ul>
-<h2 id="外网访问内网-NAT-端口映射"><a href="#外网访问内网-NAT-端口映射" class="headerlink" title="外网访问内网 (NAT 端口映射)"></a>外网访问内网 (NAT 端口映射)</h2><ul>
-<li><p>User Case:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">用户通过 10.123.10.99:11022 访问内网机器 192.168.1.11:22</span><br><span class="line"></span><br><span class="line">$ ssh root@10.123.10.99 -p 11022</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Flow Figure:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">        |</span><br><span class="line">        V</span><br><span class="line"> src: x.x.x.x:xx</span><br><span class="line">dest: 10.123.10.99:11022</span><br><span class="line">        |</span><br><span class="line">        V</span><br><span class="line">---- eth0 (in) --------</span><br><span class="line">        |</span><br><span class="line">        | PREROUTING</span><br><span class="line">        |  (DNAT)</span><br><span class="line">        V</span><br><span class="line"> src: x.x.x.x:xx</span><br><span class="line">dest: 192.168.1.11:22</span><br><span class="line">        |</span><br><span class="line">        | routing</span><br><span class="line">        V</span><br><span class="line">---- eth1 (out) -------</span><br><span class="line">        |</span><br><span class="line">        | POSTROUTING</span><br><span class="line">        |  (SNAT)</span><br><span class="line">        V</span><br><span class="line"> src: 192.168.1.99:xx</span><br><span class="line">dest: 192.168.1.11:22</span><br><span class="line">        |</span><br><span class="line">        V</span><br><span class="line">---- Internal BOX ----</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Configure:</p>
-<ul>
-<li><p>DNAT (任意方法均可)</p>
-<ul>
-<li>iptables -t nat -A PREROUTING  -p tcp -i eth0 -d 10.123.10.99 –dport 11022 -j DNAT –to 192.168.1.11:22</li>
-<li>iptables -t nat -A PREROUTING  -p tcp -i eth0 –dport 11022 -j DNAT –to 192.168.1.11:22</li>
-<li>iptables -t nat -A PREROUTING  -p tcp -d 10.123.10.99 –dport 11022 -j DNAT –to 192.168.1.11:22</li>
-<li>iptables -t nat -A PREROUTING  -p tcp –dport 11022 -j DNAT –to 192.168.1.11:22</li>
-</ul>
-</li>
-<li><p>SNAT (任意方法均可)</p>
-<ul>
-<li>iptables -t nat -A POSTROUTING -p tcp -o eth1 -d 192.168.1.11 -j SNAT –to 192.168.1.99</li>
-<li>iptables -t nat -A POSTROUTING -p tcp -o eth1 -d 192.168.1.0/24 -j SNAT –to 192.168.1.99</li>
-<li>iptables -t nat -A POSTROUTING -p tcp -d 192.168.1.0/24 -j SNAT –to 192.168.1.99</li>
-<li>iptables -t nat -A POSTROUTING -p tcp -d 192.168.1.0/24 -j MASQUERADE</li>
-<li>iptables -t nat -A POSTROUTING -p tcp -o eth1 -j SNAT –to 192.168.1.99</li>
-<li>iptables -t nat -A POSTROUTING -p tcp -o eth1 -j MASQUERADE</li>
-</ul>
-</li>
-<li><p>最简单的配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A PREROUTING  -p tcp --dport 11022 -j DNAT --to 192.168.1.11:22</span><br><span class="line">iptables -t nat -A POSTROUTING -p tcp -o eth1 -j MASQUERADE</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<blockquote>
-<p>注意：</p>
-<ol>
-<li>其中 <code>-j MASQUERADE</code> 等价于 <code>-j SNAT --to 192.168.1.99</code></li>
-<li><code>-j MASQUERADE</code> 会自动从服务器的网卡上，获取当前ip地址来做NAT</li>
-<li>参考：<a target="_blank" rel="noopener" href="http://www.cnblogs.com/Dicky-Zhang/p/5934657.html">http://www.cnblogs.com/Dicky-Zhang/p/5934657.html</a></li>
-</ol>
-</blockquote>
-</li>
-</ul>
-<h2 id="内网访问外网-直连，GATEWAY"><a href="#内网访问外网-直连，GATEWAY" class="headerlink" title="内网访问外网 (直连，GATEWAY)"></a>内网访问外网 (直连，GATEWAY)</h2><ul>
-<li><p>User Case:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">内网机器 192.168.1.0&#x2F;24 通过网关 10.123.10.99 直接访问外网</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Flow Figure:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">---- Internal BOX ----</span><br><span class="line">        |</span><br><span class="line">        V</span><br><span class="line"> src: 192.68.1.0&#x2F;24:xx</span><br><span class="line">dest: x.x.x.x:xx</span><br><span class="line">        |</span><br><span class="line">        V</span><br><span class="line">---- eth1 (in) --------</span><br><span class="line">        |</span><br><span class="line">        | routing</span><br><span class="line">        V</span><br><span class="line">---- eth0 (out) -------</span><br><span class="line">        |</span><br><span class="line">        | POSTROUTING</span><br><span class="line">        |  (SNAT)</span><br><span class="line">        V</span><br><span class="line"> src: 10.123.10.99:xx</span><br><span class="line">dest: x.x.x.x:xx</span><br><span class="line">        |</span><br><span class="line">        V</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Configure:</p>
-<ol>
-<li><p>在 GatewayBox 上配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A POSTROUTING -s 192.168.1.0&#x2F;24 -o eth0 -j MASQUERADE</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在内网机器上设置默认 gateway 为 192.168.1.99</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ cat &gt; &#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;ifcfg-eth0 &lt;&lt; EOF</span><br><span class="line">NAME&#x3D;eth0</span><br><span class="line">DEVICE&#x3D;eth0</span><br><span class="line">ONBOOT&#x3D;yes</span><br><span class="line">BOOTPROTO&#x3D;static</span><br><span class="line">IPADDR&#x3D;192.168.1.11</span><br><span class="line">NETMASK&#x3D;255.255.255.0</span><br><span class="line">GATEWAY&#x3D;192.168.1.99</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">$ systemctl restart network.service</span><br><span class="line"></span><br><span class="line">$ route -n</span><br><span class="line">Destination     Gateway         Genmask         Flags Metric Ref    Use Iface</span><br><span class="line">0.0.0.0         192.168.1.99    0.0.0.0         UG    0      0        0 eth0</span><br><span class="line">192.168.1.0     0.0.0.0         255.255.255.0   U     0      0        0 eth0</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-</li>
-</ul>
 
       
     </div>

@@ -65,6 +65,92 @@
 
   
     
+    <h3 class="article-title"><a href="/2015/11/16/tips/testing/2015-11-16-error_toleration/"><span>软件容错</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/11/16/tips/testing/2015-11-16-error_toleration/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-11-16T15:24:33.000Z">
+          2015-11-16
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>软件的世界已经变的及其复杂，在互联网的世界中一个个知道不知道的API将世界连接起来，如蜘蛛网一般,一个看的到的功能可能依赖了好几个看不到的API,所以中间出点错误实在不能说是个意外了。但是出错归出错，出错了软件也是一样要处理这些问题，下面就讲讲我学到遇到的一点容错的小知识。</p>
+<h2 id="容错的目标"><a href="#容错的目标" class="headerlink" title="容错的目标"></a>容错的目标</h2><p>降低或者最小化对系统可用性，可靠性的影响，举个例子来说就是单点故障，如果一个地方出现错误<br>而把整个系统网络都拖垮了，这个显然是不能接受的。可以用一下几个来形容错误：</p>
+<ul>
+<li>fault(缺陷) 一些bug</li>
+<li>error(错误) 一些业务无法正常执行</li>
+<li>failure(故障) 业务较长时间无法正常执行</li>
+</ul>
+<h2 id="容错的方法"><a href="#容错的方法" class="headerlink" title="容错的方法"></a>容错的方法</h2><ul>
+<li>硬件容错：多备份,系统冗余，主备</li>
+<li>软件容错：避免严重业务错误，降级，异常处理,侦测，监控，重启……</li>
+<li>系统容错</li>
+</ul>
+<h2 id="常见机遇鲁棒性"><a href="#常见机遇鲁棒性" class="headerlink" title="常见机遇鲁棒性"></a>常见机遇鲁棒性</h2><ul>
+<li>Process Pairs</li>
+<li>Graceful Degradation:降级</li>
+<li>Selective Retry</li>
+<li>state handling</li>
+<li>Linking Process</li>
+<li>Rejuvenation: 不可重现问题</li>
+<li>Checkpoint</li>
+<li>update lost</li>
+<li>application state scrubbing</li>
+<li>process pools</li>
+<li>recovery block</li>
+<li>micro reboot</li>
+<li>state correction</li>
+</ul>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/testing/">testing</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/testing/">testing</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2015/11/15/python/2015-11-15-String-Format-in-Python/"><span>Python 中String的格式化</span></a></h3>
     
   
@@ -199,74 +285,6 @@
     <span class="post-tags">
       <i class="icon-tags"></i>
         <a href="/tags/shell/">shell</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2015/11/04/tips/thoughts/2015-11-03-Test-Tools/"><span>测试用例-一些有意思的工具</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2015/11/04/tips/thoughts/2015-11-03-Test-Tools/" rel="bookmark">
-        <time class="entry-date published" datetime="2015-11-03T18:31:11.000Z">
-          2015-11-04
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h2 id="Automation-Test-Case-Generate-Tools"><a href="#Automation-Test-Case-Generate-Tools" class="headerlink" title="Automation Test Case Generate Tools"></a>Automation Test Case Generate Tools</h2><ul>
-<li><a target="_blank" rel="noopener" href="http://korat.sourceforge.net/">Korat(structurally complex tests)</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/randoop/randoop">Randoop (random testing)</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/CERTCC-Vulnerability-Analysis/certfuzz">CERT Basic Fuzzing Framework</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/samhocevar/zzuf.git">ZZUF</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.cert.org/vulnerability-analysis/tools/triage.cfm">cert.org</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/osate">osate</a></li>
-</ul>
-<p><a target="_blank" rel="noopener" href="http://mit.bme.hu/~micskeiz/pages/code_based_test_generation.html">link</a></p>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/testing/">testing</a>, <a href="/categories/testing/thoughts/">thoughts</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/testing/">testing</a><a href="/tags/thoughts/">thoughts</a>
     </span>
     
 

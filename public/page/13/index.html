@@ -65,6 +65,80 @@
 
   
     
+    <h3 class="article-title"><a href="/2019/10/01/tips/tester-ops/2-linux-commands/"><span>Linux 命令基础</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/10/01/tips/tester-ops/2-linux-commands/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-09-30T16:58:45.000Z">
+          2019-10-01
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="查询用户和密码"><a href="#查询用户和密码" class="headerlink" title="查询用户和密码"></a>查询用户和密码</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">less /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">awk -F: <span class="string">&#x27;&#123; print $1&#125;&#x27;</span> /etc/passwd</span><br><span class="line">cut -d: -f1 /etc/passwd</span><br><span class="line">getent passwd | awk -F: <span class="string">&#x27;&#123; print $1&#125;&#x27;</span></span><br><span class="line">getent passwd</span><br><span class="line">getent passwd | grep sonar</span><br><span class="line">grep -E <span class="string">&#x27;^UID_MIN|^UID_MAX&#x27;</span> /etc/login.defs</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="hostname"><a href="#hostname" class="headerlink" title="hostname"></a>hostname</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hostname</span><br><span class="line">hostname -f</span><br></pre></td></tr></table></figure>
+<h2 id="install-mysql-in-centos"><a href="#install-mysql-in-centos" class="headerlink" title="install mysql in centos"></a>install mysql in centos</h2><ul>
+<li>update mysql dependencies</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm</span><br><span class="line">sudo rpm -ivh mysql-community-release-el7-5.noarch.rpm</span><br><span class="line">yum update</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>install mysql-server and start mysql</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install mysql-server</span><br><span class="line">sudo systemctl start mysqld</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>setup mysql password</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">use mysql;</span><br><span class="line">update user SET PASSWORD=PASSWORD(<span class="string">&quot;password&quot;</span>) WHERE USER=<span class="string">&#x27;root&#x27;</span>;</span><br><span class="line">flush privileges;</span><br><span class="line"><span class="built_in">exit</span></span><br><span class="line">sudo systemctl start mysqld</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/test-ops/">test-ops</a><a href="/tags/linux/">linux</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2019/10/01/tips/tester-ops/3-SONAR-Installation/"><span>SONAR环境建立</span></a></h3>
     
   
@@ -185,59 +259,6 @@
     <span class="post-tags">
       <i class="icon-tags"></i>
         <a href="/tags/thoughts/">thoughts</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2019/08/07/tips/1-Junit5CaseTestTemplate/"><span>Xmind,Test Cases,and Allure templates for TDD</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/08/07/tips/1-Junit5CaseTestTemplate/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-08-07T13:34:04.000Z">
-          2019-08-07
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h1 id="Xmind-TestCases-and-JUnit5-Allure-Template"><a href="#Xmind-TestCases-and-JUnit5-Allure-Template" class="headerlink" title="Xmind,TestCases and JUnit5 Allure Template"></a>Xmind,TestCases and JUnit5 Allure Template</h1><p>Learn from the requirements and write test cases are the common daily work of a tester.<br>Normally write the mind map as a guide of test cases(in internet it is enough), then<br>execute the test cases or write testing codes based on the xmind file(mind map).<br>But do you ever question about this process? It is productive enough? Is there any improvement?</p>
-        
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/JAVA/">JAVA</a><a href="/tags/Automation/">Automation</a><a href="/tags/TDD/">TDD</a><a href="/tags/Productivity/">Productivity</a>
     </span>
     
 

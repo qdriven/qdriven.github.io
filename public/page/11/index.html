@@ -65,6 +65,88 @@
 
   
     
+    <h3 class="article-title"><a href="/2019/11/22/python/read_excel_yml/"><span>数据驱动测试- 测试用例加载</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/11/22/python/read_excel_yml/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-11-21T18:31:11.000Z">
+          2019-11-22
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>使用pytest作为测试工具，有一个pytest.parameterized 的装饰器可以用来进行数据驱动测试，以下是一个最简单的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@pytest.mark.parametrize(&quot;id_num&quot;, (1, 2, 3, 4, 5))</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_issue_plain</span>(<span class="params">id_num</span>):</span></span><br><span class="line">    print(id_num)</span><br></pre></td></tr></table></figure>
+
+<p>test_issue方法有一个参数名称是 id_num, 这个值可以在测试过程中不断的被改变，但是实际中接口自动化中，有时我们会使用一些excel，yml作为外部测试用例来传入参数进行测试，那怎么样才能实现这个功能呢？</p>
+<h2 id="case-loader-例子说明"><a href="#case-loader-例子说明" class="headerlink" title="case loader 例子说明"></a>case loader 例子说明</h2><p>简单来说，一般我们测试用例传入的数据包括：</p>
+<ul>
+<li>test_desc: 测试用例描述</li>
+<li>inputs: 输入参数，可以作为json格式</li>
+<li>expected: 期望结果，可以是json格式</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@pytest.mark.parametrize(&quot;test_desc,input,expected&quot;, load_case_by_yml(&quot;testcases.yml&quot;))</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_issue_plain</span>(<span class="params">test_desc, input, expected</span>):</span></span><br><span class="line">    print(test_desc, input, expected)</span><br></pre></td></tr></table></figure>
+
+<p>所以我们通过程序加载后的内容也就是load_case_by_yml返回的应该是这样的一个list：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(test_desc,inputs,expected),......]</span><br></pre></td></tr></table></figure>
+
+<h2 id="case-loader-实现"><a href="#case-loader-实现" class="headerlink" title="case loader 实现"></a>case loader 实现</h2><p>有了目标，我们就动手，使用yml包非常容易的下面的功能:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_case_by_yml</span>(<span class="params">path</span>):</span></span><br><span class="line">    <span class="keyword">with</span> open(path, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> stream:</span><br><span class="line">        raw_yaml_result = yaml.safe_load(stream)</span><br><span class="line">    cases = raw_yaml_result[<span class="string">&quot;tests&quot;</span>]</span><br><span class="line">    parameterized_case = []</span><br><span class="line">    <span class="keyword">for</span> case <span class="keyword">in</span> cases:</span><br><span class="line">        parameterized_case.append(tuple(case.values()))</span><br><span class="line">    <span class="keyword">return</span> parameterized_case</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>对应测试用例的yaml如下:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">tests:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">test_desc:</span> <span class="string">test1</span></span><br><span class="line">    <span class="attr">input:</span> &#123;<span class="string">&quot;k1&quot;</span><span class="string">:&quot;v1&quot;</span>&#125;</span><br><span class="line">    <span class="attr">expected:</span> &#123;<span class="string">&quot;k1&quot;</span><span class="string">:&quot;v1&quot;</span>&#125;</span><br><span class="line">  <span class="bullet">-</span> <span class="attr">test_desc:</span> <span class="string">test2</span></span><br><span class="line">    <span class="attr">input:</span> &#123;<span class="string">&quot;k1&quot;</span><span class="string">:&quot;v2&quot;</span>&#125;</span><br><span class="line">    <span class="attr">expected:</span> &#123;<span class="string">&quot;k1&quot;</span><span class="string">:&quot;v2&quot;</span>&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>通过这个方式，就非常容易的实现了数据驱动，同时也可以让自己的测试数据更好的被阅读和管理.</p>
+<p>每天1小时，可以让你的效率更好. 明天可以自己试试如何从excel加载实现类似功能.</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/automation，python/">automation，python</a>, <a href="/categories/automation，python/daily-automation-tip/">daily-automation-tip</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/automation/">automation</a><a href="/tags/daily-automation-tip/">daily-automation-tip</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2019/10/31/qa-thoughts/things-matter/"><span>测试陷阱2-永远都在忙碌重要紧急的事情</span></a></h3>
     
   
@@ -207,119 +289,6 @@
     <span class="post-tags">
       <i class="icon-tags"></i>
         <a href="/tags/QATrap/">QATrap</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2019/10/09/tips/tester-ops/4-GOReplay-usage/"><span>goreplay-usage</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/10/09/tips/tester-ops/4-GOReplay-usage/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-10-09T02:06:26.000Z">
-          2019-10-09
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h2 id="Gorelapy简介"><a href="#Gorelapy简介" class="headerlink" title="Gorelapy简介"></a>Gorelapy简介</h2><p>goreplay是一款从生产环境copy流量到测试环境的工具，且不会影响生产环境的业务响应，又能很简单的达到复用http请求来做稳定性测试的目的。</p>
-<p>GoReplay 工作方式：listener server 捕获流量，并将其发送至 replay server 或者保存至文件。replay server 会将流量转移至配置的地址<br><img src="https://camo.githubusercontent.com/1c65a684aeb1d16343d59c3ab6d3f9d41c77c36f/68747470733a2f2f692e696d6775722e636f6d2f494e327866446d2e706e67" alt="img"></p>
-<p>最简单的使用模式是：listener server捕获流量，并将其发送至kafka，然后解析kafka的消息并存入mysql,处理起来还是比较方便的.</p>
-<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><ul>
-<li><p>1、安装kafka<br>启动zookeeper 和kafka server，并创建一个topic<br>温馨提示：server.properties中的PLAINTEX后面需要把ip加上，否则其他服务器上的消息接收不到</p>
-</li>
-<li><p>2、安装mysql<br>创建db和表,用来保存请求数据</p>
-</li>
-</ul>
-<h2 id="监听消息发送到kafaka"><a href="#监听消息发送到kafaka" class="headerlink" title="监听消息发送到kafaka"></a>监听消息发送到kafaka</h2><ul>
-<li>1、在目标服务器上安装gorepay<ul>
-<li>a、源码：<a target="_blank" rel="noopener" href="https://github.com/buger/goreplay">https://github.com/buger/goreplay</a></li>
-<li>b、二进制包：百度或者找我要吧。如果你的服务器是centos7以上，可以直接解压使用。建议使用这种方式</li>
-</ul>
-</li>
-<li>2、监听并往kafka发消息</li>
-</ul>
-<ul>
-<li><p>使用HTTP 请求输出到kafka - HTTP原始信息</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./goreplay --input-raw :8179--output-kafka-host <span class="string">&#x27;10.8.1.43:9092&#x27;</span> --output-kafka-topic <span class="string">&#x27;test&#x27;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用HTTP 请求输出到kafka - JSON格式</p>
-</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./goreplay --input-raw :8080 --input-raw-track-response --output-kafka-host <span class="string">&#x27;10.8.1.43:9092&#x27;</span> --output-kafka-topic <span class="string">&#x27;test&#x27;</span> --output-kafka-json-format</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查看监听消息<br>在kafka所在的服务器上启一个consumer，查看这个topic中的消息，可以看到监听端口的流量了<br>bin/kafka-console-consumer.sh –bootstrap-server 10.8.1.43:9092 –topic test</li>
-</ul>
-<h2 id="解析kafka的消息并保存到mysql"><a href="#解析kafka的消息并保存到mysql" class="headerlink" title="解析kafka的消息并保存到mysql"></a>解析kafka的消息并保存到mysql</h2><ul>
-<li>安装依赖库：confluent-kafka、records、PyMySQL<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install confluent-kafka</span><br><span class="line">pip install records</span><br><span class="line">pip install PyMySQL</span><br></pre></td></tr></table></figure></li>
-<li>Confluent-kafka是一款高效、稳定的kafka的python客户端<br><a target="_blank" rel="noopener" href="https://github.com/confluentinc/confluent-kafka-python">https://github.com/confluentinc/confluent-kafka-python</a></li>
-<li>records一个非常简单但功能强大的库，用于对大多数关系数据库进行原始SQL查询</li>
-<li>PyMySQL是从Python连接到MySQL数据库服务器的接口</li>
-<li>编写解析kafka消息的python代码，进行解析并且保存落库</li>
-</ul>
-<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p>基本命令：</p>
-<ul>
-<li>1、获取经过本地8080端口的请求流量，然后打印出来</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./goreplay --input-raw :8080 --output-stdout</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>2、获取经过本地8080端口的请求流量，然后保存在.gor文件中</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./goreplay --input-raw :8080 --output-file=request.gor</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>3、从保存下来的流量文件中提取流量并向某的地址的某个端口输出</p>
-</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./goreplay --input-file=request.gor --output-http=<span class="string">&quot;http://localhost:8000&quot;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>4、转发</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./goreplay --input-raw :8080 --output-http=<span class="string">&quot;http://localhost:8000&quot;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>5.请求过滤</p>
-</li>
-</ul>
-<p>例如只收集 /api 下的请求</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./gor --input-raw :8080 --output-http staging.com --http-allow-url /api</span><br></pre></td></tr></table></figure>
-<p>例如只收集请求头中符合 api-version 为 1.0x 的请求</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./gor --input-raw :8080 --output-http staging.com --http-allow-header api-version:^1\.0\d</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/test-ops/">test-ops</a>
     </span>
     
 

@@ -65,6 +65,118 @@
 
   
     
+    <h3 class="article-title"><a href="/2019/04/20/tips/api-testing/APITesting-Intro/"><span>Build API Testing Framework-1 - Learn Http Api</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/04/20/tips/api-testing/APITesting-Intro/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-04-20T15:58:45.000Z">
+          2019-04-20
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="Build-API-Testing-Framework-1-Learn-Http-Api"><a href="#Build-API-Testing-Framework-1-Learn-Http-Api" class="headerlink" title="Build API Testing Framework-1 - Learn Http Api"></a>Build API Testing Framework-1 - Learn Http Api</h1><p>API now, in most cases, it is a HTTP API which over http protocol. It is hard to explain without a example, so let’s start with a HelloWorld API sample.<br>The main purposes of these apis are to do the CRUD(Create/Read/Update/Delete) against the resouce <code>HelloWorld</code>.<br>Here are HTTP Methods mapping to CRUD:</p>
+<table>
+<thead>
+<tr>
+<th>HTTP Method</th>
+<th>CRUD</th>
+<th>Resource</th>
+<th>Response</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GET</td>
+<td>Read</td>
+<td>/HelloWorld/{id}</td>
+<td>200:success/404: not found</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>Create</td>
+<td>/HelloWorld</td>
+<td>200:success/404: not found</td>
+</tr>
+<tr>
+<td>Update</td>
+<td>Update</td>
+<td>/HelloWorld/{id}</td>
+<td>200:success/404: not found</td>
+</tr>
+<tr>
+<td>Delete</td>
+<td>Delete</td>
+<td>/HelloWorld/{id}</td>
+<td>200:success/404: not found</td>
+</tr>
+</tbody></table>
+<p>It is easy to implement a sets of APIs against resource HelloWorld based on SpringBoot, here comes demo codes:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorldController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/HelloWorld/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> BaseResponse <span class="title">getHelloWorld</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> BaseResponse.OK().data(HelloWorldDTO.builder().id(id).msg(<span class="string">&quot;Hello World&quot;</span>).build());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostMapping(&quot;/HelloWorld&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> BaseResponse&lt;HelloWorldDTO&gt; <span class="title">createHelloWorld</span><span class="params">(<span class="meta">@RequestBody</span> HelloWorldDTO requestBody)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> BaseResponse.OK().data(requestBody);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PutMapping(&quot;/HelloWorld/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> BaseResponse&lt;HelloWorldDTO&gt; <span class="title">updateHelloWorld</span><span class="params">(<span class="meta">@PathVariable</span> Long id, <span class="meta">@RequestBody</span> HelloWorldDTO updateData)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> BaseResponse.OK().data(updateData);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@DeleteMapping(&quot;/HelloWorld/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> BaseResponse&lt;HelloWorldDTO&gt; <span class="title">deleteHelloWorld</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> BaseResponse.OK().data(HelloWorldDTO.builder().id(id).msg(<span class="string">&quot;deleted!&quot;</span>).build());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Start the web server, actaully there are 4 apis with different HTTP methods, GET/DELETE/POST/PUT, use postman to check what happened:</p>
+<p><img src="https://raw.githubusercontent.com/evenhumble/hustle-player/maste/img/postman-get.jpg" alt="img"><br><img src="https://raw.githubusercontent.com/evenhumble/hustle-player/maste/img/postman-post.jpg" alt="img"></p>
+<p>It represents how the api work, and how to use postman to invoke the http api to get a result.</p>
+<p>So the api testing is simple, a client send a http request, then get the http response to check if the response is correct. </p>
+<p><img src="https://raw.githubusercontent.com/evenhumble/hustle-player/maste/img/api_response.png" alt="img"></p>
+<p>In this case, if you want to start a api automation testing, what kind of codes need to write? In this case, it is very simple:</p>
+<ol>
+<li>A clint to invoke http api: Client</li>
+<li>Data builder to build input data: InputData</li>
+<li>Verify the response: OutputData</li>
+</ol>
+<p>the code example generated bu postman(java and OkHttpClient) is :</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">OkHttpClient client = new OkHttpClient();</span><br><span class="line"></span><br><span class="line">MediaType mediaType = MediaType.parse(<span class="string">&quot;application/json&quot;</span>);</span><br><span class="line">RequestBody body = RequestBody.create(mediaType, <span class="string">&quot;&#123;\&quot;msg\&quot;:123&#125;&quot;</span>);</span><br><span class="line">Request request = new Request.Builder()</span><br><span class="line">  .url(<span class="string">&quot;http://localhost:9090/HelloWorld&quot;</span>)</span><br><span class="line">  .post(body)</span><br><span class="line">  .addHeader(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>)</span><br><span class="line">  .addHeader(<span class="string">&quot;cache-control&quot;</span>, <span class="string">&quot;no-cache&quot;</span>)</span><br><span class="line">  .addHeader(<span class="string">&quot;Postman-Token&quot;</span>, <span class="string">&quot;ac6e83d3-8446-4ae7-81ea-59316ca5cce7&quot;</span>)</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line">Response response = client.newCall(request).execute();</span><br></pre></td></tr></table></figure>
+
+<p>Copy these codes, and run in maven project, your first API automation code is completed.</p>
+<p>By the way, there are several questions for HTTP API:</p>
+<ul>
+<li>What is Idempotent Methods? GET/HEAD/PUT/DELETE are declared idemponten</li>
+<li>What Option method used for? </li>
+<li>Is http api stateless? What does the stateless mean? All the information is in the request.</li>
+</ul>
+<p>In Next Chapter, let’s write code and go through these cases.</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/java/">java</a><a href="/tags/API-Testing/">API Testing</a><a href="/tags/patterns/">patterns</a><a href="/tags/testing/">testing</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2019/02/20/tips/real/3-Defensive-programing/"><span>Defensive Programming</span></a></h3>
     
   
@@ -169,83 +281,6 @@
     <span class="post-tags">
       <i class="icon-tags"></i>
         <a href="/tags/java/">java</a><a href="/tags/patterns/">patterns</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2018/12/24/python/yuml-usage/"><span>YUML Basic Usage</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2018/12/24/python/yuml-usage/" rel="bookmark">
-        <time class="entry-date published" datetime="2018-12-23T16:00:36.000Z">
-          2018-12-24
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h1 id="YUML-Syntax"><a href="#YUML-Syntax" class="headerlink" title="YUML Syntax"></a>YUML Syntax</h1><ul>
-<li>comments and directives</li>
-<li>class diagram</li>
-</ul>
-<h2 id="Comments-and-Directives"><a href="#Comments-and-Directives" class="headerlink" title="Comments and Directives"></a>Comments and Directives</h2><ul>
-<li>type: //{type:class}</li>
-<li>direction: // {direction:leftToRight}</li>
-<li>generate: // {generate:true}</li>
-</ul>
-<h2 id="Class-diagram"><a href="#Class-diagram" class="headerlink" title="Class diagram"></a>Class diagram</h2><p>cheetsheet for class diagram</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Class         [Customer]</span><br><span class="line">Directional   [Customer]-&gt;[Order]</span><br><span class="line">Bidirectional [Customer]&lt;-&gt;[Order]</span><br><span class="line">Aggregation   [Customer]+-[Order] or [Customer]&lt;&gt;-[Order]</span><br><span class="line">Composition   [Customer]++-[Order]</span><br><span class="line">Inheritance   [Customer]^[Cool Customer], [Customer]^[Uncool Customer]</span><br><span class="line">Dependencies  [Customer]uses-.-&gt;[PaymentStrategy]</span><br><span class="line">Cardinality   [Customer]&lt;1-1..2&gt;[Address]</span><br><span class="line">Labels        [Person]customer-billingAddress[Address]</span><br><span class="line">Notes         [Address]-[note: Value Object]</span><br><span class="line">Full Class    [Customer|Forename;Surname;Email|Save()]</span><br><span class="line">Color splash  [Customer&#123;<span class="built_in">bg</span>:orange&#125;]&lt;&gt;1-&gt;*[Order&#123;<span class="built_in">bg</span>:green&#125;]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="Association-classes"><a href="#Association-classes" class="headerlink" title="Association classes"></a>Association classes</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Invoice]&lt;*-*&gt;[Products][Invoice Item]</span><br></pre></td></tr></table></figure>
-
-<h2 id="Use-cases-diagram"><a href="#Use-cases-diagram" class="headerlink" title="Use-cases diagram"></a>Use-cases diagram</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Use Case           (Login)</span><br><span class="line">Actor              [Customer]</span><br><span class="line">&lt;&lt;Extend&gt;&gt;         (Login)&lt;(Forgot Password)</span><br><span class="line">&lt;&lt;Include&gt;&gt;        (Register)&gt;(Confirm Email)</span><br><span class="line">Actor Inheritance  [Admin]^[User]</span><br><span class="line">Note               [Admin]-(note: Most privilidged user)</span><br></pre></td></tr></table></figure>
-
-<h2 id="Activity-diagram"><a href="#Activity-diagram" class="headerlink" title="Activity diagram"></a>Activity diagram</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Start               (start)</span><br><span class="line">End                (end)</span><br><span class="line">Activity           (Find Products)</span><br><span class="line">Flow               (start)-&gt;(Find Products)</span><br><span class="line">Multiple Assoc.    (start)-&gt;(Find Products)-&gt;(end)</span><br><span class="line">Decisions          (start)-&gt;&lt;d1&gt;</span><br><span class="line">Decisions w/Label  (start)-&gt;&lt;d1&gt;logged <span class="keyword">in</span>-&gt;(Show Dashboard)   and   &lt;d1&gt;not logged <span class="keyword">in</span>-&gt;(Show Login Page)</span><br><span class="line">Parallel           (Action 1)-&gt;|a|   and   (Action 2)-&gt;|a|</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="State-diagram"><a href="#State-diagram" class="headerlink" title="State diagram"></a>State diagram</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Start             (start)</span><br><span class="line">End              (end)</span><br><span class="line">Activity         (Find Products)</span><br><span class="line">Flow             (start)-&gt;(Find Products)</span><br><span class="line">Multiple Assoc.  (start)-&gt;(Find Products)-&gt;(end)</span><br><span class="line">Complex <span class="keyword">case</span>     (Simulator running)[Pause]-&gt;(Simulator paused|<span class="keyword">do</span>/<span class="built_in">wait</span>)[Unpause]-&gt;(Simulator running)</span><br><span class="line">Note             (state)-(note: a note here)</span><br></pre></td></tr></table></figure>
-
-<h2 id="Deployment-diagram"><a href="#Deployment-diagram" class="headerlink" title="Deployment diagram"></a>Deployment diagram</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Node           [node1]</span><br><span class="line">Association    [node1]-[node2]</span><br><span class="line">Labeled Assoc. [node1]label-[node2]</span><br><span class="line">Note           [node1]-[note: a note here]</span><br></pre></td></tr></table></figure>
-
-<h2 id="Sequence-diagram"><a href="#Sequence-diagram" class="headerlink" title="Sequence diagram"></a>Sequence diagram</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Object       [Patron]</span><br><span class="line">Message      [Patron]order food&gt;[Waiter]</span><br><span class="line">Response     [Waiter]serve wine.&gt;[Patron]</span><br><span class="line">Note         [Actor]-[note: a note message]</span><br><span class="line">Asynchronous [Patron]order food&gt;&gt;[Waiter]</span><br></pre></td></tr></table></figure>
-
-<h2 id="Package-diagram"><a href="#Package-diagram" class="headerlink" title="Package diagram"></a>Package diagram</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Package        [package1]</span><br><span class="line">Association    [package1]-&gt;[package2]</span><br><span class="line">Labeled assoc  [package1]label-&gt;[package2]</span><br><span class="line">Note           [package1]-[note: a note here]</span><br><span class="line"></span><br><span class="line">````</span><br><span class="line"></span><br><span class="line"><span class="comment">## Others</span></span><br><span class="line"></span><br><span class="line">- Color codes: form <span class="comment">#RRGGBB, X11 color coding</span></span><br><span class="line">- checkout [yuml.me](http://yuml.me)</span><br><span class="line"></span><br><span class="line"><span class="comment">## Tools</span></span><br><span class="line"></span><br><span class="line">[yuml-diagram](https://github.com/jaime-olivares/yuml-diagram)</span><br><span class="line"></span><br><span class="line">```sh</span><br><span class="line">npm install yuml-diagram</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/tips/">tips</a>
     </span>
     
 

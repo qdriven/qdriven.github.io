@@ -65,6 +65,174 @@
 
   
     
+    <h3 class="article-title"><a href="/2018/07/24/tips/1-junit-perf/"><span>junit-perf</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/07/24/tips/1-junit-perf/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-07-24T14:11:05.000Z">
+          2018-07-24
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="使用JunitPerf进行性能测试"><a href="#使用JunitPerf进行性能测试" class="headerlink" title="使用JunitPerf进行性能测试"></a>使用JunitPerf进行性能测试</h1><p>以下简单介绍一下如何使用JunitPerf进行性能测试，JunitPerf是基于JUnit4的一个单元性能测试插件，对于会远程调用API测试比较合适，如果想要比较nanosecond 延迟的则需要使用<a target="_blank" rel="noopener" href="http://openjdk.java.net/projects/code-tools/jmh/">JMH</a>.</p>
+<h2 id="JunitPerf-依赖声明"><a href="#JunitPerf-依赖声明" class="headerlink" title="JunitPerf 依赖声明"></a>JunitPerf 依赖声明</h2><p>此例子假设使用MAVEN管理项目，所以在POM文件中添加：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.12<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.noconnor<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junitperf<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.9.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="构建压力测试类"><a href="#构建压力测试类" class="headerlink" title="构建压力测试类"></a>构建压力测试类</h2><p>假设你想衡量DemoPerfService 类中的getServiceId方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoPerfService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getServiceId</span><span class="params">(String userId)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> UUID.randomUUID().toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那么你可以构建如下的测试类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoServiceTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Rule</span></span><br><span class="line">    <span class="keyword">public</span> JUnitPerfRule perfTestRule = <span class="keyword">new</span> JUnitPerfRule();</span><br><span class="line">    DemoPerfService demoPerfService;</span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setupService</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.demoPerfService = <span class="keyword">new</span> DemoPerfService();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="meta">@JUnitPerfTest(threads = 50,durationMs = 1200,warmUpMs = 100,maxExecutionsPerSecond = 110)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getServiceId_withoutTestRequirement</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        String result =demoPerfService.getServiceId(<span class="string">&quot;userid&quot;</span>);</span><br><span class="line">        System.out.println(result);</span><br><span class="line">        Assert.assertNotNull(result);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>直接运行就可以进行压力测试,默认的测试报告可以在build/reports 目录下获取：</p>
+<p><img src="/images/ut/junitperf_1.jpg" alt="img"></p>
+<p>以下是对于测试类的几点说明：</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>定义说明</th>
+<th>Default值或说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@Rule</td>
+<td>申明为JUnit 的Rule类</td>
+<td></td>
+</tr>
+<tr>
+<td>JUnitPerfRule</td>
+<td>JUnitPerf 测试规则类</td>
+<td></td>
+</tr>
+<tr>
+<td>@JunitPerfTest</td>
+<td>声明为性能测试方法</td>
+<td></td>
+</tr>
+<tr>
+<td>threads</td>
+<td>测试使用的线程数</td>
+<td></td>
+</tr>
+<tr>
+<td>durationMs</td>
+<td>测试持续时间</td>
+<td></td>
+</tr>
+<tr>
+<td>warmUpMs</td>
+<td>测试热身时间</td>
+<td>热身时间的测试数据不会计算进最后的测试结果</td>
+</tr>
+<tr>
+<td>maxExecutionsPerSecond</td>
+<td>方法执行的上限</td>
+<td>RateLimiter，控制TPS上限</td>
+</tr>
+</tbody></table>
+<h2 id="对自己的测试设置期望值"><a href="#对自己的测试设置期望值" class="headerlink" title="对自己的测试设置期望值"></a>对自己的测试设置期望值</h2><p>使用@JUnitPerfTestRequirement 可以给性能测试设置期望值，这个annotation的属性有:</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>percentits</td>
+<td>设置例如90%/95%/50% 响应时间的期望</td>
+</tr>
+<tr>
+<td>executionsPerSec</td>
+<td>期望每秒执行测试(TPS)</td>
+</tr>
+<tr>
+<td>allowedErrorPercentage</td>
+<td>允许错误比例</td>
+</tr>
+<tr>
+<td>minLatency</td>
+<td>期望最小延时，如果实际最小延时超过这个数，则失败</td>
+</tr>
+<tr>
+<td>maxLatency</td>
+<td>期望最大延时，如果实际最大延时超过这个，则失败</td>
+</tr>
+<tr>
+<td>meanLatency</td>
+<td>期望中位数延时</td>
+</tr>
+</tbody></table>
+<p>下面是使用了JUnitPerfTestRequirement的一个测试方法,需要和@JUnitPerfTest一起使用：</p>
+<ul>
+<li>@JUnitPerfTest 定义了压测的运行参数</li>
+<li>@JUnitPerfTestRequirement定义了压测的期望值</li>
+</ul>
+<p>具体代码如下例:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">  <span class="meta">@JUnitPerfTest(threads = 50,durationMs = 1200,warmUpMs = 100,maxExecutionsPerSecond = 110)</span></span><br><span class="line">  <span class="meta">@JUnitPerfTestRequirement(percentiles = &quot;90:7,95:7,98:7,99:8&quot;, executionsPerSec = 10_000, allowedErrorPercentage = 0.10f)</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getServiceId</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">      String result =demoPerfService.getServiceId(<span class="string">&quot;userid&quot;</span>);</span><br><span class="line">      System.out.println(result);</span><br><span class="line">      Assert.assertNotNull(result);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行之后，如果发现没有满足JUnitPerfTestRequirement定义，则报错:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">java.lang.AssertionError: Test throughput threshold not achieved</span><br><span class="line">Expected: is &lt;<span class="keyword">true</span>&gt;</span><br><span class="line">     but: was &lt;<span class="keyword">false</span>&gt;</span><br><span class="line">Expected :is &lt;<span class="keyword">true</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p>是不是很简单！</p>
+<h2 id="设置测试报告地址"><a href="#设置测试报告地址" class="headerlink" title="设置测试报告地址"></a>设置测试报告地址</h2><p>JUnitPerf 有不同的测试报告，个人觉得HTML的测试报告比较实用，具体只需要:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Rule</span></span><br><span class="line"><span class="keyword">public</span> JUnitPerfRule perfTestRule = <span class="keyword">new</span> JUnitPerfRule(<span class="keyword">new</span> HtmlReportGenerator(<span class="string">&quot;perf/report.html&quot;</span>));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="完整的例子"><a href="#完整的例子" class="headerlink" title="完整的例子"></a>完整的例子</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoServiceTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Rule</span></span><br><span class="line"><span class="comment">//    public JUnitPerfRule perfTestRule = new JUnitPerfRule(new HtmlReportGenerator(&quot;perf/report.html&quot;));</span></span><br><span class="line">    <span class="keyword">public</span> JUnitPerfRule perfTestRule = <span class="keyword">new</span> JUnitPerfRule();</span><br><span class="line">    DemoPerfService demoPerfService;</span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setupService</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.demoPerfService = <span class="keyword">new</span> DemoPerfService();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="meta">@JUnitPerfTest(threads = 50,durationMs = 1200,warmUpMs = 100,maxExecutionsPerSecond = 110)</span></span><br><span class="line">    <span class="meta">@JUnitPerfTestRequirement(percentiles = &quot;90:7,95:7,98:7,99:8&quot;, executionsPerSec = 10_000, allowedErrorPercentage = 0.10f)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getServiceId</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        String result =demoPerfService.getServiceId(<span class="string">&quot;userid&quot;</span>);</span><br><span class="line">        System.out.println(result);</span><br><span class="line">        Assert.assertNotNull(result);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="meta">@JUnitPerfTest(threads = 50,durationMs = 1200,warmUpMs = 100,maxExecutionsPerSecond = 110)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getServiceId_withoutTestRequirement</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        String result =demoPerfService.getServiceId(<span class="string">&quot;userid&quot;</span>);</span><br><span class="line">        System.out.println(result);</span><br><span class="line">        Assert.assertNotNull(result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后可以再设定的目录中查看测试报告，测试报告和默认的HTML 测试报告是一致的.</p>
+<h2 id="一点问题"><a href="#一点问题" class="headerlink" title="一点问题"></a>一点问题</h2><p>压力测试过程中，有时数据不能复用，举个例子来说，如果想测试完全没有访问redis缓存情况下，通过userid查询的user信息速度，那么压测的时候userid就不能复用，因为一旦访问了就会放入redis缓存而影响结果，这个可以通过使用其他的方法解决，比如曾今使用过BlockingQueue的方法进行过尝试，具体方法如下：</p>
+<ol>
+<li>读取所有userid的文件</li>
+<li>把userid放到一个BlockingQueue中</li>
+<li>压测时获取userid通过BlockingQueue去获取</li>
+</ol>
+<p>这样就解决了数据不能重复的方法，具体方法可以参考如下代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">static</span> BlockingQueue&lt;String&gt; distinctIdQueue ;</span><br><span class="line">    <span class="meta">@Rule</span></span><br><span class="line">    <span class="keyword">public</span> JUnitPerfRule perfTestRule =</span><br><span class="line">            <span class="keyword">new</span> JUnitPerfRule(<span class="keyword">new</span> HtmlReportGenerator(<span class="string">&quot;data/report_test.html&quot;</span>));</span><br><span class="line"></span><br><span class="line">    <span class="meta">@BeforeClass</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">setupQueue</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">        distinctIdQueue = <span class="keyword">new</span> LinkedBlockingQueue&lt;&gt;();</span><br><span class="line">        Files.readAllLines(</span><br><span class="line">                Paths.get(<span class="string">&quot;data/userid.txt&quot;</span>)</span><br><span class="line">        ).parallelStream().forEach(</span><br><span class="line">                item-&gt; &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        distinctIdQueue.put(item);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">     <span class="meta">@Test</span></span><br><span class="line">    <span class="meta">@JUnitPerfTest(threads = 50,durationMs = 1200,warmUpMs = 100,maxExecutionsPerSecond = 110)</span></span><br><span class="line">    <span class="meta">@JUnitPerfTestRequirement(percentiles = &quot;90:7,95:7,98:7,99:8&quot;, executionsPerSec = 10_000, allowedErrorPercentage = 0.10f)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getServiceId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String uesrId = distinctIdQueue.take();</span><br><span class="line">        String result =demoPerfService.getServiceId(userId);</span><br><span class="line">        System.out.println(result);</span><br><span class="line">        Assert.assertNotNull(result);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/junit/">junit</a><a href="/tags/performance/">performance</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2018/07/01/tips/ansible/1-ansible-in-10-minutes/"><span>ansible In 30 Minutes</span></a></h3>
     
   
@@ -248,75 +416,6 @@
     <span class="post-tags">
       <i class="icon-tags"></i>
         <a href="/tags/interview/">interview</a><a href="/tags/word-frequency/">word_frequency</a><a href="/tags/algorithm/">algorithm</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2016/05/11/python/2016-05-11-pythonic/"><span>Pythonic,What is it</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2016/05/11/python/2016-05-11-pythonic/" rel="bookmark">
-        <time class="entry-date published" datetime="2016-05-11T02:41:15.000Z">
-          2016-05-11
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h1 id="Pythonic-Style"><a href="#Pythonic-Style" class="headerlink" title="Pythonic Style"></a>Pythonic Style</h1><p>Pythonic 是种很有趣的风格，有些实际上python的惯用方法和特有方法。</p>
-<h2 id="Switch-Two-variables"><a href="#Switch-Two-variables" class="headerlink" title="Switch Two variables"></a>Switch Two variables</h2><p>python 通过tuple进行pack，unpack就不需要temp变量</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a,b=b,a</span><br></pre></td></tr></table></figure>
-<p>如果其他语言需要swap的话，就需要一个temp变量，然后再置换。</p>
-<h2 id="P-VS-NP"><a href="#P-VS-NP" class="headerlink" title="P VS NP"></a>P VS NP</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># P</span></span><br><span class="line">a=<span class="number">3</span></span><br><span class="line">b=<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span>&lt;=b&lt;=a <span class="keyword">and</span> a&lt;<span class="number">10</span> <span class="comment"># return True</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## NP</span></span><br><span class="line">b&gt;=<span class="number">1</span> <span class="keyword">and</span> b&lt;=a <span class="keyword">and</span> a&lt;<span class="number">10</span> <span class="comment"># True</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>reverse string</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reverse_str</span>(<span class="params">s</span>):</span></span><br><span class="line">  <span class="keyword">return</span> s[::<span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reverse_str</span>(<span class="params">s</span>):</span></span><br><span class="line">  t=<span class="string">&#x27;&#x27;</span></span><br><span class="line">  <span class="keyword">for</span> x <span class="keyword">in</span> xrange(len(s)<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>):</span><br><span class="line">    t+=s[x]</span><br><span class="line">  <span class="keyword">return</span> t</span><br><span class="line"></span><br><span class="line"><span class="comment"># join the strList</span></span><br><span class="line">str_list=[<span class="string">&quot;Python&quot;</span>,<span class="string">&quot;is&quot;</span>,<span class="string">&quot;good&quot;</span>]</span><br><span class="line">res=<span class="string">&#x27;,&#x27;</span>.join(str_list) <span class="comment"># pythonic</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># NP:</span></span><br><span class="line">res = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> strList:</span><br><span class="line">    res += s + <span class="string">&#x27; &#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># P</span></span><br><span class="line">numList = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]   </span><br><span class="line"></span><br><span class="line">sum = sum(numList)  <span class="comment">#sum = 15</span></span><br><span class="line">maxNum = max(numList) <span class="comment">#maxNum = 5</span></span><br><span class="line">minNum = min(numList) <span class="comment">#minNum = 1</span></span><br><span class="line"><span class="keyword">from</span> operator <span class="keyword">import</span> mul</span><br><span class="line"><span class="comment"># reduce is interesting</span></span><br><span class="line">prod = reduce(mul, numList, <span class="number">1</span>) <span class="comment">##prod = 120 默认值传1以防空列表报错</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># NP</span></span><br><span class="line">sum = <span class="number">0</span></span><br><span class="line">maxNum = -float(<span class="string">&#x27;inf&#x27;</span>)</span><br><span class="line">minNum = float(<span class="string">&#x27;inf&#x27;</span>)</span><br><span class="line">prod = <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> numList:</span><br><span class="line">    <span class="keyword">if</span> num &gt; maxNum:</span><br><span class="line">        maxNum = num</span><br><span class="line">    <span class="keyword">if</span> num &lt; minNum:</span><br><span class="line">        minNum = num</span><br><span class="line">    sum += num</span><br><span class="line">    prod *= num</span><br><span class="line"><span class="comment"># sum = 15 maxNum = 5 minNum = 1 prod = 120</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="列表推导式"><a href="#列表推导式" class="headerlink" title="列表推导式"></a>列表推导式</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">l = [x*x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10</span>) <span class="keyword">if</span> x % <span class="number">3</span> == <span class="number">0</span>]</span><br><span class="line"><span class="comment">#l = [0, 9, 36, 81]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">##NP</span></span><br><span class="line">l = []</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    <span class="keyword">if</span> x % <span class="number">3</span> == <span class="number">0</span>:</span><br><span class="line">        l.append(x*x)</span><br><span class="line"><span class="comment">#l = [0, 9, 36, 81]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/python/">python</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/python/">python</a>
     </span>
     
 

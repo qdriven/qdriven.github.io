@@ -65,6 +65,136 @@
 
   
     
+    <h3 class="article-title"><a href="/2016/03/30/tips/automation/2016-03-30-jenkins_basic/"><span>Jenkins API的简单介绍</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/03/30/tips/automation/2016-03-30-jenkins_basic/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-03-29T21:15:11.000Z">
+          2016-03-30
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="Jenkins-介绍"><a href="#Jenkins-介绍" class="headerlink" title="Jenkins 介绍"></a>Jenkins 介绍</h1><p>Jenkins是一个非常有用的持续集成的工具，可以通过它完成代码的build，测试，发布等一系列的事情.</p>
+<p>From Jenkins Home Page</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Jenkins is an automation engine with an unparalleled plugin ecosystem to support all of your favorite tools in your delivery pipelines, whether your goal is continuous integration, automated testing, or continuous delivery.</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Jenkins-使用"><a href="#Jenkins-使用" class="headerlink" title="Jenkins 使用"></a>Jenkins 使用</h2><p>关于Jenkins的基本使用网上有很多的教程，基本使用其事没有太多说的，它是个平台，可以集成很多不同的工具，脚本等等.<br>总结下来这些东西包括：</p>
+<ul>
+<li>jenkins parameter setting, string, choice, ……</li>
+<li>JAVA 的maven, ant, gradle 等打包工具，其他语言也有类似的build，deploy，依赖管理的工具</li>
+<li>定制化的脚本，可以在一个Jenkins的build步骤中运行这些脚本如shell命令，python脚本</li>
+<li>定制插件来完成自己的特殊的目的</li>
+</ul>
+<p>这些内容非常庞大，自己也不可能完全都知道，如果遇到实际的一些问题需要解决的话,<br>大体的逻辑就是，如果遇到一些特殊需求，那么先去找插件看能不能完成，如果没有插件就再想shell，python脚本等不同的事情，或者自己开发插件.</p>
+<h2 id="Jenkins-的实践问题"><a href="#Jenkins-的实践问题" class="headerlink" title="Jenkins 的实践问题"></a>Jenkins 的实践问题</h2><p>随着Jenkins里面的任务越来越多，管理的环境越来越多，变更越来愈多，手工管理就会遇到一些问题：</p>
+<ul>
+<li>比如为了改一个IP地址，可能需要没一个任务都去改具体的配置，比如部署同一个war到不同的测试环境，就需要给不同的job改IP</li>
+<li>为了不同的环境配置不同的任务，需要很多的人工的配置修改等等</li>
+<li>如果需要迁移一个多应用的测试环境，那么需要很多的复制，修改工作</li>
+</ul>
+<p>那么为了解决这些问题，个人觉得可以改善的地方是：</p>
+<ul>
+<li>定义一些类型项目的模版，抽象一些参数出来给Jenkins里面的Job做参数话，当然有时需要修改的是默认值</li>
+<li>在定义了一些模版之后，就可以通过操作Jenkins API的方式来操作</li>
+<li>在尝试了一些Jenkins API之后，感觉纯粹通过API的方式去操作，不一定比复制Jenkins 任务，然后修改来的快，但是通过Jenkins API的方式<br>来操作Jenkins 的好处是，如果这些东西融入到运维的流程中，那么它会提高生产率</li>
+</ul>
+<p>一些体会是，可能代码方式的操作单个单个来看不一定会提高多少生产率(参数一样要设)，但是如果放在一个流程的角度看，那么他的效率是高的，比如你如果需要运维帮你建环境，那么你需要提供一些信息，而这些信息就可以直接建立Jenkins的Job了，那么作为用户你只提供一次信息，就可以完成你需要的所有事情，这样效率就高了.</p>
+<p>我对于自动化一切的看法是，也许对于单个任务来说，通过写代码的方式不一定是最优方式，但是如果放在一个流程中来看，那么一定是.所以平常可以积累点不同类型的脚本，代码，然后在某个时间点，也许连接你的这些脚本，代码，就可以流水线化一些你的工作了，不要以为这不会带来，我觉得这一天一定会有的。</p>
+<h2 id="Jenkins-API-的使用"><a href="#Jenkins-API-的使用" class="headerlink" title="Jenkins API 的使用"></a>Jenkins API 的使用</h2><p>对于Jenkins API来说，我使用过Java和Python的，总结下来大同小异，逻辑上可以分为几个层次：</p>
+<ul>
+<li>Job: 不同类型的Job<ul>
+<li>添加，修改，删除Job</li>
+<li>Job的详细信息</li>
+<li>可以通过Job的config.xml文件来修改配置</li>
+<li>Job创建属于哪个父类和Jenkins的URL有关系</li>
+</ul>
+</li>
+<li>View<br>基本功能和Job类似</li>
+</ul>
+<h3 id="Jenkins-API-JAVA"><a href="#Jenkins-API-JAVA" class="headerlink" title="Jenkins API - JAVA"></a>Jenkins API - JAVA</h3><p>我自己使用的是这个Jenkins的这个API client.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.offbytwo.jenkins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jenkins-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.3.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p> 这个包中最主要的两个类是：</p>
+<ul>
+<li>JenkinsServer: JenkinsServer 可以认为是一个JenkinsHttpClient的一个Wrapper，封装了一些常用的方法，如getJob，getJobXml等等，具体可以参考他<a target="_blank" rel="noopener" href="https://github.com/RisingOak/jenkins-client">github</a></li>
+<li>JenkinsHttpClient：可以通过这个HttpClient组装URL和参数来达到完成调用其他API的方法，提供的一些方法主要包括了:<ul>
+<li>post</li>
+<li>post_xml: 主要用来修改job的config.xml</li>
+</ul>
+</li>
+</ul>
+<p>大体的东西就是这些，那么通过这个Jenkins的API client，完成了一些一些功能：</p>
+<ul>
+<li>复制Job,根据参数修改复制出来的Job</li>
+<li>复制View，根据参数修改复制出来的View，同时包括了所有的子Job</li>
+<li>查询到使用了某个shell 命令或者某个配置的任务</li>
+</ul>
+<p>一些实例代码如下：</p>
+<p>复制任务：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JenkinsReplicator</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> String COPY_FROM_VIEW_URL = <span class="string">&quot;/view/%s/createItem?&quot;</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> String DEFAULT_VIEW = <span class="string">&quot;All&quot;</span>;</span><br><span class="line">  <span class="keyword">private</span> JenkinsInstance instance;</span><br><span class="line">  <span class="keyword">private</span> JenkinsHttpClient client;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">JenkinsReplicator</span><span class="params">(JenkinsInstance instance)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.instance = instance;</span><br><span class="line">      <span class="keyword">this</span>.client = instance.getJenkinsHttpClient();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> fromName: copied from issue</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> toName:   new Name</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> parentName: to View name</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">copyItem</span><span class="params">(String fromName, String toName, String parentName)</span> </span>&#123;</span><br><span class="line">      Map&lt;String, String&gt; formData = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">      formData.put(<span class="string">&quot;name&quot;</span>, toName);</span><br><span class="line">      formData.put(<span class="string">&quot;mode&quot;</span>, <span class="string">&quot;copy&quot;</span>);</span><br><span class="line">      formData.put(<span class="string">&quot;from&quot;</span>, fromName);</span><br><span class="line">      formData.put(<span class="string">&quot;json&quot;</span>, String.format(<span class="string">&quot;&#123;\&quot;name\&quot;: \&quot;%s\&quot;, \&quot;mode\&quot;: \&quot;copy\&quot;, \&quot;from\&quot;: \&quot;%s\&quot;&#125;&quot;</span>, toName, fromName));</span><br><span class="line">      formData.put(<span class="string">&quot;Submit&quot;</span>, <span class="string">&quot;OK&quot;</span>);</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">          <span class="keyword">this</span>.client.post_form(String.format(COPY_FROM_VIEW_URL, parentName), formData, <span class="keyword">false</span>);</span><br><span class="line">      &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> JenkinsBaseException(<span class="string">&quot;copy item &quot;</span>+ fromName+ <span class="string">&quot;to &quot;</span> + toName+<span class="string">&quot; in view &quot;</span> + parentName + <span class="string">&quot; failed&quot;</span>, e);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>update config file:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String configXml = jobDescription.jobConfigXml();</span><br><span class="line"><span class="keyword">this</span>.getJenkins().updateJob(jobDescription.getJobName(),configXml,<span class="keyword">false</span>);</span><br></pre></td></tr></table></figure>
+
+<p>复制整个view下面同时包括了不同的子Job:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> View <span class="title">copy</span><span class="params">(String fromName, String toName, String parentNameOrNull)</span> </span>&#123;</span><br><span class="line">       View fromView = getByName(fromName);</span><br><span class="line">       <span class="keyword">if</span> (fromView == <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> JenkinsViewException(fromName + <span class="string">&quot;view is not found,can&#x27;t copy from it!&quot;</span>);</span><br><span class="line">       View toView = getOrCreate(toName, fromName, parentNameOrNull);</span><br><span class="line">       Map&lt;String, Job&gt; viewJobs = jobController.getJobsByViewName(fromName);</span><br><span class="line">       <span class="keyword">for</span> (Map.Entry&lt;String, Job&gt; entry : viewJobs.entrySet()) &#123;</span><br><span class="line">           jobController.copy(entry.getKey(), toName + <span class="string">&quot;_&quot;</span> + entry.getKey(), toView.getName());</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">return</span> getByName(toName);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Python-API-使用"><a href="#Python-API-使用" class="headerlink" title="Python API 使用"></a>Python API 使用</h2><p>Python的Jenkins API client 可以通过以下命令安装：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install jenkinsapi</span><br></pre></td></tr></table></figure>
+
+<p>基本的python jenkins api client 和JAVA的概念比较类似，不过python 的这个jenkinsapi很明显要比java的这个客户端功能要丰富的多的多，后面会详细介绍这个python client api的使用.</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p><a target="_blank" rel="noopener" href="https://github.com/testless/jenkins-controller.git">GITHUB</a></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/automation/">automation</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/automation/">automation</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2016/02/28/python/2016-02-28-python_oop_attributes/"><span>Python 面向对象，以及访问对象属性基础</span></a></h3>
     
   
@@ -243,79 +373,6 @@
 <h3 id="JAVA8-之前："><a href="#JAVA8-之前：" class="headerlink" title="JAVA8 之前："></a>JAVA8 之前：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Map&lt;String,Integer&gt; <span class="title">countCharacters</span><span class="params">(String source)</span></span>&#123;</span><br><span class="line">       <span class="keyword">char</span>[] chars = source.toCharArray();</span><br><span class="line">       Map&lt;String,Integer&gt; result = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">char</span> aChar : chars) &#123;</span><br><span class="line">           Integer existing_counter = result.get(String.valueOf(aChar));</span><br><span class="line">           <span class="keyword">int</span> counter =  existing_counter==<span class="keyword">null</span>?<span class="number">0</span>:existing_counter;</span><br><span class="line">           result.put(String.valueOf(aChar),counter+<span class="number">1</span>);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> result;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="JAVA8-解法"><a href="#JAVA8-解法" class="headerlink" title="JAVA8 解法"></a>JAVA8 解法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> Map&lt;String,Integer&gt; <span class="title">countCharacters_JAVA8</span><span class="params">(String source)</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span>[] chars = source.toCharArray();</span><br><span class="line">    Map&lt;String,Integer&gt; result = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">char</span> aChar : chars) &#123;</span><br><span class="line">        result.put(String.valueOf(aChar),result.getOrDefault(String.valueOf(aChar),<span class="number">0</span>)+<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/python/">python</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/python/">python</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2016/02/26/python/2016-02-26-call_zabbix_api/"><span>Python 访问Zabbix API</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2016/02/26/python/2016-02-26-call_zabbix_api/" rel="bookmark">
-        <time class="entry-date published" datetime="2016-02-26T08:51:20.000Z">
-          2016-02-26
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h2 id="Zabbix-API-访问"><a href="#Zabbix-API-访问" class="headerlink" title="Zabbix API 访问"></a>Zabbix API 访问</h2><p>准备使用Python来访问一下Zabbix，首先当然阅读一下Zabbix的<a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/2.4/">API Manual</a>,抛开什么json rpc这样的问题之外，zabbix的API的分类还是很工整的，所以看起来比较舒服，在一定了解了zabbix基础之后，基本上就可以上手来写了，网上查了一下，找个一个python zabbix的调用的一个客户段代码，感觉不错，就开始行动了。</p>
-<h2 id="Zabbix-API-客户端代码的实现"><a href="#Zabbix-API-客户端代码的实现" class="headerlink" title="Zabbix API 客户端代码的实现"></a>Zabbix API 客户端代码的实现</h2><p>Zabbix API的主要的两个参数其实是method，params，params基本上就可以看作一些可变的参数，其实就是一个json或者map， 对于method来说，一般就是 resource.action 这种方式，所以python客户端使用重写了一个__getattr__来做,返回一个可以访问不同资源名称的客户端,具体的代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ZabbixClient</span>:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Generic Zabbix API Client</span></span><br><span class="line"><span class="string">    - login</span></span><br><span class="line"><span class="string">    - get auth</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    globale_header = &#123;</span><br><span class="line">        <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/json-rpc&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, session=None, timeout=None</span>):</span></span><br><span class="line">        self.user_name, self.default_user_name = <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span></span><br><span class="line">        self.password, self.default_password = <span class="string">&#x27;123456&#x27;</span>, <span class="string">&#x27;123456&#x27;</span></span><br><span class="line">        self.zabbix_api_url = <span class="string">&#x27;http://&#123;0&#125;/api_jsonrpc.php&#x27;</span>.format(<span class="string">&#x27;abcd.http&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> session:</span><br><span class="line">            self.session = session</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.session = requests.session()</span><br><span class="line"></span><br><span class="line">        self.session.headers.update(&#123;</span><br><span class="line">            <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json-rpc&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;python-zabbix-client&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;Cache-Control&#x27;</span>: <span class="string">&#x27;no-cache&#x27;</span></span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">        self.auth = <span class="string">&#x27;&#x27;</span></span><br><span class="line">        self.id = <span class="number">0</span></span><br><span class="line">        self.timeout = timeout</span><br><span class="line">        logger.info(<span class="string">&#x27;JSON-RPC Server EndPoint: %s&#x27;</span>, self.zabbix_api_url)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">login_in</span>(<span class="params">self, user_name=None, password=None</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        login with given user_name and password, if None, use default user</span></span><br><span class="line"><span class="string">        :param user_name:</span></span><br><span class="line"><span class="string">        :param password:</span></span><br><span class="line"><span class="string">        :return: result,auth key</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> user_name:</span><br><span class="line">            self.user_name = user_name</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> password:</span><br><span class="line">            self.password = password</span><br><span class="line"></span><br><span class="line">        self.auth = self.user.login(user=self.user_name, password=self.password)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">api_version</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.apiinfo.version()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># def confimport(self, format=&#x27;&#x27;, source=&#x27;&#x27;, rules=&#x27;&#x27;):</span></span><br><span class="line">    <span class="comment">#     &quot;&quot;&quot;Alias for configuration.import because it clashes with</span></span><br><span class="line">    <span class="comment">#        Python&#x27;s import reserved keyword&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment">#     return self.do_request(</span></span><br><span class="line">    <span class="comment">#         method=&quot;configuration.import&quot;,</span></span><br><span class="line">    <span class="comment">#         params=&#123;&quot;format&quot;: format, &quot;source&quot;: source, &quot;rules&quot;: rules&#125;</span></span><br><span class="line">    <span class="comment">#     )[&#x27;result&#x27;]</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">do_request</span>(<span class="params">self, method, params=None</span>):</span></span><br><span class="line">        request_json = &#123;</span><br><span class="line">            <span class="string">&#x27;jsonrpc&#x27;</span>: <span class="string">&#x27;2.0&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;method&#x27;</span>: method,</span><br><span class="line">            <span class="string">&#x27;params&#x27;</span>: params <span class="keyword">or</span> &#123;&#125;,</span><br><span class="line">            <span class="string">&#x27;id&#x27;</span>: self.id,</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> method != <span class="string">&#x27;apiinfo.version&#x27;</span> <span class="keyword">and</span> self.auth:</span><br><span class="line">            request_json[<span class="string">&#x27;auth&#x27;</span>] = self.auth</span><br><span class="line"></span><br><span class="line">        logger.debug(<span class="string">&quot;sending: %s&quot;</span>, json.dumps(request_json, indent=<span class="number">4</span>, separators=(<span class="string">&#x27;,&#x27;</span>, <span class="string">&#x27;:&#x27;</span>)))</span><br><span class="line">        response = self.session.post(</span><br><span class="line">            self.zabbix_api_url,</span><br><span class="line">            data=json.dumps(request_json),</span><br><span class="line">            timeout=self.timeout</span><br><span class="line">        )</span><br><span class="line">        logger.debug(<span class="string">&quot;Response Code : %s&quot;</span>, str(response.status_code))</span><br><span class="line"></span><br><span class="line">        response.raise_for_status()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> len(response.text):</span><br><span class="line">            <span class="keyword">raise</span> ZabbixAPIException(<span class="string">&quot;没有返回值&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            response_json = json.loads(response.text)</span><br><span class="line">        <span class="keyword">except</span> ValueError:</span><br><span class="line">            <span class="keyword">raise</span> ZabbixAPIException(<span class="string">&quot;不能解析JSON %s&quot;</span> % response.text)</span><br><span class="line"></span><br><span class="line">        logger.debug(<span class="string">&quot;sending: %s&quot;</span>, json.dumps(request_json, indent=<span class="number">4</span>, separators=(<span class="string">&#x27;,&#x27;</span>, <span class="string">&#x27;:&#x27;</span>)))</span><br><span class="line"></span><br><span class="line">        self.id += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;error&#x27;</span> <span class="keyword">in</span> response_json:</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;data&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> response_json[<span class="string">&#x27;error&#x27;</span>]:</span><br><span class="line">                response_json[<span class="string">&#x27;error&#x27;</span>][<span class="string">&#x27;data&#x27;</span>] = <span class="string">&#x27;No Data&#x27;</span></span><br><span class="line">            msg = <span class="string">&quot;Error &#123;code&#125;: &#123;message&#125;,&#123;data&#125;&quot;</span>.format(</span><br><span class="line">                code=response_json[<span class="string">&#x27;error&#x27;</span>][<span class="string">&#x27;code&#x27;</span>],</span><br><span class="line">                message=response_json[<span class="string">&#x27;error&#x27;</span>][<span class="string">&#x27;message&#x27;</span>],</span><br><span class="line">                data=response_json[<span class="string">&#x27;error&#x27;</span>][<span class="string">&#x27;data&#x27;</span>]</span><br><span class="line">            )</span><br><span class="line">            <span class="keyword">raise</span> ZabbixAPIException(msg, response_json[<span class="string">&#x27;error&#x27;</span>][<span class="string">&#x27;code&#x27;</span>])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> response_json</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span>(<span class="params">self, item</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        auto create Zabbix API Client</span></span><br><span class="line"><span class="string">        :param item:</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">return</span> ZabbixAPIObjectClass(item, self)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ZabbixAPIObjectClass</span>(<span class="params">object</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, parent</span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.parent = parent</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span>(<span class="params">self, item</span>):</span></span><br><span class="line"></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        dynamic create a method (get,create,update,delete)</span></span><br><span class="line"><span class="string">        :param item:</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">fn</span>(<span class="params">*args, **kwargs</span>):</span></span><br><span class="line">            <span class="keyword">if</span> args <span class="keyword">and</span> kwargs:</span><br><span class="line">                <span class="keyword">raise</span> TypeError(<span class="string">&#x27;Found Both args and kwargs&#x27;</span>)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> self.parent.do_request(<span class="string">&#x27;&#123;0&#125;.&#123;1&#125;&#x27;</span>.format(self.name, item),</span><br><span class="line">                                          args <span class="keyword">or</span> kwargs)[<span class="string">&#x27;result&#x27;</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> fn</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>基本上一个文件就搞定了，不过这个基本上参考了网上的一个代码实现的，这里使用__getattr__这种方式可以非常简洁的处理了这种请求非常类似的情况，这也是python的魅力吧.</p>
-<h2 id="访问Zabbix-API"><a href="#访问Zabbix-API" class="headerlink" title="访问Zabbix API"></a>访问Zabbix API</h2><p>访问API比较简单(如何参数不多的话，哈哈)，实例代码取Template的一些信息如下:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestZabbixTemplateClient</span>(<span class="params">unittest.TestCase</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setUp</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.zapi = ZabbixClient()</span><br><span class="line">        self.zapi.login_in()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_get_template</span>(<span class="params">self</span>):</span></span><br><span class="line">        templates = self.zapi.template.get()</span><br><span class="line">        print(templates)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_get_template</span>(<span class="params">self</span>):</span></span><br><span class="line">        templates = self.zapi.template.get(</span><br><span class="line">            filter=&#123;</span><br><span class="line">                <span class="string">&quot;host&quot;</span>: [<span class="string">&quot;Template OS Linux&quot;</span>]</span><br><span class="line">            &#125;)</span><br><span class="line">        print(templates[<span class="number">0</span>][<span class="string">&quot;id&quot;</span>])</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_create_template</span>(<span class="params">self</span>):</span></span><br><span class="line">        template = self.zapi.template.create()</span><br></pre></td></tr></table></figure>
-
-<p>补充一句，就是其实可以看到：</p>
-<ul>
-<li>ZabbixClient这个类没有定义template，可是他去可以使用？写了JAVA人是不是感觉有点惊喜的感觉</li>
-<li>template也没有create这个方法呀，他是怎么做到的？？</li>
-</ul>
-<p>这个例子很好的说明了使用<code>__getattr__</code>可以做一些魔法的事情</p>
 
       
     </div>

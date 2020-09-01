@@ -65,6 +65,71 @@
 
   
     
+    <h3 class="article-title"><a href="/2020/07/30/tools/nginx-runner/"><span>测试日志2020-5 前端部署 NGINX Conf文件自动配置</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2020/07/30/tools/nginx-runner/" rel="bookmark">
+        <time class="entry-date published" datetime="2020-07-30T04:12:00.000Z">
+          2020-07-30
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="前端部署-NGINX-Conf文件自动配置"><a href="#前端部署-NGINX-Conf文件自动配置" class="headerlink" title="前端部署 NGINX Conf文件自动配置"></a>前端部署 NGINX Conf文件自动配置</h2><p>新部署了一个服务，测试环境NGINX帮忙配置一下；这周老鸟被这些事情忙的不亦乐乎，一会nginx加一个环境配置，<br>一会部署一个测试环境前端,一会重启一些nginx,一周很快就过去了，老鸟感觉一周测试的事情做的很少，倒是做了很多nginx运维的事情.<br>按照现在流行的说法叫test-ops，不知道哪个天才创造了这个职位名称，但是很遗憾，老鸟不能再招人了，公司HC已经冻结了，但是如果一直这样也不是个事情呀. 怎么解决？老鸟除了这些破事，还有其他项目要搞，会要开，还想着早点回家和小孩做做几何题，怎么办？</p>
+<p>问题怎么解决？ 老鸟一般问题会遵照下面几个步骤进行:</p>
+<ol>
+<li>问题是什么？想要解决什么问题</li>
+<li>有没有现成的解决方案？解决的思路是什么</li>
+<li>不求完美解决，但求80%以上解决问题
+        
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/python/">python</a>, <a href="/categories/python/eat-dog-food/">eat-dog-food</a>, <a href="/categories/python/eat-dog-food/test-ops/">test-ops</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/python/">python</a><a href="/tags/eat-dog-food/">eat-dog-food</a><a href="/tags/test-ops/">test-ops</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2020/03/11/shell/2020-03-11-nginx/"><span>devops nginx 使用tips</span></a></h3>
     
   
@@ -162,7 +227,7 @@
 
     <span class="post-tags">
       <i class="icon-tags"></i>
-        <a href="/tags/devops/">devops</a><a href="/tags/daily-automation-tip/">daily-automation-tip</a>
+        <a href="/tags/daily-automation-tip/">daily-automation-tip</a><a href="/tags/devops/">devops</a>
     </span>
     
 
@@ -248,70 +313,6 @@
     <span class="post-tags">
       <i class="icon-tags"></i>
         <a href="/tags/qa-daily/">qa-daily</a><a href="/tags/git/">git</a><a href="/tags/10minutes/">10minutes</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2020/01/13/tips/refactor-get-ipaddress/"><span>一次获取IP地址的小重构</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2020/01/13/tips/refactor-get-ipaddress/" rel="bookmark">
-        <time class="entry-date published" datetime="2020-01-12T18:19:56.000Z">
-          2020-01-13
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>原始代码不好的地方：</p>
-<ul>
-<li>有很多if/else</li>
-<li>扩展需要增加内部的if/else判断</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getIpAddr</span><span class="params">(HttpServletRequest request)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (request == <span class="keyword">null</span>)</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="string">&quot;unknown&quot;</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       String ip = request.getHeader(<span class="string">&quot;x-forwarded-for&quot;</span>);</span><br><span class="line">       <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">&quot;unknown&quot;</span>.equalsIgnoreCase(ip))</span><br><span class="line">       &#123;</span><br><span class="line">           ip = request.getHeader(<span class="string">&quot;Proxy-Client-IP&quot;</span>);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">&quot;unknown&quot;</span>.equalsIgnoreCase(ip))</span><br><span class="line">       &#123;</span><br><span class="line">           ip = request.getHeader(<span class="string">&quot;X-Forwarded-For&quot;</span>);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">&quot;unknown&quot;</span>.equalsIgnoreCase(ip))</span><br><span class="line">       &#123;</span><br><span class="line">           ip = request.getHeader(<span class="string">&quot;WL-Proxy-Client-IP&quot;</span>);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">&quot;unknown&quot;</span>.equalsIgnoreCase(ip))</span><br><span class="line">       &#123;</span><br><span class="line">           ip = request.getHeader(<span class="string">&quot;X-Real-IP&quot;</span>);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">&quot;unknown&quot;</span>.equalsIgnoreCase(ip))</span><br><span class="line">       &#123;</span><br><span class="line">           ip = request.getRemoteAddr();</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">return</span> <span class="string">&quot;0:0:0:0:0:0:0:1&quot;</span>.equals(ip) ? <span class="string">&quot;127.0.0.1&quot;</span> : ip;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>重构后代码:</p>
-<ol>
-<li>代码精简</li>
-<li>取header部分只要传入参数就可以</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String UNKNOWN = <span class="string">&quot;UNKNOWN&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getIpAddressFromReq</span><span class="params">(HttpServletRequest request,String... headerNames)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (ObjectUtil.isNotNull(request)) &#123;</span><br><span class="line">    String ip = request.getHeader(<span class="string">&quot;x-forwarded-for&quot;</span>);</span><br><span class="line">    List&lt;String&gt; headers = Arrays.asList(<span class="string">&quot;Proxy-Client-IP&quot;</span>,</span><br><span class="line">                                         <span class="string">&quot;X-Forwarded-For&quot;</span>,</span><br><span class="line">                                         <span class="string">&quot;WL-Proxy-Client-IP&quot;</span>,<span class="string">&quot;X-Real-IP&quot;</span>);</span><br><span class="line">    headers.addAll(Arrays.asList(headerNames));</span><br><span class="line">    <span class="keyword">for</span> (String header : headers) &#123;</span><br><span class="line">      <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || UNKNOWN.equalsIgnoreCase(ip)) &#123;</span><br><span class="line">        ip = request.getHeader(header);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">&quot;unknown&quot;</span>.equalsIgnoreCase(ip)) &#123;</span><br><span class="line">      ip = request.getRemoteAddr();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;0:0:0:0:0:0:0:1&quot;</span>.equals(ip) ? <span class="string">&quot;127.0.0.1&quot;</span> : ip;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> UNKNOWN;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/10Minutes/">10Minutes</a><a href="/tags/refactor/">refactor</a>
     </span>
     
 

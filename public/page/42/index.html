@@ -65,6 +65,79 @@
 
   
     
+    <h3 class="article-title"><a href="/2015/10/24/true_stories/2015-10-24-return-flag/"><span>True Stories: About Return Flag</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/10/24/true_stories/2015-10-24-return-flag/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-10-23T18:31:11.000Z">
+          2015-10-24
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="Return-Flag"><a href="#Return-Flag" class="headerlink" title="Return Flag"></a>Return Flag</h2><p>真实的一段代码片段：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">update</span><span class="params">(Inquiry inquiry)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">boolean</span> bUpdBaseInf = <span class="keyword">super</span>.update(inquiry);</span><br><span class="line">    solrService.syncUpdate(<span class="keyword">new</span> SolrInquiry(inquiry.getInquiryId()));</span><br><span class="line">    <span class="keyword">return</span> bUpdBaseInfo;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>自己的思考：</p>
+<ul>
+<li>这个返回的状态值没有完全体现整个函数的状态</li>
+<li>如果solrService是个异步还可以理解这个返回值，但是名字是syncUpdate<br>直接是不是应该怀疑这是个异步更新？</li>
+<li>solr的更新真的需要同步吗？solr的更新可能直接影响到整个业务的处理了……</li>
+<li>这里也许是留了点坑关于这个flag的</li>
+<li>这个flag的命名是不是有点那个啥?</li>
+</ul>
+<h2 id="代码REVIEW-流程的思考"><a href="#代码REVIEW-流程的思考" class="headerlink" title="代码REVIEW 流程的思考"></a>代码REVIEW 流程的思考</h2><p>这样的代码,个人觉得代码REVIEW是需要检查出来的。也许这样的代码永远也不会出现问题，但是他的味道就是不好。<br>就算我是一个测试，也看出这里面不严谨的地方了,很多时候我们总是讲流程,流程，流程，但是有了流程又怎么样呢？</p>
+<p>一个好的技术团队是有他自己的品味的.呆过技术很好的公司,也呆过技术比较一般的公司,比较不同类别公司的开发，<br>很好的公司的开发更加注重这些细节,你可能觉得他们其实都在写差不多的代码,但是这种细节的常年累积,一个产品是否好维护就会出现很明显的差距了.<br>不容易维护的产品,有时可能已经资不抵债了.</p>
+<p>如果想的更远一点的话,关于开发经常说到的工作无聊没有挑战的话题，<br>好公司的开发说的工作无聊和一般公司一些开发说的工作无聊可能是两个不同层次的无聊。<br>有些知道确实没有挑战而有些只是不知道其实自己写的代码挺烂的而已。我无意攻击任何人只是说说我真实的想法。</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/truestories/">truestories</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/truestories/">truestories</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2015/10/24/tips/automation/2015-10-24-phantomjs-usage/"><span>Phantomjs Tutorial</span></a></h3>
     
   
@@ -312,86 +385,6 @@
     <span class="post-tags">
       <i class="icon-tags"></i>
         <a href="/tags/designpattern/">designpattern</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2015/10/22/tips/interview/2015-10-22-python_interview_questions/"><span>Python 面试题</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2015/10/22/tips/interview/2015-10-22-python_interview_questions/" rel="bookmark">
-        <time class="entry-date published" datetime="2015-10-21T18:31:11.000Z">
-          2015-10-22
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>测试有的时候出去会遇到一些编程面试题,以下是用python来解决两个简单面试题.</p>
-<h2 id="倒转字符串中的单词的排列"><a href="#倒转字符串中的单词的排列" class="headerlink" title="倒转字符串中的单词的排列"></a>倒转字符串中的单词的排列</h2><p>给定字符串“Hello World!”,经过一段程序运行之后,得到输出结果“World! Hello”,也就是以单词<br>为单位,倒转输入“Hello World!”</p>
-<ul>
-<li>python解法: 不考虑编码格式</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">words = <span class="string">&quot;Hello World!&quot;</span></span><br><span class="line">print(<span class="string">&quot; &quot;</span>.join(reversed(words)))</span><br><span class="line">print(<span class="string">&quot; &quot;</span>.join(words.split(<span class="string">&quot; &quot;</span>)[::<span class="number">-1</span>]))</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Java 解法</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReverseWords</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">reverseWords</span><span class="params">(String input)</span></span>&#123;</span><br><span class="line">        String[] words = input.split(<span class="string">&quot; &quot;</span>);</span><br><span class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = words.length-<span class="number">1</span>; i &gt;=<span class="number">0</span> ; i--) &#123;</span><br><span class="line">            sb.append(words[i]);</span><br><span class="line">            sb.append(<span class="string">&quot; &quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> sb.toString().trim();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(reverseWords(<span class="string">&quot;Hello World!&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="输出斐波那契数列"><a href="#输出斐波那契数列" class="headerlink" title="输出斐波那契数列"></a>输出斐波那契数列</h2><p>根据给定的值,输出相同数目的斐波那契列， 如如果给定是1， 则输出1;给定2,输出1,1;<br>给定3，输出1,1,2, 依次类推。</p>
-<ul>
-<li>python 解法</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n &lt;= <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> [<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> [<span class="number">1</span>, <span class="number">1</span>]</span><br><span class="line">    nums = [<span class="number">1</span>, <span class="number">1</span>]</span><br><span class="line">    temp1 = <span class="number">1</span></span><br><span class="line">    temp2 = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n - <span class="number">2</span>):</span><br><span class="line">        append_num = temp1 + temp2</span><br><span class="line">        nums.append(append_num)</span><br><span class="line">        temp1,temp2=temp2,append_num</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> nums</span><br><span class="line"></span><br><span class="line">print(f(<span class="number">3</span>))</span><br><span class="line">print(f(<span class="number">5</span>))</span><br><span class="line">print(f(<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>java 解法</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getFibListByNum</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n&lt;=<span class="number">0</span>) <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">&quot;invalid input&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">1</span>) <span class="keyword">return</span> <span class="string">&quot;1&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">2</span>) <span class="keyword">return</span> <span class="string">&quot;1,1&quot;</span>;</span><br><span class="line">    <span class="keyword">int</span> temp1=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> temp2=<span class="number">1</span>;</span><br><span class="line">    String result = <span class="string">&quot;1,1&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">3</span>; i &lt;=n ; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> appendNum = temp1+temp2;</span><br><span class="line">        temp1=temp2;</span><br><span class="line">        temp2=appendNum;</span><br><span class="line">        result=result+<span class="string">&quot;,&quot;</span>+appendNum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/interview/">interview</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/interview/">interview</a>
     </span>
     
 
