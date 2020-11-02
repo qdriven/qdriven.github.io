@@ -65,6 +65,76 @@
 
   
     
+    <h3 class="article-title"><a href="/2019/12/01/shell/linux_fs/"><span></span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/12/01/shell/linux_fs/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-12-01T13:27:38.000Z">
+          2019-12-01
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="linux的文件系统"><a href="#linux的文件系统" class="headerlink" title="linux的文件系统"></a>linux的文件系统</h2><h2 id="概述（个人描述）"><a href="#概述（个人描述）" class="headerlink" title="概述（个人描述）"></a>概述（个人描述）</h2><p>linux有个说法，一切皆文件，算是对IO的简化。<br>通常我们操作的目录+文件名是个逻辑上的概念，用以定位，目录也是文件。<br>物理上的概念是分区，分区需要挂载<code>mount</code>到特定目录上使用，挂载后就屏蔽了物理细节了。</p>
+<h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><p>这个用<code>ls -l</code>可以看到详细信息</p>
+<h3 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h3><pre><code>-rwxrwsrwT，三个类别读写执行权限。第一个字符表明文件类型。</code></pre>
+<h3 id="所有者和所属组"><a href="#所有者和所属组" class="headerlink" title="所有者和所属组"></a>所有者和所属组</h3><pre><code>权限是分所有者、所属组和其他人的。</code></pre>
+<h3 id="特殊位"><a href="#特殊位" class="headerlink" title="特殊位"></a>特殊位</h3><pre><code>SUID    u+s,文件执行时以文件所有者的身份执行
+SGID    g+s,文件执行时以文件所属组的身份执行
+SBIT    o+t,针对目录，删除目录中文件的只能是root和所有者</code></pre>
+<h3 id="修改命令"><a href="#修改命令" class="headerlink" title="修改命令"></a>修改命令</h3><pre><code>chown user file
+chgrp group file
+chmod a+x file</code></pre>
+<h3 id="umask"><a href="#umask" class="headerlink" title="umask"></a>umask</h3><pre><code>权限掩码，创建文件是默认权限由他的值控制，回取消其设置的相应权限</code></pre>
+<h2 id="单个文件系统的结构"><a href="#单个文件系统的结构" class="headerlink" title="单个文件系统的结构"></a>单个文件系统的结构</h2><p>linux大致把外部存储空间分为<strong>数据区</strong>和<strong>索引区</strong>，文件系统间独立。这个索引区就是inode了，存文件的大小、权限、拥有者、引用数、block块位置等信息。inode与block的对应是个多级列表的结构，有十几个block指针。</p>
+<p>inode的概念，在使用ln时有用，这个默认创建硬连接（只能是文件），这个时候两个文件指向同一个inode。</p>
+<h2 id="分区挂载"><a href="#分区挂载" class="headerlink" title="分区挂载"></a>分区挂载</h2><p>分区需要挂载才能使用，根<code>/</code>也是如此（这个不明白具体怎么做的）。<br>内核加载时，会根据<code>/etc/fstab</code>的内容加载分区。</p>
+<h2 id="NFS"><a href="#NFS" class="headerlink" title="NFS"></a>NFS</h2><pre><code>Ubuntu下面Ubuntu下的例子
+服务端:
+$apt-get install nfs-kernel-server
+vi /etc/exports 添加nfs目录: /personal/nfs_share 10.1.60.34(rw,sync,no_root_squash)
+$sudo exportfs -r
+$sudo /etc/init.d/portmap start
+$sudo /etc/init.d/nfs-kernel-server start
+客户端:
+$sudo apt-get install nfs-common
+$sudo mount 10.19.34.76:/personal/nfs_share ~/nfsshare</code></pre>
+<h2 id="特定目录含义"><a href="#特定目录含义" class="headerlink" title="特定目录含义"></a>特定目录含义</h2><p>markdown表格支持挫呀，左右都可编辑估计就解决问题了</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2019/12/01/shell/5.nginx/"><span></span></a></h3>
     
   
@@ -215,70 +285,6 @@
 
     
 
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2019/11/27/qa-thoughts/tech-is-all/"><span>测试陷阱3-自动化测试就是测试的技术</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/11/27/qa-thoughts/tech-is-all/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-11-27T15:49:47.000Z">
-          2019-11-27
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>随着自动化测试的风靡，测试同学们越来越觉得自动化就是全部，自动化就是自己的方向。<br>这些本身没有太大问题，但是如果认为自动化测试就是终极技术，那么我觉得这是一个很大的陷阱。<br>为什么？个人觉得大部分的测试把自动化和技术都定义的太狭小了,技术和自动化都是非常宽泛的定义,下面是我自己问自己的两个问题:</p>
-<ul>
-<li>什么是自动化？测试讨论的自动化难道就是接口自动化，UI自动化测试吗？</li>
-<li>什么是技术？技术难道就是写代码吗？把测试用例代码化吗？</li>
-</ul>
-<h2 id="什么是自动化？测试讨论的自动化难道就是接口自动化，UI自动化测试吗？"><a href="#什么是自动化？测试讨论的自动化难道就是接口自动化，UI自动化测试吗？" class="headerlink" title="什么是自动化？测试讨论的自动化难道就是接口自动化，UI自动化测试吗？"></a>什么是自动化？测试讨论的自动化难道就是接口自动化，UI自动化测试吗？</h2><p>为什么先问这个问题，因为很多同学一开始没有接触过自动化，后来写了一些自动化用例之后，要么觉得高人一等，要么觉得一会就觉得没意思了，原因何在？因为写过自动化测试用例之后，要么觉得我技术很厉害了，基本可以把所有问题都解决了；要么马上一个疑问是这有技术含量吗？ 大量重复的代码，差不多的验证点，没有比设计测试用例和执行用例高级到多少,然后就有一种深深的幻灭的感觉？路在何方的问题又来了.</p>
-<p>其实什么都可以是自动化,把原来重复做的事情用代码实现是自动化的一种；把类似的事情用代码实现也是自动化的一种；把<br>日常工作用代码实现也是自动化；这些自动化都是在做了一次之后再用代码去实现，如果用时髦一点的时候machine learning/ai去把<br>没做过的事情自动实现了,也是自动化. 我甚至可以说，社会生产力的进步都是每一个自动化的结果。<br>如果从这个角度看的，那么自动化能做的事情太多了，自动化测试也好，测试自动化也好，你可以做的事情有很多很多，多到你无法想像，问题是你有<br>能力做吗？ 那些写接口自动化，web ui自动化的技能足够你去做更多的自动化吗？</p>
-<p>自动化的目的大致就是为了不让人去做差不多的事情，减少重复劳动。用一样的方法做一样的事情是重复劳动，用不一样的方法重新再做一遍一样的事情也是重复劳动；如果目标是减少重复劳动，那么自动化测试就不能停在把测试自动化这一步，还有很多很多的事情可以做。但是坦白说，有哪些事情，我也说不出来，但是我觉得用代码再去实现一遍测试过用例，也是一种重复劳动，只是还没有能力把这件事情不重复做，但是相信一定有一些办法，有一些方面是可以解决的。</p>
-<p>如果从上面的角度说，自动化的范围太广了，能做的事情太多了，会了接口自动化，UI自动化算什么呢？</p>
-<h2 id="什么是技术？技术难道就是写代码吗？把测试用例代码化吗？"><a href="#什么是技术？技术难道就是写代码吗？把测试用例代码化吗？" class="headerlink" title="什么是技术？技术难道就是写代码吗？把测试用例代码化吗？"></a>什么是技术？技术难道就是写代码吗？把测试用例代码化吗？</h2><p>个人觉得技术包括的范围也很广，不止是写代码，不仅仅是测试用例代码化，这些都只是技术的一块。讨论起代码来兴致很高，觉得技术含量很高，讨论起业务来，没有一点情绪。但是如果仔细想想，像一个会计问题，一个交易问题，一个合规问题，这些是业务，但是不也是技术吗？这些只要是专业问题，这些就也是技术的一种，就像你专业写代码，这些不能理解为计算机科学的业务吗？如果是这样的话，那有什么非要区分业务和技术的？放在现实中来说，业务就是处理实际问题的技术，代码就是解决计算机如何运行的技术，不是吗？既然是这样的化，那么问问自己业务了解的透彻了，各个流程节点了解透彻了吗？技术实现和业务的匹配对应关系了解透彻了？代码说到底只是一个产品成功的一部分，还有很多很多其他问题需要解决,如果非要说代码能占到产品上线或者成功的多少比例？或许50%都不到. 代码本身不是目的，实际业务问题才是。不用非要拘泥与代码，各种方式解决了业务问题，也是很有技术含量的。</p>
-<h2 id="自动化测试就是测试的技术？"><a href="#自动化测试就是测试的技术？" class="headerlink" title="自动化测试就是测试的技术？"></a>自动化测试就是测试的技术？</h2><p>自动化测试只是测试的一种技术, 决定你有没有价值的不是你用了什么技术手段，是你解决了什么问题。代码，自动化测试也只是测试的一个侧面，想想日常工作中有多少事情要处理，如果眼里只有自动化测试，那么是不是失去了很多其他方面的锻炼和成长。问问自己把问题说清楚了吗，问问自己<br>做到了有效沟通吗，问问自己了解业务吗，问问自己能快速了解需求吗？自动化测试只是那么一小块，需要做的事情还有很多。</p>
-<p>不过自动化测试如果你完全不会，那么现在的行情你肯定是不容易拿到高工资的；但是如果认为只有自动化测试，那么天花板也放在那边,也算给自己的一个提醒吧。</p>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/QATrap/">QATrap</a>
-    </span>
     
 
     </div>

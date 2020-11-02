@@ -65,6 +65,75 @@
 
   
     
+    <h3 class="article-title"><a href="/2014/11/24/python/2014-11-24-python_mirror/"><span>Python PIP mirror设置</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2014/11/24/python/2014-11-24-python_mirror/" rel="bookmark">
+        <time class="entry-date published" datetime="2014-11-23T18:31:11.000Z">
+          2014-11-24
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>使用默认的pip mirror速度实在太慢了，所以使用douban的pypi镜像.如何使用呢？很简单，以下几步：</p>
+<ul>
+<li>修改~/.pip/pip.conf 文件，将index_url改成douban镜像地址:<code>http://pypi.douban.com/simple</code></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[<span class="keyword">global</span>]</span><br><span class="line">index-url=http://pypi.douban.com/simple</span><br><span class="line">timeout = <span class="number">30</span></span><br><span class="line">require-virtualenv = false</span><br><span class="line">download-cache = /tmp</span><br></pre></td></tr></table></figure>
+
+<p>当然记得把require-virtualenv 值改为false</p>
+<ul>
+<li>关闭终端，重新使用pip命令就可以使用douban镜像了，速度超快</li>
+</ul>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/python/">python</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/python/">python</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2014/11/24/python/2014-11-24-virtual_env/"><span>Python virtualenv in Mac</span></a></h3>
     
   
@@ -197,95 +266,6 @@
       <i class="icon-tags"></i>
         <a href="/tags/shell/">shell</a>
     </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2014/08/24/shell/2014-08-24-shell_101_variant/"><span>Shell Learning - Variant 变量</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2014/08/24/shell/2014-08-24-shell_101_variant/" rel="bookmark">
-        <time class="entry-date published" datetime="2014-08-24T02:31:11.000Z">
-          2014-08-24
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h3 id="变量赋值"><a href="#变量赋值" class="headerlink" title="变量赋值"></a>变量赋值</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">var=value</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$var</span></span><br><span class="line">var=<span class="string">&#x27;the value&#x27;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$var</span></span><br><span class="line">var=<span class="string">&quot;the <span class="variable">$PARAM</span>&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$var</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$var</span></span><br><span class="line"><span class="built_in">echo</span> `<span class="built_in">pwd</span>`</span><br><span class="line"><span class="built_in">echo</span> $(<span class="built_in">pwd</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#result:</span></span><br><span class="line">╰─[:)] % sh shell_variant.sh</span><br><span class="line">value</span><br><span class="line">the value</span><br><span class="line">the</span><br><span class="line">the</span><br><span class="line">/Users/patrick/workspace/works/shell_learning</span><br><span class="line">/Users/patrick/workspace/works/shell_learning</span><br></pre></td></tr></table></figure>
-
-<h3 id="字符串处理"><a href="#字符串处理" class="headerlink" title="字符串处理"></a>字符串处理</h3><ul>
-<li>可以给出字符串的长度</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$#</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$0</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$1</span> <span class="variable">$2</span></span><br><span class="line"><span class="built_in">echo</span> $$</span><br><span class="line"></span><br><span class="line">p=<span class="variable">$2</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$p</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$&#123;#p&#125;</span> != 2 ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;wrong input&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Result</span></span><br><span class="line"></span><br><span class="line">h read_parameter.sh 1 2</span><br><span class="line">2</span><br><span class="line">read_parameter.sh</span><br><span class="line">1 2</span><br><span class="line">24217</span><br><span class="line">2</span><br><span class="line">wrong input</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="变量分类"><a href="#变量分类" class="headerlink" title="变量分类"></a>变量分类</h3><p>四种变量：环境变量、本地变量、位置变量、特定变量参数</p>
-<ul>
-<li>环境变量可作用于所有子进程</li>
-<li>本地变量在用户现在的shell 生命期的脚本中使用，仅存在于当前进程</li>
-<li>位置变量：作为程序参数</li>
-<li>特定变量：特殊作用</li>
-</ul>
-<h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">设置</span><br><span class="line">MYVAR=<span class="string">&quot;test&quot;</span></span><br><span class="line">expirt MYVAR</span><br><span class="line">or</span><br><span class="line"><span class="built_in">export</span> MYVAR=<span class="string">&quot;test&quot;</span></span><br><span class="line"></span><br><span class="line">只读</span><br><span class="line">MYVAR=<span class="string">&quot;test&quot;</span></span><br><span class="line"><span class="built_in">readonly</span> MYVAR</span><br><span class="line">or</span><br><span class="line"><span class="built_in">readonly</span> MYVAR=<span class="string">&quot;test&quot;</span></span><br><span class="line"></span><br><span class="line">显示</span><br><span class="line"><span class="built_in">export</span> -p</span><br><span class="line">env <span class="comment">#查看所有环境变量</span></span><br><span class="line"><span class="variable">$MYVAR</span> <span class="comment">#获取</span></span><br><span class="line"></span><br><span class="line">消除</span><br><span class="line"><span class="built_in">unset</span> MYVAR</span><br></pre></td></tr></table></figure>
-
-<h3 id="本地变量"><a href="#本地变量" class="headerlink" title="本地变量"></a>本地变量</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">设置</span><br><span class="line">LOCAL_VAR=<span class="string">&quot;test&quot;</span></span><br><span class="line">or</span><br><span class="line">LOCAL_VAR=<span class="string">&quot;test&quot;</span></span><br><span class="line"><span class="built_in">readonly</span> LOCAL_VAR <span class="comment">#设置只读</span></span><br><span class="line"></span><br><span class="line">还可以使用<span class="built_in">declare</span>命令定义</span><br></pre></td></tr></table></figure>
-
-<h3 id="位置变量"><a href="#位置变量" class="headerlink" title="位置变量"></a>位置变量</h3><ul>
-<li>$0 脚本名称</li>
-<li>$# 传递到脚本参数个数</li>
-<li>$$ shell脚本运行当前进程ID</li>
-<li>$? 退出状态</li>
-<li>$N N&gt;=1，第n个参数</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$#</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$0</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$1</span> <span class="variable">$2</span></span><br><span class="line"><span class="built_in">echo</span> $$</span><br><span class="line"></span><br><span class="line"><span class="comment"># result:</span></span><br><span class="line">2</span><br><span class="line">read_parameter.sh</span><br><span class="line">1 2</span><br><span class="line">24171</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="拼接字符串"><a href="#拼接字符串" class="headerlink" title="拼接字符串"></a>拼接字符串</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$x</span><span class="variable">$y</span>&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="字符串切片"><a href="#字符串切片" class="headerlink" title="字符串切片"></a>字符串切片</h3><p>${变量名:起始:长度}得到子字符串</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">test</span>=<span class="string">&#x27;I love china&#x27;</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;test:5&#125;</span></span><br><span class="line">e china</span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;test:5:10&#125;</span></span><br><span class="line">e china</span><br><span class="line"></span><br><span class="line">str=<span class="string">&quot;hello world&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;str:6&#125;</span>  <span class="comment"># $&#123;var:offset:length&#125;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="字符串替换"><a href="#字符串替换" class="headerlink" title="字符串替换"></a>字符串替换</h3><p>${变量/查找/替换值}</p>
-<p>一个“/”表示替换第一个，”//”表示替换所有,当查找中出现了：”/”请加转义符”/”表示</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;str/foo/bar&#125;</span> <span class="comment">#首个</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;str//foo/bar&#125;</span> <span class="comment">#所有</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="正则匹配"><a href="#正则匹配" class="headerlink" title="正则匹配"></a>正则匹配</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [[ <span class="variable">$str</span> =~ [0-9]+\.[0-9]+ ]]</span><br></pre></td></tr></table></figure>
-
-<h3 id="数值处理"><a href="#数值处理" class="headerlink" title="数值处理"></a>数值处理</h3><p>自增</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">a=1</span><br><span class="line">a=`expr a + 1`</span><br><span class="line"></span><br><span class="line">or</span><br><span class="line"></span><br><span class="line">a=1</span><br><span class="line"><span class="built_in">let</span> a++</span><br><span class="line"><span class="built_in">let</span> a+=2</span><br><span class="line"><span class="built_in">let</span></span><br><span class="line"></span><br><span class="line">no1=4</span><br><span class="line">no2=5</span><br><span class="line"><span class="built_in">let</span> result=no1+no2</span><br><span class="line">expr</span><br><span class="line"></span><br><span class="line">result=`expr 3 + 4`</span><br><span class="line">result=$(expr <span class="variable">$no1</span> + 5)</span><br></pre></td></tr></table></figure>
-
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">result=$[ no1 + no2 ]</span><br><span class="line">result=$[ <span class="variable">$no</span> + 5 ]</span><br><span class="line"></span><br><span class="line">result=$(( no1 + <span class="number">5</span> ))</span><br><span class="line">浮点数</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;4 * 0.56&quot;</span> | bc</span><br><span class="line">设定精度</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;scale=2;3/8&quot;</span> | bc</span><br><span class="line">进制转换</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;obase=2;100&quot;</span> | bc</span><br><span class="line">平方</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;sqrt(100)&quot;</span> | bc</span><br><span class="line">数组和map</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
     
 
     </div>

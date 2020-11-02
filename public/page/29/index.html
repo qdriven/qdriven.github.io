@@ -65,6 +65,79 @@
 
   
     
+    <h3 class="article-title"><a href="/2016/02/28/python/2016-02-28-simple_word_count/"><span>Simple Word Counter</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/02/28/python/2016-02-28-simple_word_count/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-02-28T02:41:15.000Z">
+          2016-02-28
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>有时测试的面试题中会考点编程的内容，比如统计字符串中的相同字符数量，具体题目如下：</p>
+<ul>
+<li>给定一个字符串，如MIssissippi</li>
+<li>计算字符串中每一个不同字符出现的数量</li>
+</ul>
+<h2 id="Python-的解法"><a href="#Python-的解法" class="headerlink" title="Python 的解法"></a>Python 的解法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">letter_count=&#123;&#125;</span><br><span class="line"><span class="keyword">for</span> letter <span class="keyword">in</span> <span class="string">&#x27;Mississippi&#x27;</span>:</span><br><span class="line">  letter[letter]=letter_count.get(letter,<span class="number">0</span>)+<span class="number">1</span></span><br><span class="line">print(letter_count)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#39;s&#39;: 4, &#39;M&#39;: 1, &#39;i&#39;: 3, &#39;I&#39;: 1, &#39;p&#39;: 2&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Java-的解法"><a href="#Java-的解法" class="headerlink" title="Java 的解法"></a>Java 的解法</h2><p>JAVA 8 中给Map加入了getOrDefault的方法，下面就分别介绍一下JAVA8之前和使用JAVA8的方法：</p>
+<h3 id="JAVA8-之前："><a href="#JAVA8-之前：" class="headerlink" title="JAVA8 之前："></a>JAVA8 之前：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Map&lt;String,Integer&gt; <span class="title">countCharacters</span><span class="params">(String source)</span></span>&#123;</span><br><span class="line">       <span class="keyword">char</span>[] chars = source.toCharArray();</span><br><span class="line">       Map&lt;String,Integer&gt; result = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">char</span> aChar : chars) &#123;</span><br><span class="line">           Integer existing_counter = result.get(String.valueOf(aChar));</span><br><span class="line">           <span class="keyword">int</span> counter =  existing_counter==<span class="keyword">null</span>?<span class="number">0</span>:existing_counter;</span><br><span class="line">           result.put(String.valueOf(aChar),counter+<span class="number">1</span>);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> result;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="JAVA8-解法"><a href="#JAVA8-解法" class="headerlink" title="JAVA8 解法"></a>JAVA8 解法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> Map&lt;String,Integer&gt; <span class="title">countCharacters_JAVA8</span><span class="params">(String source)</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span>[] chars = source.toCharArray();</span><br><span class="line">    Map&lt;String,Integer&gt; result = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">char</span> aChar : chars) &#123;</span><br><span class="line">        result.put(String.valueOf(aChar),result.getOrDefault(String.valueOf(aChar),<span class="number">0</span>)+<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/python/">python</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/python/">python</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2016/02/26/python/2016-02-26-call_zabbix_api/"><span>Python 访问Zabbix API</span></a></h3>
     
   
@@ -248,113 +321,6 @@
     <span class="post-tags">
       <i class="icon-tags"></i>
         <a href="/tags/python/">python</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2016/02/22/tips/real/2016-02-22-mobile_perf_testing/"><span>Mobile 性能测试关键点</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2016/02/22/tips/real/2016-02-22-mobile_perf_testing/" rel="bookmark">
-        <time class="entry-date published" datetime="2016-02-22T01:40:07.000Z">
-          2016-02-22
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h1 id="移动端性能测试的一些关键点"><a href="#移动端性能测试的一些关键点" class="headerlink" title="移动端性能测试的一些关键点"></a>移动端性能测试的一些关键点</h1><p>阅读了一些人的PPT，再这里记录一些移动端性能测试的一些关键点，每个关键点会在后续润色，细化.</p>
-<h2 id="移动端性能测试的方方面面"><a href="#移动端性能测试的方方面面" class="headerlink" title="移动端性能测试的方方面面"></a>移动端性能测试的方方面面</h2><h3 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h3><ul>
-<li>Monkey</li>
-<li>Memory Usage:<pre><code>  /system/build.prop
-  dalvik.vm.heapstartsize=8m
-  # 堆分配的初始大小
-  dalvik.vm.heapgrowthlimit=64m</code></pre>
-</li>
-<li>adb shell procrank</li>
-<li>DDMS</li>
-<li>adb shell top</li>
-<li>启动性能(首次，多次)</li>
-<li>流量</li>
-<li>应用占用量，cachesize，datasize，codesize</li>
-<li>电量</li>
-<li>CPU: active, idel</li>
-<li>memory leak, hprof, ddms dump hprof</li>
-<li>GPU 过度绘制<br>1.蓝色1x过度绘制<br>2.绿色2x过度绘制<br>3.淡红色3x过度绘制<br>4.红色超过4x过度绘制</li>
-<li>gfxinfo</li>
-<li>systrace</li>
-<li>traceview</li>
-<li>tracer for OpenGL ES</li>
-</ul>
-<h3 id="IOS"><a href="#IOS" class="headerlink" title="IOS"></a>IOS</h3><ul>
-<li>instruments</li>
-<li>api</li>
-<li>business flow/scenario</li>
-</ul>
-<h2 id="Performance-Baseline"><a href="#Performance-Baseline" class="headerlink" title="Performance Baseline"></a>Performance Baseline</h2><ul>
-<li>comparison</li>
-<li>颗粒度</li>
-<li>Business flow</li>
-<li>Automation supporting</li>
-<li>poor network condition</li>
-</ul>
-<h2 id="Security"><a href="#Security" class="headerlink" title="Security"></a>Security</h2><ul>
-<li>混淆</li>
-<li>加固</li>
-<li>权限</li>
-<li>本地数据库安全</li>
-<li>ContentProvider共享</li>
-<li>Activity注入风险</li>
-</ul>
-<h2 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h2><ul>
-<li>Fiddler</li>
-<li>Charles</li>
-<li>Burpsuites</li>
-<li>Anyproxy</li>
-<li>lint</li>
-<li>findbugs</li>
-<li>PMD</li>
-<li>oclint</li>
-<li>scan-build</li>
-<li>pro-guarded</li>
-</ul>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/performance/">performance</a>
     </span>
     
 

@@ -65,6 +65,86 @@
 
   
     
+    <h3 class="article-title"><a href="/2015/10/24/true_stories/2015-10-24-interesting-methods/"><span>True Stories: 有趣的函数</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/10/24/true_stories/2015-10-24-interesting-methods/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-10-23T18:31:11.000Z">
+          2015-10-24
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="有趣的函数"><a href="#有趣的函数" class="headerlink" title="有趣的函数"></a>有趣的函数</h2><p>下面是一些有趣而真实的函数，自己的感受是：</p>
+<ul>
+<li>此刻的想法是复杂的</li>
+<li>不敢想象</li>
+<li>这是认真的吗?</li>
+<li>为什么会这样?</li>
+<li>如果4个key－value对是不是还要再写函数？</li>
+<li>这样的代码放在Controller层？你是认真的吗？</li>
+</ul>
+<p>测试有时真的很难改变什么,这样的代码其实已经无力吐槽了.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//    json方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">json</span><span class="params">(Map&lt;String,Object&gt; map)</span></span>&#123;</span><br><span class="line">    JsonString jsonString = <span class="keyword">new</span> JsonString();</span><br><span class="line">    Set&lt;String&gt; set = map.keySet();</span><br><span class="line">    <span class="keyword">for</span> (String key : set) &#123;</span><br><span class="line">        <span class="comment">//spring内置的对象去掉</span></span><br><span class="line">        <span class="keyword">if</span> (key.contains(<span class="string">&quot;org.springframework&quot;</span>)) &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        jsonString.put(key, map.get(key));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> jsonString.toString();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">json</span><span class="params">(Model model)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> json(model.asMap());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">json</span><span class="params">(String key, Object value)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> JsonString().put(key, value).toString();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">json</span><span class="params">(String key, Object value,String key2, Object value2)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> JsonString().put(key, value).put(key2,value2).toString();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">json</span><span class="params">(String key, Object value,String key2, Object value2,String key3, Object value3)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> JsonString().put(key, value).put(key2,value2).put(key3, value3).toString();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="自己的思考"><a href="#自己的思考" class="headerlink" title="自己的思考"></a>自己的思考</h2><ul>
+<li>JOSN转换方法不应该放到Controller层</li>
+<li>这几个json的函数其实没有必要,完全可以通过</li>
+<li>使用了keySet,再使用map.get(key) 有点浪费，应该直接使用Map.Entry</li>
+<li>Map 转Json应该直接使用第三方库</li>
+<li>不理解org.springframework的东西怎么会到Map里面？</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> JsonString().put(key,value).put(key,value).toString();</span><br></pre></td></tr></table></figure>
+<p>来获得，完全没有必要写这些函数，这些函数基本上和上面代码没有区别.</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/truestories/">truestories</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/truestories/">truestories</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2015/10/24/true_stories/2015-10-24-return-flag/"><span>True Stories: About Return Flag</span></a></h3>
     
   
@@ -247,144 +327,6 @@
     <span class="post-tags">
       <i class="icon-tags"></i>
         <a href="/tags/automation/">automation</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2015/10/23/tips/refactoring/2015-10-22-Functional-Programming-pattern/"><span>Functional Patterns</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2015/10/23/tips/refactoring/2015-10-22-Functional-Programming-pattern/" rel="bookmark">
-        <time class="entry-date published" datetime="2015-10-22T18:31:11.000Z">
-          2015-10-23
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h2 id="Functional-patterns"><a href="#Functional-patterns" class="headerlink" title="Functional patterns"></a>Functional patterns</h2><ul>
-<li>Core Principles of FP design<ul>
-<li>Functions</li>
-<li>Types</li>
-<li>Composition</li>
-</ul>
-</li>
-<li>Functions as parameters<ul>
-<li>Abstraction,Dependency injection</li>
-<li>Partial application, Continuations,Folds</li>
-</ul>
-</li>
-<li>Chaining Functions<ul>
-<li>Error handling, Async</li>
-<li>Monads</li>
-</ul>
-</li>
-<li>Dealing with wrapped data<ul>
-<li>Lifting,Functors</li>
-<li>Validation with applicatives</li>
-</ul>
-</li>
-<li>Aggregating data and operations<ul>
-<li>Monoids</li>
-</ul>
-</li>
-</ul>
-<h2 id="Functional-programming-is-scary"><a href="#Functional-programming-is-scary" class="headerlink" title="Functional programming is scary"></a>Functional programming is scary</h2><ul>
-<li>Functors</li>
-<li>applicatives</li>
-<li>currying</li>
-<li>catamorphism</li>
-<li>Monad</li>
-<li>Monoid</li>
-<li>chainable</li>
-<li>aggregatable</li>
-<li>mappable</li>
-</ul>
-<h2 id="Object-oriented-programming-is-scary"><a href="#Object-oriented-programming-is-scary" class="headerlink" title="Object oriented programming is scary"></a>Object oriented programming is scary</h2><ul>
-<li>Generic</li>
-<li>Polymorphism</li>
-<li>Interface</li>
-<li>Inheritance</li>
-<li>SOLID: SRP,OCP,LSP,ISP,DIP,……</li>
-<li>Covariance</li>
-<li>IOC,DI,MVC</li>
-</ul>
-<h2 id="OO-Patterns-VS-FP-Patterns"><a href="#OO-Patterns-VS-FP-Patterns" class="headerlink" title="OO Patterns VS FP Patterns"></a>OO Patterns VS FP Patterns</h2><ul>
-<li><p>OO pattern/principle<br>• Single Responsibility Principle<br>• Open/Closed principle<br>• Dependency Inversion Principle<br>• Interface Segregation Principle<br>• Factory pattern<br>• Strategy pattern<br>• Decorator pattern<br>• Visitor pattern</p>
-</li>
-<li><p>FP pattern/principle<br>• Functions<br>• Functions<br>• Functions, also<br>• Functions<br>• Yes, functions<br>• Oh my, functions again! • Functions<br>• Functions</p>
-</li>
-</ul>
-<p>:)</p>
-<h2 id="Functional-programming"><a href="#Functional-programming" class="headerlink" title="Functional programming"></a>Functional programming</h2><p>Haskell,OCaml, etc</p>
-<h2 id="Core-Principles-of-FP-Design"><a href="#Core-Principles-of-FP-Design" class="headerlink" title="Core Principles of FP Design"></a>Core Principles of FP Design</h2><ul>
-<li>Steal from mathematics</li>
-<li>Types are not classes</li>
-<li>Functions are things</li>
-<li>Composition everytwhere</li>
-</ul>
-<h3 id="Mathematics-functions"><a href="#Mathematics-functions" class="headerlink" title="Mathematics functions"></a>Mathematics functions</h3><p>• Input and output values already exist<br>• A function is not a calculation, just a mapping<br>• Input and output values are unchanged (immutable)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let add1 x &#x3D; x+1</span><br><span class="line">va1 add1: int-&gt;int</span><br></pre></td></tr></table></figure>
-
-<h3 id="Guideline-Strive-for-purity"><a href="#Guideline-Strive-for-purity" class="headerlink" title="Guideline: Strive for purity"></a>Guideline: Strive for purity</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">￼let x &#x3D; doSomething()</span><br><span class="line">let y &#x3D; doSomethingElse(x)</span><br><span class="line">return y + 1</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let helper() &#x3D;</span><br><span class="line">￼   let x &#x3D; doSomething()</span><br><span class="line">   let y &#x3D; doSomethingElse(x)</span><br><span class="line">   return y</span><br><span class="line">return helper() + 1</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Laziness: only evaluate when I need output</li>
-<li>Cacheable results<br>same answer every time – “memoization”</li>
-<li>No order dependencies</li>
-<li>Parallelizable  </li>
-<li>No Side Effects</li>
-<li>Immutable data</li>
-</ul>
-<p>Haskell/Clojure</p>
-<h3 id="Types-are-not-classes"><a href="#Types-are-not-classes" class="headerlink" title="Types are not classes"></a>Types are not classes</h3><p>set of valid inputs and sets of valid output</p>
-<p>Data Behavior Data</p>
-<h3 id="Functions-are-things"><a href="#Functions-are-things" class="headerlink" title="Functions are things"></a>Functions are things</h3><p>A function is a standalone thing, not attached to a class.<br>Functions as inputs and outputs</p>
-<h3 id="Composition-everywhere"><a href="#Composition-everywhere" class="headerlink" title="Composition everywhere"></a>Composition everywhere</h3><p>Types can be composed too<br>“algebraic types”</p>
-<ul>
-<li>Product type: *<br>set of people * set of dates</li>
-<li>Sum type: +<br>set of cash value + set of cheque value+ set of credit card value</li>
-</ul>
-<h3 id="DDD-amp-DOMAIN-MODELING"><a href="#DDD-amp-DOMAIN-MODELING" class="headerlink" title="DDD &amp; DOMAIN MODELING"></a>DDD &amp; DOMAIN MODELING</h3><p>to be continue ……….</p>
-<p>发现函数式编程其实挺有意思的，函数式我觉的可以比面向对象更为抽象，所以他的代码少<br>是有道理的。</p>
-<p>￼</p>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/designpattern/">designpattern</a>
     </span>
     
 

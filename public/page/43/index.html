@@ -65,6 +65,144 @@
 
   
     
+    <h3 class="article-title"><a href="/2015/10/23/tips/refactoring/2015-10-22-Functional-Programming-pattern/"><span>Functional Patterns</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/10/23/tips/refactoring/2015-10-22-Functional-Programming-pattern/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-10-22T18:31:11.000Z">
+          2015-10-23
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="Functional-patterns"><a href="#Functional-patterns" class="headerlink" title="Functional patterns"></a>Functional patterns</h2><ul>
+<li>Core Principles of FP design<ul>
+<li>Functions</li>
+<li>Types</li>
+<li>Composition</li>
+</ul>
+</li>
+<li>Functions as parameters<ul>
+<li>Abstraction,Dependency injection</li>
+<li>Partial application, Continuations,Folds</li>
+</ul>
+</li>
+<li>Chaining Functions<ul>
+<li>Error handling, Async</li>
+<li>Monads</li>
+</ul>
+</li>
+<li>Dealing with wrapped data<ul>
+<li>Lifting,Functors</li>
+<li>Validation with applicatives</li>
+</ul>
+</li>
+<li>Aggregating data and operations<ul>
+<li>Monoids</li>
+</ul>
+</li>
+</ul>
+<h2 id="Functional-programming-is-scary"><a href="#Functional-programming-is-scary" class="headerlink" title="Functional programming is scary"></a>Functional programming is scary</h2><ul>
+<li>Functors</li>
+<li>applicatives</li>
+<li>currying</li>
+<li>catamorphism</li>
+<li>Monad</li>
+<li>Monoid</li>
+<li>chainable</li>
+<li>aggregatable</li>
+<li>mappable</li>
+</ul>
+<h2 id="Object-oriented-programming-is-scary"><a href="#Object-oriented-programming-is-scary" class="headerlink" title="Object oriented programming is scary"></a>Object oriented programming is scary</h2><ul>
+<li>Generic</li>
+<li>Polymorphism</li>
+<li>Interface</li>
+<li>Inheritance</li>
+<li>SOLID: SRP,OCP,LSP,ISP,DIP,……</li>
+<li>Covariance</li>
+<li>IOC,DI,MVC</li>
+</ul>
+<h2 id="OO-Patterns-VS-FP-Patterns"><a href="#OO-Patterns-VS-FP-Patterns" class="headerlink" title="OO Patterns VS FP Patterns"></a>OO Patterns VS FP Patterns</h2><ul>
+<li><p>OO pattern/principle<br>• Single Responsibility Principle<br>• Open/Closed principle<br>• Dependency Inversion Principle<br>• Interface Segregation Principle<br>• Factory pattern<br>• Strategy pattern<br>• Decorator pattern<br>• Visitor pattern</p>
+</li>
+<li><p>FP pattern/principle<br>• Functions<br>• Functions<br>• Functions, also<br>• Functions<br>• Yes, functions<br>• Oh my, functions again! • Functions<br>• Functions</p>
+</li>
+</ul>
+<p>:)</p>
+<h2 id="Functional-programming"><a href="#Functional-programming" class="headerlink" title="Functional programming"></a>Functional programming</h2><p>Haskell,OCaml, etc</p>
+<h2 id="Core-Principles-of-FP-Design"><a href="#Core-Principles-of-FP-Design" class="headerlink" title="Core Principles of FP Design"></a>Core Principles of FP Design</h2><ul>
+<li>Steal from mathematics</li>
+<li>Types are not classes</li>
+<li>Functions are things</li>
+<li>Composition everytwhere</li>
+</ul>
+<h3 id="Mathematics-functions"><a href="#Mathematics-functions" class="headerlink" title="Mathematics functions"></a>Mathematics functions</h3><p>• Input and output values already exist<br>• A function is not a calculation, just a mapping<br>• Input and output values are unchanged (immutable)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let add1 x &#x3D; x+1</span><br><span class="line">va1 add1: int-&gt;int</span><br></pre></td></tr></table></figure>
+
+<h3 id="Guideline-Strive-for-purity"><a href="#Guideline-Strive-for-purity" class="headerlink" title="Guideline: Strive for purity"></a>Guideline: Strive for purity</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">￼let x &#x3D; doSomething()</span><br><span class="line">let y &#x3D; doSomethingElse(x)</span><br><span class="line">return y + 1</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let helper() &#x3D;</span><br><span class="line">￼   let x &#x3D; doSomething()</span><br><span class="line">   let y &#x3D; doSomethingElse(x)</span><br><span class="line">   return y</span><br><span class="line">return helper() + 1</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Laziness: only evaluate when I need output</li>
+<li>Cacheable results<br>same answer every time – “memoization”</li>
+<li>No order dependencies</li>
+<li>Parallelizable  </li>
+<li>No Side Effects</li>
+<li>Immutable data</li>
+</ul>
+<p>Haskell/Clojure</p>
+<h3 id="Types-are-not-classes"><a href="#Types-are-not-classes" class="headerlink" title="Types are not classes"></a>Types are not classes</h3><p>set of valid inputs and sets of valid output</p>
+<p>Data Behavior Data</p>
+<h3 id="Functions-are-things"><a href="#Functions-are-things" class="headerlink" title="Functions are things"></a>Functions are things</h3><p>A function is a standalone thing, not attached to a class.<br>Functions as inputs and outputs</p>
+<h3 id="Composition-everywhere"><a href="#Composition-everywhere" class="headerlink" title="Composition everywhere"></a>Composition everywhere</h3><p>Types can be composed too<br>“algebraic types”</p>
+<ul>
+<li>Product type: *<br>set of people * set of dates</li>
+<li>Sum type: +<br>set of cash value + set of cheque value+ set of credit card value</li>
+</ul>
+<h3 id="DDD-amp-DOMAIN-MODELING"><a href="#DDD-amp-DOMAIN-MODELING" class="headerlink" title="DDD &amp; DOMAIN MODELING"></a>DDD &amp; DOMAIN MODELING</h3><p>to be continue ……….</p>
+<p>发现函数式编程其实挺有意思的，函数式我觉的可以比面向对象更为抽象，所以他的代码少<br>是有道理的。</p>
+<p>￼</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/designpattern/">designpattern</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2015/10/22/tips/interview/2015-10-22-python_interview_questions/"><span>Python 面试题</span></a></h3>
     
   
@@ -246,109 +384,6 @@
     <span class="post-tags">
       <i class="icon-tags"></i>
         <a href="/tags/testing/">testing</a><a href="/tags/thoughts/">thoughts</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2015/09/24/tips/automation/2015-09-24-page-factory/"><span>Page Factory in Selenium</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2015/09/24/tips/automation/2015-09-24-page-factory/" rel="bookmark">
-        <time class="entry-date published" datetime="2015-09-23T18:31:11.000Z">
-          2015-09-24
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>本文主要用来分析Page Factory实现的原理以及一些扩展的可能性。</p>
-<h2 id="Page-Factory-的例子"><a href="#Page-Factory-的例子" class="headerlink" title="Page Factory 的例子"></a>Page Factory 的例子</h2><p><a target="_blank" rel="noopener" href="https://code.google.com/p/selenium/wiki/PageFactory">Selenium Page Factory Wiki</a></p>
-<p>首先解释一下这个例子：</p>
-<ul>
-<li>使用注解描述元素定位</li>
-<li>使用 <code>PageFactory.initElements(driver, page);</code></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GoogleSearchPage</span> </span>&#123;</span><br><span class="line">    <span class="comment">// The element is now looked up using the name attribute</span></span><br><span class="line">    <span class="meta">@FindBy(how = How.NAME, using = &quot;q&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> WebElement searchBox;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">searchFor</span><span class="params">(String text)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// We continue using the element just as before</span></span><br><span class="line">        searchBox.sendKeys(text);</span><br><span class="line">        searchBox.submit();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">searchFor</span><span class="params">(String text)</span> </span>&#123;</span><br><span class="line">    GoogleSearchPage page＝ PageFactory.initElements(<span class="keyword">new</span> ChromeDriver(), GoogleSearchPage.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>以上一个显而易见的好处就是减少了查找元素的代码量，比如类似于一下的代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">driver.findElement(By.id(<span class="string">&quot;q&quot;</span>))</span><br></pre></td></tr></table></figure>
-
-<p>但是只有这样的好处吗？我们先从分析Selenium Page Factory实现的原理说起</p>
-<p>##Page Factory 实现的原理</p>
-<p>PageFactory 是使用反射(Reflection)和动态代理(dynamic proxies)的方式来创建页面的每<br>每个元素:</p>
-<ul>
-<li>PageFactory: initElements and proxyFields</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">initElements</span><span class="params">(FieldDecorator decorator, Object page)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(Class proxyIn = page.getClass(); proxyIn != Object.class; proxyIn = proxyIn.getSuperclass()) &#123;</span><br><span class="line">        proxyFields(decorator, page, proxyIn);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">proxyFields</span><span class="params">(FieldDecorator decorator, Object page, Class&lt;?&gt; proxyIn)</span> </span>&#123;</span><br><span class="line">    Field[] fields = proxyIn.getDeclaredFields();</span><br><span class="line">    Field[] arr$ = fields;</span><br><span class="line">    <span class="keyword">int</span> len$ = fields.length;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i$ = <span class="number">0</span>; i$ &lt; len$; ++i$) &#123;</span><br><span class="line">        Field field = arr$[i$];</span><br><span class="line">        Object value = decorator.decorate(page.getClass().getClassLoader(), field);</span><br><span class="line">        <span class="keyword">if</span>(value != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">                field.set(page, value);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IllegalAccessException var10) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(var10);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>FieldDecorator：DefaultFieldDecorator 源码<br>从DefaultFieldDecorator的源码看:</li>
-</ul>
-<ol>
-<li>实现decorate方法,WebElement 和List<WebElement> 都是通过proxy的方式创建的</li>
-<li>每个Proxy的方式都有一个对应的invocationHandler处理<br>Selenium的源码有两个invocationHandler：<ul>
-<li>LocatingElementHandler</li>
-<li>LocatingElementListHandler</li>
-</ul>
-</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">decorate</span><span class="params">(ClassLoader loader, Field field)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!WebElement.class.isAssignableFrom(field.getType()) &amp;&amp; !<span class="keyword">this</span>.isDecoratableList(field)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            ElementLocator locator = <span class="keyword">this</span>.factory.createLocator(field);</span><br><span class="line">            <span class="keyword">return</span> locator == <span class="keyword">null</span>?<span class="keyword">null</span>:(WebElement.class.isAssignableFrom(field.getType())?<span class="keyword">this</span>.proxyForLocator(loader, locator):(List.class.isAssignableFrom(field.getType())?<span class="keyword">this</span>.proxyForListLocator(loader, locator):<span class="keyword">null</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isDecoratableList</span><span class="params">(Field field)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!List.class.isAssignableFrom(field.getType())) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            Type genericType = field.getGenericType();</span><br><span class="line">            <span class="keyword">if</span>(!(genericType <span class="keyword">instanceof</span> ParameterizedType)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                Type listType = ((ParameterizedType)genericType).getActualTypeArguments()[<span class="number">0</span>];</span><br><span class="line">                <span class="keyword">return</span> !WebElement.class.equals(listType)?<span class="keyword">false</span>:field.getAnnotation(FindBy.class) != <span class="keyword">null</span> || field.getAnnotation(FindBys.class) != <span class="keyword">null</span> || field.getAnnotation(FindAll.class) != <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> WebElement <span class="title">proxyForLocator</span><span class="params">(ClassLoader loader, ElementLocator locator)</span> </span>&#123;</span><br><span class="line">        LocatingElementHandler handler = <span class="keyword">new</span> LocatingElementHandler(locator);</span><br><span class="line">        WebElement proxy = (WebElement)Proxy.newProxyInstance(loader, <span class="keyword">new</span> Class[]&#123;WebElement.class, WrapsElement.class, Locatable.class&#125;, handler);</span><br><span class="line">        <span class="keyword">return</span> proxy;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> List&lt;WebElement&gt; <span class="title">proxyForListLocator</span><span class="params">(ClassLoader loader, ElementLocator locator)</span> </span>&#123;</span><br><span class="line">        LocatingElementListHandler handler = <span class="keyword">new</span> LocatingElementListHandler(locator);</span><br><span class="line">        List proxy = (List)Proxy.newProxyInstance(loader, <span class="keyword">new</span> Class[]&#123;List.class&#125;, handler);</span><br><span class="line">        <span class="keyword">return</span> proxy;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>我们再看一下LocatingElementHandler,可以看到实际在待用PageFactory创建的元素时候<br>都是通过这个掉用LocatingElementHandler:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LocatingElementHandler</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ElementLocator locator;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LocatingElementHandler</span><span class="params">(ElementLocator locator)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.locator = locator;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object object, Method method, Object[] objects)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        WebElement element;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            element = <span class="keyword">this</span>.locator.findElement();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchElementException var7) &#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="string">&quot;toString&quot;</span>.equals(method.getName())) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="string">&quot;Proxy element for: &quot;</span> + <span class="keyword">this</span>.locator.toString();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">throw</span> var7;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(<span class="string">&quot;getWrappedElement&quot;</span>.equals(method.getName())) &#123;</span><br><span class="line">            <span class="keyword">return</span> element;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> method.invoke(element, objects);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InvocationTargetException var6) &#123;</span><br><span class="line">                <span class="keyword">throw</span> var6.getCause();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>以上Selenium PageFactory大致的实现，从过程来看：<br>PageFaction-&gt; initElements-&gt; proxyFields</p>
-<h2 id="Page-Factory-有什么好处"><a href="#Page-Factory-有什么好处" class="headerlink" title="Page Factory 有什么好处"></a>Page Factory 有什么好处</h2><p>个人理解的好处:</p>
-<ul>
-<li>可以通过修改InvocationHandler里面的处理,比如<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element = <span class="keyword">this</span>.locator.findElement();</span><br></pre></td></tr></table></figure>
-如果都使用wait().util的方式,这样可以使所有查找的元素更加稳定</li>
-<li>使用了proxy的方式,在实例化WebElement的时候，实际上不管WebElement存在不存在都可以创建<br>而实际findElement都会延迟到真的调用这个元素时执行,这带来一个好处就是如果WebElement的实例创建后<br>页面DOM刷新后,需要重新查找WebElement,否则可能抛出StaleElementReferenceException,而Proxy之后每次都会自动<br>查找,这样就减少了代码处理</li>
-<li>工厂的设计模式同时也带了了灵活程度,在创建页面或者页面元素的时候,可以开始添加统一的前置或者后置的处理</li>
-</ul>
-<p>但是可惜的是Selenium并没有提供开发的接口来让用户定制,所以如果自己定制PageFactory模式,则需要自己去实现Selenium这<br>一套方法,同时加入自己特殊的实现</p>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/automation/">automation</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/automation/">automation</a>
     </span>
     
 

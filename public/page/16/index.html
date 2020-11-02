@@ -65,6 +65,60 @@
 
   
     
+    <h3 class="article-title"><a href="/2019/07/27/python/Python-Tester-Should-Know/"><span>测试的Python须知脑图</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/07/27/python/Python-Tester-Should-Know/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-07-27T13:34:04.000Z">
+          2019-07-27
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>下图是使用Python进行自动化测试需要了解的大纲.</p>
+<p><img src="/images/python/python-in-testing.jpg" alt="img"></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Python/">Python</a><a href="/tags/Automation/">Automation</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2019/04/28/tips/api-testing/CreditRisk-Testing-3/"><span>Rule Based Risk Engine Part 3 - The Easiest Mock, The highest ROI</span></a></h3>
     
   
@@ -222,110 +276,6 @@
     <span class="post-tags">
       <i class="icon-tags"></i>
         <a href="/tags/productivity/">productivity</a><a href="/tags/real/">real</a><a href="/tags/think-different/">think-different</a><a href="/tags/ThinkInTesting/">ThinkInTesting</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2019/04/25/tips/api-testing/CreditRisk-Testing-2/"><span>Rule Based Risk Engine Part 2 - Write Code to Test</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/04/25/tips/api-testing/CreditRisk-Testing-2/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-04-25T15:58:45.000Z">
-          2019-04-25
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h1 id="Rule-Based-Risk-Engine-Part-2-Write-Code-to-Test"><a href="#Rule-Based-Risk-Engine-Part-2-Write-Code-to-Test" class="headerlink" title="Rule Based Risk Engine Part 2 - Write Code to Test"></a>Rule Based Risk Engine Part 2 - Write Code to Test</h1><p>What to do is quite obvious:</p>
-<ol>
-<li>Compose input data - Test Case Input<ul>
-<li>Fundamental Data</li>
-<li>Third Party And in-house data</li>
-</ul>
-</li>
-<li>Mock the third party and in-house data according test cases</li>
-<li>Call the Evaluation API to checkout if meet the expectation</li>
-</ol>
-<p>And how to write code? I separate into different modules:</p>
-<ul>
-<li>TestCaseLoader: load the whole input parameters</li>
-<li>DataFactory: Produce different Data as input parameters<ul>
-<li>RiskInputDataFactory</li>
-<li>MockDataFactory</li>
-<li>Some Auto Generated Data Helper for testing purposes</li>
-</ul>
-</li>
-<li>Clients: invoke evaluation api and mock service api<ul>
-<li>RiskEvaluationClient</li>
-<li>MockClient</li>
-</ul>
-</li>
-<li>Third Party and In-house Data Feature Manager <ul>
-<li>Feature Manager</li>
-</ul>
-</li>
-<li>Test Case Runner<ul>
-<li>TestCase Runner Template</li>
-</ul>
-</li>
-</ul>
-<p><img src="/images/img/risk-test-flow.jpg" alt="img"></p>
-<h2 id="Implement-The-different-Modules-TestCaseLoader"><a href="#Implement-The-different-Modules-TestCaseLoader" class="headerlink" title="Implement The different Modules - TestCaseLoader"></a>Implement The different Modules - TestCaseLoader</h2><p>TestCaseLoader, levarage easy-poi, it helps you to read/write excel<br>very quickly. For how to use easy-poi, please refer <a target="_blank" rel="noopener" href="http://easypoi.mydoc.io/">easy-poi</a></p>
-<h2 id="Implement-The-different-Modules-Datafactory"><a href="#Implement-The-different-Modules-Datafactory" class="headerlink" title="Implement The different Modules - Datafactory"></a>Implement The different Modules - Datafactory</h2><p>All about handle data, so need some utility class, </p>
-<ul>
-<li>IdCard Generator</li>
-<li>Generate IDCard through age</li>
-<li>Generate several ids, like request id</li>
-<li>Generate Times, such as creditTime</li>
-</ul>
-<p>So I just write all these utilities, they are in <a href=""></a></p>
-<h2 id="Implement-The-different-Modules-MockDataFactory"><a href="#Implement-The-different-Modules-MockDataFactory" class="headerlink" title="Implement The different Modules - MockDataFactory"></a>Implement The different Modules - MockDataFactory</h2><p>It is very hard at the beginning,  because there is not place to indicate there third party and in-house data name, and also there is big amount of these features. </p>
-<p>Finally I just find out that leverage Dev’s codes is the bese option. Do a quick change, and use Spring Class Scanner function do helo me a lot to achieve to mange the third part and in-houce data.</p>
-<h2 id="Implement-The-different-Modules-Clients"><a href="#Implement-The-different-Modules-Clients" class="headerlink" title="Implement The different Modules - Clients"></a>Implement The different Modules - Clients</h2><p>It is quite simple, just leverage the Okwrap client.</p>
-<h2 id="Implement-The-different-Modules-TestRunner"><a href="#Implement-The-different-Modules-TestRunner" class="headerlink" title="Implement The different Modules - TestRunner"></a>Implement The different Modules - TestRunner</h2><p>TestRunnerTemplate</p>
-<ul>
-<li>Before</li>
-<li>Run</li>
-<li>After</li>
-</ul>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/real/">real</a><a href="/tags/API-Testing/">API Testing</a><a href="/tags/patterns/">patterns</a><a href="/tags/testing/">testing</a>
     </span>
     
 

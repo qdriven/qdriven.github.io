@@ -65,6 +65,110 @@
 
   
     
+    <h3 class="article-title"><a href="/2019/04/25/tips/api-testing/CreditRisk-Testing-2/"><span>Rule Based Risk Engine Part 2 - Write Code to Test</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/04/25/tips/api-testing/CreditRisk-Testing-2/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-04-25T15:58:45.000Z">
+          2019-04-25
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="Rule-Based-Risk-Engine-Part-2-Write-Code-to-Test"><a href="#Rule-Based-Risk-Engine-Part-2-Write-Code-to-Test" class="headerlink" title="Rule Based Risk Engine Part 2 - Write Code to Test"></a>Rule Based Risk Engine Part 2 - Write Code to Test</h1><p>What to do is quite obvious:</p>
+<ol>
+<li>Compose input data - Test Case Input<ul>
+<li>Fundamental Data</li>
+<li>Third Party And in-house data</li>
+</ul>
+</li>
+<li>Mock the third party and in-house data according test cases</li>
+<li>Call the Evaluation API to checkout if meet the expectation</li>
+</ol>
+<p>And how to write code? I separate into different modules:</p>
+<ul>
+<li>TestCaseLoader: load the whole input parameters</li>
+<li>DataFactory: Produce different Data as input parameters<ul>
+<li>RiskInputDataFactory</li>
+<li>MockDataFactory</li>
+<li>Some Auto Generated Data Helper for testing purposes</li>
+</ul>
+</li>
+<li>Clients: invoke evaluation api and mock service api<ul>
+<li>RiskEvaluationClient</li>
+<li>MockClient</li>
+</ul>
+</li>
+<li>Third Party and In-house Data Feature Manager <ul>
+<li>Feature Manager</li>
+</ul>
+</li>
+<li>Test Case Runner<ul>
+<li>TestCase Runner Template</li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/img/risk-test-flow.jpg" alt="img"></p>
+<h2 id="Implement-The-different-Modules-TestCaseLoader"><a href="#Implement-The-different-Modules-TestCaseLoader" class="headerlink" title="Implement The different Modules - TestCaseLoader"></a>Implement The different Modules - TestCaseLoader</h2><p>TestCaseLoader, levarage easy-poi, it helps you to read/write excel<br>very quickly. For how to use easy-poi, please refer <a target="_blank" rel="noopener" href="http://easypoi.mydoc.io/">easy-poi</a></p>
+<h2 id="Implement-The-different-Modules-Datafactory"><a href="#Implement-The-different-Modules-Datafactory" class="headerlink" title="Implement The different Modules - Datafactory"></a>Implement The different Modules - Datafactory</h2><p>All about handle data, so need some utility class, </p>
+<ul>
+<li>IdCard Generator</li>
+<li>Generate IDCard through age</li>
+<li>Generate several ids, like request id</li>
+<li>Generate Times, such as creditTime</li>
+</ul>
+<p>So I just write all these utilities, they are in <a href=""></a></p>
+<h2 id="Implement-The-different-Modules-MockDataFactory"><a href="#Implement-The-different-Modules-MockDataFactory" class="headerlink" title="Implement The different Modules - MockDataFactory"></a>Implement The different Modules - MockDataFactory</h2><p>It is very hard at the beginning,  because there is not place to indicate there third party and in-house data name, and also there is big amount of these features. </p>
+<p>Finally I just find out that leverage Dev’s codes is the bese option. Do a quick change, and use Spring Class Scanner function do helo me a lot to achieve to mange the third part and in-houce data.</p>
+<h2 id="Implement-The-different-Modules-Clients"><a href="#Implement-The-different-Modules-Clients" class="headerlink" title="Implement The different Modules - Clients"></a>Implement The different Modules - Clients</h2><p>It is quite simple, just leverage the Okwrap client.</p>
+<h2 id="Implement-The-different-Modules-TestRunner"><a href="#Implement-The-different-Modules-TestRunner" class="headerlink" title="Implement The different Modules - TestRunner"></a>Implement The different Modules - TestRunner</h2><p>TestRunnerTemplate</p>
+<ul>
+<li>Before</li>
+<li>Run</li>
+<li>After</li>
+</ul>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/real/">real</a><a href="/tags/API-Testing/">API Testing</a><a href="/tags/patterns/">patterns</a><a href="/tags/testing/">testing</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2019/04/23/tips/api-testing/CreditRisk-Testing-1/"><span>Rule Based Risk Engine Testing Part 1- Background</span></a></h3>
     
   
@@ -240,75 +344,6 @@
     <span class="post-tags">
       <i class="icon-tags"></i>
         <a href="/tags/python/">python</a><a href="/tags/annaconda3/">annaconda3</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2019/04/20/tips/0-GIT-SUBMODULE/"><span>Git Sub Module Usage</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/04/20/tips/0-GIT-SUBMODULE/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-04-20T15:58:45.000Z">
-          2019-04-20
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h1 id="Git-Sub-Module-Usage"><a href="#Git-Sub-Module-Usage" class="headerlink" title="Git Sub Module Usage"></a>Git Sub Module Usage</h1><p>A Git Repo sometimes has several sub projects which are also a git repo. Let’s walk through following scenarios to became a super<br>git sub module user. The Scenario are:</p>
-<ul>
-<li>Add Git Sub odule into a existing Git Repo</li>
-<li>Git Clone With Sub Modules</li>
-<li>Push To Sub Module’s remote repo</li>
-</ul>
-<h2 id="Add-Git-Sub-Module-into-a-existing-Git-Repo"><a href="#Add-Git-Sub-Module-into-a-existing-Git-Repo" class="headerlink" title="Add Git Sub Module into a existing Git Repo"></a>Add Git Sub Module into a existing Git Repo</h2><p>It is a quit straight forward. You have already clone one git repo to local, then you want to add a sub module to this repo.<br>So just using:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git submodule add https://github.com/allroundtesters/Shell-Steps.git</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><figcaption><span>submodule add <git repo url> <local dir>``` is the command</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">to use. Just checkout the folder, everything is there. So easy, no magic. But what is different with &#96;&#96;&#96;git clone &#96;&#96;&#96;, The different is that &#96;&#96;&#96;.gitmodules&#96;&#96;&#96; file is added to the existing repo, and there sub module info is in it:</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;sh</span><br><span class="line">[submodule &quot;Shell-Steps&quot;]</span><br><span class="line">    path &#x3D; Shell-Steps</span><br><span class="line">    url &#x3D; https:&#x2F;&#x2F;github.com&#x2F;allroundtesters&#x2F;Shell-Steps.git</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>Obviously, if you add more than one sub module, the sub module info will be appened into the <code>.gitmodules</code> file to make the parent repo know where the sub modules are.<br>That’s it.</p>
-<h2 id="Git-Clone-With-Sub-Modules"><a href="#Git-Clone-With-Sub-Modules" class="headerlink" title="Git Clone With Sub Modules"></a>Git Clone With Sub Modules</h2><p>Normally you git clone one project, then find out several folders is empty, then you are confused what happened.  Don’t worry, use the following command to have a try:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git pull  --recurse-submodules</span><br><span class="line"><span class="comment"># or for git 1.8.2</span></span><br><span class="line">git submodule update --recursive --remote</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>Then everything is ready. Go to work right now.</p>
-<h2 id="Push-To-Sub-Module’s-remote-repo"><a href="#Push-To-Sub-Module’s-remote-repo" class="headerlink" title="Push To Sub Module’s remote repo"></a>Push To Sub Module’s remote repo</h2><p>There is no difference. Go to the Sub Module Folder. Then use git push or change the working branch. Everything is same as the single git repo. T here are several advaned command for sub modules, your can read <a target="_blank" rel="noopener" href="https://git-scm.com/book/en/v2/Git-Tools-Submodules">gitbook-submodules</a> for more details.</p>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/git/">git</a>
     </span>
     
 

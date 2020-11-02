@@ -65,6 +65,73 @@
 
   
     
+    <h3 class="article-title"><a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-PullUpField-PushDownField/"><span>Refactoring-4-Push Down Method and Pull Up and Posh Down Field</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-PullUpField-PushDownField/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-10-25T18:31:11.000Z">
+          2015-10-26
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>Push down method 和Pull Up method刚好相反.<br>有时会遇到公用的父类方法在某个子类中不需要了,如果这样的情况可以考虑将功用<br>方法放到具体的实现中</p>
+<h2 id="Push-Down-Method实例"><a href="#Push-Down-Method实例" class="headerlink" title="Push Down Method实例"></a>Push Down Method实例</h2><p>重构前：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">bark</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;testing&quot;</span>);   </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span> <span class="keyword">extends</span> <span class="title">Animal</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span> <span class="keyword">extends</span> <span class="title">Animal</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重构后:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span> <span class="keyword">extends</span> <span class="title">Animal</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">bark</span><span class="params">()</span></span>&#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;testing&quot;</span>);   </span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span> <span class="keyword">extends</span> <span class="title">Animal</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Pull-Up-and-Posh-Down-Field"><a href="#Pull-Up-and-Posh-Down-Field" class="headerlink" title="Pull Up and Posh Down Field"></a>Pull Up and Posh Down Field</h2><p>Pull Up and Posh Down Field 表达了Pull up 和 Push Down method<br>基本上一样的意思，只不过一个是方法，一个是成员变量</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/refactoring/">refactoring</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/refactoring/">refactoring</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-rename/"><span>Refactoring-5-rename</span></a></h3>
     
   
@@ -186,86 +253,6 @@
     <span class="post-tags">
       <i class="icon-tags"></i>
         <a href="/tags/refactoring/">refactoring</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2015/10/24/true_stories/2015-10-24-interesting-methods/"><span>True Stories: 有趣的函数</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2015/10/24/true_stories/2015-10-24-interesting-methods/" rel="bookmark">
-        <time class="entry-date published" datetime="2015-10-23T18:31:11.000Z">
-          2015-10-24
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h2 id="有趣的函数"><a href="#有趣的函数" class="headerlink" title="有趣的函数"></a>有趣的函数</h2><p>下面是一些有趣而真实的函数，自己的感受是：</p>
-<ul>
-<li>此刻的想法是复杂的</li>
-<li>不敢想象</li>
-<li>这是认真的吗?</li>
-<li>为什么会这样?</li>
-<li>如果4个key－value对是不是还要再写函数？</li>
-<li>这样的代码放在Controller层？你是认真的吗？</li>
-</ul>
-<p>测试有时真的很难改变什么,这样的代码其实已经无力吐槽了.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//    json方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">json</span><span class="params">(Map&lt;String,Object&gt; map)</span></span>&#123;</span><br><span class="line">    JsonString jsonString = <span class="keyword">new</span> JsonString();</span><br><span class="line">    Set&lt;String&gt; set = map.keySet();</span><br><span class="line">    <span class="keyword">for</span> (String key : set) &#123;</span><br><span class="line">        <span class="comment">//spring内置的对象去掉</span></span><br><span class="line">        <span class="keyword">if</span> (key.contains(<span class="string">&quot;org.springframework&quot;</span>)) &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        jsonString.put(key, map.get(key));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> jsonString.toString();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">json</span><span class="params">(Model model)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> json(model.asMap());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">json</span><span class="params">(String key, Object value)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> JsonString().put(key, value).toString();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">json</span><span class="params">(String key, Object value,String key2, Object value2)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> JsonString().put(key, value).put(key2,value2).toString();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">json</span><span class="params">(String key, Object value,String key2, Object value2,String key3, Object value3)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> JsonString().put(key, value).put(key2,value2).put(key3, value3).toString();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="自己的思考"><a href="#自己的思考" class="headerlink" title="自己的思考"></a>自己的思考</h2><ul>
-<li>JOSN转换方法不应该放到Controller层</li>
-<li>这几个json的函数其实没有必要,完全可以通过</li>
-<li>使用了keySet,再使用map.get(key) 有点浪费，应该直接使用Map.Entry</li>
-<li>Map 转Json应该直接使用第三方库</li>
-<li>不理解org.springframework的东西怎么会到Map里面？</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> JsonString().put(key,value).put(key,value).toString();</span><br></pre></td></tr></table></figure>
-<p>来获得，完全没有必要写这些函数，这些函数基本上和上面代码没有区别.</p>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/truestories/">truestories</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/truestories/">truestories</a>
     </span>
     
 

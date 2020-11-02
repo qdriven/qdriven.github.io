@@ -65,6 +65,86 @@
 
   
     
+    <h3 class="article-title"><a href="/2018/06/08/tips/0-word-frequency/"><span>Word Frequency - Use JDK Methods</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/06/08/tips/0-word-frequency/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-06-07T17:50:03.000Z">
+          2018-06-08
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="What-is-the-problem"><a href="#What-is-the-problem" class="headerlink" title="What is the problem"></a>What is the problem</h2><p>Be confidence to the JDK, in most case, it is enough to solve problem. Here is a case, an issue to solve:</p>
+<ul>
+<li>There are over 10000 files in a dir</li>
+<li>Try to find out the top 100 most frequency words in these files, estimate 10 millions words out there</li>
+<li>Try to use </li>
+</ul>
+<p>I didn’t sovle it in 40 mintues, the failure part is just think too much about the data structure and algorithm. I just did some investigation then, and find out actually JDK methods are enough.</p>
+<p>Here is my thought, and I think need to implement my own algorithm to solve, actually I am wrong, JDK is enough</p>
+<ul>
+<li>Read the files</li>
+<li>Put word and count to a concurrent map</li>
+<li>get the top 100 from the map</li>
+</ul>
+<p>Because I am a fraid the memory and other resource issue, but later I had my try, it looks like worked if only use JDK methods. Here comes my solution.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>First of all, I try to create 10000 files with some random string(word),all strings are less than 18 characters, the codes are :</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> String <span class="title">getSaltString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    String SALTCHARS = <span class="string">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890&quot;</span>;</span><br><span class="line">    StringBuilder salt = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">    Random rnd = <span class="keyword">new</span> Random();</span><br><span class="line">    <span class="keyword">int</span> strLength = rnd.nextInt(<span class="number">10</span>);</span><br><span class="line">    <span class="keyword">if</span>(strLength&lt;=<span class="number">2</span>)&#123;</span><br><span class="line">      strLength =<span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (salt.length() &lt; strLength) &#123; <span class="comment">// length of the random string.</span></span><br><span class="line">      <span class="keyword">int</span> index = (<span class="keyword">int</span>) (rnd.nextFloat() * SALTCHARS.length());</span><br><span class="line">      salt.append(SALTCHARS.charAt(index));</span><br><span class="line">    &#125;</span><br><span class="line">    String saltStr = salt.toString();</span><br><span class="line">    <span class="keyword">return</span> saltStr;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> List&lt;String&gt; <span class="title">createRandomFile</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    List&lt;String&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">      List&lt;String&gt; listString = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">50</span>; j++) &#123;</span><br><span class="line"></span><br><span class="line">        listString.add(getSaltString());</span><br><span class="line">      &#125;</span><br><span class="line">      StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">      <span class="keyword">for</span> (String s : listString) &#123;</span><br><span class="line">        sb.append(<span class="string">&quot; &quot;</span>).append(s);</span><br><span class="line">      &#125;</span><br><span class="line">      result.add(sb.toString());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">createFile</span><span class="params">(<span class="keyword">int</span> i, List&lt;String&gt; values)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    Files.write(Paths.get(<span class="string">&quot;tmp/&quot;</span> + i), values);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">createFiles</span><span class="params">(<span class="keyword">int</span> fileNum)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; fileNum; i++) &#123;</span><br><span class="line">      createFile(i, createRandomFile());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>then I tried use to read files and put words into frequency map,and here multiple threads are used</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">readAndPutTo</span><span class="params">(Path path)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">    List&lt;String&gt; lines = Files.readAllLines(path);</span><br><span class="line">    <span class="keyword">for</span> (String line : lines) &#123;</span><br><span class="line">      String[] words = line.split(<span class="string">&quot;\\s+&quot;</span>);</span><br><span class="line">      <span class="keyword">for</span> (String word : words) &#123;</span><br><span class="line">        frenquncyMap.put(word, frenquncyMap.getOrDefault(word, <span class="number">0</span>) + <span class="number">1</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(args[])</span></span>&#123;</span><br><span class="line">ExecutorService es = Executors.newFixedThreadPool(<span class="number">30</span>);</span><br><span class="line">    System.out.println(Files.list(Paths.get(<span class="string">&quot;tmp&quot;</span>)).count());</span><br><span class="line">    Files.list(Paths.get(<span class="string">&quot;tmp&quot;</span>)).forEach(</span><br><span class="line">        path -&gt; &#123;</span><br><span class="line">          count.getAndIncrement();</span><br><span class="line">          <span class="keyword">try</span> &#123;</span><br><span class="line">            readAndPutTo(path);</span><br><span class="line">          &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    );</span><br><span class="line">    System.out.println(<span class="string">&quot;completed tasks: &quot;</span>+count);</span><br><span class="line">    <span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">    System.out.println(end - start);</span><br><span class="line">    es.shutdown();</span><br><span class="line">    System.out.println(es.awaitTermination(<span class="number">120</span>, TimeUnit.SECONDS);</span><br><span class="line">    System.out.println(System.currentTimeMillis() - start);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Use shutdown() to make sure every tasks are completed, and print the task count to check if all tasks had be invoked.</p>
+<p>At last use stream api to list top 100 work frequency.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">List result = frenquncyMap.entrySet().stream()</span><br><span class="line">    .sorted(Map.Entry.comparingByValue())</span><br><span class="line">    .limit(<span class="number">100</span>).collect(Collectors.toList());</span><br><span class="line">System.out.println(result);</span><br><span class="line">System.out.println(System.currentTimeMillis() - start);</span><br><span class="line"></span><br><span class="line">Files.delete(Paths.get(<span class="string">&quot;tmp/&quot;</span>));</span><br><span class="line">Files.createDirectories(Paths.get(<span class="string">&quot;tmp/&quot;</span>));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>That’s it, let’s run and see what happened:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Later I willl jump into JDK, to understand what the algorithm used in JDK. </p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/interview/">interview</a><a href="/tags/word-frequency/">word_frequency</a><a href="/tags/algorithm/">algorithm</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2016/05/11/python/2016-05-11-pythonic/"><span>Pythonic,What is it</span></a></h3>
     
   
@@ -233,110 +313,6 @@
     <span class="post-tags">
       <i class="icon-tags"></i>
         <a href="/tags/interview/">interview</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2016/04/22/tips/2016-04-22-git-history/"><span>Git 基本使用－2</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2016/04/22/tips/2016-04-22-git-history/" rel="bookmark">
-        <time class="entry-date published" datetime="2016-04-21T18:31:11.000Z">
-          2016-04-22
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h1 id="GIT-基本使用"><a href="#GIT-基本使用" class="headerlink" title="GIT 基本使用"></a>GIT 基本使用</h1><ul>
-<li>git log -p</li>
-<li>git diff</li>
-<li>git add</li>
-<li>git diff HEAD</li>
-<li>git commit -m “Add something”</li>
-<li>git branch</li>
-<li>git checkout -b feature-A</li>
-<li>git branch</li>
-<li>git merge –no-ff feature-A</li>
-<li>git log –graph</li>
-<li>git reset</li>
-<li>git reflog</li>
-<li>git merge –no-ff fix-b</li>
-<li>git rebase -i HEAD-2</li>
-<li>git remote add</li>
-<li>git push</li>
-<li>git push -u origin feature-D</li>
-<li>git fetch -all</li>
-<li>git fetch origin refspeec</li>
-</ul>
-<h2 id="GIT-Flow"><a href="#GIT-Flow" class="headerlink" title="GIT Flow"></a>GIT Flow</h2><h3 id="git-flow-cheatsheet"><a href="#git-flow-cheatsheet" class="headerlink" title="git-flow-cheatsheet"></a>git-flow-cheatsheet</h3><p>A cheatsheet on the usage of git flow, visit <a target="_blank" rel="noopener" href="http://danielkummer.github.com/git-flow-cheatsheet/">http://danielkummer.github.com/git-flow-cheatsheet/</a></p>
-<h3 id="GIT-FLOW"><a href="#GIT-FLOW" class="headerlink" title="GIT FLOW"></a>GIT FLOW</h3><p>Git extensions to provide high-level repository operations for Vincent Driessen’s branching model. <a target="_blank" rel="noopener" href="http://nvie.com/posts/a-successful-git-branching-model/">Read more</a></p>
-<p>INIT:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git flow init</span><br></pre></td></tr></table></figure>
-
-<h3 id="TRACK-DEVELOP-REMOTELY-ON-GITHUB"><a href="#TRACK-DEVELOP-REMOTELY-ON-GITHUB" class="headerlink" title="TRACK DEVELOP REMOTELY ON GITHUB:"></a>TRACK DEVELOP REMOTELY ON GITHUB:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin develop</span><br></pre></td></tr></table></figure>
-
-<p><strong>FEATURES:</strong></p>
-<p>Use to develop new features starting from the develop branch. Merge back into develop branch waiting for a reasonable amount of features to be there before declaring it a release.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git flow feature</span><br><span class="line">$ git flow feature start &lt;name&gt;</span><br><span class="line">$ git flow feature finish &lt;name&gt;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">usage: git flow feature [list] [-v]</span><br><span class="line">       git flow feature start [-F] &lt;name&gt; [&lt;base&gt;]</span><br><span class="line">       git flow feature finish [-rFk] &lt;name|nameprefix&gt;</span><br><span class="line">       git flow feature publish &lt;name&gt;</span><br><span class="line">       git flow feature track &lt;name&gt;</span><br><span class="line">       git flow feature diff [&lt;name|nameprefix&gt;]</span><br><span class="line">       git flow feature rebase [-i] [&lt;name|nameprefix&gt;]</span><br><span class="line">       git flow feature checkout [&lt;name|nameprefix&gt;]</span><br><span class="line">       git flow feature pull &lt;remote&gt; [&lt;name&gt;]</span><br></pre></td></tr></table></figure>
-
-<p><strong>RELEASES:</strong></p>
-<p>Use to group together latest development (features) add a few finishing touches if necessary and send to production. All last changes will merge back to master and develop so new features will start from current release.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git flow release</span><br><span class="line">$ git flow release start &lt;release&gt; [&lt;base&gt;]</span><br><span class="line">$ git flow release finish &lt;release&gt;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">usage: git flow release [list] [-v]</span><br><span class="line">       git flow release start [-F] &lt;version&gt;</span><br><span class="line">       git flow release finish [-Fsumpk] &lt;version&gt;</span><br><span class="line">       git flow release publish &lt;name&gt;</span><br><span class="line">       git flow release track &lt;name&gt;</span><br></pre></td></tr></table></figure>
-
-<p><strong>HOTFIXES:</strong></p>
-<p>Similar to releases but the hotfix branch starts off master to avoid unvoluntary send to production of unwanted features that my be present in branches. The quick fix must be used when an important bug arises in production which must be fixed and can’t wait for other features to be ready. It merges back to master and develop.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git flow hotfix</span><br><span class="line">$ git flow hotfix start &lt;release&gt; [&lt;base&gt;]</span><br><span class="line">$ git flow hotfix finish &lt;release&gt;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">usage: git flow hotfix [list] [-v]</span><br><span class="line">       git flow hotfix start [-F] &lt;version&gt; [&lt;base&gt;]</span><br><span class="line">       git flow hotfix finish [-Fsumpk] &lt;version&gt;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/git/">git</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/git/">git</a>
     </span>
     
 

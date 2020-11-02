@@ -65,6 +65,84 @@
 
   
     
+    <h3 class="article-title"><a href="/2015/11/05/shell/2015-11-05-generate-jekyll-post-file/"><span>shell来自动生成Jekyll post文件</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/11/05/shell/2015-11-05-generate-jekyll-post-file/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-11-05T10:31:42.000Z">
+          2015-11-05
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>通过以下代码可以生成jekyll 的post 文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#! /bin/bash</span></span><br><span class="line"></span><br><span class="line">CAT=<span class="variable">$1</span></span><br><span class="line">TITLE=<span class="variable">$2</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;current location: <span class="variable">$PWD</span>&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;category: <span class="variable">$CAT</span>&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;file_name: <span class="variable">$TITLE</span>&quot;</span></span><br><span class="line"></span><br><span class="line">FilePrefix=`date <span class="string">&quot;+%Y-%m-%d-&quot;</span>`</span><br><span class="line">FILE_NAME=<span class="string">&quot;<span class="variable">$FilePrefix</span><span class="variable">$TITLE</span>.md&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;target file name is <span class="variable">$FILE_NAME</span>&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;generate file.......&quot;</span></span><br><span class="line"></span><br><span class="line">POST_LOCATION=_posts/<span class="variable">$CAT</span></span><br><span class="line">FILE_LOCATION=<span class="variable">$POST_LOCATION</span>/<span class="variable">$FILE_NAME</span></span><br><span class="line"><span class="keyword">if</span> [ -d <span class="variable">$POST_LOCATION</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">    cp template.md <span class="variable">$FILE_LOCATION</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;create folder <span class="variable">$CAT</span>&quot;</span></span><br><span class="line">    mkdir -p <span class="variable">$POST_LOCATION</span></span><br><span class="line">    cp template.md <span class="variable">$FILE_LOCATION</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$POST_LOCATION</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;current location: <span class="variable">$PWD</span>&quot;</span></span><br><span class="line">TODAY=`date <span class="string">&quot;+%Y-%m-%d-%H:%M:%S&quot;</span>`</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;today:<span class="variable">$TODAY</span>&quot;</span></span><br><span class="line"><span class="comment"># replace keyword in template</span></span><br><span class="line">sed -i <span class="string">&#x27;&#x27;</span> <span class="string">&quot;s/_TITLE/<span class="variable">$TITLE</span>/g&quot;</span> <span class="variable">$FILE_NAME</span></span><br><span class="line">sed -i <span class="string">&#x27;&#x27;</span> <span class="string">&quot;s/_CAT/<span class="variable">$CAT</span>/g&quot;</span> <span class="variable">$FILE_NAME</span></span><br><span class="line">sed -i <span class="string">&#x27;&#x27;</span> <span class="string">&quot;s/_TAG/<span class="variable">$CAT</span>/g&quot;</span> <span class="variable">$FILE_NAME</span></span><br><span class="line">sed -i <span class="string">&#x27;&#x27;</span> <span class="string">&quot;s/_DATE/<span class="variable">$TODAY</span>/g&quot;</span> <span class="variable">$FILE_NAME</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>以上脚本中使用到了shell中的如下命令：</p>
+<ul>
+<li>date 获取时间</li>
+<li>sed 替换文本内容</li>
+</ul>
+<h2 id="shell-date-使用"><a href="#shell-date-使用" class="headerlink" title="shell - date 使用"></a>shell - date 使用</h2><p>格式化date 可以使用如下方法：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">date <span class="string">&quot;+%Y-%m-%d-%H:%M:%S&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>后面是date 的格式，通过<code>man date</code>可以查找更详细的格式</li>
+</ul>
+<h2 id="将shell的返回值再赋值"><a href="#将shell的返回值再赋值" class="headerlink" title="将shell的返回值再赋值"></a>将shell的返回值再赋值</h2><p>以上实例中使用了:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TODAY=`date <span class="string">&quot;+%Y-%m-%d-%H:%M:%S&quot;</span>`</span><br></pre></td></tr></table></figure>
+<p>将shell的返回值再赋值,</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">  ``</span><br><span class="line">```  </span><br><span class="line">在shell中是用来将返回值赋值</span><br><span class="line"></span><br><span class="line"><span class="comment">## 使用sed 替换文本</span></span><br><span class="line"></span><br><span class="line">以下是MAC中sed的用法，－i后面额外多了‘’参数</span><br><span class="line"></span><br><span class="line">```sh</span><br><span class="line">sed -i <span class="string">&#x27;&#x27;</span> <span class="string">&quot;s/_TITLE/<span class="variable">$TITLE</span>/g&quot;</span> <span class="variable">$FILE_NAME</span></span><br></pre></td></tr></table></figure>
+
+<p>解释<code>s/_TITLE/$TITLE/g</code>：</p>
+<ul>
+<li>s: replace</li>
+<li>_TITLE: 旧值</li>
+<li>$TITLE: 新值</li>
+<li>g: 全部替换(global)</li>
+</ul>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/shell/">shell</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2015/11/04/tips/thoughts/2015-11-03-Test-Tools/"><span>测试用例-一些有意思的工具</span></a></h3>
     
   
@@ -183,76 +261,6 @@
     <span class="post-tags">
       <i class="icon-tags"></i>
         <a href="/tags/designpattern/">designpattern</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2015/11/03/tips/refactoring/2015-11-3-refactoring-introduce-method-object-and-replace-conditions-with-poly/"><span>Refactoring-10-introduce method object, replace conditions with polymorphism</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2015/11/03/tips/refactoring/2015-11-3-refactoring-introduce-method-object-and-replace-conditions-with-poly/" rel="bookmark">
-        <time class="entry-date published" datetime="2015-11-03T02:31:11.000Z">
-          2015-11-03
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h2 id="将方法参数转化为类"><a href="#将方法参数转化为类" class="headerlink" title="将方法参数转化为类"></a>将方法参数转化为类</h2><p>有时一个方法的传入参数太多，就需要考虑是否需要引入新的类来解决的。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Registration</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">create</span><span class="params">(<span class="keyword">double</span> amount,String name,</span></span></span><br><span class="line"><span class="function"><span class="params">                       <span class="keyword">double</span> credits)</span></span>&#123;</span><br><span class="line">        <span class="comment">//do work</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>重构后:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//instroduce new Class</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RegistrationContext</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">double</span> amount;</span><br><span class="line">    String name;</span><br><span class="line">    <span class="keyword">double</span> credits;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//modify the method</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createRefactored</span><span class="params">(RegistrationContext context)</span></span>&#123;</span><br><span class="line">    <span class="comment">//do work</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="多态替代条件判断"><a href="#多态替代条件判断" class="headerlink" title="多态替代条件判断"></a>多态替代条件判断</h2><p>有时通过If…Else来判断不同的类型进行不同的处理，代码可读性不是很强，通过多态来替代这些<br>条件判断，同时抽取方法后，代码就会更加的具有可读性.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderProcessor</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">processOrder</span><span class="params">(Customer cu,List&lt;Product&gt; products)</span></span>&#123;</span><br><span class="line">        <span class="keyword">double</span> orderTotal = products.parallelStream().mapToDouble(Product::getPrice).sum();</span><br><span class="line">        <span class="keyword">if</span>(cu <span class="keyword">instanceof</span> Employee)&#123;</span><br><span class="line">            orderTotal-=orderTotal*<span class="number">0.15</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (cu <span class="keyword">instanceof</span> NonEmployee)&#123;</span><br><span class="line">            orderTotal-=orderTotal*<span class="number">0.10</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> orderTotal;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Customer</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Employee</span> <span class="keyword">extends</span> <span class="title">Customer</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NonEmployee</span> <span class="keyword">extends</span> <span class="title">Customer</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>重构后:是不是代码更清楚了</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Customer</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">double</span> <span class="title">tax</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Employee</span> <span class="keyword">extends</span> <span class="title">Customer</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">tax</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0.15</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NonEmployee</span> <span class="keyword">extends</span> <span class="title">Customer</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">tax</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0.10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">processOrderRefactor</span><span class="params">(Customer cu,List&lt;Product&gt; products)</span></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> orderTotal = products.parallelStream().mapToDouble(Product::getPrice).sum();</span><br><span class="line"></span><br><span class="line">    orderTotal-=orderTotal*cu.tax();</span><br><span class="line">    <span class="keyword">return</span> orderTotal;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/refactoring/">refactoring</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/refactoring/">refactoring</a>
     </span>
     
 

@@ -65,6 +65,76 @@
 
   
     
+    <h3 class="article-title"><a href="/2019/08/26/tips/thoughts/testing-is-hard/"><span>测试之难和突破</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/08/26/tips/thoughts/testing-is-hard/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-08-26T01:25:03.000Z">
+          2019-08-26
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>最近一段时间经常听见有人说测试就是点点点，或者带着鄙视的声调说测试就是不就是点点点吗，一般情况下我不会回应，因为我知道就算回应也很难改变外面人的看法。不回应不代表我不去思考，测试真的就是点点点吗？我只想举个例子，大家都知道股票只要低买高卖就可以挣钱，但是有几个人靠股票人生开挂了？人们总是低估了做好看得懂的事情的难度，又高估了看不懂的事情的难度。</p>
+<h2 id="测试真的就是点点吗？"><a href="#测试真的就是点点吗？" class="headerlink" title="测试真的就是点点吗？"></a>测试真的就是点点吗？</h2><p>测试真的就是点点点吗？很明显不是，就算你看到的是点点点，其实有些要比点点点难多了，至少为什么点这个而不是那个，为什么先点这个而不是那个，为什么点过了还要去继续再点？为什么要是很多种不同的情况，每种情况又是代表什么含义呢？ 你看到的点点点的背后都是有不同逻辑的思考，而不同逻辑的思考会是一件简单的事情吗？ 只是高估了看的懂的事情，但是完全没有了解过他的背后，但是点点点真的只是表象。我自己的经验来说，测试需要的逻辑可能比写代码更多，为什么？因为测试本生有两种意图，一种是验证正确性，一种是去找到可能会造成不正确的情况来验证正确性；后一种是巨大的难度，首选你的选择面很多，其次你如何挑选异常情况，理论上异常情况是无穷多的，你为什么能确信你在大海里面捞到的东西就是你想要的？再次，选择的一些情况实际上是有些是非常难以模仿的，那么如何去模拟这些情况又变得很难，这样一来你还会觉得简单吗？</p>
+<p>测试就是一种实验，而实验是花大量时间和人力的地方，没有实验就不会有什么好的产品.<br>但是有一点是需要说明的，测试不代表就是专职测试人去做，这是一个非常重要的点，也是现在很多误区的来源.</p>
+<h2 id="测试难度的分类和难点"><a href="#测试难度的分类和难点" class="headerlink" title="测试难度的分类和难点"></a>测试难度的分类和难点</h2><p>这边不去总结测试有什么样的类型，这些类型如何去做，换个简单从进行测试难度的角度思考测试的工作，大致可以分为：</p>
+<ul>
+<li>确定性的测试，如同大众相关的各种互联网服务，这些功能一般人都可以理解，主要是验证功能是否实现， 这些工作难度不高，但是工作量大，需要的人员多，但是每个人的工资上限低</li>
+<li>和底层技术结合的测试，主要验证关键技术在EdgeCase上面的表现，这块要求高，测试能力代表工程能力，这块更多的是实验，<br>基本可以认为测试者就应该是开发者，或者比简单的开发人员更加高级的技术专家，极高的专业性</li>
+<li>专业领域知识门槛高，领域知识一般人不懂，如化工，金融，航空等等，这些专业知识的积累绝不比通用技术难度低，极高的专业度</li>
+</ul>
+<p>从领域角度我觉得大体分为三大类，那么这些从业人员的优缺点来看：</p>
+<ul>
+<li>第一类，可替代性高，有上限，如果希望寻求有提升，我觉得就两个方向，一个是比其他人知道的多，在多个内容里面比其他人熟悉，<br>另外一个就是可以和技术结合，可以用技术手段解决确定性问题，比如通过代码能够自动化整个确定性的内容</li>
+<li>第二类，技术性强但是问题是就业面窄，同时一般赢家通吃，刚好你做的内容是其他家强，或者被新事物淘汰，那么会遇到很大的挑战<br>这一类需要把原理搞的很懂，同时有一块比别人深入很多，那么在特定领域有很好的用途</li>
+<li>第三类，大部分人忽律了专业领域的知识本质上也是技术的一种，和编程一样也是专业领域知识，这类人同时如果懂专业知识和编程，那么是高手中的高手，独当一面是自然而然的；但是大部分人是做不到的，一旦这个领域知识是一个高迭代或者非常偏门，那么和第二类一样也是面临直接淘汰</li>
+</ul>
+<p>实际上从优缺点来看，大部分从事测试的人要么就是有很明显的上限，要么就是一个牛的不能再牛的人才，而在中间地带，实际上没有太多空间的.也就是要么在一个相对低的层次，要们就是一个明显高出其他类似人员很多很多的存在。其实这也是测试的一个难点，就是成为大牛的机会很少，大部分人就是最多能达到的高度很有限。从三类来说，第一类本质是什么人多可以做，第二类大部分是同一个人做，第三类有很好的互补，开发和测试有很好的互补，同时大家都容易被人认可。</p>
+<p>所以写到这里，职业的选择而言，其实大体比较清楚了。测试想要做的久，最好的还是可以专注一个行业；或者开发技能基本达到架构师水平。然后平时都被业务逼的没有时间学习了，达到一定深度是件很难的事情。</p>
+<p>已股市为例子，股票规则很简单，挣钱就一条，就是高卖低买；但是股票上挣钱的可能只有1%不到，这些就是陷阱，看起来很容易的事情，做好真的很难，而且会比想的还要难。</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/thoughts/">thoughts</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2019/08/07/tips/1-Junit5CaseTestTemplate/"><span>Xmind,Test Cases,and Allure templates for TDD</span></a></h3>
     
   
@@ -236,105 +306,6 @@
     <span class="post-tags">
       <i class="icon-tags"></i>
         <a href="/tags/productivity/">productivity</a><a href="/tags/real/">real</a><a href="/tags/think-different/">think-different</a><a href="/tags/API-Testing/">API Testing</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2019/07/28/tips/api-testing/1-Demo-TestCase/"><span>Integration-Runner Test Case Demo</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/07/28/tips/api-testing/1-Demo-TestCase/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-07-28T15:58:45.000Z">
-          2019-07-28
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>Last chapter introduce how to build a test framework in two days,<br>In this chapter, let’s do demos:</p>
-<ul>
-<li>A Api TestCase</li>
-<li>Api Chain Test Case</li>
-<li>Pre-Condition And Verification Render to use context data</li>
-</ul>
-<h2 id="A-Api-TestCase"><a href="#A-Api-TestCase" class="headerlink" title="A Api TestCase"></a>A Api TestCase</h2><p>Here are two cases: </p>
-<ol>
-<li>after call HttpBin API, check the url field in response is <a target="_blank" rel="noopener" href="http://httpbin.org/">http://httpbin.org</a></li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;verification&quot;</span>: &#123;<span class="string">&quot;url&quot;</span>: <span class="string">&quot;is_equal_to http://httpbin.org&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>after call HttpBin API, check the headers.Accept field in response is application/json1</li>
-</ol>
-<p>The overall cases is:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;test_cases&quot;</span>: [&#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;getapi-tc-1&quot;</span>,</span><br><span class="line">        <span class="string">&quot;tc_id&quot;</span>: <span class="string">&quot;tc-get-1&quot;</span>,</span><br><span class="line">        <span class="string">&quot;steps&quot;</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&quot;name&quot;</span>: <span class="string">&quot;http get api&quot;</span>,</span><br><span class="line">                <span class="string">&quot;precondition&quot;</span>: &#123;&#125;,</span><br><span class="line">                <span class="string">&quot;service&quot;</span>: HttpBinGet,</span><br><span class="line">                <span class="string">&quot;params&quot;</span>: &#123;&#125;,</span><br><span class="line">                <span class="string">&quot;verification&quot;</span>: &#123;<span class="string">&quot;url&quot;</span>: <span class="string">&quot;is_equal_to http://httpbin.org&quot;</span>&#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]&#125;</span><br><span class="line">    ,&#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;getapi-tc-21&quot;</span>,</span><br><span class="line">        <span class="string">&quot;tc_id&quot;</span>: <span class="string">&quot;tc-get-2&quot;</span>,</span><br><span class="line">        <span class="string">&quot;steps&quot;</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&quot;name&quot;</span>: <span class="string">&quot;http get api&quot;</span>,</span><br><span class="line">                <span class="string">&quot;precondition&quot;</span>: &#123;&#125;,</span><br><span class="line">                <span class="string">&quot;service&quot;</span>: HttpBinGet,</span><br><span class="line">                <span class="string">&quot;params&quot;</span>: &#123;&#125;,</span><br><span class="line">                <span class="string">&quot;verification&quot;</span>: &#123;<span class="string">&quot;headers.Accept&quot;</span>: <span class="string">&quot;is_equal_to application/json1&quot;</span>&#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]&#125;</span><br><span class="line"></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>and the demo codes are:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@allure.epic(&quot;testing http bin test cases&quot;)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestHttpBinTestCase</span>:</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @allure.feature(&quot;testing http bin get&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_httpbin_get</span>(<span class="params">self</span>):</span></span><br><span class="line">        runner = IntegrationExecutor(httpbinget_testcases)</span><br><span class="line">        result = runner.run()</span><br><span class="line">        <span class="keyword">assert</span> result.get_tc_result() == <span class="string">&quot;pass&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Api-Chain-Test-Case"><a href="#Api-Chain-Test-Case" class="headerlink" title="Api Chain Test Case"></a>Api Chain Test Case</h2><p>test cases:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#123; </span><br><span class="line">    <span class="string">&quot;test_cases&quot;</span>: [&#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;tc description&quot;</span>,</span><br><span class="line">        <span class="string">&quot;tc_id&quot;</span>: <span class="string">&quot;testCaseId&quot;</span>,</span><br><span class="line">        <span class="string">&quot;steps&quot;</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&quot;name&quot;</span>: <span class="string">&quot;http get api&quot;</span>,</span><br><span class="line">                <span class="string">&quot;precondition&quot;</span>: &#123;&#125;,</span><br><span class="line">                <span class="string">&quot;service&quot;</span>: HttpBinGet,</span><br><span class="line">                <span class="string">&quot;params&quot;</span>: &#123;&#125;,</span><br><span class="line">                <span class="string">&quot;post_action&quot;</span>: &#123;<span class="string">&quot;url&quot;</span>: <span class="string">&quot;url&quot;</span>, <span class="string">&quot;args&quot;</span>: <span class="string">&quot;args&quot;</span>&#125;,</span><br><span class="line">                <span class="string">&quot;verification&quot;</span>: &#123;<span class="string">&quot;url&quot;</span>: <span class="string">&quot;is_equal_to http://httpbin.org&quot;</span>&#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&quot;name&quot;</span>: <span class="string">&quot;http post api&quot;</span>,</span><br><span class="line">                <span class="string">&quot;precondition&quot;</span>: &#123;&#125;,</span><br><span class="line">                <span class="string">&quot;service&quot;</span>: HttpBinPOST,</span><br><span class="line">                <span class="string">&quot;params&quot;</span>: &#123;&#125;,</span><br><span class="line">                <span class="string">&quot;post_action&quot;</span>: &#123;&#125;,</span><br><span class="line">                <span class="string">&quot;verification&quot;</span>: &#123;<span class="string">&quot;url&quot;</span>: <span class="string">&quot;is_equal_to http://httpbin.org&quot;</span>&#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@allure.epic(&quot;testing http bin test cases&quot;)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestHttpBinTestCase</span>:</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @allure.feature(&quot;testing http bin get/post&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_httpbin_tc</span>(<span class="params">self</span>):</span></span><br><span class="line">        runner = IntegrationExecutor(httpbin_testcases)</span><br><span class="line">        result = runner.run()</span><br><span class="line">        <span class="keyword">assert</span> result.get_tc_result() == <span class="string">&quot;pass&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>the test cases code is almost same.</p>
-<h2 id="Pre-Condition-And-Verification-Render-to-use-context-data"><a href="#Pre-Condition-And-Verification-Render-to-use-context-data" class="headerlink" title="Pre-Condition And Verification Render to use context data"></a>Pre-Condition And Verification Render to use context data</h2><p>This case is more complex, use pre-condition, post-action, and verficiation to checkout<br>how the context processing.</p>
-<p>We have two Api:</p>
-<ul>
-<li><code>/json</code> api to get a json, in this api’s response, there is a <code>author</code> field,<br>value is “Yours Truly”</li>
-<li><code>/cookies/set</code> api is to query a value by query parameter freeform</li>
-</ul>
-<p>So assume there is a workflow in real business:</p>
-<ol>
-<li>call <code>/json</code> to get author</li>
-<li>then use the author name to query(call <code>/cookie./set</code>) some author properties </li>
-</ol>
-<p>The author name might be changed over time in different environment, so I have to call<br>the api first in step 1, then getting the author name as the second api’s input, finally call the second<br>api then verify the result .</p>
-<p>So the example test cases is:</p>
-<ul>
-<li><p>Case 1: Use Context and Render Input and Verifications<br><img src="/images/complex_case.jpg" alt="img"></p>
-</li>
-<li><p>Case2: Use jinja2 built-in filter to handle parameters in test cases</p>
-</li>
-</ul>
-<p><img src="/images/jinja2_filter.jpg" alt="img"></p>
-<p>and again, there is no re-invention, just use the exiting jinja2 template</p>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/productivity/">productivity</a><a href="/tags/real/">real</a><a href="/tags/think-different/">think-different</a><a href="/tags/api-testing/">api testing</a>
     </span>
     
 

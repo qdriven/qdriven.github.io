@@ -65,6 +65,110 @@
 
   
     
+    <h3 class="article-title"><a href="/2016/04/22/tips/2016-04-22-git-history/"><span>Git 基本使用－2</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/04/22/tips/2016-04-22-git-history/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-04-21T18:31:11.000Z">
+          2016-04-22
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="GIT-基本使用"><a href="#GIT-基本使用" class="headerlink" title="GIT 基本使用"></a>GIT 基本使用</h1><ul>
+<li>git log -p</li>
+<li>git diff</li>
+<li>git add</li>
+<li>git diff HEAD</li>
+<li>git commit -m “Add something”</li>
+<li>git branch</li>
+<li>git checkout -b feature-A</li>
+<li>git branch</li>
+<li>git merge –no-ff feature-A</li>
+<li>git log –graph</li>
+<li>git reset</li>
+<li>git reflog</li>
+<li>git merge –no-ff fix-b</li>
+<li>git rebase -i HEAD-2</li>
+<li>git remote add</li>
+<li>git push</li>
+<li>git push -u origin feature-D</li>
+<li>git fetch -all</li>
+<li>git fetch origin refspeec</li>
+</ul>
+<h2 id="GIT-Flow"><a href="#GIT-Flow" class="headerlink" title="GIT Flow"></a>GIT Flow</h2><h3 id="git-flow-cheatsheet"><a href="#git-flow-cheatsheet" class="headerlink" title="git-flow-cheatsheet"></a>git-flow-cheatsheet</h3><p>A cheatsheet on the usage of git flow, visit <a target="_blank" rel="noopener" href="http://danielkummer.github.com/git-flow-cheatsheet/">http://danielkummer.github.com/git-flow-cheatsheet/</a></p>
+<h3 id="GIT-FLOW"><a href="#GIT-FLOW" class="headerlink" title="GIT FLOW"></a>GIT FLOW</h3><p>Git extensions to provide high-level repository operations for Vincent Driessen’s branching model. <a target="_blank" rel="noopener" href="http://nvie.com/posts/a-successful-git-branching-model/">Read more</a></p>
+<p>INIT:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git flow init</span><br></pre></td></tr></table></figure>
+
+<h3 id="TRACK-DEVELOP-REMOTELY-ON-GITHUB"><a href="#TRACK-DEVELOP-REMOTELY-ON-GITHUB" class="headerlink" title="TRACK DEVELOP REMOTELY ON GITHUB:"></a>TRACK DEVELOP REMOTELY ON GITHUB:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin develop</span><br></pre></td></tr></table></figure>
+
+<p><strong>FEATURES:</strong></p>
+<p>Use to develop new features starting from the develop branch. Merge back into develop branch waiting for a reasonable amount of features to be there before declaring it a release.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git flow feature</span><br><span class="line">$ git flow feature start &lt;name&gt;</span><br><span class="line">$ git flow feature finish &lt;name&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">usage: git flow feature [list] [-v]</span><br><span class="line">       git flow feature start [-F] &lt;name&gt; [&lt;base&gt;]</span><br><span class="line">       git flow feature finish [-rFk] &lt;name|nameprefix&gt;</span><br><span class="line">       git flow feature publish &lt;name&gt;</span><br><span class="line">       git flow feature track &lt;name&gt;</span><br><span class="line">       git flow feature diff [&lt;name|nameprefix&gt;]</span><br><span class="line">       git flow feature rebase [-i] [&lt;name|nameprefix&gt;]</span><br><span class="line">       git flow feature checkout [&lt;name|nameprefix&gt;]</span><br><span class="line">       git flow feature pull &lt;remote&gt; [&lt;name&gt;]</span><br></pre></td></tr></table></figure>
+
+<p><strong>RELEASES:</strong></p>
+<p>Use to group together latest development (features) add a few finishing touches if necessary and send to production. All last changes will merge back to master and develop so new features will start from current release.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git flow release</span><br><span class="line">$ git flow release start &lt;release&gt; [&lt;base&gt;]</span><br><span class="line">$ git flow release finish &lt;release&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">usage: git flow release [list] [-v]</span><br><span class="line">       git flow release start [-F] &lt;version&gt;</span><br><span class="line">       git flow release finish [-Fsumpk] &lt;version&gt;</span><br><span class="line">       git flow release publish &lt;name&gt;</span><br><span class="line">       git flow release track &lt;name&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>HOTFIXES:</strong></p>
+<p>Similar to releases but the hotfix branch starts off master to avoid unvoluntary send to production of unwanted features that my be present in branches. The quick fix must be used when an important bug arises in production which must be fixed and can’t wait for other features to be ready. It merges back to master and develop.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git flow hotfix</span><br><span class="line">$ git flow hotfix start &lt;release&gt; [&lt;base&gt;]</span><br><span class="line">$ git flow hotfix finish &lt;release&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">usage: git flow hotfix [list] [-v]</span><br><span class="line">       git flow hotfix start [-F] &lt;version&gt; [&lt;base&gt;]</span><br><span class="line">       git flow hotfix finish [-Fsumpk] &lt;version&gt;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/git/">git</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/git/">git</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2016/04/21/tips/interview/2016-04-20-Linux基础/"><span>Linux 基础</span></a></h3>
     
   
@@ -247,93 +351,6 @@
 <li>nmon</li>
 <li>glance</li>
 </ul>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/interview/">interview</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/interview/">interview</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2016/04/20/tips/interview/2016-04-20-最大子数组和/"><span>Maximum SubArray sum</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2016/04/20/tips/interview/2016-04-20-最大子数组和/" rel="bookmark">
-        <time class="entry-date published" datetime="2016-04-19T18:31:11.000Z">
-          2016-04-20
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h1 id="Maximum-SubArray"><a href="#Maximum-SubArray" class="headerlink" title="Maximum SubArray"></a>Maximum SubArray</h1><p>数组中有正,有负,求下面子集的最大和的思路是:</p>
-<p>假设: 数组Items: A B C D E 这里有两个标记值: 最大和maxSum,最大和结束的位置maxEndingHere 开始扫描数组:</p>
-<ul>
-<li><p>A 的时候: 最大就是A,最大和,最大和结束的位置都在位置A,maxSum和maxEndingHere都是A</p>
-</li>
-<li><p>B 的时候: maxEndingHere就是(A+B),如果maxEndingHere &gt; B 那么就继续累加计算,否则就是B就是maxEndingHere,也就是从B开始重新开始累加计算. 如果这个时候的maxSum比maxEndingHere大,那么maxSum就还是那个maxSum,否则maxSum就是maxEndingHere 这里的逻辑是可以想成这样:</p>
-</li>
-<li><p>如果A是负数,B是正数,那么计算应该从B开始,推到小区就是累加的值如果比下一个小了,那么就直接从下一个开始计算</p>
-</li>
-<li><p>如果A是正数,B是正数,那么计算还是从A开始,然后继续累加</p>
-</li>
-<li><p>如果A是正数,B是负数,那么计算还是从A开始,继续累加累加,但是最大和还是在A这个位置计算的,直到累加得到超过这个最大和或者遇到第一种情况,重新开始累加计算</p>
-</li>
-<li><p>C 的时候: 继续在B的时候的动作</p>
-</li>
-</ul>
-<p>综合起来,在进行一次累加的时候需要确定的是:</p>
-<ul>
-<li>是否从新还是计算累加,进行重新累加的标准是,前面所有的累积和不如当前的这个元素,那么就是当前元素开始累加,重新计算</li>
-<li>保留历次累加的最大值,如果此类累加超过这个最大值,则替换,否者就保留,寻找下一个可能的最大累加值</li>
-</ul>
-<p>所以Java代码实现如下:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; subArrays = Lists.newArrayList(-<span class="number">2</span>, <span class="number">1</span>, -<span class="number">3</span>, <span class="number">4</span>, -<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, -<span class="number">5</span>, <span class="number">4</span>);</span><br><span class="line">      Integer maxEndingHere = <span class="number">0</span>;</span><br><span class="line">      Integer maxSumSoFar = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">for</span> (Integer item : subArrays) &#123;</span><br><span class="line"></span><br><span class="line">          maxEndingHere = max(item,maxEndingHere+item);</span><br><span class="line">          maxSumSoFar=max(maxSumSoFar,maxEndingHere);</span><br><span class="line">      &#125;</span><br><span class="line">      System.out.println(maxSumSoFar);</span><br></pre></td></tr></table></figure>
-
-<p>python 的实现:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maximum_subarray_sum</span>(<span class="params">array=[]</span>):</span></span><br><span class="line">    max_ending_here = max_so_far = array[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> array[<span class="number">1</span>:]:</span><br><span class="line">        max_ending_here = max(<span class="number">0</span>, max_ending_here + item)</span><br><span class="line">        max_so_far = max(max_so_far, max_ending_here)</span><br><span class="line">    <span class="keyword">return</span> max_so_far</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print(maximum_subarray_sum([<span class="number">-2</span>, <span class="number">1</span>, <span class="number">-3</span>, <span class="number">4</span>, <span class="number">-1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">-5</span>, <span class="number">4</span>]))</span><br></pre></td></tr></table></figure>
-
-<p>参考,学习: <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Maximum_subarray_problem">Maximum_subarray_problem</a></p>
 
       
     </div>

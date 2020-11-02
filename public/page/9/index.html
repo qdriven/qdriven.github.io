@@ -65,6 +65,85 @@
 
   
     
+    <h3 class="article-title"><a href="/2019/12/04/tips/refactoring/Bad_Code_Never_Die/"><span></span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/12/04/tips/refactoring/Bad_Code_Never_Die/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-12-04T01:52:28.000Z">
+          2019-12-04
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="Bad-Code-Never-Die"><a href="#Bad-Code-Never-Die" class="headerlink" title="Bad Code Never Die"></a>Bad Code Never Die</h1><p>坏代码到处都是，好代码其实也不少，了解坏在哪里，好在哪里才是最重要的.</p>
+<h2 id="Start-it"><a href="#Start-it" class="headerlink" title="Start it"></a>Start it</h2><p>Simplicity over common logic.</p>
+<p>A simple code to get has next or not as follow.These codes are following our logic thinking competely.It is good.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(db.next()) &#123;</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">true</span>;   </span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>But if we think twice, maybe there is a more abstract way, actually just use following codes:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> db.next()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>db.next() already represents the result whether hasNext or not. So sometimes abstract is simplicity.</p>
+<h2 id="What-is-the-if-else-really-used-for"><a href="#What-is-the-if-else-really-used-for" class="headerlink" title="What is the if/else really used for?"></a>What is the if/else really used for?</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="number">0</span>==retCode)&#123;</span><br><span class="line">  sendMessage(<span class="string">&quot;000&quot;</span>,<span class="string">&quot;Success&quot;</span>,returnCode);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">  sendMessage(<span class="string">&quot;000&quot;</span>,<span class="string">&quot;Fail&quot;</span>,returnCode);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The only difference is the Succecss or Fail message when call sendMessage, so actually if/else is only for message(Success or Fail),not for sendMessage.So:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String msg = <span class="number">0</span>==retCode?<span class="string">&quot;Success&quot;</span>:<span class="string">&quot;Fail&quot;</span>;</span><br><span class="line">sendMessage(<span class="string">&quot;000&quot;</span>,msg,returnCode);</span><br></pre></td></tr></table></figure>
+<p>And what if the difference is not only Success or Fail, also returnCode……; if so, it doesn’t change if/else’s scope at all, it is for the what message to send but not for<br>send message. so the codes might be :</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ResMsg msg = <span class="number">0</span>==retCode?<span class="keyword">new</span> ResMsg(<span class="string">&quot;123&quot;</span>,<span class="string">&quot;Success&quot;</span>,OK):<span class="keyword">new</span> ResMsg(<span class="string">&quot;234&quot;</span>,<span class="string">&quot;Fail&quot;</span>,Fail);</span><br><span class="line">sendMessage(msg);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Extract-Method"><a href="#Extract-Method" class="headerlink" title="Extract Method"></a>Extract Method</h2><p>There are a few checking for a.class, but why not putting all these type into a list, then for-loop this list? it is more readable.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">if</span>(a.class==String.class</span><br><span class="line">  ||a.class==Boolean.class</span><br><span class="line">  ||a.class==SelfDefined.class</span><br><span class="line">  ||a.class==Float.class</span><br><span class="line">  ......)&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="keyword">false</span>;</span><br></pre></td></tr></table></figure>
+
+<p>Changed to Following codes:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Class&gt; checkedClasses = Lists.newArrayList(String.class,Boolean.class,.....)</span><br><span class="line"><span class="keyword">for</span>(checkedClass in checkedClasses)&#123;</span><br><span class="line">  <span class="keyword">if</span> a.class.equals(checkedClass)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="keyword">false</span>;</span><br></pre></td></tr></table></figure>
+
+<p>Why is it good?</p>
+<ul>
+<li>it is more readable</li>
+<li>it is abstraction</li>
+<li>if add more checking class, just change the checkedClasses list, it is easy for plugin or hook</li>
+</ul>
+<p>sometimes, using map to replace some if/else logic is good too. The reason is quite similar.</p>
+<p>Extract Method is a refactor methodology. It is quite useful.</p>
+<h2 id="Naming"><a href="#Naming" class="headerlink" title="Naming"></a>Naming</h2><p>Naming is everything, if there is variable named a,b, after a while, everyone would be lost even the writer.<br>Name like XString,YString, it doesn’t make your look like a hacker, but a unprofessional developer.</p>
+<h2 id="不允许出现多层缩进"><a href="#不允许出现多层缩进" class="headerlink" title="不允许出现多层缩进"></a>不允许出现多层缩进</h2><p>A simple rule, but useful. Consider not use too many if else. maybe one if/else is enough.</p>
+<h2 id="SimpleDateFormat"><a href="#SimpleDateFormat" class="headerlink" title="SimpleDateFormat"></a>SimpleDateFormat</h2><p>SimpleDateFormat is not thread safe, so it is wrong when use it as a static variable in a class.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sample</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> DateFormat format = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy.MM.dd&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getCurrentDateText</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> format.format(<span class="keyword">new</span> Date());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2019/12/01/shell/iptable-nat/"><span></span></a></h3>
     
   
@@ -258,76 +337,6 @@ groups
 finger
 id</code></pre>
 <h2 id="切换用户"><a href="#切换用户" class="headerlink" title="切换用户"></a>切换用户</h2><pre><code>su - new_user   </code></pre>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2019/12/01/shell/linux_fs/"><span></span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/12/01/shell/linux_fs/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-12-01T13:27:38.000Z">
-          2019-12-01
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h2 id="linux的文件系统"><a href="#linux的文件系统" class="headerlink" title="linux的文件系统"></a>linux的文件系统</h2><h2 id="概述（个人描述）"><a href="#概述（个人描述）" class="headerlink" title="概述（个人描述）"></a>概述（个人描述）</h2><p>linux有个说法，一切皆文件，算是对IO的简化。<br>通常我们操作的目录+文件名是个逻辑上的概念，用以定位，目录也是文件。<br>物理上的概念是分区，分区需要挂载<code>mount</code>到特定目录上使用，挂载后就屏蔽了物理细节了。</p>
-<h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><p>这个用<code>ls -l</code>可以看到详细信息</p>
-<h3 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h3><pre><code>-rwxrwsrwT，三个类别读写执行权限。第一个字符表明文件类型。</code></pre>
-<h3 id="所有者和所属组"><a href="#所有者和所属组" class="headerlink" title="所有者和所属组"></a>所有者和所属组</h3><pre><code>权限是分所有者、所属组和其他人的。</code></pre>
-<h3 id="特殊位"><a href="#特殊位" class="headerlink" title="特殊位"></a>特殊位</h3><pre><code>SUID    u+s,文件执行时以文件所有者的身份执行
-SGID    g+s,文件执行时以文件所属组的身份执行
-SBIT    o+t,针对目录，删除目录中文件的只能是root和所有者</code></pre>
-<h3 id="修改命令"><a href="#修改命令" class="headerlink" title="修改命令"></a>修改命令</h3><pre><code>chown user file
-chgrp group file
-chmod a+x file</code></pre>
-<h3 id="umask"><a href="#umask" class="headerlink" title="umask"></a>umask</h3><pre><code>权限掩码，创建文件是默认权限由他的值控制，回取消其设置的相应权限</code></pre>
-<h2 id="单个文件系统的结构"><a href="#单个文件系统的结构" class="headerlink" title="单个文件系统的结构"></a>单个文件系统的结构</h2><p>linux大致把外部存储空间分为<strong>数据区</strong>和<strong>索引区</strong>，文件系统间独立。这个索引区就是inode了，存文件的大小、权限、拥有者、引用数、block块位置等信息。inode与block的对应是个多级列表的结构，有十几个block指针。</p>
-<p>inode的概念，在使用ln时有用，这个默认创建硬连接（只能是文件），这个时候两个文件指向同一个inode。</p>
-<h2 id="分区挂载"><a href="#分区挂载" class="headerlink" title="分区挂载"></a>分区挂载</h2><p>分区需要挂载才能使用，根<code>/</code>也是如此（这个不明白具体怎么做的）。<br>内核加载时，会根据<code>/etc/fstab</code>的内容加载分区。</p>
-<h2 id="NFS"><a href="#NFS" class="headerlink" title="NFS"></a>NFS</h2><pre><code>Ubuntu下面Ubuntu下的例子
-服务端:
-$apt-get install nfs-kernel-server
-vi /etc/exports 添加nfs目录: /personal/nfs_share 10.1.60.34(rw,sync,no_root_squash)
-$sudo exportfs -r
-$sudo /etc/init.d/portmap start
-$sudo /etc/init.d/nfs-kernel-server start
-客户端:
-$sudo apt-get install nfs-common
-$sudo mount 10.19.34.76:/personal/nfs_share ~/nfsshare</code></pre>
-<h2 id="特定目录含义"><a href="#特定目录含义" class="headerlink" title="特定目录含义"></a>特定目录含义</h2><p>markdown表格支持挫呀，左右都可编辑估计就解决问题了</p>
 
       
     </div>
