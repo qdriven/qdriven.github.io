@@ -1,0 +1,704 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="allround tester">
+  <meta name="author" content="qmeta">
+  <meta name="keywords" content="">
+  <title>Implement A Integration Testing Libs in two days - Learning Testing/QA in Hardway</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"qdriven.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Practising</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Implement A Integration Testing Libs in two days">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-07-28 23:58" pubdate>
+        2019年7月28日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      35
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Implement A Integration Testing Libs in two days</h1>
+            
+            <div class="markdown-body">
+              <p>There is a question over my head several times. is it real hard for tester to write test codes?<br>I don’t know, but I just want to do a task to evaluate this conclusion.</p>
+<h2 id="Start-From-The-End"><a href="#Start-From-The-End" class="headerlink" title="Start From The End"></a>Start From The End</h2><p>I don’t prefer the term <strong><em>automation testing</em></strong>, but like the term <strong><em>write testing codes</em></strong>.<br>Automation testing is almost defined as failure in most of testers’s mind(not company, company still think it is valuable).<br>As I known, many testers(a big portion actually) just think automation testing is a political job which actually has no value at all in reality.<br>Most of the automation cases are never used after it passed one time.<br>Almost in every testing meet-up, there is always someone talked about test platform,how good it is,how easy to use.<br>But in reality,almost every test platform user complained the test platform is to hard to use. Why? and what’s the gap between those platform and<br>their users. </p>
+<p>I don’t know. But I just believe automation testing will never happen if you never write codes, only doing configuration like coding.<br>Write scripts should be a basic skill for tester, like eating or drinking. </p>
+<p>And in other hands, setting a high expectation in a short period of time which is way beyond the average tester’s coding skill.<br>There are too much legacy debit out there. High expectation meets even high debit, it can easily crash you.<br>The delayed schedule, the unreachable target, and voices like automation testing doesn’t work is just around you.<br>Finally, you will find out automation never from nowhere, it happened when you write codes line by line just.<br>And if you re-think about automation, it is quite reasonable. It is just like a product which want to automate business flow. The product is built by<br>tons of codes. So does automation testing. And also to pay back the debit, accumulate codes in daily basis in the key. Don’t expected to pay back it<br>in a short time, just focus accumulating the tests day in and day out, then someday, you will feel a little easy.</p>
+<p>Back to the topic, What the task is given to myself is that:</p>
+<ol>
+<li>Write A Simple Integration Libs as a tiny testing framework(just work) in 2-3 days</li>
+<li>Leverage Existing Libs as more as possible, and don’t write too much complex codes</li>
+<li>Integration library, not a http library. It is open for different component client</li>
+<li>The test codes could be used in any other place,but not only for testing</li>
+<li>Not strict, different coding level can use and ramp  up</li>
+</ol>
+<h2 id="Let’s-getting-start"><a href="#Let’s-getting-start" class="headerlink" title="Let’s getting start"></a>Let’s getting start</h2><p>Think about integration testing(not consider UI), it is actually calling different service or api, then get a result to verify.<br><img src="/images/test-service.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>And if in more complex workflow, it looks like a workflow or api call chain<br><img src="/images/chained-invoker.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>So I need to abstract these into following conception:</p>
+<ol>
+<li><strong><em>Executor</em></strong>: execute the who process no matter how many steps the test case should have</li>
+<li><strong><em>Client</em></strong>: every api/service invoker is a client, no matter http,redis,database or whatever tester used in daily<br>basis for send a request to get a response </li>
+<li><strong><em>Validator</em></strong>: verify the result</li>
+<li><strong><em>TestCase</em></strong>:  test cases with test case data and steps</li>
+</ol>
+<h2 id="Executor-Integration-Executor"><a href="#Executor-Integration-Executor" class="headerlink" title="Executor - Integration Executor"></a>Executor - Integration Executor</h2><p>Integration Executor is used to run the whole test case, and it is the core<br>of this tiny lib, it targets to connect all the things used when testing.</p>
+<p><img src="/images/process.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>Let’s do following things to implement it:</p>
+<ol>
+<li>define the test case data structure</li>
+<li>implement a generic client</li>
+<li>implement a extractor to extract data from response</li>
+<li>implement a validator to validate result</li>
+<li>implement a context to store and calculate runtime data when execute test cases</li>
+</ol>
+<h2 id="Client"><a href="#Client" class="headerlink" title="Client"></a>Client</h2><p>The client implement is for generic purpose, so I just define a callable object<br>or with a invoke method:</p>
+<pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Client</span>:</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, params, env</span>):</span>
+        self.params = params
+        self.env = env
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">invoke</span>(<span class="hljs-params">self</span>):</span>
+        <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">        what ever</span>
+<span class="hljs-string">        :return: ClientResponse</span>
+<span class="hljs-string">        &quot;&quot;&quot;</span>
+        <span class="hljs-keyword">raise</span> NotImplementedError(<span class="hljs-string">&quot;abstract class, need an implementation&quot;</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__call__</span>(<span class="hljs-params">self, *args, **kwargs</span>):</span>
+        print(<span class="hljs-string">&quot;client should a callable object or with a invoke method&quot;</span>)
+        <span class="hljs-keyword">return</span> self.invoke()
+``` 
+
+-  <span class="hljs-keyword">and</span> the response <span class="hljs-keyword">for</span> a client also need to be unified <span class="hljs-keyword">and</span> generic:
+
+```python
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ClientResponse</span>():</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, response</span>):</span>
+        <span class="hljs-keyword">pass</span></code></pre>
+
+<ul>
+<li>So basically I defined a generic client which the input is :</li>
+</ul>
+<ol>
+<li><code>params</code>: input test data</li>
+<li><code>env</code>: target environment</li>
+</ol>
+<ul>
+<li>Output is:</li>
+</ul>
+<pre><figcaption><span>Generic Output Object, which have a status code and response data, data should</span></figcaption><code class="hljs ClientReponse```:">be in json or dict which is easy to handle 
+
+
+A http client is implement based on python &#96;&#96;&#96;requests&#96;&#96;&#96; lib:
+
+&#96;&#96;&#96;python
+http_methods &#x3D; &#123;
+
+    &quot;get&quot;: requests.get,
+    &quot;post&quot;: requests.post,
+    &quot;delete&quot;: requests.delete,
+    &quot;put&quot;: requests.put,
+    &quot;option&quot;: requests.options
+&#125;
+
+class HttpClient(Client):
+    req_url &#x3D; &quot;&quot;
+    domain &#x3D; &quot;&quot;
+    headers &#x3D; &#123;
+        &quot;accept&quot;: &quot;application&#x2F;json&quot;,
+        &quot;content-type&quot;: &quot;application&#x2F;json&quot;
+    &#125;
+    req_body &#x3D; &#123;&#125;  ## make sure the some variables with default values
+    query_params &#x3D; []
+    method &#x3D; &quot;post&quot;
+
+    def __init__(self, params, env):
+        super().__init__(params, env)
+
+    def invoke(self):
+        real_req_url &#x3D; self.__build_request_url()
+        self.__build_header()
+        self.__build_body()
+        http_method &#x3D; http_methods.get(self.method.lower(), requests.get)
+        response &#x3D; http_method(url&#x3D;real_req_url, headers&#x3D;self.headers, data&#x3D;self.req_body)
+        return make_client_response(response)
+
+    def __build_request_url(self):
+        if self.env.get_config_by_key(self.domain) is None:
+            raise ClientException(&quot;domain name should be set in environment or config file&quot;)
+        else:
+            url &#x3D; self.env.get_config_by_key(self.domain)
+
+        real_req_url &#x3D; url + self.__make_request_path() + self.__make_query_url()
+        return real_req_url
+
+    def __build_header(self):
+        if self.params.get(&quot;headers&quot;, &quot;&quot;) !&#x3D; &quot;&quot;:
+            for h_name, h_value in self.params.get(&quot;headers&quot;).items():
+                self.headers.update(&#123;h_name: h_value&#125;)
+
+    def __make_request_path(self):
+        self.req_url &#x3D; self.req_url.format(**self.params)
+        return self.req_url
+
+    ## todo: set value in a dict,use path
+    def __build_body(self):
+        for param_name, param_value in self.params.items():
+            kv_util.set_value(self.req_body, param_name, param_value)
+
+    def __make_query_url(self):
+        query_url &#x3D; &quot;&quot;
+        if len(self.query_params) &gt; 0:
+            query_url &#x3D; query_url + &quot;?&quot;
+        # query_temp &#x3D;&quot;%s&#x3D;%s&amp;&quot;
+        for query_param in self.query_params:
+            if self.params.get(query_param, &quot;&quot;) !&#x3D; &quot;&quot;:
+                query_url &#x3D; query_url + query_param + &quot;&#x3D;&quot; + self.params.get(query_param, &quot;&quot;) + &quot;&amp;&quot;
+        return query_url
+</code></pre>
+
+<p>Don’t invent any new thing, just use <a target="_blank" rel="noopener" href="http://docs.python-requests.org/zh_CN/latest/user/quickstart.html">requests</a></p>
+<h2 id="Extractor"><a href="#Extractor" class="headerlink" title="Extractor"></a>Extractor</h2><p> First of all, why I need an extractor?<br> The extractor is used to get a value from a json or dict by an expression like jsonpath.<br> So that we can leverage this tiny tool to get any value in response.</p>
+<p> The demo:</p>
+ <pre><code class="hljs python">simple_dict_json = &#123;
+    <span class="hljs-string">&quot;characters&quot;</span>: &#123;
+        <span class="hljs-string">&quot;Lonestar&quot;</span>: &#123;
+            <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">55923</span>,
+            <span class="hljs-string">&quot;role&quot;</span>: <span class="hljs-string">&quot;renegade&quot;</span>,
+            <span class="hljs-string">&quot;items&quot;</span>: [
+                <span class="hljs-string">&quot;space winnebago&quot;</span>,
+                <span class="hljs-string">&quot;leather jacket&quot;</span>
+            ]
+        &#125;,
+        <span class="hljs-string">&quot;Barfolomew&quot;</span>: &#123;
+            <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">55924</span>,
+            <span class="hljs-string">&quot;role&quot;</span>: <span class="hljs-string">&quot;mawg&quot;</span>,
+            <span class="hljs-string">&quot;items&quot;</span>: [
+                <span class="hljs-string">&quot;peanut butter jar&quot;</span>,
+                <span class="hljs-string">&quot;waggy tail&quot;</span>
+            ]
+        &#125;,
+        <span class="hljs-string">&quot;Dark Helmet&quot;</span>: &#123;
+            <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">99999</span>,
+            <span class="hljs-string">&quot;role&quot;</span>: <span class="hljs-string">&quot;Good is dumb&quot;</span>,
+            <span class="hljs-string">&quot;items&quot;</span>: [
+                <span class="hljs-string">&quot;Shwartz&quot;</span>,
+                <span class="hljs-string">&quot;helmet&quot;</span>
+            ]
+        &#125;,
+        <span class="hljs-string">&quot;Skroob&quot;</span>: &#123;
+            <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">12345</span>,
+            <span class="hljs-string">&quot;role&quot;</span>: <span class="hljs-string">&quot;Spaceballs CEO&quot;</span>,
+            <span class="hljs-string">&quot;items&quot;</span>: [
+                <span class="hljs-string">&quot;luggage&quot;</span>
+            ]
+        &#125;
+    &#125;
+&#125;
+
+<span class="hljs-comment"># encoding: utf-8</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestDataExtractor</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_list_get_value_by_exp</span>(<span class="hljs-params">self</span>):</span>
+        result = data_extractor.get_value_by_exp(simple_dict_json, <span class="hljs-string">&quot;characters&quot;</span>)
+        <span class="hljs-keyword">assert</span> len(result) &gt;= <span class="hljs-number">1</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_get_value_by_exp</span>(<span class="hljs-params">self</span>):</span>
+        result = data_extractor.get_value_by_exp(simple_dict_json, <span class="hljs-string">&quot;characters.Lonestar.items[0]&quot;</span>)
+        <span class="hljs-keyword">assert</span> result == <span class="hljs-string">&quot;space winnebago&quot;</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_get_value_by_exp_not_exist</span>(<span class="hljs-params">self</span>):</span>
+        result = data_extractor.get_value_by_exp(simple_dict_json, <span class="hljs-string">&quot;characters.Lonestar323.items[0]&quot;</span>)
+        <span class="hljs-keyword">assert</span> result == <span class="hljs-string">&quot;space winnebago&quot;</span></code></pre>
+
+<p>just give a path expression, then get the value without going to a json level by level.</p>
+<p>Don’t invent new thing:  the implementation is relied on following lib:</p>
+<ul>
+<li>jmespath</li>
+<li>dictor</li>
+</ul>
+<h2 id="Validator"><a href="#Validator" class="headerlink" title="Validator"></a>Validator</h2><p>Validator is used to validate if an actually result meets the expected result.</p>
+<p>Also, refer to the assertPy, I did a function to validate result:</p>
+<p>The Demo: </p>
+<pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestValidator</span>():</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_demos</span>(<span class="hljs-params">self</span>):</span>
+        result = validator.validate(<span class="hljs-string">&quot;value&quot;</span>,<span class="hljs-string">&quot;is_equal_to test&quot;</span>)
+        <span class="hljs-keyword">assert</span> result[<span class="hljs-number">0</span>],<span class="hljs-string">&quot;fail&quot;</span>
+        print(str(result[<span class="hljs-number">1</span>]))</code></pre>
+
+<h2 id="Test-Case"><a href="#Test-Case" class="headerlink" title="Test Case"></a>Test Case</h2><p>Test Case is to connect all these things to feed into Integration Runner</p>
+<p>The Basic Schema is :</p>
+<pre><code class="hljs json"> &#123;
+    <span class="hljs-attr">&quot;test_cases&quot;</span>: [&#123;
+        <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;tc description&quot;</span>,
+        <span class="hljs-attr">&quot;tc_id&quot;</span>: <span class="hljs-string">&quot;testCaseId&quot;</span>,
+        <span class="hljs-attr">&quot;steps&quot;</span>: [
+            &#123;
+                <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;http get api&quot;</span>,
+                <span class="hljs-attr">&quot;precondition&quot;</span>: &#123;&#125;,
+                <span class="hljs-attr">&quot;service&quot;</span>: HttpBinGet,
+                <span class="hljs-attr">&quot;params&quot;</span>: &#123;&#125;,
+                <span class="hljs-attr">&quot;post_action&quot;</span>: &#123;<span class="hljs-attr">&quot;url&quot;</span>: <span class="hljs-string">&quot;url&quot;</span>, <span class="hljs-attr">&quot;args&quot;</span>: <span class="hljs-string">&quot;args&quot;</span>&#125;,
+                <span class="hljs-attr">&quot;verification&quot;</span>: &#123;<span class="hljs-attr">&quot;url&quot;</span>: <span class="hljs-string">&quot;is_equal_to http://httpbin.org&quot;</span>&#125;
+            &#125;,
+            &#123;
+                <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;http post api&quot;</span>,
+                <span class="hljs-attr">&quot;precondition&quot;</span>: &#123;&#125;,
+                <span class="hljs-attr">&quot;service&quot;</span>: HttpBinPOST,
+                <span class="hljs-attr">&quot;params&quot;</span>: &#123;<span class="hljs-attr">&quot;url&quot;</span>: <span class="hljs-string">&quot;&#123;&#123;args&#125;&#125;&quot;</span>&#125;,
+                <span class="hljs-attr">&quot;post_action&quot;</span>: &#123;&#125;,
+                <span class="hljs-attr">&quot;verification&quot;</span>: &#123;<span class="hljs-attr">&quot;url&quot;</span>: <span class="hljs-string">&quot;is_equal_to http://httpbin.org&quot;</span>, <span class="hljs-attr">&quot;json&quot;</span>: <span class="hljs-string">&quot;is_none&quot;</span>&#125;
+            &#125;
+        ]
+    &#125;]
+&#125;</code></pre>
+
+<p>The schema is easy to understand. The <code>service</code> is for a Python Object, here<br>HttpBinGet is an api for call HttpBinGet service, and the service is also easy to<br>implement.</p>
+<pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HttpBinGet</span>(<span class="hljs-params">HttpClient</span>):</span>
+    req_url = <span class="hljs-string">&quot;/get&quot;</span>
+    domain = <span class="hljs-string">&quot;domain&quot;</span>
+    headers = &#123;
+        <span class="hljs-string">&quot;accept&quot;</span>: <span class="hljs-string">&quot;application/json&quot;</span>,
+        <span class="hljs-string">&quot;content-type&quot;</span>: <span class="hljs-string">&quot;application/json&quot;</span>
+    &#125;
+    req_body = &#123;&#125;  <span class="hljs-comment">## make sure the some variables with default values</span>
+    query_params = []
+    method = <span class="hljs-string">&quot;GET&quot;</span></code></pre>
+
+<h2 id="Context"><a href="#Context" class="headerlink" title="Context"></a>Context</h2><p>Context is used for store and calculate data. It will be used in executor<br>in process pre-condition and post action to handler.</p>
+<p>What data context stored in key-value manner, for example:</p>
+<p>in test case data:</p>
+<pre><code class="hljs python"><span class="hljs-string">&quot;post_action&quot;</span>: &#123;<span class="hljs-string">&quot;url1&quot;</span>: <span class="hljs-string">&quot;url&quot;</span>, <span class="hljs-string">&quot;args1&quot;</span>: <span class="hljs-string">&quot;args&quot;</span>&#125;</code></pre>
+
+<p>the post action processor will put url1 as key, the value is the value extracted<br>by the path “url” from response</p>
+<p>and also, the context will used to render data in process pre-condition,<br>because some input data is in generated in runtime:</p>
+<pre><code class="hljs python"><span class="hljs-string">&quot;params&quot;</span>: &#123;<span class="hljs-string">&quot;url&quot;</span>: <span class="hljs-string">&quot;&#123;&#123;args&#125;&#125;&quot;</span>&#125;</code></pre>
+ will be replaced by a value which is from response before. Use python template lib
+<p>jinja2 can achieve it.</p>
+<h2 id="Revisit-Executor"><a href="#Revisit-Executor" class="headerlink" title="Revisit Executor"></a>Revisit Executor</h2><p>Now every tiny thing is ready for Executor. And everything is ready.</p>
+<p>For Detail please refer the demo.</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/productivity/">productivity</a>
+                    
+                      <a class="hover-with-bg" href="/tags/real/">real</a>
+                    
+                      <a class="hover-with-bg" href="/tags/think-different/">think-different</a>
+                    
+                      <a class="hover-with-bg" href="/tags/API-Testing/">API Testing</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/08/07/tips/1-Junit5CaseTestTemplate/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Xmind,Test Cases,and Allure templates for TDD</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/07/28/tips/api-testing/1-Demo-TestCase/">
+                        <span class="hidden-mobile">Integration-Runner Test Case Demo</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

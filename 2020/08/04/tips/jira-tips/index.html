@@ -1,0 +1,445 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="allround tester">
+  <meta name="author" content="qmeta">
+  <meta name="keywords" content="">
+  <title>JIRA Fields 说明 - Learning Testing/QA in Hardway</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"qdriven.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Practising</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JIRA Fields 说明">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-08-04 09:17" pubdate>
+        2020年8月4日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      15
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JIRA Fields 说明</h1>
+            
+            <div class="markdown-body">
+              <p>JIRA可以导出的字段的说明</p>
+<a id="more"></a>
+
+<p>JIRA可以导出的字段|中文名|字段说明|字段样例<br>|——-|——-|—-|—-|<br>Summary|概要|一句话描述问题|100字符以内的文本<br>Issue key|问题号|用于识别任务的唯一编号。可通过搜索问题号快速跳转至问题详情页面<br>Issue id|问题ID|用于系统表结构关联，用户无需关注|43021<br>Parent id|父问题ID|用于系统表结构关联，用户无需关注|38524<br>Issue Type|问题类型|标识问题的类型|史诗；任务；子任务等<br>Status|状态|标识问题的状态。可参考JIRA中的问题状态待办，进行中，开发中，测试，完成等<br>Project key|项目关键字|项目的唯一识别标识符。项目中的问题号会以累加的数列标识在关键字后面。例如|TS-1，TS-2<br>Project name|项目名称|项目名称，在创建项目时必填。项目管理员可随时修改项目名称<br>Project type|项目类型|项目类型分两种，software|或|business。项目在创建之初会通过选择的类型提供不同的创建模板software|或|business<br>Project lead|项目负责人|项目的负责人。其不一定是项目参与者或管理员人员名称<br>Project description|项目描述|项目名称，在创建项目时选填。项目管理员可随时修改项目描述可带特殊字符的文本，支持markup<br>Project url|项目URL链接|在项目链接板块选择添加的网页链接|网页链接<br>Priority|优先级|P1，P2，P3<br>Resolution|解决结果|当问题状态流转至最终阶段时系统填写的字段。系统通过此值来判断问题是否完成完成；未解决<br>Assignee|经办人|当前问题的负责人，由其负责该任务的完成人员名称<br>Reporter|报告人|当前问题的发起人，该角色关注此问题的进展人员名称<br>Creator|创建人|当前问题的创建者，操作创建的人，不一定是报告人或经办人人员名称<br>Created|创建时间|问题被创建时的时间|精确到分钟的时间戳<br>Updated|更新时间|问题被最近一次更新时的时间|精确到分钟的时间戳<br>Last Viewed|上次浏览时间|问题被最近一次浏览时的时间|精确到分钟的时间戳<br>Resolved|解决时间|仅当“解决结果”被赋值时由系统自动更新精确到分钟的时间戳<br>Fix Version/s|修复的版本|将发布此问题的版本号|文本|例|DalmoreX|v1.2<br>Affected Version/s|影响的版本|此问题造成影响的版本号，多用于故障类的问题文本|例|x|v1.2<br>Components|模块|同一条记录可含有多个值|JIRA中的4个字段<br>Due Date|到期日|当前问题需要完成的截止日期|精确到分钟的时间戳<br>Log Work|工作日志|同一条记录可含有多个值|精确到分钟的记录时间；记录人；记录时长（秒）<br>OriginalEstimate|初始预估|记录一个问题的计划工作时长。参考时间记录3600（秒）<br>RemainingEstimate|剩余估算|记录一个问题的剩余工作时长。参考时间记录1080（秒）<br>TimeSpent|时间消耗|记录一个问题的耗费工作时长。参考时间记录360（秒）<br>WorkRatio|未明确|整数百分比例|85%<br>SecurityLevel|安全等级|未明确<br>Outwardissue|link|外部连接问题|基于连接类型，同一条记录可含有多个值<br>Attachment|附件|同一条记录可含有多个值<br>Custom field|(Baseline|end|date)|自定义字段|记录一个问题的计划结束时间基线。第三方插件SoftwarePlant引入的字段，用于BigPicture,|BigGantt等插件精确到分钟的时间戳<br>Custom field|(Baseline|start|date)|自定义字段|记录一个问题的计划开始时间基线。第三方插件SoftwarePlant引入的字段，用于BigPicture,|BigGantt等插件精确到分钟的时间戳<br>Custom field|(End|date)|自定义字段|记录一个问题的计划结束时间。参考时间记录第三方插件SoftwarePlant引入的字段，用于BigPicture,|BigGantt等插件精确到分钟的时间戳<br>Custom field|(Epic状态)|自定义字段|表示史诗的状态，系统通过此值来判断史诗是否完成待办，进行中，完成<br>Custom field|(Epic颜色)|自定义字段|记录该史诗在史诗栏位中所使用的颜色<br>Custom field|(Progress)|自定义字段|第三方插件SoftwarePlant引入的字段，用于BigPicture,|BigGantt等插件<br>Custom field|(Severity)|严重程度|表示此问题的严重程度。S1为最高|S1，S2，S3<br>Custom field|(Start|date)|自定义字段|记录一个问题的计划开始时间。参考时间记录第三方插件SoftwarePlant引入的字段，用于BigPicture,|BigGantt等插件精确到分钟的时间戳<br>Custom field|(Story|Point)|自定义字段|记录一个问题故事点估算值|任意数值，例|1，2，3，5，8，0.5|等<br>Custom field|(史诗名称)|自定义字段|史诗类型问题专用，一句话描述史诗问题包括项目创建、项目查询、基础信息、资源管理、项目角色及权限配置等<br>Custom field|(史诗链接)|自定义字段|史诗类型问题专用，概括史诗，用于史诗栏内显示“项目管理”<br>Custom field|(等级)|自定义字段|未明确|0|i0019d:zkvy0hyw9c<br>Comment|备注|同一条记录可含有多个值|可带特殊字符的文本，支持markup</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/daily-tips/">daily-tips</a>
+                    
+                      <a class="hover-with-bg" href="/tags/jira/">jira</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/08/04/tips/git-tips-2/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">修改Git提交人</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/07/30/tools/nginx-runner/">
+                        <span class="hidden-mobile">测试日志2020-5 前端部署 NGINX Conf文件自动配置</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

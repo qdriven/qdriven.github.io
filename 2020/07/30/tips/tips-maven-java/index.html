@@ -1,0 +1,576 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="allround tester">
+  <meta name="author" content="qmeta">
+  <meta name="keywords" content="">
+  <title>测试日志2020-1 MAVEN 创建项目JAVA项目 - Learning Testing/QA in Hardway</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"qdriven.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Practising</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="测试日志2020-1 MAVEN 创建项目JAVA项目">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-07-30 12:12" pubdate>
+        2020年7月30日 中午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      29
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">测试日志2020-1 MAVEN 创建项目JAVA项目</h1>
+            
+            <div class="markdown-body">
+              <h2 id="MAVEN-创建项目JAVA项目"><a href="#MAVEN-创建项目JAVA项目" class="headerlink" title="MAVEN 创建项目JAVA项目"></a>MAVEN 创建项目JAVA项目</h2><p>MAVEN是开发过程中常用的一个管理软件项目代码的工具，这里开始一个简单系列的介绍，给测试同学介绍MAVEN的使用，<br>以便更好的了解开发过程，以及版本，文档管理的方式.</p>
+<a id="more"></a>
+<h2 id="1-1-什么是MAVEN"><a href="#1-1-什么是MAVEN" class="headerlink" title="1.1. 什么是MAVEN"></a>1.1. 什么是MAVEN</h2><p>在理解MAVEN之前首先先要了解一个JAVA项目有哪些内容组成.<br>通常我们看到的一个JAVA的后台服务从代码层面上简单理解主要有两类：</p>
+<ol>
+<li>自己写的代码</li>
+<li>第三方写的代码，在自己项目里面做引用</li>
+</ol>
+<p>由于Java历史悠久，因此沉淀和很多第三方的代码，而现实的项目不可能每个项目从头开始<br>写代码，必然站在巨人的肩膀上来实现自己的项目，那么就一定会去使用第三方的代码.<br>使用第三方代码越多，管理起来就越麻烦，这种麻烦直接会造成自己项目的编译，打包的麻烦.<br>这样MAVEN就出现了.</p>
+<p>MAVEN就是为了解决项目中出现的这些问题，<a target="_blank" rel="noopener" href="https://maven.apache.org/">MAVEN</a>官方对自己的定位:</p>
+<pre><code class="hljs vbnet">Apache Maven <span class="hljs-keyword">is</span> a software project management <span class="hljs-keyword">and</span> comprehension tool. Based <span class="hljs-keyword">on</span> the concept <span class="hljs-keyword">of</span> a project <span class="hljs-built_in">object</span> model (POM), Maven can manage a project<span class="hljs-comment">&#x27;s build, reporting and documentation </span>
+<span class="hljs-keyword">from</span> a central piece <span class="hljs-keyword">of</span> information.</code></pre>
+
+<p>MAVEN的功能：</p>
+<pre><code class="hljs sql">Feature Summary
+The following are the key features of Maven in a nutshell:
+
+1. Simple project setup that follows best practices - get a new project or module started in seconds
+2. Consistent usage across all projects - means no ramp up time for new developers coming onto a project
+3. Superior dependency management including automatic updating, dependency closures (also known as transitive dependencies)
+4. Able to easily work <span class="hljs-keyword">with</span> multiple projects <span class="hljs-keyword">at</span> the same <span class="hljs-built_in">time</span>
+<span class="hljs-number">5.</span> A <span class="hljs-keyword">large</span> <span class="hljs-keyword">and</span> growing repository <span class="hljs-keyword">of</span> libraries <span class="hljs-keyword">and</span> metadata <span class="hljs-keyword">to</span> <span class="hljs-keyword">use</span> <span class="hljs-keyword">out</span> <span class="hljs-keyword">of</span> the box, <span class="hljs-keyword">and</span> arrangements <span class="hljs-keyword">in</span> place <span class="hljs-keyword">with</span> the largest <span class="hljs-keyword">Open</span> <span class="hljs-keyword">Source</span> projects <span class="hljs-keyword">for</span> <span class="hljs-built_in">real</span>-<span class="hljs-built_in">time</span> <span class="hljs-keyword">availability</span> <span class="hljs-keyword">of</span> their latest releases
+<span class="hljs-number">6.</span> Extensible, <span class="hljs-keyword">with</span> the ability <span class="hljs-keyword">to</span> easily write plugins <span class="hljs-keyword">in</span> <span class="hljs-keyword">Java</span> <span class="hljs-keyword">or</span> scripting languages
+<span class="hljs-number">7.</span> Instant <span class="hljs-keyword">access</span> <span class="hljs-keyword">to</span> <span class="hljs-keyword">new</span> features <span class="hljs-keyword">with</span> <span class="hljs-keyword">little</span> <span class="hljs-keyword">or</span> <span class="hljs-keyword">no</span> extra configuration
+<span class="hljs-number">8.</span> Ant tasks <span class="hljs-keyword">for</span> dependency <span class="hljs-keyword">management</span> <span class="hljs-keyword">and</span> deployment outside <span class="hljs-keyword">of</span> Maven
+<span class="hljs-number">9.</span> <span class="hljs-keyword">Model</span> based builds: Maven <span class="hljs-keyword">is</span> able <span class="hljs-keyword">to</span> <span class="hljs-keyword">build</span> <span class="hljs-keyword">any</span> <span class="hljs-built_in">number</span> <span class="hljs-keyword">of</span> projects <span class="hljs-keyword">into</span> predefined <span class="hljs-keyword">output</span> types such <span class="hljs-keyword">as</span> a JAR, WAR, <span class="hljs-keyword">or</span> distribution based <span class="hljs-keyword">on</span> metadata about the <span class="hljs-keyword">project</span>, <span class="hljs-keyword">without</span> the need <span class="hljs-keyword">to</span> <span class="hljs-keyword">do</span> <span class="hljs-keyword">any</span> scripting <span class="hljs-keyword">in</span> most cases.
+<span class="hljs-number">10.</span> Coherent site <span class="hljs-keyword">of</span> <span class="hljs-keyword">project</span> information: <span class="hljs-keyword">Using</span> the same metadata <span class="hljs-keyword">as</span> <span class="hljs-keyword">for</span> the <span class="hljs-keyword">build</span> process, Maven <span class="hljs-keyword">is</span> able <span class="hljs-keyword">to</span> generate a web site <span class="hljs-keyword">or</span> PDF <span class="hljs-keyword">including</span> <span class="hljs-keyword">any</span> documentation you care <span class="hljs-keyword">to</span> <span class="hljs-keyword">add</span>, <span class="hljs-keyword">and</span> adds <span class="hljs-keyword">to</span> that standard reports about the state <span class="hljs-keyword">of</span> development <span class="hljs-keyword">of</span> the project. Examples <span class="hljs-keyword">of</span> this information can be seen <span class="hljs-keyword">at</span> the bottom <span class="hljs-keyword">of</span> the <span class="hljs-keyword">left</span>-hand navigation <span class="hljs-keyword">of</span> this site <span class="hljs-keyword">under</span> the <span class="hljs-string">&quot;Project Information&quot;</span> <span class="hljs-keyword">and</span> <span class="hljs-string">&quot;Project Reports&quot;</span> submenus.
+<span class="hljs-number">11.</span> <span class="hljs-keyword">Release</span> <span class="hljs-keyword">management</span> <span class="hljs-keyword">and</span> distribution publication: <span class="hljs-keyword">Without</span> much additional configuration, Maven will integrate <span class="hljs-keyword">with</span> your <span class="hljs-keyword">source</span> control <span class="hljs-keyword">system</span> (such <span class="hljs-keyword">as</span> Subversion <span class="hljs-keyword">or</span> Git) <span class="hljs-keyword">and</span> manage the <span class="hljs-keyword">release</span> <span class="hljs-keyword">of</span> a <span class="hljs-keyword">project</span> based <span class="hljs-keyword">on</span> a certain tag. It can also publish this <span class="hljs-keyword">to</span> a distribution location <span class="hljs-keyword">for</span> <span class="hljs-keyword">use</span> <span class="hljs-keyword">by</span> other projects. Maven <span class="hljs-keyword">is</span> able <span class="hljs-keyword">to</span> publish individual outputs such <span class="hljs-keyword">as</span> a JAR, an <span class="hljs-keyword">archive</span> <span class="hljs-keyword">including</span> other dependencies <span class="hljs-keyword">and</span> documentation, <span class="hljs-keyword">or</span> <span class="hljs-keyword">as</span> a <span class="hljs-keyword">source</span> distribution.
+<span class="hljs-number">12.</span> Dependency <span class="hljs-keyword">management</span>: Maven encourages the <span class="hljs-keyword">use</span> <span class="hljs-keyword">of</span> a central repository <span class="hljs-keyword">of</span> JARs <span class="hljs-keyword">and</span> other dependencies. Maven comes <span class="hljs-keyword">with</span> a mechanism that your <span class="hljs-keyword">project</span><span class="hljs-string">&#x27;s clients can use to download any JARs required for building your project from a central JAR repository much like Perl&#x27;</span>s CPAN. This allows <span class="hljs-keyword">users</span> <span class="hljs-keyword">of</span> Maven <span class="hljs-keyword">to</span> <span class="hljs-keyword">reuse</span> JARs across projects <span class="hljs-keyword">and</span> encourages communication <span class="hljs-keyword">between</span> projects <span class="hljs-keyword">to</span> ensure that backward <span class="hljs-keyword">compatibility</span> issues <span class="hljs-keyword">are</span> dealt with.</code></pre>
+
+<h2 id="1-2-MAVEN的常用方法"><a href="#1-2-MAVEN的常用方法" class="headerlink" title="1.2. MAVEN的常用方法"></a>1.2. MAVEN的常用方法</h2><ol>
+<li>创建多个模块的MAVEN项目</li>
+<li>如果给JAVA项目打包</li>
+</ol>
+<h2 id="1-3-创建多个模块的MAVEN项目"><a href="#1-3-创建多个模块的MAVEN项目" class="headerlink" title="1.3. 创建多个模块的MAVEN项目"></a>1.3. 创建多个模块的MAVEN项目</h2><p>如何创建MAVEN多个模块的项目,大概分成如下几个步骤:</p>
+<ol>
+<li>创建MAVEN 父项目</li>
+<li>创建MAVEN 子项目(module)</li>
+</ol>
+<h3 id="1-3-1-创建MAVEN-父项目"><a href="#1-3-1-创建MAVEN-父项目" class="headerlink" title="1.3.1. 创建MAVEN 父项目"></a>1.3.1. 创建MAVEN 父项目</h3><ol>
+<li>使用IntelliJ IDEA创建MAVEN项目,这个时候能看到项目自动生成了如下的文件:<pre><code class="hljs crmsh">├── README.md
+├── multiple-modules.iml
+├── pom.xml
+└── src
+ ├── main
+ │   ├── java
+ │   └── resources
+ └── test
+     └── java
+</code></pre>
+
+</li>
+</ol>
+<p>检查MAVEN的<code>pom.xml</code>文件:</p>
+<pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">project</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span></span>
+<span class="hljs-tag">         <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span>
+<span class="hljs-tag">         <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">modelVersion</span>&gt;</span>4.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">modelVersion</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>io.qmeta.dirthyhands<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>multiple-modules<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.0-SNAPSHOT<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+
+<span class="hljs-tag">&lt;/<span class="hljs-name">project</span>&gt;</span></code></pre>
+
+<p>可以清楚的看到这个项目的定义(关于POM的定义后续会再做介绍).<br>项目建立成功了，那么我们先试试打包可不可以.MAVEN如何打包，使用如下命令就可以:</p>
+<pre><code class="hljs sh">mvn clean package</code></pre>
+<p>命令执行完成后，可以看到一个有趣的内容，就是项目中新生成了一个目录target：</p>
+<pre><code class="hljs sh">└── target
+    ├── classes
+    ├── maven-archiver
+    │   └── pom.properties
+    ├── maven-status
+    │   └── maven-compiler-plugin
+    │       ├── compile
+    │       │   └── default-compile
+    │       │       └── inputFiles.lst
+    │       └── testCompile
+    │           └── default-testCompile
+    │               └── inputFiles.lst
+    └── multiple-modules-1.0-SNAPSHOT.jar
+</code></pre>
+<p>那么target目录是用来做什么的呢？这个目录实际上是JAVA编译完成后的文件，同时由于我们做了打包(package),<br>我们可以看到这个里面有个文件<strong>multiple-modules-1.0-SNAPSHOT.jar</strong>, 这个就是项目打包出来的文件了.</p>
+<p>到这里一个最简单的MAVEN项目建立好了.</p>
+<h2 id="1-4-创建多个模块的MAVEN项目"><a href="#1-4-创建多个模块的MAVEN项目" class="headerlink" title="1.4. 创建多个模块的MAVEN项目"></a>1.4. 创建多个模块的MAVEN项目</h2><p>现实中一个项目有很多的模块组成，代码也一般按照模块来分开管理，因此我们试试创建多个模块的项目.</p>
+<ol>
+<li>在刚才创建的项目中，选中项目，创建模块java11-module</li>
+<li>我们通过查看文件来说明项目情况,新增的module和新建项目几乎一样的结构，但是检查POM文件，<br>文件结构:<pre><code class="hljs crmsh">├── java11-module
+│   ├── pom.xml
+│   └── src
+│       ├── main
+│       │   ├── java
+│       │   └── resources
+│       └── test
+│           └── java
+├── multiple-modules.iml
+├── pom.xml
+</code></pre>
+java11-module pom.xml,可以看到这个里面有个parent,这个parent项目就是刚才建立的父项目<br>&lt;!–hexoPostRenderEscape:<pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">project</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;<a target="_blank" rel="noopener" href="http://maven.apache.org/POM/4.0.0">http://maven.apache.org/POM/4.0.0</a>&quot;</span></span><br><span class="hljs-tag">         <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;<a target="_blank" rel="noopener" href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>&quot;</span></span><br><span class="hljs-tag">         <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;<a target="_blank" rel="noopener" href="http://maven.apache.org/POM/4.0.0">http://maven.apache.org/POM/4.0.0</a> <a target="_blank" rel="noopener" href="http://maven.apache.org/xsd/maven-4.0.0.xsd">http://maven.apache.org/xsd/maven-4.0.0.xsd</a>&quot;</span>&gt;</span><br> <span class="hljs-tag">&lt;<span class="hljs-name">parent</span>&gt;</span><pre><code> &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;multiple-modules&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;
+ &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;io.qmeta.dirthyhands&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;
+ &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;version&lt;/span&gt;&amp;gt;&lt;/span&gt;1.0-SNAPSHOT&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;version&lt;/span&gt;&amp;gt;&lt;/span&gt;</code></pre>
+ <span class="hljs-tag">&lt;/<span class="hljs-name">parent</span>&gt;</span><br> <span class="hljs-tag">&lt;<span class="hljs-name">modelVersion</span>&gt;</span>4.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">modelVersion</span>&gt;</span><br> <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>java11-module<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></li>
+</ol>
+<p><span class="hljs-tag">&lt;/<span class="hljs-name">project</span>&gt;</span></code></pre>:hexoPostRenderEscape–&gt;<br>检查父项目POM文件: 新加了一个module的项，看到这里是不是大家都理解了？</p>
+<pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">project</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span></span>
+<span class="hljs-tag">         <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span>
+<span class="hljs-tag">         <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">modelVersion</span>&gt;</span>4.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">modelVersion</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>io.qmeta.dirthyhands<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>multiple-modules<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">packaging</span>&gt;</span>pom<span class="hljs-tag">&lt;/<span class="hljs-name">packaging</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.0-SNAPSHOT<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">modules</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">module</span>&gt;</span>java11-module<span class="hljs-tag">&lt;/<span class="hljs-name">module</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">modules</span>&gt;</span>
+
+
+<span class="hljs-tag">&lt;/<span class="hljs-name">project</span>&gt;</span></code></pre>
+
+<p>那么如何给这个项目打包呢，其实一样:</p>
+<pre><code class="hljs actionscript">mvn clean <span class="hljs-class"><span class="hljs-keyword">package</span></span></code></pre>
+
+<h2 id="1-5-MAVEN-小结"><a href="#1-5-MAVEN-小结" class="headerlink" title="1.5. MAVEN 小结"></a>1.5. MAVEN 小结</h2><p>这里简单介绍了MAVEN项目创建的方式,和如何打包使用. 这是最简单的MAVEN的使用，<br>后续会慢慢加入新的MAVEN使用的高级一点的方法. Stay tuned!</p>
+<p>简单的代码后台留言，我会根据留言发送给需要.</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/backend/">backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/backend/tips/">tips</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/tips/">tips</a>
+                    
+                      <a class="hover-with-bg" href="/tags/java/">java</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/07/30/tips/tips-Github-Slowdown/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">测试日志2020-3 Github 访问速度缓慢解决</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/03/11/shell/2020-03-11-nginx/">
+                        <span class="hidden-mobile">devops nginx 使用tips</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

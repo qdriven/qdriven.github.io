@@ -1,156 +1,513 @@
-<!DOCTYPE HTML>
-<html>
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <title>Pythonic,What is it | Learning Testing/QA in Hardway | Just Do It</title>
-
-  
-  <meta name="author" content="qmeta">
-  
-
-  
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="allround tester">
+  <meta name="author" content="qmeta">
+  <meta name="keywords" content="">
+  <title>Pythonic,What is it - Learning Testing/QA in Hardway</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
   
 
   
-  
-  <meta name="keywords" content="python">
-  
-
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <meta property="og:title" content="Pythonic,What is it"/>
-
-  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
-
-  
-  <meta property="og:image" content="/favicon.ico"/>
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
   
 
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"qdriven.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.0.0"></head>
 
 
 <body>
-<div class="blog">
-  <div class="content">
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Practising</strong>&nbsp;</a>
 
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Learning Testing/QA in Hardway</a>
-    </h1>
-    <p class="site-description">Just Do It</p>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
   </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">主页</a></li>
-      
-        <li><a href="/archives">归档</a></li>
-      
-        <li><a href="/categories">分类</a></li>
-      
-        <li><a href="/tags">标签</a></li>
-      
-    </ul>
-  </nav>
-</header>
+</nav>
 
-    <main class="site-main posts-loop">
-    <article>
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Pythonic,What is it">
+              
+            </span>
 
+            
+              <div class="mt-3">
   
-    
-    <h3 class="article-title"><span>Pythonic,What is it</span></h3>
-    
   
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2016/05/11/python/2016-05-11-pythonic/" rel="bookmark">
-        <time class="entry-date published" datetime="2016-05-11T02:41:15.000Z">
-          2016-05-11
-        </time>
-      </a>
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2016-05-11 10:41" pubdate>
+        2016年5月11日 上午
+      </time>
     </span>
-  </div>
+  
+</div>
 
-
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      293 字
+    </span>
   
 
-  <div class="article-content">
-    <div class="entry">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
       
-        <h1 id="Pythonic-Style"><a href="#Pythonic-Style" class="headerlink" title="Pythonic Style"></a>Pythonic Style</h1><p>Pythonic 是种很有趣的风格，有些实际上python的惯用方法和特有方法。</p>
+      
+      5
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Pythonic,What is it</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Pythonic-Style"><a href="#Pythonic-Style" class="headerlink" title="Pythonic Style"></a>Pythonic Style</h1><p>Pythonic 是种很有趣的风格，有些实际上python的惯用方法和特有方法。</p>
 <h2 id="Switch-Two-variables"><a href="#Switch-Two-variables" class="headerlink" title="Switch Two variables"></a>Switch Two variables</h2><p>python 通过tuple进行pack，unpack就不需要temp变量</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a,b=b,a</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs python">a,b=b,a</code></pre>
 <p>如果其他语言需要swap的话，就需要一个temp变量，然后再置换。</p>
-<h2 id="P-VS-NP"><a href="#P-VS-NP" class="headerlink" title="P VS NP"></a>P VS NP</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># P</span></span><br><span class="line">a=<span class="number">3</span></span><br><span class="line">b=<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span>&lt;=b&lt;=a <span class="keyword">and</span> a&lt;<span class="number">10</span> <span class="comment"># return True</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## NP</span></span><br><span class="line">b&gt;=<span class="number">1</span> <span class="keyword">and</span> b&lt;=a <span class="keyword">and</span> a&lt;<span class="number">10</span> <span class="comment"># True</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="P-VS-NP"><a href="#P-VS-NP" class="headerlink" title="P VS NP"></a>P VS NP</h2><pre><code class="hljs python"><span class="hljs-comment"># P</span>
+a=<span class="hljs-number">3</span>
+b=<span class="hljs-number">1</span>
+
+<span class="hljs-number">1</span>&lt;=b&lt;=a <span class="hljs-keyword">and</span> a&lt;<span class="hljs-number">10</span> <span class="hljs-comment"># return True</span>
+
+<span class="hljs-comment">## NP</span>
+b&gt;=<span class="hljs-number">1</span> <span class="hljs-keyword">and</span> b&lt;=a <span class="hljs-keyword">and</span> a&lt;<span class="hljs-number">10</span> <span class="hljs-comment"># True</span>
+</code></pre>
 
 <p>reverse string</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reverse_str</span>(<span class="params">s</span>):</span></span><br><span class="line">  <span class="keyword">return</span> s[::<span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reverse_str</span>(<span class="params">s</span>):</span></span><br><span class="line">  t=<span class="string">&#x27;&#x27;</span></span><br><span class="line">  <span class="keyword">for</span> x <span class="keyword">in</span> xrange(len(s)<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>):</span><br><span class="line">    t+=s[x]</span><br><span class="line">  <span class="keyword">return</span> t</span><br><span class="line"></span><br><span class="line"><span class="comment"># join the strList</span></span><br><span class="line">str_list=[<span class="string">&quot;Python&quot;</span>,<span class="string">&quot;is&quot;</span>,<span class="string">&quot;good&quot;</span>]</span><br><span class="line">res=<span class="string">&#x27;,&#x27;</span>.join(str_list) <span class="comment"># pythonic</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># NP:</span></span><br><span class="line">res = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> strList:</span><br><span class="line">    res += s + <span class="string">&#x27; &#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># P</span></span><br><span class="line">numList = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]   </span><br><span class="line"></span><br><span class="line">sum = sum(numList)  <span class="comment">#sum = 15</span></span><br><span class="line">maxNum = max(numList) <span class="comment">#maxNum = 5</span></span><br><span class="line">minNum = min(numList) <span class="comment">#minNum = 1</span></span><br><span class="line"><span class="keyword">from</span> operator <span class="keyword">import</span> mul</span><br><span class="line"><span class="comment"># reduce is interesting</span></span><br><span class="line">prod = reduce(mul, numList, <span class="number">1</span>) <span class="comment">##prod = 120 默认值传1以防空列表报错</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># NP</span></span><br><span class="line">sum = <span class="number">0</span></span><br><span class="line">maxNum = -float(<span class="string">&#x27;inf&#x27;</span>)</span><br><span class="line">minNum = float(<span class="string">&#x27;inf&#x27;</span>)</span><br><span class="line">prod = <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> numList:</span><br><span class="line">    <span class="keyword">if</span> num &gt; maxNum:</span><br><span class="line">        maxNum = num</span><br><span class="line">    <span class="keyword">if</span> num &lt; minNum:</span><br><span class="line">        minNum = num</span><br><span class="line">    sum += num</span><br><span class="line">    prod *= num</span><br><span class="line"><span class="comment"># sum = 15 maxNum = 5 minNum = 1 prod = 120</span></span><br></pre></td></tr></table></figure>
+<pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reverse_str</span>(<span class="hljs-params">s</span>):</span>
+  <span class="hljs-keyword">return</span> s[::<span class="hljs-number">-1</span>]
 
-<h2 id="列表推导式"><a href="#列表推导式" class="headerlink" title="列表推导式"></a>列表推导式</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">l = [x*x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10</span>) <span class="keyword">if</span> x % <span class="number">3</span> == <span class="number">0</span>]</span><br><span class="line"><span class="comment">#l = [0, 9, 36, 81]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">##NP</span></span><br><span class="line">l = []</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    <span class="keyword">if</span> x % <span class="number">3</span> == <span class="number">0</span>:</span><br><span class="line">        l.append(x*x)</span><br><span class="line"><span class="comment">#l = [0, 9, 36, 81]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reverse_str</span>(<span class="hljs-params">s</span>):</span>
+  t=<span class="hljs-string">&#x27;&#x27;</span>
+  <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> xrange(len(s)<span class="hljs-number">-1</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">-1</span>):
+    t+=s[x]
+  <span class="hljs-keyword">return</span> t
 
-      
+<span class="hljs-comment"># join the strList</span>
+str_list=[<span class="hljs-string">&quot;Python&quot;</span>,<span class="hljs-string">&quot;is&quot;</span>,<span class="hljs-string">&quot;good&quot;</span>]
+res=<span class="hljs-string">&#x27;,&#x27;</span>.join(str_list) <span class="hljs-comment"># pythonic</span>
+
+<span class="hljs-comment"># NP:</span>
+res = <span class="hljs-string">&#x27;&#x27;</span>
+<span class="hljs-keyword">for</span> s <span class="hljs-keyword">in</span> strList:
+    res += s + <span class="hljs-string">&#x27; &#x27;</span>
+
+<span class="hljs-comment"># P</span>
+numList = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>]   
+
+sum = sum(numList)  <span class="hljs-comment">#sum = 15</span>
+maxNum = max(numList) <span class="hljs-comment">#maxNum = 5</span>
+minNum = min(numList) <span class="hljs-comment">#minNum = 1</span>
+<span class="hljs-keyword">from</span> operator <span class="hljs-keyword">import</span> mul
+<span class="hljs-comment"># reduce is interesting</span>
+prod = reduce(mul, numList, <span class="hljs-number">1</span>) <span class="hljs-comment">##prod = 120 默认值传1以防空列表报错</span>
+
+<span class="hljs-comment"># NP</span>
+sum = <span class="hljs-number">0</span>
+maxNum = -float(<span class="hljs-string">&#x27;inf&#x27;</span>)
+minNum = float(<span class="hljs-string">&#x27;inf&#x27;</span>)
+prod = <span class="hljs-number">1</span>
+<span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> numList:
+    <span class="hljs-keyword">if</span> num &gt; maxNum:
+        maxNum = num
+    <span class="hljs-keyword">if</span> num &lt; minNum:
+        minNum = num
+    sum += num
+    prod *= num
+<span class="hljs-comment"># sum = 15 maxNum = 5 minNum = 1 prod = 120</span></code></pre>
+
+<h2 id="列表推导式"><a href="#列表推导式" class="headerlink" title="列表推导式"></a>列表推导式</h2><pre><code class="hljs python">l = [x*x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>) <span class="hljs-keyword">if</span> x % <span class="hljs-number">3</span> == <span class="hljs-number">0</span>]
+<span class="hljs-comment">#l = [0, 9, 36, 81]</span>
+
+<span class="hljs-comment">##NP</span>
+l = []
+<span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>):
+    <span class="hljs-keyword">if</span> x % <span class="hljs-number">3</span> == <span class="hljs-number">0</span>:
+        l.append(x*x)
+<span class="hljs-comment">#l = [0, 9, 36, 81]</span>
+</code></pre>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/python/">python</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/python/">python</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/06/08/tips/0-word-frequency/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Word Frequency - Use JDK Methods</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2016/04/24/tips/interview/2016-04-24-12factors/">
+                        <span class="hidden-mobile">12 factors Application</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
     </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
     
-      
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
 
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/python/">python</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/python/">python</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-  
-
-
-
-
-
-
-    </main>
-
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
-    
-    &copy; 2020 qmeta
-    
-  </p>
-</footer>
+      </div>
     
   </div>
 </div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
 </body>
 </html>

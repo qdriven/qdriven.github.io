@@ -1,93 +1,233 @@
-<!DOCTYPE HTML>
-<html>
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <title>HBase 介绍 | Learning Testing/QA in Hardway | Just Do It</title>
-
-  
-  <meta name="author" content="qmeta">
-  
-
-  
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="allround tester">
+  <meta name="author" content="qmeta">
+  <meta name="keywords" content="">
+  <title>HBase 介绍 - Learning Testing/QA in Hardway</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
   
 
   
-  
-  <meta name="keywords" content="bigdata,hbase">
-  
-
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <meta property="og:title" content="HBase 介绍"/>
-
-  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
-
-  
-  <meta property="og:image" content="/favicon.ico"/>
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
   
 
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"qdriven.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.0.0"></head>
 
 
 <body>
-<div class="blog">
-  <div class="content">
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Practising</strong>&nbsp;</a>
 
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Learning Testing/QA in Hardway</a>
-    </h1>
-    <p class="site-description">Just Do It</p>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
   </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">主页</a></li>
-      
-        <li><a href="/archives">归档</a></li>
-      
-        <li><a href="/categories">分类</a></li>
-      
-        <li><a href="/tags">标签</a></li>
-      
-    </ul>
-  </nav>
-</header>
+</nav>
 
-    <main class="site-main posts-loop">
-    <article>
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="HBase 介绍">
+              
+            </span>
 
+            
+              <div class="mt-3">
   
-    
-    <h3 class="article-title"><span>HBase 介绍</span></h3>
-    
   
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2018/11/21/tips/hbase-intro/" rel="bookmark">
-        <time class="entry-date published" datetime="2018-11-21T15:11:47.000Z">
-          2018-11-21
-        </time>
-      </a>
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-11-21 23:11" pubdate>
+        2018年11月21日 晚上
+      </time>
     </span>
-  </div>
+  
+</div>
 
-
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      843 字
+    </span>
   
 
-  <div class="article-content">
-    <div class="entry">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
       
-        <h2 id="What-is-HBASE"><a href="#What-is-HBASE" class="headerlink" title="What is HBASE"></a>What is HBASE</h2><ul>
+      
+      14
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">HBase 介绍</h1>
+            
+            <div class="markdown-body">
+              <h2 id="What-is-HBASE"><a href="#What-is-HBASE" class="headerlink" title="What is HBASE"></a>What is HBASE</h2><ul>
 <li>NoSQL: Not Only SQL</li>
 <li>Column-Oriented Database</li>
 <li>Based on Google BigTable</li>
@@ -95,52 +235,67 @@
 <li>TB/PB data and Random Access</li>
 <li>解决10条记录和1000千万记录同样的读写性能问题</li>
 </ul>
-<h2 id="RDBMS-问题"><a href="#RDBMS-问题" class="headerlink" title="RDBMS 问题"></a>RDBMS 问题</h2><p><img src="/images/db-e.jpg" alt="img"></p>
-<h2 id="HBASE-VS-MYSQL"><a href="#HBASE-VS-MYSQL" class="headerlink" title="HBASE VS MYSQL"></a>HBASE VS MYSQL</h2><p><img src="/images/habseVSmysql.jpg" alt="img"></p>
-<h2 id="Google-Big-Table"><a href="#Google-Big-Table" class="headerlink" title="Google Big Table"></a>Google Big Table</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A Bigtable is a sparse, distributed, persistent multidimensional sorted map.</span><br><span class="line">The map is indexed by a row key, column key, and a timestamp; each value in the map is an uninterpreted array of bytes.</span><br></pre></td></tr></table></figure>
+<h2 id="RDBMS-问题"><a href="#RDBMS-问题" class="headerlink" title="RDBMS 问题"></a>RDBMS 问题</h2><p><img src="/images/db-e.jpg" srcset="/img/loading.gif" alt="img"></p>
+<h2 id="HBASE-VS-MYSQL"><a href="#HBASE-VS-MYSQL" class="headerlink" title="HBASE VS MYSQL"></a>HBASE VS MYSQL</h2><p><img src="/images/habseVSmysql.jpg" srcset="/img/loading.gif" alt="img"></p>
+<h2 id="Google-Big-Table"><a href="#Google-Big-Table" class="headerlink" title="Google Big Table"></a>Google Big Table</h2><pre><code class="hljs maxima">A Bigtable <span class="hljs-built_in">is</span> a <span class="hljs-built_in">sparse</span>, distributed, persistent multidimensional sorted <span class="hljs-built_in">map</span>.
+The <span class="hljs-built_in">map</span> <span class="hljs-built_in">is</span> indexed by a <span class="hljs-built_in">row</span> <span class="hljs-built_in">key</span>, column <span class="hljs-built_in">key</span>, <span class="hljs-keyword">and</span> a timestamp; each value <span class="hljs-keyword">in</span> the <span class="hljs-built_in">map</span> <span class="hljs-built_in">is</span> an uninterpreted <span class="hljs-built_in">array</span> of bytes.</code></pre>
 
 <ul>
 <li>map: bigtable 的核心就是一个Map，key-value</li>
 <li>persistent： 持久化和其他没有任何区别</li>
 <li>distributed： 分布式文件系统(HDFS/S3/GFS)/多副本(replication)</li>
 <li>sorted: key是排序的</li>
-<li>multidimensional： 和columns有对应关系, 第一层key-value,可以认为是个row, A,B 可以认为是Column Families<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;1&quot;</span> : &#123;</span><br><span class="line">    <span class="attr">&quot;A&quot;</span> : <span class="string">&quot;x&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;B&quot;</span> : <span class="string">&quot;z&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">&quot;aaaaa&quot;</span> : &#123;</span><br><span class="line">    <span class="attr">&quot;A&quot;</span> : <span class="string">&quot;y&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;B&quot;</span> : <span class="string">&quot;w&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+<li>multidimensional： 和columns有对应关系, 第一层key-value,可以认为是个row, A,B 可以认为是Column Families<pre><code class="hljs json">&#123;
+<span class="hljs-attr">&quot;1&quot;</span> : &#123;
+  <span class="hljs-attr">&quot;A&quot;</span> : <span class="hljs-string">&quot;x&quot;</span>,
+  <span class="hljs-attr">&quot;B&quot;</span> : <span class="hljs-string">&quot;z&quot;</span>
+&#125;,
+<span class="hljs-attr">&quot;aaaaa&quot;</span> : &#123;
+  <span class="hljs-attr">&quot;A&quot;</span> : <span class="hljs-string">&quot;y&quot;</span>,
+  <span class="hljs-attr">&quot;B&quot;</span> : <span class="hljs-string">&quot;w&quot;</span>
+&#125;
+&#125;</code></pre></li>
 <li>sparse: 稀疏，字段不固定,null值不占空间</li>
 </ul>
-<h2 id="Tables-Rows-Columns-and-Cells"><a href="#Tables-Rows-Columns-and-Cells" class="headerlink" title="Tables,Rows,Columns and Cells"></a>Tables,Rows,Columns and Cells</h2><p><img src="/images/table_row_col.jpg" alt="img"></p>
-<h2 id="Region"><a href="#Region" class="headerlink" title="Region"></a>Region</h2><p>map: key-value, 根据key可以直接找到对应值,o(1),但是内存不可能无限大,怎么办?<br><img src="/images/regions.jpg" alt="img"></p>
-<h2 id="Region-Server"><a href="#Region-Server" class="headerlink" title="Region Server"></a>Region Server</h2><p><img src="/images/regserver.jpg" alt="img"></p>
+<h2 id="Tables-Rows-Columns-and-Cells"><a href="#Tables-Rows-Columns-and-Cells" class="headerlink" title="Tables,Rows,Columns and Cells"></a>Tables,Rows,Columns and Cells</h2><p><img src="/images/table_row_col.jpg" srcset="/img/loading.gif" alt="img"></p>
+<h2 id="Region"><a href="#Region" class="headerlink" title="Region"></a>Region</h2><p>map: key-value, 根据key可以直接找到对应值,o(1),但是内存不可能无限大,怎么办?<br><img src="/images/regions.jpg" srcset="/img/loading.gif" alt="img"></p>
+<h2 id="Region-Server"><a href="#Region-Server" class="headerlink" title="Region Server"></a>Region Server</h2><p><img src="/images/regserver.jpg" srcset="/img/loading.gif" alt="img"></p>
 <h2 id="Region-Region-Server"><a href="#Region-Region-Server" class="headerlink" title="Region,Region Server"></a>Region,Region Server</h2><ul>
 <li>Region 根据不同表来切分</li>
 <li>Region 放到不同的Region Server</li>
 </ul>
-<h2 id="HBASE-Column-Family"><a href="#HBASE-Column-Family" class="headerlink" title="HBASE Column Family"></a>HBASE Column Family</h2><p><img src="/images/Hbase_CF.jpg" alt="img"></p>
+<h2 id="HBASE-Column-Family"><a href="#HBASE-Column-Family" class="headerlink" title="HBASE Column Family"></a>HBASE Column Family</h2><p><img src="/images/Hbase_CF.jpg" srcset="/img/loading.gif" alt="img"></p>
 <h2 id="HBASE-column-family"><a href="#HBASE-column-family" class="headerlink" title="HBASE column family"></a>HBASE column family</h2><ul>
 <li>每个column family 存成不同的文件</li>
-<li>缓存/压缩/version<br><img src="/images/reg_hfile.jpg" alt="img"></li>
+<li>缓存/压缩/version<br><img src="/images/reg_hfile.jpg" srcset="/img/loading.gif" alt="img"></li>
 </ul>
-<h2 id="HBASE架构-1"><a href="#HBASE架构-1" class="headerlink" title="HBASE架构-1"></a>HBASE架构-1</h2><p>存储基于Haddop/HDFS:<br><img src="/images/hbase-1.jpg" alt="img"></p>
-<h2 id="HBASE架构-2"><a href="#HBASE架构-2" class="headerlink" title="HBASE架构-2"></a>HBASE架构-2</h2><p>Region Server/Region：<br><img src="/images/hbase-2.jpg" alt="img"></p>
-<h2 id="HBASE架构-3"><a href="#HBASE架构-3" class="headerlink" title="HBASE架构-3"></a>HBASE架构-3</h2><p><img src="/images/hbase-3.jpg" alt="img"></p>
+<h2 id="HBASE架构-1"><a href="#HBASE架构-1" class="headerlink" title="HBASE架构-1"></a>HBASE架构-1</h2><p>存储基于Haddop/HDFS:<br><img src="/images/hbase-1.jpg" srcset="/img/loading.gif" alt="img"></p>
+<h2 id="HBASE架构-2"><a href="#HBASE架构-2" class="headerlink" title="HBASE架构-2"></a>HBASE架构-2</h2><p>Region Server/Region：<br><img src="/images/hbase-2.jpg" srcset="/img/loading.gif" alt="img"></p>
+<h2 id="HBASE架构-3"><a href="#HBASE架构-3" class="headerlink" title="HBASE架构-3"></a>HBASE架构-3</h2><p><img src="/images/hbase-3.jpg" srcset="/img/loading.gif" alt="img"></p>
 <h2 id="HBASE架构-4"><a href="#HBASE架构-4" class="headerlink" title="HBASE架构-4"></a>HBASE架构-4</h2><ul>
-<li>zookeeper: 管理节点信息,hbase:meta信息<br><img src="/images/HBASE-4.jpg" alt="img"></li>
+<li>zookeeper: 管理节点信息,hbase:meta信息<br><img src="/images/HBASE-4.jpg" srcset="/img/loading.gif" alt="img"></li>
 </ul>
 <h2 id="HBASE架构-5"><a href="#HBASE架构-5" class="headerlink" title="HBASE架构-5"></a>HBASE架构-5</h2><ul>
-<li>HMASTER： 管理RegionServer节点，所有metadata变化的接口<br><img src="/images/HBASE-5.jpg" alt="img"></li>
+<li>HMASTER： 管理RegionServer节点，所有metadata变化的接口<br><img src="/images/HBASE-5.jpg" srcset="/img/loading.gif" alt="img"></li>
 </ul>
-<h2 id="HBASE架构-6"><a href="#HBASE架构-6" class="headerlink" title="HBASE架构-6"></a>HBASE架构-6</h2><p>客户端访问：<br><img src="/images/hbase-7.jpg" alt="img"></p>
-<h2 id="HBASE架构-7"><a href="#HBASE架构-7" class="headerlink" title="HBASE架构-7"></a>HBASE架构-7</h2><p>Region Sever 内部结构：<br><img src="/images/hbase-10.jpg" alt="img"></p>
+<h2 id="HBASE架构-6"><a href="#HBASE架构-6" class="headerlink" title="HBASE架构-6"></a>HBASE架构-6</h2><p>客户端访问：<br><img src="/images/hbase-7.jpg" srcset="/img/loading.gif" alt="img"></p>
+<h2 id="HBASE架构-7"><a href="#HBASE架构-7" class="headerlink" title="HBASE架构-7"></a>HBASE架构-7</h2><p>Region Sever 内部结构：<br><img src="/images/hbase-10.jpg" srcset="/img/loading.gif" alt="img"></p>
 <p>Regions:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Table                    (HBase table)</span><br><span class="line">    Region               (Regions for the table)</span><br><span class="line">        Store            (Store per ColumnFamily for each Region for the table)</span><br><span class="line">            MemStore     (MemStore for each Store for each Region for the table)</span><br><span class="line">            StoreFile&#x2F;HFILE    (StoreFiles for each Store for each Region for the table)</span><br><span class="line">                Block    (Blocks within a StoreFile within a Store for each Region for the table)</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs livecodeserver">Table                    (HBase table)
+    Region               (Regions <span class="hljs-keyword">for</span> <span class="hljs-keyword">the</span> table)
+        Store            (Store per ColumnFamily <span class="hljs-keyword">for</span> <span class="hljs-keyword">each</span> Region <span class="hljs-keyword">for</span> <span class="hljs-keyword">the</span> table)
+            MemStore     (MemStore <span class="hljs-keyword">for</span> <span class="hljs-keyword">each</span> Store <span class="hljs-keyword">for</span> <span class="hljs-keyword">each</span> Region <span class="hljs-keyword">for</span> <span class="hljs-keyword">the</span> table)
+            StoreFile/HFILE    (StoreFiles <span class="hljs-keyword">for</span> <span class="hljs-keyword">each</span> Store <span class="hljs-keyword">for</span> <span class="hljs-keyword">each</span> Region <span class="hljs-keyword">for</span> <span class="hljs-keyword">the</span> table)
+                Block    (Blocks <span class="hljs-keyword">within</span> <span class="hljs-keyword">a</span> StoreFile <span class="hljs-keyword">within</span> <span class="hljs-keyword">a</span> Store <span class="hljs-keyword">for</span> <span class="hljs-keyword">each</span> Region <span class="hljs-keyword">for</span> <span class="hljs-keyword">the</span> table)</code></pre>
 
-<h2 id="HBASE架构-8"><a href="#HBASE架构-8" class="headerlink" title="HBASE架构-8"></a>HBASE架构-8</h2><p>HBASE是CP系统，WAL(Write Ahead Log)<br><img src="/images/hbase-11.jpg" alt="img"><br><img src="/images/hbase_wp.jpg" alt="img"></p>
+<h2 id="HBASE架构-8"><a href="#HBASE架构-8" class="headerlink" title="HBASE架构-8"></a>HBASE架构-8</h2><p>HBASE是CP系统，WAL(Write Ahead Log)<br><img src="/images/hbase-11.jpg" srcset="/img/loading.gif" alt="img"><br><img src="/images/hbase_wp.jpg" srcset="/img/loading.gif" alt="img"></p>
 <h2 id="HBASE"><a href="#HBASE" class="headerlink" title="HBASE"></a>HBASE</h2><ul>
 <li>table,rowkey,column family</li>
 <li>Region/Region Server</li>
 <li>Store/MemStore/StoreFile/HFILE/WAL</li>
 <li>Zookeeper/HMaster</li>
 </ul>
-<p><img src="https://mapr.com/blog/in-depth-look-hbase-architecture/assets/blogimages/HBaseArchitecture-Blog-Fig3.png" alt="img"></p>
+<p><img src="https://mapr.com/blog/in-depth-look-hbase-architecture/assets/blogimages/HBaseArchitecture-Blog-Fig3.png" srcset="/img/loading.gif" alt="img"></p>
 <h2 id="HBase-CLI"><a href="#HBase-CLI" class="headerlink" title="HBase CLI"></a>HBase CLI</h2><p>Use Hbase in CLI and JAVA to learning the basic usage of hbase:</p>
 <ul>
 <li>Use Hbase in a Local Mode</li>
@@ -148,75 +303,262 @@
 </ul>
 <h2 id="HBase-Local-Mode"><a href="#HBase-Local-Mode" class="headerlink" title="HBase Local Mode"></a>HBase Local Mode</h2><p>使用Hbase的本地模式相当简单，启动hbase就可以,不需要太多额外配置。</p>
 <ul>
-<li>启动hbase<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$&#123;HBASE_HOME&#125;</span>/bin</span><br><span class="line">sh start-hbase.sh</span><br></pre></td></tr></table></figure></li>
+<li>启动hbase<pre><code class="hljs sh"><span class="hljs-built_in">cd</span> <span class="hljs-variable">$&#123;HBASE_HOME&#125;</span>/bin
+sh start-hbase.sh</code></pre></li>
 <li>使用hbase shell 访问</li>
 </ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">./hbase shell</span><br><span class="line">HBase Shell</span><br><span class="line">Use <span class="string">&quot;help&quot;</span> to get list of supported commands.</span><br><span class="line">Use <span class="string">&quot;exit&quot;</span> to quit this interactive shell.</span><br><span class="line">For Reference, please visit: http://hbase.apache.org/2.0/book.html<span class="comment">#shell</span></span><br><span class="line">Version 2.1.1, rb60a92d6864ef27295027f5961cb46f9162d7637, Fri Oct 26 19:27:03 PDT 2018</span><br><span class="line">Took 0.0336 seconds</span><br><span class="line">Ignoring executable-hooks-1.3.2 because its extensions are not built. Try: gem pristine executable-hooks --version 1.3.2</span><br><span class="line">Ignoring gem-wrappers-1.3.2 because its extensions are not built. Try: gem pristine gem-wrappers --version 1.3.2</span><br><span class="line">2.4.1 :001 &gt;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs sh">./hbase shell
+HBase Shell
+Use <span class="hljs-string">&quot;help&quot;</span> to get list of supported commands.
+Use <span class="hljs-string">&quot;exit&quot;</span> to quit this interactive shell.
+For Reference, please visit: http://hbase.apache.org/2.0/book.html<span class="hljs-comment">#shell</span>
+Version 2.1.1, rb60a92d6864ef27295027f5961cb46f9162d7637, Fri Oct 26 19:27:03 PDT 2018
+Took 0.0336 seconds
+Ignoring executable-hooks-1.3.2 because its extensions are not built. Try: gem pristine executable-hooks --version 1.3.2
+Ignoring gem-wrappers-1.3.2 because its extensions are not built. Try: gem pristine gem-wrappers --version 1.3.2
+2.4.1 :001 &gt;</code></pre>
 
 <h2 id="HBase-Basic-Commands"><a href="#HBase-Basic-Commands" class="headerlink" title="HBase Basic Commands"></a>HBase Basic Commands</h2><ul>
 <li>create table with column family</li>
 </ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create <span class="string">&#x27;test_table&#x27;</span>,<span class="string">&#x27;cf1&#x27;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="hljs sh">create <span class="hljs-string">&#x27;test_table&#x27;</span>,<span class="hljs-string">&#x27;cf1&#x27;</span></code></pre>
 
 <ul>
-<li>put data: 插入数据： put <table>,<row_key>,<a href="cf:property">cf:property</a>,<value><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">put <span class="string">&#x27;test_table&#x27;</span>,<span class="string">&#x27;row_key_1&#x27;</span>,<span class="string">&#x27;cf1:k1&#x27;</span>,<span class="string">&#x27;k1:v1&#x27;</span></span><br></pre></td></tr></table></figure>
+<li>put data: 插入数据： put <table>,<row_key>,<a href="cf:property">cf:property</a>,<value><pre><code class="hljs sh">put <span class="hljs-string">&#x27;test_table&#x27;</span>,<span class="hljs-string">&#x27;row_key_1&#x27;</span>,<span class="hljs-string">&#x27;cf1:k1&#x27;</span>,<span class="hljs-string">&#x27;k1:v1&#x27;</span></code></pre>
 同一个column family,不同数据，然后scan结果, scan的结果是cell-oriented</li>
 </ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> =&gt; [<span class="string">&quot;test_table&quot;</span>]</span><br><span class="line">2.4.1 :004 &gt; put <span class="string">&#x27;test_table&#x27;</span>,<span class="string">&#x27;row_key_1&#x27;</span>,<span class="string">&#x27;cf1:k1&#x27;</span>,<span class="string">&#x27;k1:v1&#x27;</span></span><br><span class="line">Took 0.2186 seconds</span><br><span class="line">2.4.1 :005 &gt; put <span class="string">&#x27;test_table&#x27;</span>,<span class="string">&#x27;row_key_1&#x27;</span>,<span class="string">&#x27;cf1:k2&#x27;</span>,<span class="string">&#x27;k2:v2&#x27;</span></span><br><span class="line">Took 0.0094 seconds</span><br><span class="line">2.4.1 :006 &gt; put <span class="string">&#x27;test_table&#x27;</span>,<span class="string">&#x27;row_key_1&#x27;</span>,<span class="string">&#x27;cf1:k3&#x27;</span>,<span class="string">&#x27;k3:v3&#x27;</span></span><br><span class="line">Took 0.0032 seconds</span><br><span class="line">2.4.1 :007 &gt; scan <span class="string">&#x27;test_table&#x27;</span></span><br><span class="line">ROW                        COLUMN+CELL</span><br><span class="line"> row_key_1                 column=cf1:k1, timestamp=1545926595556, value=k1:v1</span><br><span class="line"> row_key_1                 column=cf1:k2, timestamp=1545926683964, value=k2:v2</span><br><span class="line"> row_key_1                 column=cf1:k3, timestamp=1545926692956, value=k3:v3</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs sh"> =&gt; [<span class="hljs-string">&quot;test_table&quot;</span>]
+2.4.1 :004 &gt; put <span class="hljs-string">&#x27;test_table&#x27;</span>,<span class="hljs-string">&#x27;row_key_1&#x27;</span>,<span class="hljs-string">&#x27;cf1:k1&#x27;</span>,<span class="hljs-string">&#x27;k1:v1&#x27;</span>
+Took 0.2186 seconds
+2.4.1 :005 &gt; put <span class="hljs-string">&#x27;test_table&#x27;</span>,<span class="hljs-string">&#x27;row_key_1&#x27;</span>,<span class="hljs-string">&#x27;cf1:k2&#x27;</span>,<span class="hljs-string">&#x27;k2:v2&#x27;</span>
+Took 0.0094 seconds
+2.4.1 :006 &gt; put <span class="hljs-string">&#x27;test_table&#x27;</span>,<span class="hljs-string">&#x27;row_key_1&#x27;</span>,<span class="hljs-string">&#x27;cf1:k3&#x27;</span>,<span class="hljs-string">&#x27;k3:v3&#x27;</span>
+Took 0.0032 seconds
+2.4.1 :007 &gt; scan <span class="hljs-string">&#x27;test_table&#x27;</span>
+ROW                        COLUMN+CELL
+ row_key_1                 column=cf1:k1, timestamp=1545926595556, value=k1:v1
+ row_key_1                 column=cf1:k2, timestamp=1545926683964, value=k2:v2
+ row_key_1                 column=cf1:k3, timestamp=1545926692956, value=k3:v3</code></pre>
 
 <ul>
 <li>get data</li>
 </ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">2.4.1 :008 &gt; get <span class="string">&#x27;test_table&#x27;</span>,<span class="string">&#x27;row_key_1&#x27;</span></span><br><span class="line">COLUMN                     CELL</span><br><span class="line"> cf1:k1                    timestamp=1545926595556, value=k1:v1</span><br><span class="line"> cf1:k2                    timestamp=1545926683964, value=k2:v2</span><br><span class="line"> cf1:k3                    timestamp=1545926692956, value=k3:v3</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs sh">2.4.1 :008 &gt; get <span class="hljs-string">&#x27;test_table&#x27;</span>,<span class="hljs-string">&#x27;row_key_1&#x27;</span>
+COLUMN                     CELL
+ cf1:k1                    timestamp=1545926595556, value=k1:v1
+ cf1:k2                    timestamp=1545926683964, value=k2:v2
+ cf1:k3                    timestamp=1545926692956, value=k3:v3</code></pre>
 
 <p>以上实际上就是HBASE的最常用的使用方法: put/get(write/read)</p>
 
-      
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/bigdata/">bigdata</a>
+                    
+                      <a class="hover-with-bg" href="/tags/hbase/">hbase</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/11/21/tips/frp-usage/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">内网穿透方案 - frp</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2018/11/20/tips/thoughts/Thoughts-Be-A-Touch-Tester/">
+                        <span class="hidden-mobile">Be Tough as a QA</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
 
+      </div>
+    
   </div>
+</div>
 
-  <div class="article-footer">
-    <div class="article-meta pull-left">
+<!-- Custom -->
+
 
     
 
     
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
     
 
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/bigdata/">bigdata</a><a href="/tags/hbase/">hbase</a>
-    </span>
     
-
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
     </div>
+  </div>
+</div>
+    
 
     
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
-</article>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
 
   
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
 
 
 
-    </main>
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
 
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
-    
-    &copy; 2020 qmeta
-    
-  </p>
-</footer>
-    
-  </div>
-</div>
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
 </body>
 </html>
