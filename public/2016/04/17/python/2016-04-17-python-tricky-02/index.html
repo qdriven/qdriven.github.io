@@ -1,197 +1,736 @@
-<!DOCTYPE HTML>
-<html>
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <title>Python Tricky-02 | Learning Testing/QA in Hardway | Just Do It</title>
-
-  
-  <meta name="author" content="qmeta">
-  
-
-  
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="allround tester">
+  <meta name="author" content="qmeta">
+  <meta name="keywords" content="">
+  <title>Python Tricky-02 - Learning Testing/QA in Hardway</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
   
 
   
-  
-  <meta name="keywords" content="python">
-  
-
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <meta property="og:title" content="Python Tricky-02"/>
-
-  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
-
-  
-  <meta property="og:image" content="/favicon.ico"/>
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
   
 
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"qdriven.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.0.0"></head>
 
 
 <body>
-<div class="blog">
-  <div class="content">
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Practising</strong>&nbsp;</a>
 
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Learning Testing/QA in Hardway</a>
-    </h1>
-    <p class="site-description">Just Do It</p>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
   </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">主页</a></li>
-      
-        <li><a href="/archives">归档</a></li>
-      
-        <li><a href="/categories">分类</a></li>
-      
-        <li><a href="/tags">标签</a></li>
-      
-    </ul>
-  </nav>
-</header>
+</nav>
 
-    <main class="site-main posts-loop">
-    <article>
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Python Tricky-02">
+              
+            </span>
 
+            
+              <div class="mt-3">
   
-    
-    <h3 class="article-title"><span>Python Tricky-02</span></h3>
-    
   
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2016/04/17/python/2016-04-17-python-tricky-02/" rel="bookmark">
-        <time class="entry-date published" datetime="2016-04-17T02:41:15.000Z">
-          2016-04-17
-        </time>
-      </a>
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2016-04-17 10:41" pubdate>
+        2016年4月17日 上午
+      </time>
     </span>
-  </div>
+  
+</div>
 
-
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
   
 
-  <div class="article-content">
-    <div class="entry">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
       
-        <h1 id="Python-Tricky-2"><a href="#Python-Tricky-2" class="headerlink" title="Python Tricky-2"></a>Python Tricky-2</h1><h2 id="max-split"><a href="#max-split" class="headerlink" title="max split"></a>max split</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;split a string max times&quot;&quot;&quot;</span></span><br><span class="line">string = <span class="string">&quot;a_b_c_d_e&quot;</span></span><br><span class="line">print(string.split(<span class="string">&quot;_&quot;</span>, <span class="number">2</span>))</span><br><span class="line"><span class="string">&quot;&quot;&quot;use maxsplit with  arbitrary whitespace&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">s = <span class="string">&quot;foo    bar        foobar foo&quot;</span></span><br><span class="line"></span><br><span class="line">print(s.split(<span class="literal">None</span>, maxsplit=<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+      
+      26
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Python Tricky-02</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Python-Tricky-2"><a href="#Python-Tricky-2" class="headerlink" title="Python Tricky-2"></a>Python Tricky-2</h1><h2 id="max-split"><a href="#max-split" class="headerlink" title="max split"></a>max split</h2><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;split a string max times&quot;&quot;&quot;</span>
+string = <span class="hljs-string">&quot;a_b_c_d_e&quot;</span>
+print(string.split(<span class="hljs-string">&quot;_&quot;</span>, <span class="hljs-number">2</span>))
+<span class="hljs-string">&quot;&quot;&quot;use maxsplit with  arbitrary whitespace&quot;&quot;&quot;</span>
+
+s = <span class="hljs-string">&quot;foo    bar        foobar foo&quot;</span>
+
+print(s.split(<span class="hljs-literal">None</span>, maxsplit=<span class="hljs-number">1</span>))</code></pre>
 
 <h2 id="min-and-max-index"><a href="#min-and-max-index" class="headerlink" title="min and max index"></a>min and max index</h2><p>获取最大值，最小值的index</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Find Index of Min/Max Element.</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">lst = [<span class="number">40</span>, <span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">minIndex</span>(<span class="params">lst</span>):</span></span><br><span class="line">    <span class="keyword">return</span> min(range(len(lst)), key=lst.__getitem__)  <span class="comment"># use xrange if &lt; 2.7</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxIndex</span>(<span class="params">lst</span>):</span></span><br><span class="line">    <span class="keyword">return</span> max(range(len(lst)), key=lst.__getitem__)  <span class="comment"># use xrange if &lt; 2.7</span></span><br><span class="line">print(minIndex(lst))</span><br><span class="line">print(maxIndex(lst))</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">Find Index of Min/Max Element.</span>
+<span class="hljs-string">&quot;&quot;&quot;</span>
+
+lst = [<span class="hljs-number">40</span>, <span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">30</span>]
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">minIndex</span>(<span class="hljs-params">lst</span>):</span>
+    <span class="hljs-keyword">return</span> min(range(len(lst)), key=lst.__getitem__)  <span class="hljs-comment"># use xrange if &lt; 2.7</span>
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">maxIndex</span>(<span class="hljs-params">lst</span>):</span>
+    <span class="hljs-keyword">return</span> max(range(len(lst)), key=lst.__getitem__)  <span class="hljs-comment"># use xrange if &lt; 2.7</span>
+print(minIndex(lst))
+print(maxIndex(lst))</code></pre>
 
 <h2 id="nested-function"><a href="#nested-function" class="headerlink" title="nested function"></a>nested function</h2><p>python 支持函数作为参数传递：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;nested functions&quot;&quot;&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">addBy</span>(<span class="params">val</span>):</span></span><br><span class="line">    print(val)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">func</span>(<span class="params">inc</span>):</span></span><br><span class="line">        print(inc)</span><br><span class="line">        <span class="keyword">return</span> val + inc</span><br><span class="line">    <span class="keyword">return</span> func</span><br><span class="line"></span><br><span class="line">addFive = addBy(<span class="number">5</span>)</span><br><span class="line">print(addFive(<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">addThree = addBy(<span class="number">3</span>)</span><br><span class="line">print(addThree(<span class="number">7</span>))</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;nested functions&quot;&quot;&quot;</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">addBy</span>(<span class="hljs-params">val</span>):</span>
+    print(val)
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func</span>(<span class="hljs-params">inc</span>):</span>
+        print(inc)
+        <span class="hljs-keyword">return</span> val + inc
+    <span class="hljs-keyword">return</span> func
+
+addFive = addBy(<span class="hljs-number">5</span>)
+print(addFive(<span class="hljs-number">4</span>))
+
+addThree = addBy(<span class="hljs-number">3</span>)
+print(addThree(<span class="hljs-number">7</span>))</code></pre>
 
 <h2 id="obj-get-attribute"><a href="#obj-get-attribute" class="headerlink" title="obj get attribute"></a>obj get attribute</h2><p>通过getattr获取python的属性，可以是类级别的，也可以实例级别的，但是如果属性没有实例级别是先通过<code>__getattribute__</code>获取</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">obj</span>():</span></span><br><span class="line">    attr = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattribute__</span>(<span class="params">self, item</span>):</span></span><br><span class="line">        print(<span class="string">&#x27;get attribute&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;123&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__get__</span>(<span class="params">self, instance, owner</span>):</span></span><br><span class="line">        print(<span class="string">&quot;get&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span>(<span class="params">self, item</span>):</span></span><br><span class="line">        print(<span class="string">&quot;get attribute1&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">foo = <span class="string">&quot;attr&quot;</span></span><br><span class="line">a = obj()</span><br><span class="line">print(a.test)</span><br><span class="line">print(getattr(obj, foo))</span><br><span class="line">print(getattr(a, <span class="string">&quot;attr1&quot;</span>))</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs python">
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">obj</span>():</span>
+    attr = <span class="hljs-number">1</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__getattribute__</span>(<span class="hljs-params">self, item</span>):</span>
+        print(<span class="hljs-string">&#x27;get attribute&#x27;</span>)
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;123&quot;</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__get__</span>(<span class="hljs-params">self, instance, owner</span>):</span>
+        print(<span class="hljs-string">&quot;get&quot;</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__getattr__</span>(<span class="hljs-params">self, item</span>):</span>
+        print(<span class="hljs-string">&quot;get attribute1&quot;</span>)
+
+
+foo = <span class="hljs-string">&quot;attr&quot;</span>
+a = obj()
+print(a.test)
+print(getattr(obj, foo))
+print(getattr(a, <span class="hljs-string">&quot;attr1&quot;</span>))</code></pre>
 
 <h2 id="remove-duplicated-values"><a href="#remove-duplicated-values" class="headerlink" title="remove duplicated values"></a>remove duplicated values</h2><p>这里面需要理解清楚的是：</p>
 <ul>
 <li>list，可以重复</li>
 <li>set,没有重复</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;remove duplicate items from list. note: does not preserve the original list order&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">items = [<span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">newitems2 = list(set(items))</span><br><span class="line">print(newitems2)</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;remove dups and keep order&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> OrderedDict</span><br><span class="line"></span><br><span class="line">items = [<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;bar&quot;</span>, <span class="string">&quot;bar&quot;</span>, <span class="string">&quot;foo&quot;</span>]</span><br><span class="line"></span><br><span class="line">print(list(OrderedDict.fromkeys(items).keys()))</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;remove duplicate items from list. note: does not preserve the original list order&quot;&quot;&quot;</span>
 
-<h2 id="reverse-list-string"><a href="#reverse-list-string" class="headerlink" title="reverse list/string"></a>reverse list/string</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;reversing list with special case of slice step param&quot;&quot;&quot;</span></span><br><span class="line">a = [<span class="number">5</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>]</span><br><span class="line">print(a[::<span class="number">-1</span>])</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;iterating over list contents in reverse efficiently.&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> ele <span class="keyword">in</span> reversed(a):</span><br><span class="line">    print(ele)</span><br></pre></td></tr></table></figure>
+items = [<span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">1</span>]
 
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;reversing string with special case of slice step param&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">a = <span class="string">&#x27;abcdefghijklmnopqrstuvwxyz&#x27;</span></span><br><span class="line">print(a[::<span class="number">-1</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;iterating over string contents in reverse efficiently.&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> char <span class="keyword">in</span> reversed(a):</span><br><span class="line">    print(char)</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;reversing an integer through type conversion and slicing.&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">num = <span class="number">123456789</span></span><br><span class="line">print(int(str(num)[::<span class="number">-1</span>]))</span><br></pre></td></tr></table></figure>
+newitems2 = list(set(items))
+print(newitems2)
 
-<h2 id="set-operators-集合操作"><a href="#set-operators-集合操作" class="headerlink" title="set operators 集合操作"></a>set operators 集合操作</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;Python provides usual set operator&quot;&quot;&quot;</span></span><br><span class="line">a = set([<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>])</span><br><span class="line">b = set([<span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;e&#x27;</span>, <span class="string">&#x27;f&#x27;</span>])</span><br><span class="line">c = set([<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;c&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># Intersection</span></span><br><span class="line">print(a &amp; b)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Subset</span></span><br><span class="line">print(c &lt; a)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Difference</span></span><br><span class="line">print(a - b)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Symmetric Difference</span></span><br><span class="line">print(a ^ b)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Union</span></span><br><span class="line">print(a | b)</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;using methods instead of operators which take any iterable as a second arg&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">a = &#123;<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>&#125;</span><br><span class="line">b = &#123;<span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;e&#x27;</span>, <span class="string">&#x27;f&#x27;</span>&#125;</span><br><span class="line">c = &#123;<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;c&#x27;</span>&#125;</span><br><span class="line"></span><br><span class="line">print(a.intersection([<span class="string">&quot;b&quot;</span>]))</span><br><span class="line"></span><br><span class="line">print(a.difference([<span class="string">&quot;foo&quot;</span>]))</span><br><span class="line"></span><br><span class="line">print(a.symmetric_difference([<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;e&quot;</span>]))</span><br><span class="line"></span><br><span class="line">print(a.issuperset([<span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>]))</span><br><span class="line"></span><br><span class="line">print(a.issubset([<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>, <span class="string">&quot;d&quot;</span>, <span class="string">&quot;e&quot;</span>, <span class="string">&quot;f&quot;</span>]))</span><br><span class="line"></span><br><span class="line">print(a.isdisjoint([<span class="string">&quot;y&quot;</span>, <span class="string">&#x27;z&#x27;</span>]))</span><br><span class="line"></span><br><span class="line">print(a.union([<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;bar&quot;</span>]))</span><br><span class="line"></span><br><span class="line">a.intersection_update([<span class="string">&quot;a&quot;</span>, <span class="string">&quot;c&quot;</span>, <span class="string">&quot;z&quot;</span>])</span><br><span class="line">print(a)</span><br></pre></td></tr></table></figure>
+<span class="hljs-string">&quot;&quot;&quot;remove dups and keep order&quot;&quot;&quot;</span>
+
+<span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> OrderedDict
+
+items = [<span class="hljs-string">&quot;foo&quot;</span>, <span class="hljs-string">&quot;bar&quot;</span>, <span class="hljs-string">&quot;bar&quot;</span>, <span class="hljs-string">&quot;foo&quot;</span>]
+
+print(list(OrderedDict.fromkeys(items).keys()))</code></pre>
+
+<h2 id="reverse-list-string"><a href="#reverse-list-string" class="headerlink" title="reverse list/string"></a>reverse list/string</h2><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;reversing list with special case of slice step param&quot;&quot;&quot;</span>
+a = [<span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>]
+print(a[::<span class="hljs-number">-1</span>])
+
+<span class="hljs-string">&quot;&quot;&quot;iterating over list contents in reverse efficiently.&quot;&quot;&quot;</span>
+<span class="hljs-keyword">for</span> ele <span class="hljs-keyword">in</span> reversed(a):
+    print(ele)</code></pre>
+
+<pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;reversing string with special case of slice step param&quot;&quot;&quot;</span>
+
+a = <span class="hljs-string">&#x27;abcdefghijklmnopqrstuvwxyz&#x27;</span>
+print(a[::<span class="hljs-number">-1</span>])
+
+
+<span class="hljs-string">&quot;&quot;&quot;iterating over string contents in reverse efficiently.&quot;&quot;&quot;</span>
+
+<span class="hljs-keyword">for</span> char <span class="hljs-keyword">in</span> reversed(a):
+    print(char)
+
+<span class="hljs-string">&quot;&quot;&quot;reversing an integer through type conversion and slicing.&quot;&quot;&quot;</span>
+
+num = <span class="hljs-number">123456789</span>
+print(int(str(num)[::<span class="hljs-number">-1</span>]))</code></pre>
+
+<h2 id="set-operators-集合操作"><a href="#set-operators-集合操作" class="headerlink" title="set operators 集合操作"></a>set operators 集合操作</h2><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;Python provides usual set operator&quot;&quot;&quot;</span>
+a = set([<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>, <span class="hljs-string">&#x27;d&#x27;</span>])
+b = set([<span class="hljs-string">&#x27;c&#x27;</span>, <span class="hljs-string">&#x27;d&#x27;</span>, <span class="hljs-string">&#x27;e&#x27;</span>, <span class="hljs-string">&#x27;f&#x27;</span>])
+c = set([<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>])
+
+<span class="hljs-comment"># Intersection</span>
+print(a &amp; b)
+
+<span class="hljs-comment"># Subset</span>
+print(c &lt; a)
+
+<span class="hljs-comment"># Difference</span>
+print(a - b)
+
+<span class="hljs-comment"># Symmetric Difference</span>
+print(a ^ b)
+
+<span class="hljs-comment"># Union</span>
+print(a | b)
+
+<span class="hljs-string">&quot;&quot;&quot;using methods instead of operators which take any iterable as a second arg&quot;&quot;&quot;</span>
+
+a = &#123;<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>, <span class="hljs-string">&#x27;d&#x27;</span>&#125;
+b = &#123;<span class="hljs-string">&#x27;c&#x27;</span>, <span class="hljs-string">&#x27;d&#x27;</span>, <span class="hljs-string">&#x27;e&#x27;</span>, <span class="hljs-string">&#x27;f&#x27;</span>&#125;
+c = &#123;<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>&#125;
+
+print(a.intersection([<span class="hljs-string">&quot;b&quot;</span>]))
+
+print(a.difference([<span class="hljs-string">&quot;foo&quot;</span>]))
+
+print(a.symmetric_difference([<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;b&quot;</span>, <span class="hljs-string">&quot;e&quot;</span>]))
+
+print(a.issuperset([<span class="hljs-string">&quot;b&quot;</span>, <span class="hljs-string">&quot;c&quot;</span>]))
+
+print(a.issubset([<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;b&quot;</span>, <span class="hljs-string">&quot;c&quot;</span>, <span class="hljs-string">&quot;d&quot;</span>, <span class="hljs-string">&quot;e&quot;</span>, <span class="hljs-string">&quot;f&quot;</span>]))
+
+print(a.isdisjoint([<span class="hljs-string">&quot;y&quot;</span>, <span class="hljs-string">&#x27;z&#x27;</span>]))
+
+print(a.union([<span class="hljs-string">&quot;foo&quot;</span>, <span class="hljs-string">&quot;bar&quot;</span>]))
+
+a.intersection_update([<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;c&quot;</span>, <span class="hljs-string">&quot;z&quot;</span>])
+print(a)</code></pre>
 
 <h2 id="set-global-variables"><a href="#set-global-variables" class="headerlink" title="set global variables"></a>set global variables</h2><p>python 的全局变量也可以更新：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;set global variables from dict&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">d = &#123;<span class="string">&#x27;a&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;b&#x27;</span>: <span class="string">&#x27;var2&#x27;</span>, <span class="string">&#x27;c&#x27;</span>: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]&#125;</span><br><span class="line">globals().update(d)</span><br><span class="line">print(globals())</span><br><span class="line">print(<span class="string">&#x27;a&#x27;</span> <span class="keyword">in</span> globals().keys())</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;set global variables from dict&quot;&quot;&quot;</span>
 
-<h2 id="socket-msg-handling"><a href="#socket-msg-handling" class="headerlink" title="socket msg handling"></a>socket msg handling</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> functools</span><br><span class="line"></span><br><span class="line">s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line">conn = s.connect((<span class="string">&#x27;localhost&#x27;</span>, <span class="number">1080</span>))</span><br><span class="line">msgs = []</span><br><span class="line"></span><br><span class="line"><span class="comment"># normal way</span></span><br><span class="line"><span class="comment"># while True:</span></span><br><span class="line"><span class="comment">#    msg = coon.recv(1024)</span></span><br><span class="line"><span class="comment">#    if recv:</span></span><br><span class="line"><span class="comment">#        msgs.append(msg)</span></span><br><span class="line"><span class="comment"># else:  # when no msg come, break</span></span><br><span class="line"><span class="comment">#         break</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># hack way with iter and functools.partial</span></span><br><span class="line"><span class="comment"># this circle will auto break when msg is empty &#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> msg <span class="keyword">in</span> iter(functools.partial(conn.recv, <span class="number">1024</span>), <span class="string">b&#x27;&#x27;</span>):</span><br><span class="line">    msgs.append(msg)</span><br></pre></td></tr></table></figure>
+d = &#123;<span class="hljs-string">&#x27;a&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;b&#x27;</span>: <span class="hljs-string">&#x27;var2&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>: [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]&#125;
+globals().update(d)
+print(globals())
+print(<span class="hljs-string">&#x27;a&#x27;</span> <span class="hljs-keyword">in</span> globals().keys())</code></pre>
+
+<h2 id="socket-msg-handling"><a href="#socket-msg-handling" class="headerlink" title="socket msg handling"></a>socket msg handling</h2><pre><code class="hljs python">
+<span class="hljs-keyword">import</span> socket
+<span class="hljs-keyword">import</span> functools
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+conn = s.connect((<span class="hljs-string">&#x27;localhost&#x27;</span>, <span class="hljs-number">1080</span>))
+msgs = []
+
+<span class="hljs-comment"># normal way</span>
+<span class="hljs-comment"># while True:</span>
+<span class="hljs-comment">#    msg = coon.recv(1024)</span>
+<span class="hljs-comment">#    if recv:</span>
+<span class="hljs-comment">#        msgs.append(msg)</span>
+<span class="hljs-comment"># else:  # when no msg come, break</span>
+<span class="hljs-comment">#         break</span>
+
+<span class="hljs-comment"># hack way with iter and functools.partial</span>
+<span class="hljs-comment"># this circle will auto break when msg is empty &#x27;&#x27;</span>
+<span class="hljs-keyword">for</span> msg <span class="hljs-keyword">in</span> iter(functools.partial(conn.recv, <span class="hljs-number">1024</span>), <span class="hljs-string">b&#x27;&#x27;</span>):
+    msgs.append(msg)</code></pre>
 
 <h2 id="sort-list-keeping-indices"><a href="#sort-list-keeping-indices" class="headerlink" title="sort list keeping indices"></a>sort list keeping indices</h2><ul>
 <li>enumerate 使用</li>
 <li>zip 使用</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;Sort a list and store previous indices of values&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string"># enumerate is a great but little-known tool for writing nice code</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">l = [<span class="number">4</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">1</span>] print(<span class="string">&quot;original list: &quot;</span>, l)</span><br><span class="line"></span><br><span class="line">values, indices = zip(*sorted((a, b) <span class="keyword">for</span> (b, a) <span class="keyword">in</span> enumerate(l)))</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string"># now values contains the sorted list and indices contains</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># the indices of the corresponding value in the original list</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">&quot;sorted list: &quot;</span>, values) print(<span class="string">&quot;original indices: &quot;</span>, indices)</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string"># note that this returns tuples, but if necessary they can</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># be converted to lists using list()</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="hljs python">
+<span class="hljs-string">&quot;&quot;&quot;Sort a list and store previous indices of values&quot;&quot;&quot;</span>
+
+<span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string"># enumerate is a great but little-known tool for writing nice code</span>
+<span class="hljs-string">&quot;&quot;&quot;</span>
+
+l = [<span class="hljs-number">4</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">1</span>] print(<span class="hljs-string">&quot;original list: &quot;</span>, l)
+
+values, indices = zip(*sorted((a, b) <span class="hljs-keyword">for</span> (b, a) <span class="hljs-keyword">in</span> enumerate(l)))
+
+<span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string"># now values contains the sorted list and indices contains</span>
+<span class="hljs-string"></span>
+<span class="hljs-string"># the indices of the corresponding value in the original list</span>
+<span class="hljs-string">&quot;&quot;&quot;</span>
+
+print(<span class="hljs-string">&quot;sorted list: &quot;</span>, values) print(<span class="hljs-string">&quot;original indices: &quot;</span>, indices)
+
+<span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string"># note that this returns tuples, but if necessary they can</span>
+<span class="hljs-string"></span>
+<span class="hljs-string"># be converted to lists using list()</span>
+<span class="hljs-string">&quot;&quot;&quot;</span></code></pre>
 
 <h2 id="step-slice"><a href="#step-slice" class="headerlink" title="step slice"></a>step slice</h2><p>python stepwise slicing of arrays</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;stepwise slicing of arrays&quot;&quot;&quot;</span></span><br><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]</span><br><span class="line">print(a[::<span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;stepwise slicing of arrays&quot;&quot;&quot;</span>
+a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>, <span class="hljs-number">10</span>]
+print(a[::<span class="hljs-number">3</span>])</code></pre>
 
 <h2 id="swap-keys-and-values"><a href="#swap-keys-and-values" class="headerlink" title="swap keys and values"></a>swap keys and values</h2><p>key,value 交换，只要是通过 <code>v：k for k,v in dict.items()｝</code> 这个方式就可以了</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;Swaps keys and values in a dict&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">_dict = &#123;<span class="string">&quot;one&quot;</span>: <span class="number">1</span>, <span class="string">&quot;two&quot;</span>: <span class="number">2</span>&#125;</span><br><span class="line"><span class="comment"># make sure all of dict&#x27;s values are unique</span></span><br><span class="line"><span class="keyword">assert</span> len(_dict) == len(set(_dict.values()))</span><br><span class="line">reversed_dict = &#123;v: k <span class="keyword">for</span> k, v <span class="keyword">in</span> _dict.items()&#125;</span><br><span class="line">print(reversed_dict)</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;Swaps keys and values in a dict&quot;&quot;&quot;</span>
 
-<h2 id="zip-使用"><a href="#zip-使用" class="headerlink" title="zip 使用"></a>zip 使用</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;transpose 2d array [[a,b], [c,d], [e,f]] -&gt; [[a,c,e], [b,d,f]]&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">original = [[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>], [<span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>], [<span class="string">&#x27;e&#x27;</span>, <span class="string">&#x27;f&#x27;</span>]]</span><br><span class="line">transposed = zip(*original)</span><br><span class="line">print(list(transposed))</span><br></pre></td></tr></table></figure>
+_dict = &#123;<span class="hljs-string">&quot;one&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;two&quot;</span>: <span class="hljs-number">2</span>&#125;
+<span class="hljs-comment"># make sure all of dict&#x27;s values are unique</span>
+<span class="hljs-keyword">assert</span> len(_dict) == len(set(_dict.values()))
+reversed_dict = &#123;v: k <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> _dict.items()&#125;
+print(reversed_dict)</code></pre>
 
-<h2 id="tree-使用"><a href="#tree-使用" class="headerlink" title="tree 使用"></a>tree 使用</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">See description here</span></span><br><span class="line"><span class="string">https://gist.github.com/hrldcpr/2012250</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"></span><br><span class="line">tree = <span class="keyword">lambda</span>: defaultdict(tree)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">users = tree()</span><br><span class="line">users[<span class="string">&#x27;harold&#x27;</span>][<span class="string">&#x27;username&#x27;</span>] = <span class="string">&#x27;chopper&#x27;</span></span><br><span class="line">users[<span class="string">&#x27;matt&#x27;</span>][<span class="string">&#x27;password&#x27;</span>] = <span class="string">&#x27;hunter2&#x27;</span></span><br></pre></td></tr></table></figure>
+<h2 id="zip-使用"><a href="#zip-使用" class="headerlink" title="zip 使用"></a>zip 使用</h2><pre><code class="hljs python">
+<span class="hljs-string">&quot;&quot;&quot;transpose 2d array [[a,b], [c,d], [e,f]] -&gt; [[a,c,e], [b,d,f]]&quot;&quot;&quot;</span>
 
-<h2 id="try-else"><a href="#try-else" class="headerlink" title="try else"></a>try else</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot; You can have an &#x27;else&#x27; clause with try/except.</span></span><br><span class="line"><span class="string">    It gets excecuted if no exception is raised.</span></span><br><span class="line"><span class="string">    This allows you to put less happy-path code in the &#x27;try&#x27; block so you can be</span></span><br><span class="line"><span class="string">    more sure of where a caught exception came from.&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="number">1</span> + <span class="number">1</span></span><br><span class="line"><span class="keyword">except</span> TypeError:</span><br><span class="line">    print(<span class="string">&quot;Oh no! An exception was raised.&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">&quot;Oh good, no exceptions were raised.&quot;</span>)</span><br></pre></td></tr></table></figure>
+original = [[<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>], [<span class="hljs-string">&#x27;c&#x27;</span>, <span class="hljs-string">&#x27;d&#x27;</span>], [<span class="hljs-string">&#x27;e&#x27;</span>, <span class="hljs-string">&#x27;f&#x27;</span>]]
+transposed = zip(*original)
+print(list(transposed))</code></pre>
+
+<h2 id="tree-使用"><a href="#tree-使用" class="headerlink" title="tree 使用"></a>tree 使用</h2><pre><code class="hljs python">
+<span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">See description here</span>
+<span class="hljs-string">https://gist.github.com/hrldcpr/2012250</span>
+<span class="hljs-string">&quot;&quot;&quot;</span>
+
+<span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> defaultdict
+
+tree = <span class="hljs-keyword">lambda</span>: defaultdict(tree)
+
+
+users = tree()
+users[<span class="hljs-string">&#x27;harold&#x27;</span>][<span class="hljs-string">&#x27;username&#x27;</span>] = <span class="hljs-string">&#x27;chopper&#x27;</span>
+users[<span class="hljs-string">&#x27;matt&#x27;</span>][<span class="hljs-string">&#x27;password&#x27;</span>] = <span class="hljs-string">&#x27;hunter2&#x27;</span></code></pre>
+
+<h2 id="try-else"><a href="#try-else" class="headerlink" title="try else"></a>try else</h2><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot; You can have an &#x27;else&#x27; clause with try/except.</span>
+<span class="hljs-string">    It gets excecuted if no exception is raised.</span>
+<span class="hljs-string">    This allows you to put less happy-path code in the &#x27;try&#x27; block so you can be</span>
+<span class="hljs-string">    more sure of where a caught exception came from.&quot;&quot;&quot;</span>
+
+<span class="hljs-keyword">try</span>:
+    <span class="hljs-number">1</span> + <span class="hljs-number">1</span>
+<span class="hljs-keyword">except</span> TypeError:
+    print(<span class="hljs-string">&quot;Oh no! An exception was raised.&quot;</span>)
+<span class="hljs-keyword">else</span>:
+    print(<span class="hljs-string">&quot;Oh good, no exceptions were raised.&quot;</span>)</code></pre>
 
 <p>also while else:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">i = <span class="number">5</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> i &gt; <span class="number">1</span>:</span><br><span class="line">    print(<span class="string">&quot;Whil-ing away!&quot;</span>)</span><br><span class="line">    i -= <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">3</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">&quot;Finished up!&quot;</span>)</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs python">i = <span class="hljs-number">5</span>
 
-<h2 id="unique-by-attr"><a href="#unique-by-attr" class="headerlink" title="unique by attr"></a>unique by attr</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    If we have some sequence of objects and want to remove items with the same attribute value</span></span><br><span class="line"><span class="string">    Python creates a dict, where keys are value if attribute (bar in our case), values are object of the sequence.</span></span><br><span class="line"><span class="string">    After that the dict is transformed back to list</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Note: in result we save the last from repeating elements (item2 in our case)!</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, value</span>):</span></span><br><span class="line">        self.bar = value</span><br><span class="line"></span><br><span class="line">item1 = Foo(<span class="number">15</span>)</span><br><span class="line">item2 = Foo(<span class="number">15</span>)</span><br><span class="line">item3 = Foo(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">lst = [item1, item2, item3]</span><br><span class="line"></span><br><span class="line">unique_lst = list(&#123;getattr(obj, <span class="string">&#x27;bar&#x27;</span>): obj <span class="keyword">for</span> obj <span class="keyword">in</span> lst&#125;.values())</span><br><span class="line"></span><br><span class="line">print(unique_lst)  <span class="comment"># [item2, item3]</span></span><br></pre></td></tr></table></figure>
+<span class="hljs-keyword">while</span> i &gt; <span class="hljs-number">1</span>:
+    print(<span class="hljs-string">&quot;Whil-ing away!&quot;</span>)
+    i -= <span class="hljs-number">1</span>
+    <span class="hljs-keyword">if</span> i == <span class="hljs-number">3</span>:
+        <span class="hljs-keyword">break</span>
+<span class="hljs-keyword">else</span>:
+    print(<span class="hljs-string">&quot;Finished up!&quot;</span>)</code></pre>
 
-      
+<h2 id="unique-by-attr"><a href="#unique-by-attr" class="headerlink" title="unique by attr"></a>unique by attr</h2><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    If we have some sequence of objects and want to remove items with the same attribute value</span>
+<span class="hljs-string">    Python creates a dict, where keys are value if attribute (bar in our case), values are object of the sequence.</span>
+<span class="hljs-string">    After that the dict is transformed back to list</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">    Note: in result we save the last from repeating elements (item2 in our case)!</span>
+<span class="hljs-string">&quot;&quot;&quot;</span>
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, value</span>):</span>
+        self.bar = value
+
+item1 = Foo(<span class="hljs-number">15</span>)
+item2 = Foo(<span class="hljs-number">15</span>)
+item3 = Foo(<span class="hljs-number">5</span>)
+
+lst = [item1, item2, item3]
+
+unique_lst = list(&#123;getattr(obj, <span class="hljs-string">&#x27;bar&#x27;</span>): obj <span class="hljs-keyword">for</span> obj <span class="hljs-keyword">in</span> lst&#125;.values())
+
+print(unique_lst)  <span class="hljs-comment"># [item2, item3]</span></code></pre>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/python/">python</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/python/">python</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2016/04/17/python/2016-04-17-python-tricky-01/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Python Tricky-01</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2016/04/12/tips/2016-04-23-REST-API_SECURITY/">
+                        <span class="hidden-mobile">Rest API Security</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
 
+      </div>
+    
   </div>
+</div>
 
-  <div class="article-footer">
-    <div class="article-meta pull-left">
+<!-- Custom -->
 
-    
-      
 
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/python/">python</a>
-    </span>
     
 
     
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
     
 
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/python/">python</a>
-    </span>
     
-
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
     </div>
+  </div>
+</div>
+    
 
     
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
-</article>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
 
   
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
 
 
 
-    </main>
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
 
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
-    
-    &copy; 2020 qmeta
-    
-  </p>
-</footer>
-    
-  </div>
-</div>
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
 </body>
 </html>

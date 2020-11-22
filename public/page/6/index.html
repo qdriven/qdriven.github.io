@@ -1,309 +1,801 @@
-<!DOCTYPE HTML>
-<html>
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <title>第 6 页 | Learning Testing/QA in Hardway | Just Do It</title>
-
-  
-  <meta name="author" content="qmeta">
-  
-
-  
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="allround tester">
-  
+  <meta name="author" content="qmeta">
+  <meta name="keywords" content="">
+  <title>Learning Testing/QA in Hardway</title>
 
-  
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  
 
-  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+<!-- 主题依赖的图标库，不要自行修改 -->
 
-  
-  <meta property="og:image" content="/favicon.ico"/>
-  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"qdriven.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.0.0"></head>
 
 
 <body>
-<div class="blog">
-  <div class="content">
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Practising</strong>&nbsp;</a>
 
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Learning Testing/QA in Hardway</a>
-    </h1>
-    <p class="site-description">Just Do It</p>
-  </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">主页</a></li>
-      
-        <li><a href="/archives">归档</a></li>
-      
-        <li><a href="/categories">分类</a></li>
-      
-        <li><a href="/tags">标签</a></li>
-      
-    </ul>
-  </nav>
-</header>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
 
-    <main class="site-main posts-loop">
-    
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2020/01/20/tips/git-tips-git-stash/"><span>git stash 使用</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2020/01/20/tips/git-tips-git-stash/" rel="bookmark">
-        <time class="entry-date published" datetime="2020-01-20T01:52:58.000Z">
-          2020-01-20
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>git-stash 文档的说明有点抽象，下面用一些例子来解释如何使用git-stash。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git-stash - Stash the changes <span class="keyword">in</span> a dirty working directory away</span><br></pre></td></tr></table></figure>
-
-<p>git-stash 主要使用的场景如下：</p>
-<ol>
-<li>本地的工作区已经有了一些提交</li>
-<li>你想恢复本地工作区到本地修改前的状态，pull最新的代码到本地</li>
-</ol>
-<p>这个时候你可以使用git stash来出来，如何处理？</p>
-<ol>
-<li>暂存本地修改：<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash</span><br></pre></td></tr></table></figure></li>
-<li>更新最新代码</li>
-</ol>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>恢复本地修改</li>
-</ol>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git stash list</span><br><span class="line">git stash apply stash@&#123;0&#125;</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">git stash pop </span><br><span class="line">git status</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>如果不在需要本地的修改</li>
-</ol>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash drop</span><br></pre></td></tr></table></figure>
-
-<p>总结git stash的常见用法：</p>
-<ol>
-<li>git stash： 暂存</li>
-<li>git stash list: 获取所有的暂存</li>
-<li>git stash pop： 恢复最新的一个暂存</li>
-<li>git stash apply stash@{index}: 恢复指定的暂存</li>
-<li>git stash drop： 清除最新的stash</li>
-<li>git stash clear：清除所有的stash </li>
-</ol>
-
-      
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
-
   </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/qa-daily/">qa-daily</a><a href="/tags/git/">git</a><a href="/tags/10minutes/">10minutes</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2020/01/13/tips/refactor-get-ipaddress/"><span>一次获取IP地址的小重构</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2020/01/13/tips/refactor-get-ipaddress/" rel="bookmark">
-        <time class="entry-date published" datetime="2020-01-12T18:19:56.000Z">
-          2020-01-13
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>原始代码不好的地方：</p>
-<ul>
-<li>有很多if/else</li>
-<li>扩展需要增加内部的if/else判断</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getIpAddr</span><span class="params">(HttpServletRequest request)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (request == <span class="keyword">null</span>)</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="string">&quot;unknown&quot;</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       String ip = request.getHeader(<span class="string">&quot;x-forwarded-for&quot;</span>);</span><br><span class="line">       <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">&quot;unknown&quot;</span>.equalsIgnoreCase(ip))</span><br><span class="line">       &#123;</span><br><span class="line">           ip = request.getHeader(<span class="string">&quot;Proxy-Client-IP&quot;</span>);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">&quot;unknown&quot;</span>.equalsIgnoreCase(ip))</span><br><span class="line">       &#123;</span><br><span class="line">           ip = request.getHeader(<span class="string">&quot;X-Forwarded-For&quot;</span>);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">&quot;unknown&quot;</span>.equalsIgnoreCase(ip))</span><br><span class="line">       &#123;</span><br><span class="line">           ip = request.getHeader(<span class="string">&quot;WL-Proxy-Client-IP&quot;</span>);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">&quot;unknown&quot;</span>.equalsIgnoreCase(ip))</span><br><span class="line">       &#123;</span><br><span class="line">           ip = request.getHeader(<span class="string">&quot;X-Real-IP&quot;</span>);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">&quot;unknown&quot;</span>.equalsIgnoreCase(ip))</span><br><span class="line">       &#123;</span><br><span class="line">           ip = request.getRemoteAddr();</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">return</span> <span class="string">&quot;0:0:0:0:0:0:0:1&quot;</span>.equals(ip) ? <span class="string">&quot;127.0.0.1&quot;</span> : ip;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>重构后代码:</p>
-<ol>
-<li>代码精简</li>
-<li>取header部分只要传入参数就可以</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String UNKNOWN = <span class="string">&quot;UNKNOWN&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getIpAddressFromReq</span><span class="params">(HttpServletRequest request,String... headerNames)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (ObjectUtil.isNotNull(request)) &#123;</span><br><span class="line">    String ip = request.getHeader(<span class="string">&quot;x-forwarded-for&quot;</span>);</span><br><span class="line">    List&lt;String&gt; headers = Arrays.asList(<span class="string">&quot;Proxy-Client-IP&quot;</span>,</span><br><span class="line">                                         <span class="string">&quot;X-Forwarded-For&quot;</span>,</span><br><span class="line">                                         <span class="string">&quot;WL-Proxy-Client-IP&quot;</span>,<span class="string">&quot;X-Real-IP&quot;</span>);</span><br><span class="line">    headers.addAll(Arrays.asList(headerNames));</span><br><span class="line">    <span class="keyword">for</span> (String header : headers) &#123;</span><br><span class="line">      <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || UNKNOWN.equalsIgnoreCase(ip)) &#123;</span><br><span class="line">        ip = request.getHeader(header);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">&quot;unknown&quot;</span>.equalsIgnoreCase(ip)) &#123;</span><br><span class="line">      ip = request.getRemoteAddr();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;0:0:0:0:0:0:0:1&quot;</span>.equals(ip) ? <span class="string">&quot;127.0.0.1&quot;</span> : ip;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> UNKNOWN;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/10Minutes/">10Minutes</a><a href="/tags/refactor/">refactor</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2020/01/13/tips/ssh-login/"><span>服务器免密登录</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2020/01/13/tips/ssh-login/" rel="bookmark">
-        <time class="entry-date published" datetime="2020-01-12T18:19:56.000Z">
-          2020-01-13
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>使用下例中<code>ssh-keygen</code>和<code>ssh-copy-id</code>，仅需通过3个步骤的简单设置而无需输入密码就能登录远程Linux主机。 </p>
-<ul>
-<li><code>ssh-keygen</code> 创建公钥和密钥。 </li>
-<li><code>ssh-copy-id</code> 把本地主机的公钥复制到远程主机的<code>authorized_keys</code>文件上。</li>
-<li><code>ssh-copy-id</code> 也会给远程主机的用户主目录（home）和<code>~/.ssh</code>, 和<code>~/.ssh/authorized_keys</code>设置合适的权限 。</li>
-</ul>
-<p>####步骤1: 用 <code>ssh-key-gen</code> 在本地主机上创建公钥和密钥</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa</span><br><span class="line">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key (/home/sub/.ssh/id_rsa):[Enter key] </span><br><span class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase): [Press enter key]</span><br><span class="line">Enter same passphrase again: [Pess enter key]</span><br><span class="line">Your identification has been saved <span class="keyword">in</span> /home/sub/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved <span class="keyword">in</span> /home/sub/.ssh/id_rsa.pub. </span><br><span class="line">The key fingerprint is: 35:a4:b9:2f:c1:53:2a:42:88:df:89:dc:c1:e3:b8:a2 </span><br></pre></td></tr></table></figure>
-
-<p>####步骤2: 用 <code>ssh-copy-id</code> 把公钥复制到远程主机上</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-copy-id root@10.79.53.164</span><br><span class="line">Could not open a connection to your authentication agent.</span><br><span class="line">root@10.79.53.164<span class="string">&#x27;s password:</span></span><br><span class="line"><span class="string">Now try logging into the machine, with &quot;ssh &#x27;</span>root@10.79.53.164<span class="string">&#x27;&quot;, and check in:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  .ssh/authorized_keys</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">to make sure we haven&#x27;</span>t added extra keys that you weren<span class="string">&#x27;t expecting.</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注: <code>ssh-copy-id</code> 把公钥分发即追加到远程主机的 <code>.ssh/authorized_key</code> 上.</p>
-</blockquote>
-<p>####步骤3: 直接登录远程主机</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ssh root@10.79.53.164</span><br><span class="line">Last login: Thu May 21 02:46:19 2015 from 10.140.80.223</span><br><span class="line">root@vbox$ </span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注: 无需输入密码</p>
-</blockquote>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/10Minutes/">10Minutes</a><a href="/tags/productivity/">productivity</a><a href="/tags/devops/">devops</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-
-<nav class="pagination">
-  
-  <a href="/page/5/" class="pagination-prev">上一页</a>
-  
-  
-  <a href="/page/7/" class="pagination-next">下一页</a>
-  
 </nav>
-    </main>
 
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Dirty your hands,understand the discrimination and reality! Be tough and nice!">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
     
-    &copy; 2020 qmeta
+      <div class="container nopadding-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
     
-  </p>
-</footer>
     
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/04/20/python/1-Add_Anaconda3_Python/">Use Anaconda3 Python In Ubuntue Usage</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2019/04/20/python/1-Add_Anaconda3_Python/">
+          
+          
+            
+          
+          Use Anaconda3 Python In UbuntuFirst of all, where is your annaconda3 installed, and where is the system python path?
+# anaconda3 path
+~/anaconda3/bin
+
+echo `whereis python`
+
+Then Add you anaconda3 to 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-04-20 23:58" pubdate>
+              2019-04-20
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/python/">python</a>
+            
+              <a href="/tags/annaconda3/">annaconda3</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/04/20/tips/0-GIT-SUBMODULE/">Git Sub Module Usage</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2019/04/20/tips/0-GIT-SUBMODULE/">
+          
+          
+            
+          
+          Git Sub Module UsageA Git Repo sometimes has several sub projects which are also a git repo. Let’s walk through following scenarios to became a supergit sub module user. The Scenario are:
+
+Add Git Sub
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-04-20 23:58" pubdate>
+              2019-04-20
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/git/">git</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/04/20/tips/api-testing/APITesting-Intro/">Build API Testing Framework-1 - Learn Http Api</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2019/04/20/tips/api-testing/APITesting-Intro/">
+          
+          
+            
+          
+          Build API Testing Framework-1 - Learn Http ApiAPI now, in most cases, it is a HTTP API which over http protocol. It is hard to explain without a example, so let’s start with a HelloWorld API sample.Th
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-04-20 23:58" pubdate>
+              2019-04-20
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/java/">java</a>
+            
+              <a href="/tags/API-Testing/">API Testing</a>
+            
+              <a href="/tags/patterns/">patterns</a>
+            
+              <a href="/tags/testing/">testing</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/02/20/tips/real/3-Defensive-programing/">Defensive Programming</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2019/02/20/tips/real/3-Defensive-programing/">
+          
+          
+            
+          
+          Defensive Programming - reuse the validationWhat does Defensive Programming mean? Let’s look at some sampels:
+public class Report &#123;
+    public void export(File file) &#123;
+        if (file == nu
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-02-20 23:58" pubdate>
+              2019-02-20
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/java/">java</a>
+            
+              <a href="/tags/patterns/">patterns</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/02/20/tips/real/ALGO-0-bigo/">Algorithm Big-O notion</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2019/02/20/tips/real/ALGO-0-bigo/">
+          
+          
+            
+          
+          Algorithm Big-O notionreference
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-02-20 23:58" pubdate>
+              2019-02-20
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/java/">java</a>
+            
+              <a href="/tags/patterns/">patterns</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2018/12/24/python/yuml-usage/">YUML Basic Usage</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2018/12/24/python/yuml-usage/">
+          
+          
+            
+          
+          YUML Syntax
+comments and directives
+class diagram
+
+Comments and Directives
+type: //{type:class}
+direction: // {direction:leftToRight}
+generate: // {generate:true}
+
+Class diagramcheetsheet for class di
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2018-12-24 00:00" pubdate>
+              2018-12-24
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/tips/">tips</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2018/11/21/tips/frp-usage/">内网穿透方案 - frp</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2018/11/21/tips/frp-usage/">
+          
+          
+            
+          
+          frp 使用golang编写的，下面几个例子来说明一下如何使用frp.
+
+todo
+reference
+
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2018-11-21 23:11" pubdate>
+              2018-11-21
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/tips/">tips</a>
+            
+              <a href="/tags/ops/">ops</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2018/11/21/tips/hbase-intro/">HBase 介绍</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2018/11/21/tips/hbase-intro/">
+          
+          
+            
+          
+          What is HBASE
+NoSQL: Not Only SQL
+Column-Oriented Database
+Based on Google BigTable
+HDFS as Storage
+TB/PB data and Random Access
+解决10条记录和1000千万记录同样的读写性能问题
+
+RDBMS 问题
+HBASE VS MYSQL
+Google Big TableA Bi
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2018-11-21 23:11" pubdate>
+              2018-11-21
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/bigdata/">bigdata</a>
+            
+              <a href="/tags/hbase/">hbase</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2018/11/20/tips/thoughts/Thoughts-Be-A-Touch-Tester/">Be Tough as a QA</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2018/11/20/tips/thoughts/Thoughts-Be-A-Touch-Tester/">
+          
+          
+            
+          
+          Think in Testing 1: Be ToughIf someone tell you that software testing or quality assurance is an easy job to do, he/she might not understand what a tester or qa do.  There are many perspective a teste
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2018-11-20 09:25" pubdate>
+              2018-11-20
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/thoughts/">thoughts</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2018/11/20/tips/thoughts/think-twice/">似是而非</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2018/11/20/tips/thoughts/think-twice/">
+          
+          
+            
+          
+          很很多似是而非的问题，信息现在是爆炸，而不是太少。所以多思考，而不是不停的道听途说对自身更有意义。有些听上去很多的东西可能也是需要自己多想，多想其实简单来说就是要多方面考虑，要站在其他的角度考虑问题。
+比如我们常说我们要问为什么，但是为什么不个人的答案可能都是不一样呀，为什么可能是为什么这么做，为什么要做，但是最基本最基本的问题应该是目的是什么，很多为什么马上牵扯到很多很专业的事前，但是目的应该是
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2018-11-20 09:25" pubdate>
+              2018-11-20
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/thoughts/">thoughts</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/5/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/7/"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
   </div>
 </div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
 </body>
 </html>

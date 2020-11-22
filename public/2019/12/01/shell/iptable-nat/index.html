@@ -1,104 +1,252 @@
-<!DOCTYPE HTML>
-<html>
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <title>Learning Testing/QA in Hardway | Just Do It</title>
-
-  
-  <meta name="author" content="qmeta">
-  
-
-  
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="allround tester">
-  
-
-  
-  
+  <meta name="author" content="qmeta">
   <meta name="keywords" content="">
-  
+  <title>Learning Testing/QA in Hardway</title>
 
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
-  
 
-  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-  <meta property="og:image" content="/favicon.ico"/>
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
   
 
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"qdriven.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.0.0"></head>
 
 
 <body>
-<div class="blog">
-  <div class="content">
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Practising</strong>&nbsp;</a>
 
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Learning Testing/QA in Hardway</a>
-    </h1>
-    <p class="site-description">Just Do It</p>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
   </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">主页</a></li>
-      
-        <li><a href="/archives">归档</a></li>
-      
-        <li><a href="/categories">分类</a></li>
-      
-        <li><a href="/tags">标签</a></li>
-      
-    </ul>
-  </nav>
-</header>
+</nav>
 
-    <main class="site-main posts-loop">
-    <article>
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="">
+              
+            </span>
 
+            
+              <div class="mt-3">
   
-    
-    <h3 class="article-title"><span></span></h3>
-    
   
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/12/01/shell/iptable-nat/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-12-01T13:28:08.000Z">
-          2019-12-01
-        </time>
-      </a>
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-12-01 21:28" pubdate>
+        2019年12月1日 晚上
+      </time>
     </span>
-  </div>
+  
+</div>
 
-
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      728 字
+    </span>
   
 
-  <div class="article-content">
-    <div class="entry">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
       
-        <h1 id="iptables"><a href="#iptables" class="headerlink" title="iptables"></a>iptables</h1><ol>
+      
+      13
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            <div class="markdown-body">
+              <h1 id="iptables"><a href="#iptables" class="headerlink" title="iptables"></a>iptables</h1><ol>
 <li><p>kernel modules</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">modprobe ip_tables</span><br><span class="line">modprobe iptable_nat</span><br><span class="line">modprobe iptable_filter</span><br><span class="line">modprobe ip_conntrack</span><br><span class="line">modprobe ip_conntrack_ftp</span><br><span class="line">modprobe ip_nat_ftp</span><br></pre></td></tr></table></figure>
+ <pre><code class="hljs bash">modprobe ip_tables
+modprobe iptable_nat
+modprobe iptable_filter
+modprobe ip_conntrack
+modprobe ip_conntrack_ftp
+modprobe ip_nat_ftp</code></pre>
 </li>
 <li><p>ip_forward</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -w net.ipv4.ip_forward=1</span><br></pre></td></tr></table></figure>
+ <pre><code class="hljs bash">sysctl -w net.ipv4.ip_forward=1</code></pre>
 </li>
 <li><p>iptables.service</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">yum install -y iptables</span><br><span class="line"></span><br><span class="line">systemctl restart iptables.service</span><br><span class="line"></span><br><span class="line"><span class="comment"># show rules</span></span><br><span class="line">iptables -t nat -L</span><br><span class="line"></span><br><span class="line"><span class="comment"># clear rules</span></span><br><span class="line">iptables -t nat -F</span><br><span class="line"></span><br><span class="line"><span class="comment"># save rules</span></span><br><span class="line">iptables-save &gt; /etc/sysconfig/iptables</span><br></pre></td></tr></table></figure>
-
+<p> &lt;!–hexoPostRenderEscape:<pre><code class="hljs bash">yum install -y iptables</p>
 </li>
 </ol>
+<p>systemctl restart iptables.service</p>
+<p><span class="hljs-comment"># show rules</span><br>iptables -t nat -L</p>
+<p><span class="hljs-comment"># clear rules</span><br>iptables -t nat -F</p>
+<p><span class="hljs-comment"># save rules</span><br>iptables-save &gt; /etc/sysconfig/iptables</code></pre>:hexoPostRenderEscape–&gt;</p>
 <h2 id="Hosts-Information"><a href="#Hosts-Information" class="headerlink" title="Hosts Information"></a>Hosts Information</h2><ul>
 <li><p>Jumpbox/Gatewaybox:</p>
 <table>
@@ -124,17 +272,47 @@
 </tr>
 </tbody></table>
 <p>  路由表: <code>route -n</code></p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Destination     Gateway         Genmask         Flags Metric Ref    Use Iface</span><br><span class="line">0.0.0.0         10.123.10.1     0.0.0.0         UG    0      0        0 eth0</span><br><span class="line">10.123.10.0     0.0.0.0         255.255.255.0   U     0      0        0 eth0</span><br><span class="line">192.168.1.0     0.0.0.0         255.255.255.0   U     0      0        0 eth1</span><br></pre></td></tr></table></figure>
+<p>  &lt;!–hexoPostRenderEscape:<pre><code class="hljs bash">Destination     Gateway         Genmask         Flags Metric Ref    Use Iface</p>
 </li>
-<li><p>Internal Boxes: <code>192.168.1.0/24</code></p>
-</li>
+</ul>
+<p>0.0.0.0         10.123.10.1     0.0.0.0         UG    0      0        0 eth0<br>10.123.10.0     0.0.0.0         255.255.255.0   U     0      0        0 eth0<br>192.168.1.0     0.0.0.0         255.255.255.0   U     0      0        0 eth1</code></pre>:hexoPostRenderEscape–&gt;</p>
+<ul>
+<li>Internal Boxes: <code>192.168.1.0/24</code></li>
 </ul>
 <h2 id="外网访问内网-NAT-端口映射"><a href="#外网访问内网-NAT-端口映射" class="headerlink" title="外网访问内网 (NAT 端口映射)"></a>外网访问内网 (NAT 端口映射)</h2><ul>
 <li><p>User Case:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">用户通过 10.123.10.99:11022 访问内网机器 192.168.1.11:22</span><br><span class="line"></span><br><span class="line">$ ssh root@10.123.10.99 -p 11022</span><br></pre></td></tr></table></figure>
+<p>&lt;!–hexoPostRenderEscape:<pre><code class="hljs angelscript">用户通过 <span class="hljs-number">10.123</span><span class="hljs-number">.10</span><span class="hljs-number">.99</span>:<span class="hljs-number">11022</span> 访问内网机器 <span class="hljs-number">192.168</span><span class="hljs-number">.1</span><span class="hljs-number">.11</span>:<span class="hljs-number">22</span></p>
 </li>
+</ul>
+<p>$ ssh <span class="hljs-symbol">root@</span><span class="hljs-number">10.123</span><span class="hljs-number">.10</span><span class="hljs-number">.99</span> -p <span class="hljs-number">11022</span></code></pre>:hexoPostRenderEscape–&gt;</p>
+<ul>
 <li><p>Flow Figure:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">        |</span><br><span class="line">        V</span><br><span class="line"> src: x.x.x.x:xx</span><br><span class="line">dest: 10.123.10.99:11022</span><br><span class="line">        |</span><br><span class="line">        V</span><br><span class="line">---- eth0 (in) --------</span><br><span class="line">        |</span><br><span class="line">        | PREROUTING</span><br><span class="line">        |  (DNAT)</span><br><span class="line">        V</span><br><span class="line"> src: x.x.x.x:xx</span><br><span class="line">dest: 192.168.1.11:22</span><br><span class="line">        |</span><br><span class="line">        | routing</span><br><span class="line">        V</span><br><span class="line">---- eth1 (out) -------</span><br><span class="line">        |</span><br><span class="line">        | POSTROUTING</span><br><span class="line">        |  (SNAT)</span><br><span class="line">        V</span><br><span class="line"> src: 192.168.1.99:xx</span><br><span class="line">dest: 192.168.1.11:22</span><br><span class="line">        |</span><br><span class="line">        V</span><br><span class="line">---- Internal BOX ----</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs yaml">        <span class="hljs-string">|</span>
+      <span class="hljs-string">V</span>
+<span class="hljs-attr">src:</span> <span class="hljs-string">x.x.x.x:xx</span>
+<span class="hljs-attr">dest:</span> <span class="hljs-number">10.123</span><span class="hljs-number">.10</span><span class="hljs-number">.99</span><span class="hljs-string">:11022</span>
+      <span class="hljs-string">|</span>
+      <span class="hljs-string">V</span>
+<span class="hljs-string">----</span> <span class="hljs-string">eth0</span> <span class="hljs-string">(in)</span> <span class="hljs-string">--------</span>
+      <span class="hljs-string">|</span>
+      <span class="hljs-string">|</span> <span class="hljs-string">PREROUTING</span>
+      <span class="hljs-string">|</span>  <span class="hljs-string">(DNAT)</span>
+      <span class="hljs-string">V</span>
+<span class="hljs-attr">src:</span> <span class="hljs-string">x.x.x.x:xx</span>
+<span class="hljs-attr">dest:</span> <span class="hljs-number">192.168</span><span class="hljs-number">.1</span><span class="hljs-number">.11</span><span class="hljs-string">:22</span>
+      <span class="hljs-string">|</span>
+      <span class="hljs-string">|</span> <span class="hljs-string">routing</span>
+      <span class="hljs-string">V</span>
+<span class="hljs-string">----</span> <span class="hljs-string">eth1</span> <span class="hljs-string">(out)</span> <span class="hljs-string">-------</span>
+      <span class="hljs-string">|</span>
+      <span class="hljs-string">|</span> <span class="hljs-string">POSTROUTING</span>
+      <span class="hljs-string">|</span>  <span class="hljs-string">(SNAT)</span>
+      <span class="hljs-string">V</span>
+<span class="hljs-attr">src:</span> <span class="hljs-number">192.168</span><span class="hljs-number">.1</span><span class="hljs-number">.99</span><span class="hljs-string">:xx</span>
+<span class="hljs-attr">dest:</span> <span class="hljs-number">192.168</span><span class="hljs-number">.1</span><span class="hljs-number">.11</span><span class="hljs-string">:22</span>
+      <span class="hljs-string">|</span>
+      <span class="hljs-string">V</span>
+<span class="hljs-string">----</span> <span class="hljs-string">Internal</span> <span class="hljs-string">BOX</span> <span class="hljs-string">----</span></code></pre>
 </li>
 <li><p>Configure:</p>
 <ul>
@@ -157,7 +335,8 @@
 </ul>
 </li>
 <li><p>最简单的配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A PREROUTING  -p tcp --dport 11022 -j DNAT --to 192.168.1.11:22</span><br><span class="line">iptables -t nat -A POSTROUTING -p tcp -o eth1 -j MASQUERADE</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs routeros">iptables -t<span class="hljs-built_in"> nat </span>-A PREROUTING  -p tcp --dport 11022 -j DNAT --to 192.168.1.11:22
+iptables -t<span class="hljs-built_in"> nat </span>-A POSTROUTING -p tcp -o eth1 -j MASQUERADE</code></pre>
 
 </li>
 </ul>
@@ -173,63 +352,243 @@
 </ul>
 <h2 id="内网访问外网-直连，GATEWAY"><a href="#内网访问外网-直连，GATEWAY" class="headerlink" title="内网访问外网 (直连，GATEWAY)"></a>内网访问外网 (直连，GATEWAY)</h2><ul>
 <li><p>User Case:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">内网机器 192.168.1.0&#x2F;24 通过网关 10.123.10.99 直接访问外网</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs angelscript">内网机器 <span class="hljs-number">192.168</span><span class="hljs-number">.1</span><span class="hljs-number">.0</span>/<span class="hljs-number">24</span> 通过网关 <span class="hljs-number">10.123</span><span class="hljs-number">.10</span><span class="hljs-number">.99</span> 直接访问外网</code></pre>
 </li>
 <li><p>Flow Figure:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">---- Internal BOX ----</span><br><span class="line">        |</span><br><span class="line">        V</span><br><span class="line"> src: 192.68.1.0&#x2F;24:xx</span><br><span class="line">dest: x.x.x.x:xx</span><br><span class="line">        |</span><br><span class="line">        V</span><br><span class="line">---- eth1 (in) --------</span><br><span class="line">        |</span><br><span class="line">        | routing</span><br><span class="line">        V</span><br><span class="line">---- eth0 (out) -------</span><br><span class="line">        |</span><br><span class="line">        | POSTROUTING</span><br><span class="line">        |  (SNAT)</span><br><span class="line">        V</span><br><span class="line"> src: 10.123.10.99:xx</span><br><span class="line">dest: x.x.x.x:xx</span><br><span class="line">        |</span><br><span class="line">        V</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs yaml"><span class="hljs-string">----</span> <span class="hljs-string">Internal</span> <span class="hljs-string">BOX</span> <span class="hljs-string">----</span>
+      <span class="hljs-string">|</span>
+      <span class="hljs-string">V</span>
+<span class="hljs-attr">src:</span> <span class="hljs-number">192.68</span><span class="hljs-number">.1</span><span class="hljs-number">.0</span><span class="hljs-string">/24:xx</span>
+<span class="hljs-attr">dest:</span> <span class="hljs-string">x.x.x.x:xx</span>
+      <span class="hljs-string">|</span>
+      <span class="hljs-string">V</span>
+<span class="hljs-string">----</span> <span class="hljs-string">eth1</span> <span class="hljs-string">(in)</span> <span class="hljs-string">--------</span>
+      <span class="hljs-string">|</span>
+      <span class="hljs-string">|</span> <span class="hljs-string">routing</span>
+      <span class="hljs-string">V</span>
+<span class="hljs-string">----</span> <span class="hljs-string">eth0</span> <span class="hljs-string">(out)</span> <span class="hljs-string">-------</span>
+      <span class="hljs-string">|</span>
+      <span class="hljs-string">|</span> <span class="hljs-string">POSTROUTING</span>
+      <span class="hljs-string">|</span>  <span class="hljs-string">(SNAT)</span>
+      <span class="hljs-string">V</span>
+<span class="hljs-attr">src:</span> <span class="hljs-number">10.123</span><span class="hljs-number">.10</span><span class="hljs-number">.99</span><span class="hljs-string">:xx</span>
+<span class="hljs-attr">dest:</span> <span class="hljs-string">x.x.x.x:xx</span>
+      <span class="hljs-string">|</span>
+      <span class="hljs-string">V</span></code></pre>
 </li>
 <li><p>Configure:</p>
 <ol>
 <li><p>在 GatewayBox 上配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A POSTROUTING -s 192.168.1.0&#x2F;24 -o eth0 -j MASQUERADE</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs routeros">iptables -t<span class="hljs-built_in"> nat </span>-A POSTROUTING -s 192.168.1.0/24 -o eth0 -j MASQUERADE</code></pre>
 </li>
 <li><p>在内网机器上设置默认 gateway 为 192.168.1.99</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ cat &gt; &#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;ifcfg-eth0 &lt;&lt; EOF</span><br><span class="line">NAME&#x3D;eth0</span><br><span class="line">DEVICE&#x3D;eth0</span><br><span class="line">ONBOOT&#x3D;yes</span><br><span class="line">BOOTPROTO&#x3D;static</span><br><span class="line">IPADDR&#x3D;192.168.1.11</span><br><span class="line">NETMASK&#x3D;255.255.255.0</span><br><span class="line">GATEWAY&#x3D;192.168.1.99</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">$ systemctl restart network.service</span><br><span class="line"></span><br><span class="line">$ route -n</span><br><span class="line">Destination     Gateway         Genmask         Flags Metric Ref    Use Iface</span><br><span class="line">0.0.0.0         192.168.1.99    0.0.0.0         UG    0      0        0 eth0</span><br><span class="line">192.168.1.0     0.0.0.0         255.255.255.0   U     0      0        0 eth0</span><br></pre></td></tr></table></figure>
-
+<p>&lt;!–hexoPostRenderEscape:<pre><code class="hljs lsl">$ cat &gt; /etc/sysconfig/network-scripts/ifcfg-eth0 &lt;&lt; <span class="hljs-literal">EOF</span><br>NAME=eth0<br>DEVICE=eth0<br>ONBOOT=yes<br>BOOTPROTO=static<br>IPADDR=<span class="hljs-number">192.168</span><span class="hljs-number">.1</span><span class="hljs-number">.11</span><br>NETMASK=<span class="hljs-number">255.255</span><span class="hljs-number">.255</span><span class="hljs-number">.0</span><br>GATEWAY=<span class="hljs-number">192.168</span><span class="hljs-number">.1</span><span class="hljs-number">.99</span><br><span class="hljs-literal">EOF</span></p>
 </li>
 </ol>
 </li>
 </ul>
+<p>$ systemctl restart network.service</p>
+<p>$ route -n<br>Destination     Gateway         Genmask         Flags Metric Ref    Use Iface<br><span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>         <span class="hljs-number">192.168</span><span class="hljs-number">.1</span><span class="hljs-number">.99</span>    <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>         UG    <span class="hljs-number">0</span>      <span class="hljs-number">0</span>        <span class="hljs-number">0</span> eth0<br><span class="hljs-number">192.168</span><span class="hljs-number">.1</span><span class="hljs-number">.0</span>     <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>         <span class="hljs-number">255.255</span><span class="hljs-number">.255</span><span class="hljs-number">.0</span>   U     <span class="hljs-number">0</span>      <span class="hljs-number">0</span>        <span class="hljs-number">0</span> eth0</code></pre>:hexoPostRenderEscape–&gt;</p>
 
-      
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/12/04/tips/refactoring/Bad_Code_Never_Die/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/12/01/shell/linux-users/">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
 
+      </div>
+    
   </div>
+</div>
 
-  <div class="article-footer">
-    <div class="article-meta pull-left">
+<!-- Custom -->
+
 
     
 
     
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
     </div>
+  </div>
+</div>
+    
 
     
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
-</article>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
 
   
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
 
 
 
-    </main>
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
 
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
-    
-    &copy; 2020 qmeta
-    
-  </p>
-</footer>
-    
-  </div>
-</div>
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
 </body>
 </html>

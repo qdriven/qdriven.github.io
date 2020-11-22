@@ -1,93 +1,233 @@
-<!DOCTYPE HTML>
-<html>
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <title>Rule Based Risk Engine Testing Part 1- Background | Learning Testing/QA in Hardway | Just Do It</title>
-
-  
-  <meta name="author" content="qmeta">
-  
-
-  
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="allround tester">
+  <meta name="author" content="qmeta">
+  <meta name="keywords" content="">
+  <title>Rule Based Risk Engine Testing Part 1- Background - Learning Testing/QA in Hardway</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
   
 
   
-  
-  <meta name="keywords" content="real,API Testing,patterns,testing">
-  
-
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <meta property="og:title" content="Rule Based Risk Engine Testing Part 1- Background"/>
-
-  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
-
-  
-  <meta property="og:image" content="/favicon.ico"/>
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
   
 
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"qdriven.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.0.0"></head>
 
 
 <body>
-<div class="blog">
-  <div class="content">
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Practising</strong>&nbsp;</a>
 
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Learning Testing/QA in Hardway</a>
-    </h1>
-    <p class="site-description">Just Do It</p>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
   </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">主页</a></li>
-      
-        <li><a href="/archives">归档</a></li>
-      
-        <li><a href="/categories">分类</a></li>
-      
-        <li><a href="/tags">标签</a></li>
-      
-    </ul>
-  </nav>
-</header>
+</nav>
 
-    <main class="site-main posts-loop">
-    <article>
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Rule Based Risk Engine Testing Part 1- Background">
+              
+            </span>
 
+            
+              <div class="mt-3">
   
-    
-    <h3 class="article-title"><span>Rule Based Risk Engine Testing Part 1- Background</span></h3>
-    
   
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/04/23/tips/api-testing/CreditRisk-Testing-1/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-04-23T15:58:45.000Z">
-          2019-04-23
-        </time>
-      </a>
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-04-23 23:58" pubdate>
+        2019年4月23日 晚上
+      </time>
     </span>
-  </div>
+  
+</div>
 
-
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
   
 
-  <div class="article-content">
-    <div class="entry">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
       
-        <h1 id="Rule-Based-Risk-Engine-Testing-Part-1-Background"><a href="#Rule-Based-Risk-Engine-Testing-Part-1-Background" class="headerlink" title="Rule Based Risk Engine Testing Part 1- Background"></a>Rule Based Risk Engine Testing Part 1- Background</h1><p>This article introduces a real world case for testing a rule based risk engine. Let me separate it into several parts:</p>
+      
+      28
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Rule Based Risk Engine Testing Part 1- Background</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Rule-Based-Risk-Engine-Testing-Part-1-Background"><a href="#Rule-Based-Risk-Engine-Testing-Part-1-Background" class="headerlink" title="Rule Based Risk Engine Testing Part 1- Background"></a>Rule Based Risk Engine Testing Part 1- Background</h1><p>This article introduces a real world case for testing a rule based risk engine. Let me separate it into several parts:</p>
 <ul>
 <li>System Overview to introduct the rule based risk engine</li>
 <li>Typical Cases</li>
@@ -101,7 +241,7 @@
 </ul>
 <p>And there are different products to apply, so the rule and rating system should be configurable. There are rule engine,scorecard and decision tree components to meet the configuration needs.</p>
 <p>The whole workflow is like this:</p>
-<p><img src="/images/risk-flow-1.jpg" alt="img"></p>
+<p><img src="/images/risk-flow-1.jpg" srcset="/img/loading.gif" alt="img"></p>
 <p>The whole system is a decision flow, which includes<br>anti-fraud rules, score-card for rating and decision tree to make a decision. If you wanto unify it, it is a decision flow, which composed by rules and decision trees.</p>
 <h3 id="1-1-A-short-introduction-for-Rule-Engine"><a href="#1-1-A-short-introduction-for-Rule-Engine" class="headerlink" title="1.1 A short introduction for Rule Engine"></a>1.1 A short introduction for Rule Engine</h3><p><a target="_blank" rel="noopener" href="https://www.martinfowler.com/bliki/RulesEngine.html">Rule Engine</a> article from Martin Flow, it abstracts rule engine into three conceptions:</p>
 <ol>
@@ -111,7 +251,10 @@
 </ol>
 <p>Basically A rule includes conditons and actions, and the chain composites these rules’ conditions and actions by a runtime context.</p>
 <p>An example in this blog for explaination:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if car.owner.hasCellPhone then premium +&#x3D; 100;</span><br><span class="line">if car.model.theftRating &gt; 4 then premium +&#x3D; 200;</span><br><span class="line">if car.owner.livesInDodgyArea &amp;&amp; car.model.theftRating &gt; 2 </span><br><span class="line">then premium +&#x3D; 300;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs angelscript"><span class="hljs-keyword">if</span> car.owner.hasCellPhone then premium += <span class="hljs-number">100</span>;
+<span class="hljs-keyword">if</span> car.model.theftRating &gt; <span class="hljs-number">4</span> then premium += <span class="hljs-number">200</span>;
+<span class="hljs-keyword">if</span> car.owner.livesInDodgyArea &amp;&amp; car.model.theftRating &gt; <span class="hljs-number">2</span> 
+then premium += <span class="hljs-number">300</span>;</code></pre>
 
 <p><strong><em>if</em></strong> is condition, and <strong><em>then</em></strong>  is action, one <strong><em>rule</em></strong><br>is composed by one <strong><em>if</em></strong>  and one <strong><em>then</em></strong> . And the chain is composed by different rules. Obviously the <strong><em>premium</em></strong>  should be in the chain context in this case, because it passed through the whole rule sets.</p>
 <p>Quite simple and easy to understand.The single rule is simple enough, so the testing might be undervalued. Think about if there are hundrends rules out there, test and understand the whole picture might be not easy compared with a single rule. This is what Martin Flow claimed, and also he worried about the implicit rule and context in the rule engine module.</p>
@@ -123,7 +266,7 @@
 <li>Also this Node points a true or false path to go different evaluation path</li>
 </ol>
 <p>What ever these nodes contain, just think about it is a chain or composite rule. Here is a simple case to demostrate how the system works:</p>
-<p><img src="/images/DecisionFlow.jpg" alt="img"></p>
+<p><img src="/images/DecisionFlow.jpg" srcset="/img/loading.gif" alt="img"></p>
 <p>The output is a score. A score represents how much could be borrowed in a loan system. In this simple case, the age might be a implicit feature which should be fetched by internal api based on fundamental data like IDCard Number or SSN Number. And the rules and score card rules are pre-defined(So it is ruled based system).</p>
 <p>So you can understand the whole module in this way:</p>
 <ol>
@@ -132,7 +275,7 @@
 </ol>
 <p>So the modules should aim at how to fetch the data(facts) , and how to go through the rule engine to calculate a score. And so does this module. </p>
 <h3 id="1-2-Rule-Based-Risk-Engine-Components"><a href="#1-2-Rule-Based-Risk-Engine-Components" class="headerlink" title="1.2 Rule Based Risk Engine Components"></a>1.2 Rule Based Risk Engine Components</h3><p>Here are components:</p>
-<p><img src="/images/risk-flow-2.jpg" alt="img"></p>
+<p><img src="/images/risk-flow-2.jpg" srcset="/img/loading.gif" alt="img"></p>
 <p>There are many different tech stack used, such as elastic search, mongodb, hbase, redis,spring boot, rule engine,etc. It is hard to test in my first impression, not only it is complex, but also I only had one week to understand the whole system, and I am the only person who is responsoible for testing, meanwhile there are actual 7 developers out there.</p>
 <p>Learn it,separate the concerns, and then check out what these components really do:</p>
 <ul>
@@ -146,12 +289,19 @@
 </ul>
 <p>After dive into these components a little bit, It is easy to find out that the key critical component is the Rule engine in current stage which shoule be absolutely the priority. Other components are more like data collector/feeder or result recorder. They should be important if the volumn of users increased,or more features need to be produced. But on current stage,it is just a MVP product which try to validate if the idea is feasible.</p>
 <p>The more things need to do, the more I need to focus a critical componet. So I focused the Rule Engine first.</p>
-<h3 id="1-3-Rule-Engine-Typical-Cases"><a href="#1-3-Rule-Engine-Typical-Cases" class="headerlink" title="1.3 Rule Engine Typical Cases"></a>1.3 Rule Engine Typical Cases</h3><p>The rule engine typical cases is that:<br><img src="/images/RiskEventFlow.jpg" alt="img"></p>
+<h3 id="1-3-Rule-Engine-Typical-Cases"><a href="#1-3-Rule-Engine-Typical-Cases" class="headerlink" title="1.3 Rule Engine Typical Cases"></a>1.3 Rule Engine Typical Cases</h3><p>The rule engine typical cases is that:<br><img src="/images/RiskEventFlow.jpg" srcset="/img/loading.gif" alt="img"></p>
 <p>The things turn out that, rule engine accepts income risk input, and leverage all the different data from third party/data collection/data aggeragation services, then output the risk rating.</p>
 <p>Let me summary it in a tester point view, rule engine’s input is different data, and the output is the data calculated by the rules. If the rule composed by rules,and decision tree, the test cases covered all the node and path, then it is good to go. </p>
 <h3 id="1-4-Test-It"><a href="#1-4-Test-It" class="headerlink" title="1.4  Test It"></a>1.4  Test It</h3><p>Let’s see a test case first:</p>
 <p>Test Case Input:</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;riskFeatures&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;idNumber&quot;</span>: <span class="string">&quot;610304199801120878&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;levelType&quot;</span>: <span class="string">&quot;10&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;flowNo&quot;</span>: <span class="string">&quot;1506&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;applicationId&quot;</span>: <span class="string">&quot;ac8e120c-3615-4bdb-a92d-a118e24e33da&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs json">&#123;
+    <span class="hljs-attr">&quot;riskFeatures&quot;</span>: &#123;
+      <span class="hljs-attr">&quot;idNumber&quot;</span>: <span class="hljs-string">&quot;610304199801120878&quot;</span>,
+        <span class="hljs-attr">&quot;levelType&quot;</span>: <span class="hljs-string">&quot;10&quot;</span>,
+        <span class="hljs-attr">&quot;flowNo&quot;</span>: <span class="hljs-string">&quot;1506&quot;</span>,
+        <span class="hljs-attr">&quot;applicationId&quot;</span>: <span class="hljs-string">&quot;ac8e120c-3615-4bdb-a92d-a118e24e33da&quot;</span>
+    &#125;
+&#125;</code></pre>
 
 <p>I can change the levelType to different value, then send to risk evaluation api to get different result.<br>And this is typical test cases design.</p>
 <p>Testing a Rule steps: </p>
@@ -161,58 +311,224 @@
 <li>get result and check the result</li>
 </ol>
 <p>It looks very easy. The problem is how many these kind of parameters are? In a real case, normally 50+ parameters need to change because the third party data are aslo the input of rule engine which I can’t control it only mock it as input implicit parameters. So it is going to be crazy if create and maintain these test cases manually.</p>
-<p>There third part data is like:<br><img src="/images/risk_parameters.jpg" alt="img"></p>
+<p>There third part data is like:<br><img src="/images/risk_parameters.jpg" srcset="/img/loading.gif" alt="img"></p>
 <p>The best case for 50 parameters test cases design, every parameters has 3 possible values, then at least there are 150 cases(doesn’t consider the combination).</p>
 <p>Manual testing is not a option under this condition if the business need to complete all the testing in one day, also it will burn me out if do these testing more than one time.</p>
 <p>So the only option is to write code to test(I don’t like the term automation testing, I prefer the term write codes for testing).</p>
 <p>Let’s start coding. Coding is not rocket science, don’t be afraid of it especially for testers. In next article, how to implement the test code will be introduced. It is not that hard but improve the productivity significantly. One more point is that it might be more interesting than do it manually in this case.</p>
 
-      
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/real/">real</a>
+                    
+                      <a class="hover-with-bg" href="/tags/API-Testing/">API Testing</a>
+                    
+                      <a class="hover-with-bg" href="/tags/patterns/">patterns</a>
+                    
+                      <a class="hover-with-bg" href="/tags/testing/">testing</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/04/25/tips/api-testing/CreditRisk-Testing-2/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Rule Based Risk Engine Part 2 - Write Code to Test</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/04/20/python/1-Add_Anaconda3_Python/">
+                        <span class="hidden-mobile">Use Anaconda3 Python In Ubuntue Usage</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
 
+      </div>
+    
   </div>
+</div>
 
-  <div class="article-footer">
-    <div class="article-meta pull-left">
+<!-- Custom -->
+
 
     
 
     
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
     
 
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/real/">real</a><a href="/tags/API-Testing/">API Testing</a><a href="/tags/patterns/">patterns</a><a href="/tags/testing/">testing</a>
-    </span>
     
-
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
     </div>
+  </div>
+</div>
+    
 
     
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
-</article>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
 
   
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
 
 
 
-    </main>
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
 
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
-    
-    &copy; 2020 qmeta
-    
-  </p>
-</footer>
-    
-  </div>
-</div>
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
 </body>
 </html>

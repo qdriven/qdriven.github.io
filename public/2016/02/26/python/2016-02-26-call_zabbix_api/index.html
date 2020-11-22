@@ -1,99 +1,389 @@
-<!DOCTYPE HTML>
-<html>
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <title>Python 访问Zabbix API | Learning Testing/QA in Hardway | Just Do It</title>
-
-  
-  <meta name="author" content="qmeta">
-  
-
-  
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="allround tester">
+  <meta name="author" content="qmeta">
+  <meta name="keywords" content="">
+  <title>Python 访问Zabbix API - Learning Testing/QA in Hardway</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
   
 
   
-  
-  <meta name="keywords" content="python">
-  
-
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <meta property="og:title" content="Python 访问Zabbix API"/>
-
-  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
-
-  
-  <meta property="og:image" content="/favicon.ico"/>
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
   
 
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"qdriven.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.0.0"></head>
 
 
 <body>
-<div class="blog">
-  <div class="content">
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Practising</strong>&nbsp;</a>
 
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Learning Testing/QA in Hardway</a>
-    </h1>
-    <p class="site-description">Just Do It</p>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
   </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">主页</a></li>
-      
-        <li><a href="/archives">归档</a></li>
-      
-        <li><a href="/categories">分类</a></li>
-      
-        <li><a href="/tags">标签</a></li>
-      
-    </ul>
-  </nav>
-</header>
+</nav>
 
-    <main class="site-main posts-loop">
-    <article>
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Python 访问Zabbix API">
+              
+            </span>
 
+            
+              <div class="mt-3">
   
-    
-    <h3 class="article-title"><span>Python 访问Zabbix API</span></h3>
-    
   
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2016/02/26/python/2016-02-26-call_zabbix_api/" rel="bookmark">
-        <time class="entry-date published" datetime="2016-02-26T08:51:20.000Z">
-          2016-02-26
-        </time>
-      </a>
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2016-02-26 16:51" pubdate>
+        2016年2月26日 下午
+      </time>
     </span>
-  </div>
+  
+</div>
 
-
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1k 字
+    </span>
   
 
-  <div class="article-content">
-    <div class="entry">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
       
-        <h2 id="Zabbix-API-访问"><a href="#Zabbix-API-访问" class="headerlink" title="Zabbix API 访问"></a>Zabbix API 访问</h2><p>准备使用Python来访问一下Zabbix，首先当然阅读一下Zabbix的<a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/2.4/">API Manual</a>,抛开什么json rpc这样的问题之外，zabbix的API的分类还是很工整的，所以看起来比较舒服，在一定了解了zabbix基础之后，基本上就可以上手来写了，网上查了一下，找个一个python zabbix的调用的一个客户段代码，感觉不错，就开始行动了。</p>
+      
+      16
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Python 访问Zabbix API</h1>
+            
+            <div class="markdown-body">
+              <h2 id="Zabbix-API-访问"><a href="#Zabbix-API-访问" class="headerlink" title="Zabbix API 访问"></a>Zabbix API 访问</h2><p>准备使用Python来访问一下Zabbix，首先当然阅读一下Zabbix的<a target="_blank" rel="noopener" href="https://www.zabbix.com/documentation/2.4/">API Manual</a>,抛开什么json rpc这样的问题之外，zabbix的API的分类还是很工整的，所以看起来比较舒服，在一定了解了zabbix基础之后，基本上就可以上手来写了，网上查了一下，找个一个python zabbix的调用的一个客户段代码，感觉不错，就开始行动了。</p>
 <h2 id="Zabbix-API-客户端代码的实现"><a href="#Zabbix-API-客户端代码的实现" class="headerlink" title="Zabbix API 客户端代码的实现"></a>Zabbix API 客户端代码的实现</h2><p>Zabbix API的主要的两个参数其实是method，params，params基本上就可以看作一些可变的参数，其实就是一个json或者map， 对于method来说，一般就是 resource.action 这种方式，所以python客户端使用重写了一个__getattr__来做,返回一个可以访问不同资源名称的客户端,具体的代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ZabbixClient</span>:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Generic Zabbix API Client</span></span><br><span class="line"><span class="string">    - login</span></span><br><span class="line"><span class="string">    - get auth</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    globale_header = &#123;</span><br><span class="line">        <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/json-rpc&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, session=None, timeout=None</span>):</span></span><br><span class="line">        self.user_name, self.default_user_name = <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;1&#x27;</span></span><br><span class="line">        self.password, self.default_password = <span class="string">&#x27;123456&#x27;</span>, <span class="string">&#x27;123456&#x27;</span></span><br><span class="line">        self.zabbix_api_url = <span class="string">&#x27;http://&#123;0&#125;/api_jsonrpc.php&#x27;</span>.format(<span class="string">&#x27;abcd.http&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> session:</span><br><span class="line">            self.session = session</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.session = requests.session()</span><br><span class="line"></span><br><span class="line">        self.session.headers.update(&#123;</span><br><span class="line">            <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json-rpc&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;python-zabbix-client&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;Cache-Control&#x27;</span>: <span class="string">&#x27;no-cache&#x27;</span></span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">        self.auth = <span class="string">&#x27;&#x27;</span></span><br><span class="line">        self.id = <span class="number">0</span></span><br><span class="line">        self.timeout = timeout</span><br><span class="line">        logger.info(<span class="string">&#x27;JSON-RPC Server EndPoint: %s&#x27;</span>, self.zabbix_api_url)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">login_in</span>(<span class="params">self, user_name=None, password=None</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        login with given user_name and password, if None, use default user</span></span><br><span class="line"><span class="string">        :param user_name:</span></span><br><span class="line"><span class="string">        :param password:</span></span><br><span class="line"><span class="string">        :return: result,auth key</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> user_name:</span><br><span class="line">            self.user_name = user_name</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> password:</span><br><span class="line">            self.password = password</span><br><span class="line"></span><br><span class="line">        self.auth = self.user.login(user=self.user_name, password=self.password)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">api_version</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.apiinfo.version()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># def confimport(self, format=&#x27;&#x27;, source=&#x27;&#x27;, rules=&#x27;&#x27;):</span></span><br><span class="line">    <span class="comment">#     &quot;&quot;&quot;Alias for configuration.import because it clashes with</span></span><br><span class="line">    <span class="comment">#        Python&#x27;s import reserved keyword&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment">#     return self.do_request(</span></span><br><span class="line">    <span class="comment">#         method=&quot;configuration.import&quot;,</span></span><br><span class="line">    <span class="comment">#         params=&#123;&quot;format&quot;: format, &quot;source&quot;: source, &quot;rules&quot;: rules&#125;</span></span><br><span class="line">    <span class="comment">#     )[&#x27;result&#x27;]</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">do_request</span>(<span class="params">self, method, params=None</span>):</span></span><br><span class="line">        request_json = &#123;</span><br><span class="line">            <span class="string">&#x27;jsonrpc&#x27;</span>: <span class="string">&#x27;2.0&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;method&#x27;</span>: method,</span><br><span class="line">            <span class="string">&#x27;params&#x27;</span>: params <span class="keyword">or</span> &#123;&#125;,</span><br><span class="line">            <span class="string">&#x27;id&#x27;</span>: self.id,</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> method != <span class="string">&#x27;apiinfo.version&#x27;</span> <span class="keyword">and</span> self.auth:</span><br><span class="line">            request_json[<span class="string">&#x27;auth&#x27;</span>] = self.auth</span><br><span class="line"></span><br><span class="line">        logger.debug(<span class="string">&quot;sending: %s&quot;</span>, json.dumps(request_json, indent=<span class="number">4</span>, separators=(<span class="string">&#x27;,&#x27;</span>, <span class="string">&#x27;:&#x27;</span>)))</span><br><span class="line">        response = self.session.post(</span><br><span class="line">            self.zabbix_api_url,</span><br><span class="line">            data=json.dumps(request_json),</span><br><span class="line">            timeout=self.timeout</span><br><span class="line">        )</span><br><span class="line">        logger.debug(<span class="string">&quot;Response Code : %s&quot;</span>, str(response.status_code))</span><br><span class="line"></span><br><span class="line">        response.raise_for_status()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> len(response.text):</span><br><span class="line">            <span class="keyword">raise</span> ZabbixAPIException(<span class="string">&quot;没有返回值&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            response_json = json.loads(response.text)</span><br><span class="line">        <span class="keyword">except</span> ValueError:</span><br><span class="line">            <span class="keyword">raise</span> ZabbixAPIException(<span class="string">&quot;不能解析JSON %s&quot;</span> % response.text)</span><br><span class="line"></span><br><span class="line">        logger.debug(<span class="string">&quot;sending: %s&quot;</span>, json.dumps(request_json, indent=<span class="number">4</span>, separators=(<span class="string">&#x27;,&#x27;</span>, <span class="string">&#x27;:&#x27;</span>)))</span><br><span class="line"></span><br><span class="line">        self.id += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;error&#x27;</span> <span class="keyword">in</span> response_json:</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;data&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> response_json[<span class="string">&#x27;error&#x27;</span>]:</span><br><span class="line">                response_json[<span class="string">&#x27;error&#x27;</span>][<span class="string">&#x27;data&#x27;</span>] = <span class="string">&#x27;No Data&#x27;</span></span><br><span class="line">            msg = <span class="string">&quot;Error &#123;code&#125;: &#123;message&#125;,&#123;data&#125;&quot;</span>.format(</span><br><span class="line">                code=response_json[<span class="string">&#x27;error&#x27;</span>][<span class="string">&#x27;code&#x27;</span>],</span><br><span class="line">                message=response_json[<span class="string">&#x27;error&#x27;</span>][<span class="string">&#x27;message&#x27;</span>],</span><br><span class="line">                data=response_json[<span class="string">&#x27;error&#x27;</span>][<span class="string">&#x27;data&#x27;</span>]</span><br><span class="line">            )</span><br><span class="line">            <span class="keyword">raise</span> ZabbixAPIException(msg, response_json[<span class="string">&#x27;error&#x27;</span>][<span class="string">&#x27;code&#x27;</span>])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> response_json</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span>(<span class="params">self, item</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        auto create Zabbix API Client</span></span><br><span class="line"><span class="string">        :param item:</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">return</span> ZabbixAPIObjectClass(item, self)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ZabbixAPIObjectClass</span>(<span class="params">object</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, parent</span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.parent = parent</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span>(<span class="params">self, item</span>):</span></span><br><span class="line"></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        dynamic create a method (get,create,update,delete)</span></span><br><span class="line"><span class="string">        :param item:</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">fn</span>(<span class="params">*args, **kwargs</span>):</span></span><br><span class="line">            <span class="keyword">if</span> args <span class="keyword">and</span> kwargs:</span><br><span class="line">                <span class="keyword">raise</span> TypeError(<span class="string">&#x27;Found Both args and kwargs&#x27;</span>)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> self.parent.do_request(<span class="string">&#x27;&#123;0&#125;.&#123;1&#125;&#x27;</span>.format(self.name, item),</span><br><span class="line">                                          args <span class="keyword">or</span> kwargs)[<span class="string">&#x27;result&#x27;</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> fn</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ZabbixClient</span>:</span>
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    Generic Zabbix API Client</span>
+<span class="hljs-string">    - login</span>
+<span class="hljs-string">    - get auth</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    globale_header = &#123;
+        <span class="hljs-string">&quot;Content-Type&quot;</span>: <span class="hljs-string">&quot;application/json-rpc&quot;</span>
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, session=None, timeout=None</span>):</span>
+        self.user_name, self.default_user_name = <span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>
+        self.password, self.default_password = <span class="hljs-string">&#x27;123456&#x27;</span>, <span class="hljs-string">&#x27;123456&#x27;</span>
+        self.zabbix_api_url = <span class="hljs-string">&#x27;http://&#123;0&#125;/api_jsonrpc.php&#x27;</span>.format(<span class="hljs-string">&#x27;abcd.http&#x27;</span>)
+        <span class="hljs-keyword">if</span> session:
+            self.session = session
+        <span class="hljs-keyword">else</span>:
+            self.session = requests.session()
+
+        self.session.headers.update(&#123;
+            <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json-rpc&#x27;</span>,
+            <span class="hljs-string">&#x27;User-Agent&#x27;</span>: <span class="hljs-string">&#x27;python-zabbix-client&#x27;</span>,
+            <span class="hljs-string">&#x27;Cache-Control&#x27;</span>: <span class="hljs-string">&#x27;no-cache&#x27;</span>
+        &#125;)
+
+        self.auth = <span class="hljs-string">&#x27;&#x27;</span>
+        self.id = <span class="hljs-number">0</span>
+        self.timeout = timeout
+        logger.info(<span class="hljs-string">&#x27;JSON-RPC Server EndPoint: %s&#x27;</span>, self.zabbix_api_url)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">login_in</span>(<span class="hljs-params">self, user_name=None, password=None</span>):</span>
+        <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">        login with given user_name and password, if None, use default user</span>
+<span class="hljs-string">        :param user_name:</span>
+<span class="hljs-string">        :param password:</span>
+<span class="hljs-string">        :return: result,auth key</span>
+<span class="hljs-string">        &quot;&quot;&quot;</span>
+        <span class="hljs-keyword">if</span> user_name:
+            self.user_name = user_name
+
+        <span class="hljs-keyword">if</span> password:
+            self.password = password
+
+        self.auth = self.user.login(user=self.user_name, password=self.password)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">api_version</span>(<span class="hljs-params">self</span>):</span>
+        <span class="hljs-keyword">return</span> self.apiinfo.version()
+
+    <span class="hljs-comment"># def confimport(self, format=&#x27;&#x27;, source=&#x27;&#x27;, rules=&#x27;&#x27;):</span>
+    <span class="hljs-comment">#     &quot;&quot;&quot;Alias for configuration.import because it clashes with</span>
+    <span class="hljs-comment">#        Python&#x27;s import reserved keyword&quot;&quot;&quot;</span>
+    <span class="hljs-comment">#</span>
+    <span class="hljs-comment">#     return self.do_request(</span>
+    <span class="hljs-comment">#         method=&quot;configuration.import&quot;,</span>
+    <span class="hljs-comment">#         params=&#123;&quot;format&quot;: format, &quot;source&quot;: source, &quot;rules&quot;: rules&#125;</span>
+    <span class="hljs-comment">#     )[&#x27;result&#x27;]</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">do_request</span>(<span class="hljs-params">self, method, params=None</span>):</span>
+        request_json = &#123;
+            <span class="hljs-string">&#x27;jsonrpc&#x27;</span>: <span class="hljs-string">&#x27;2.0&#x27;</span>,
+            <span class="hljs-string">&#x27;method&#x27;</span>: method,
+            <span class="hljs-string">&#x27;params&#x27;</span>: params <span class="hljs-keyword">or</span> &#123;&#125;,
+            <span class="hljs-string">&#x27;id&#x27;</span>: self.id,
+        &#125;
+
+        <span class="hljs-keyword">if</span> method != <span class="hljs-string">&#x27;apiinfo.version&#x27;</span> <span class="hljs-keyword">and</span> self.auth:
+            request_json[<span class="hljs-string">&#x27;auth&#x27;</span>] = self.auth
+
+        logger.debug(<span class="hljs-string">&quot;sending: %s&quot;</span>, json.dumps(request_json, indent=<span class="hljs-number">4</span>, separators=(<span class="hljs-string">&#x27;,&#x27;</span>, <span class="hljs-string">&#x27;:&#x27;</span>)))
+        response = self.session.post(
+            self.zabbix_api_url,
+            data=json.dumps(request_json),
+            timeout=self.timeout
+        )
+        logger.debug(<span class="hljs-string">&quot;Response Code : %s&quot;</span>, str(response.status_code))
+
+        response.raise_for_status()
+
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> len(response.text):
+            <span class="hljs-keyword">raise</span> ZabbixAPIException(<span class="hljs-string">&quot;没有返回值&quot;</span>)
+
+        <span class="hljs-keyword">try</span>:
+            response_json = json.loads(response.text)
+        <span class="hljs-keyword">except</span> ValueError:
+            <span class="hljs-keyword">raise</span> ZabbixAPIException(<span class="hljs-string">&quot;不能解析JSON %s&quot;</span> % response.text)
+
+        logger.debug(<span class="hljs-string">&quot;sending: %s&quot;</span>, json.dumps(request_json, indent=<span class="hljs-number">4</span>, separators=(<span class="hljs-string">&#x27;,&#x27;</span>, <span class="hljs-string">&#x27;:&#x27;</span>)))
+
+        self.id += <span class="hljs-number">1</span>
+
+        <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;error&#x27;</span> <span class="hljs-keyword">in</span> response_json:
+            <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;data&#x27;</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> response_json[<span class="hljs-string">&#x27;error&#x27;</span>]:
+                response_json[<span class="hljs-string">&#x27;error&#x27;</span>][<span class="hljs-string">&#x27;data&#x27;</span>] = <span class="hljs-string">&#x27;No Data&#x27;</span>
+            msg = <span class="hljs-string">&quot;Error &#123;code&#125;: &#123;message&#125;,&#123;data&#125;&quot;</span>.format(
+                code=response_json[<span class="hljs-string">&#x27;error&#x27;</span>][<span class="hljs-string">&#x27;code&#x27;</span>],
+                message=response_json[<span class="hljs-string">&#x27;error&#x27;</span>][<span class="hljs-string">&#x27;message&#x27;</span>],
+                data=response_json[<span class="hljs-string">&#x27;error&#x27;</span>][<span class="hljs-string">&#x27;data&#x27;</span>]
+            )
+            <span class="hljs-keyword">raise</span> ZabbixAPIException(msg, response_json[<span class="hljs-string">&#x27;error&#x27;</span>][<span class="hljs-string">&#x27;code&#x27;</span>])
+
+        <span class="hljs-keyword">return</span> response_json
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__getattr__</span>(<span class="hljs-params">self, item</span>):</span>
+        <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">        auto create Zabbix API Client</span>
+<span class="hljs-string">        :param item:</span>
+<span class="hljs-string">        :return:</span>
+<span class="hljs-string">        &quot;&quot;&quot;</span>
+        <span class="hljs-keyword">return</span> ZabbixAPIObjectClass(item, self)
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ZabbixAPIObjectClass</span>(<span class="hljs-params">object</span>):</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, name, parent</span>):</span>
+        self.name = name
+        self.parent = parent
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__getattr__</span>(<span class="hljs-params">self, item</span>):</span>
+
+        <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">        dynamic create a method (get,create,update,delete)</span>
+<span class="hljs-string">        :param item:</span>
+<span class="hljs-string">        :return:</span>
+<span class="hljs-string">        &quot;&quot;&quot;</span>
+
+        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fn</span>(<span class="hljs-params">*args, **kwargs</span>):</span>
+            <span class="hljs-keyword">if</span> args <span class="hljs-keyword">and</span> kwargs:
+                <span class="hljs-keyword">raise</span> TypeError(<span class="hljs-string">&#x27;Found Both args and kwargs&#x27;</span>)
+
+            <span class="hljs-keyword">return</span> self.parent.do_request(<span class="hljs-string">&#x27;&#123;0&#125;.&#123;1&#125;&#x27;</span>.format(self.name, item),
+                                          args <span class="hljs-keyword">or</span> kwargs)[<span class="hljs-string">&#x27;result&#x27;</span>]
+
+        <span class="hljs-keyword">return</span> fn
+</code></pre>
 
 <p>基本上一个文件就搞定了，不过这个基本上参考了网上的一个代码实现的，这里使用__getattr__这种方式可以非常简洁的处理了这种请求非常类似的情况，这也是python的魅力吧.</p>
 <h2 id="访问Zabbix-API"><a href="#访问Zabbix-API" class="headerlink" title="访问Zabbix API"></a>访问Zabbix API</h2><p>访问API比较简单(如何参数不多的话，哈哈)，实例代码取Template的一些信息如下:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestZabbixTemplateClient</span>(<span class="params">unittest.TestCase</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setUp</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.zapi = ZabbixClient()</span><br><span class="line">        self.zapi.login_in()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_get_template</span>(<span class="params">self</span>):</span></span><br><span class="line">        templates = self.zapi.template.get()</span><br><span class="line">        print(templates)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_get_template</span>(<span class="params">self</span>):</span></span><br><span class="line">        templates = self.zapi.template.get(</span><br><span class="line">            filter=&#123;</span><br><span class="line">                <span class="string">&quot;host&quot;</span>: [<span class="string">&quot;Template OS Linux&quot;</span>]</span><br><span class="line">            &#125;)</span><br><span class="line">        print(templates[<span class="number">0</span>][<span class="string">&quot;id&quot;</span>])</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_create_template</span>(<span class="params">self</span>):</span></span><br><span class="line">        template = self.zapi.template.create()</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestZabbixTemplateClient</span>(<span class="hljs-params">unittest.TestCase</span>):</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">setUp</span>(<span class="hljs-params">self</span>):</span>
+        self.zapi = ZabbixClient()
+        self.zapi.login_in()
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_get_template</span>(<span class="hljs-params">self</span>):</span>
+        templates = self.zapi.template.get()
+        print(templates)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_get_template</span>(<span class="hljs-params">self</span>):</span>
+        templates = self.zapi.template.get(
+            filter=&#123;
+                <span class="hljs-string">&quot;host&quot;</span>: [<span class="hljs-string">&quot;Template OS Linux&quot;</span>]
+            &#125;)
+        print(templates[<span class="hljs-number">0</span>][<span class="hljs-string">&quot;id&quot;</span>])
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_create_template</span>(<span class="hljs-params">self</span>):</span>
+        template = self.zapi.template.create()</code></pre>
 
 <p>补充一句，就是其实可以看到：</p>
 <ul>
@@ -102,59 +392,219 @@
 </ul>
 <p>这个例子很好的说明了使用<code>__getattr__</code>可以做一些魔法的事情</p>
 
-      
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/python/">python</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/python/">python</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2016/02/28/python/2016-02-28-simple_word_count/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Simple Word Counter</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2016/02/26/python/2016-02-26-zabbix_monitoring/">
+                        <span class="hidden-mobile">zabbix 基础</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
 
+      </div>
+    
   </div>
+</div>
 
-  <div class="article-footer">
-    <div class="article-meta pull-left">
+<!-- Custom -->
 
-    
-      
 
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/python/">python</a>
-    </span>
     
 
     
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
     
 
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/python/">python</a>
-    </span>
     
-
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
     </div>
+  </div>
+</div>
+    
 
     
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
-</article>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
 
   
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
 
 
 
-    </main>
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
 
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
-    
-    &copy; 2020 qmeta
-    
-  </p>
-</footer>
-    
-  </div>
-</div>
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
 </body>
 </html>

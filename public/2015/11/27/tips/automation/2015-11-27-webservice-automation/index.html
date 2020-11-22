@@ -1,93 +1,233 @@
-<!DOCTYPE HTML>
-<html>
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <title>自动化测试－接口测试 | Learning Testing/QA in Hardway | Just Do It</title>
-
-  
-  <meta name="author" content="qmeta">
-  
-
-  
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="allround tester">
+  <meta name="author" content="qmeta">
+  <meta name="keywords" content="">
+  <title>自动化测试－接口测试 - Learning Testing/QA in Hardway</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
   
 
   
-  
-  <meta name="keywords" content="automation">
-  
-
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <meta property="og:title" content="自动化测试－接口测试"/>
-
-  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
-
-  
-  <meta property="og:image" content="/favicon.ico"/>
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
   
 
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"qdriven.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.0.0"></head>
 
 
 <body>
-<div class="blog">
-  <div class="content">
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Practising</strong>&nbsp;</a>
 
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Learning Testing/QA in Hardway</a>
-    </h1>
-    <p class="site-description">Just Do It</p>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
   </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">主页</a></li>
-      
-        <li><a href="/archives">归档</a></li>
-      
-        <li><a href="/categories">分类</a></li>
-      
-        <li><a href="/tags">标签</a></li>
-      
-    </ul>
-  </nav>
-</header>
+</nav>
 
-    <main class="site-main posts-loop">
-    <article>
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="自动化测试－接口测试">
+              
+            </span>
 
+            
+              <div class="mt-3">
   
-    
-    <h3 class="article-title"><span>自动化测试－接口测试</span></h3>
-    
   
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2015/11/27/tips/automation/2015-11-27-webservice-automation/" rel="bookmark">
-        <time class="entry-date published" datetime="2015-11-27T03:10:00.000Z">
-          2015-11-27
-        </time>
-      </a>
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2015-11-27 11:10" pubdate>
+        2015年11月27日 上午
+      </time>
     </span>
-  </div>
+  
+</div>
 
-
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.1k 字
+    </span>
   
 
-  <div class="article-content">
-    <div class="entry">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
       
-        <p>在敏捷开发交付的流程中，自动化测试实际上被放在一个看起来挺重要的位置，而自动化测试中，接口测试是一个投入产出比比较高的<br>一种自动化测试的形式，而我自己也做了一个这样的脚手架一样的东西可以方便进行自动化测试，关键是在一些现有第三包的基础上做实现，其实一个脚手架不需要几个JAVA类就可以完成了，至少我自己的这个在10个文件以内.要论行数估计也没有多少代码量，主要时间其实都是在想怎么更方便的写自动化测试，怎么使用以后的开源代码了。</p>
+      
+      36
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">自动化测试－接口测试</h1>
+            
+            <div class="markdown-body">
+              <p>在敏捷开发交付的流程中，自动化测试实际上被放在一个看起来挺重要的位置，而自动化测试中，接口测试是一个投入产出比比较高的<br>一种自动化测试的形式，而我自己也做了一个这样的脚手架一样的东西可以方便进行自动化测试，关键是在一些现有第三包的基础上做实现，其实一个脚手架不需要几个JAVA类就可以完成了，至少我自己的这个在10个文件以内.要论行数估计也没有多少代码量，主要时间其实都是在想怎么更方便的写自动化测试，怎么使用以后的开源代码了。</p>
 <p>下面介绍一下我自己如何完成这个自动化接口测试<br>脚手架设计和实现的，以及我自己实现过程中的种种发现。主要从以下几个方面来讲：</p>
 <ul>
 <li>如何构建接口自动化测试的脚手架</li>
@@ -107,7 +247,7 @@
 <li>可以查看测试结果，这个其实可以理解为某种测试框架的一个功能，不如JUNIT，TESTNG，他们</li>
 </ul>
 <p>总体上我自己的总结是如下图:</p>
-<p><img src="../../assets/images/pics/api_testing.png" alt="img"></p>
+<p><img src="../../assets/images/pics/api_testing.png" srcset="/img/loading.gif" alt="img"></p>
 <h3 id="接口自动化测试脚手架的构建"><a href="#接口自动化测试脚手架的构建" class="headerlink" title="接口自动化测试脚手架的构建"></a>接口自动化测试脚手架的构建</h3><p>根据以上的分析如果自己需要实现的话，最主要需要实现一下其实就是请求的构建，请求构建包括了:</p>
 <ul>
 <li>发起请求的客户端</li>
@@ -136,7 +276,11 @@
 </li>
 </ul>
 <p>说完这个流程，我们就说说如何通过RestTemplate构建一个简单的HTTP请求:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String,String&gt; urlVariable = <span class="keyword">new</span> Map&lt;String,String&gt; ();</span><br><span class="line">urlVariable.put(<span class="string">&quot;q&quot;</span>,<span class="string">&quot;test&quot;</span>);</span><br><span class="line">JavaBean javaBean = restTemplate.getForObject(<span class="string">&quot;http://www.baidu.com&quot;</span>,JavaBean.class,urlVariable);</span><br><span class="line">JavaBean javaBean1 = restTemplate.postForObject(<span class="string">&quot;http://www.baidu.com&quot;</span>,JavaBean.class,urlVariable);</span><br><span class="line">ResponseEntity e =  restTemplate.getForEntity(<span class="string">&quot;http://www.baidu.com&quot;</span>,JavaBean.class,urlVariable);</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs java">Map&lt;String,String&gt; urlVariable = <span class="hljs-keyword">new</span> Map&lt;String,String&gt; ();
+urlVariable.put(<span class="hljs-string">&quot;q&quot;</span>,<span class="hljs-string">&quot;test&quot;</span>);
+JavaBean javaBean = restTemplate.getForObject(<span class="hljs-string">&quot;http://www.baidu.com&quot;</span>,JavaBean.class,urlVariable);
+JavaBean javaBean1 = restTemplate.postForObject(<span class="hljs-string">&quot;http://www.baidu.com&quot;</span>,JavaBean.class,urlVariable);
+ResponseEntity e =  restTemplate.getForEntity(<span class="hljs-string">&quot;http://www.baidu.com&quot;</span>,JavaBean.class,urlVariable);</code></pre>
 
 <p>实际上使用RestTemplate还是挺简单的，不过为了让使测试更为方便一点，然后每个人的代码更统一点，自己重新封装了一下RestTemplate的使用，主要分为三个概念:</p>
 <ul>
@@ -145,13 +289,28 @@
 <li>客户端调用</li>
 </ul>
 <h3 id="接口服务描述"><a href="#接口服务描述" class="headerlink" title="接口服务描述"></a>接口服务描述</h3><p>Service的描述实际上就是一个JSON文件，只不过自己规定了一下，格式类似于,这个文件描述了API的定义，当然API的body没有在这个里面，不过为了不把事情搞复杂，就暂时不放在这个里面.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;apiDomainName&quot;: &quot;applicationName&quot;,</span><br><span class="line">  &quot;contentType&quot;: &quot;application&#x2F;x-www-form-urlencoded&quot;,</span><br><span class="line">  &quot;headers&quot;: &#123;</span><br><span class="line">    &quot;Accept&quot;: &quot;application&#x2F;json, text&#x2F;javascript, *&#x2F;*&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;method&quot;: &quot;POST&quot;,</span><br><span class="line">  &quot;pathParameters&quot;: [],</span><br><span class="line">  &quot;queryParameters&quot;: [</span><br><span class="line">    &quot;username&quot;,</span><br><span class="line">  ],</span><br><span class="line">  &quot;resourceURL&quot;: &quot;&#x2F;application&#x2F;subdomain&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs json">&#123;
+  <span class="hljs-attr">&quot;apiDomainName&quot;</span>: <span class="hljs-string">&quot;applicationName&quot;</span>,
+  <span class="hljs-attr">&quot;contentType&quot;</span>: <span class="hljs-string">&quot;application/x-www-form-urlencoded&quot;</span>,
+  <span class="hljs-attr">&quot;headers&quot;</span>: &#123;
+    <span class="hljs-attr">&quot;Accept&quot;</span>: <span class="hljs-string">&quot;application/json, text/javascript, */*&quot;</span>
+  &#125;,
+  <span class="hljs-attr">&quot;method&quot;</span>: <span class="hljs-string">&quot;POST&quot;</span>,
+  <span class="hljs-attr">&quot;pathParameters&quot;</span>: [],
+  <span class="hljs-attr">&quot;queryParameters&quot;</span>: [
+    <span class="hljs-string">&quot;username&quot;</span>,
+  ],
+  <span class="hljs-attr">&quot;resourceURL&quot;</span>: <span class="hljs-string">&quot;/application/subdomain&quot;</span>
+&#125;</code></pre>
 
 <p>测试数据类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Map&lt;String, String&gt; queryParameters = Maps.newHashMap();</span><br><span class="line"><span class="keyword">private</span> Map&lt;String, String&gt; pathParameters = Maps.newHashMap();</span><br><span class="line"><span class="keyword">private</span> Map&lt;String, String&gt; headers = Maps.newHashMap();</span><br><span class="line"><span class="keyword">private</span> T body;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs java"><span class="hljs-keyword">private</span> Map&lt;String, String&gt; queryParameters = Maps.newHashMap();
+<span class="hljs-keyword">private</span> Map&lt;String, String&gt; pathParameters = Maps.newHashMap();
+<span class="hljs-keyword">private</span> Map&lt;String, String&gt; headers = Maps.newHashMap();
+<span class="hljs-keyword">private</span> T body;</code></pre>
 
 <p>而如何调用客户端就变成,而且其实每一个API的访问其实都可以这样子来做，</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ResponseEntity response = RestTemplateHelper.build(serviceDescriptionPath,requestData).call();</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs java">ResponseEntity response = RestTemplateHelper.build(serviceDescriptionPath,requestData).call();</code></pre>
 <p>说明一下的是：</p>
 <ul>
 <li>serviceDescriptionPath就是接口的描述</li>
@@ -185,13 +344,32 @@
 </tr>
 </tbody></table>
 <p>说明一下，通过反射的方式，可以直接生成一个requestData的实例,同时queryParameters中值已经设置好了，这样调用代码中就不需要写类似于：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RequestData data = <span class="keyword">new</span> RequestData();</span><br><span class="line">data.queryParameters.put(<span class="string">&quot;username&quot;</span>,<span class="string">&quot;1&quot;</span>);</span><br><span class="line">data.queryParameters.put(<span class="string">&quot;year&quot;</span>,<span class="string">&quot;2015&quot;</span>);</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs java">RequestData data = <span class="hljs-keyword">new</span> RequestData();
+data.queryParameters.put(<span class="hljs-string">&quot;username&quot;</span>,<span class="hljs-string">&quot;1&quot;</span>);
+data.queryParameters.put(<span class="hljs-string">&quot;year&quot;</span>,<span class="hljs-string">&quot;2015&quot;</span>);</code></pre>
 
 <p>这里有兴趣的同学可以参考这个包:里面其实已经有很方便的通过反射去赋值了,</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.jodd<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jodd-bean<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.6.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.jodd<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>jodd-bean<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.6.6<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></code></pre>
 
 <h3 id="使用TestNG的DataProvider"><a href="#使用TestNG的DataProvider" class="headerlink" title="使用TestNG的DataProvider"></a>使用TestNG的DataProvider</h3><p>刚才讲述了如何发生生成数据，那么通过Excel的方式提供不同的数据，就可以通过TestNG的DataProvider了<br>所以测试数据通过，TestNG data provider的实现在这里就不多少了，网上其实有很多内容了.</p>
-<h3 id="接口测试的代码看起来就是这个样子了"><a href="#接口测试的代码看起来就是这个样子了" class="headerlink" title="接口测试的代码看起来就是这个样子了"></a>接口测试的代码看起来就是这个样子了</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@DataProvider(name = &quot;data&quot;)</span></span><br><span class="line">  <span class="keyword">public</span> Iterator&lt;Object[]&gt; getAPITestData(Method m) <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">      Map&lt;String, Class&gt; clazz = <span class="keyword">new</span> HashMap&lt;String, Class&gt;();</span><br><span class="line">      clazz.put(<span class="string">&quot;RequestData&quot;</span>, RequestData.class);</span><br><span class="line">      Iterator&lt;Object[]&gt; y = TestData.provider(<span class="string">&quot;testcase/api1.xls&quot;</span>, m, clazzMap);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> y;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Test(dataProvider = &quot;data&quot;)</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAPITest</span><span class="params">(RequestData data)</span> </span>&#123;</span><br><span class="line">    ResponseEntity response = RestTemplateHelper.build(serviceDescriptionPath,requestData).call();</span><br><span class="line">    Assert.assertEqual(response.getStatus,<span class="number">200</span>); <span class="comment">// response 的期望值实际可以通过dataprovider传入</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="接口测试的代码看起来就是这个样子了"><a href="#接口测试的代码看起来就是这个样子了" class="headerlink" title="接口测试的代码看起来就是这个样子了"></a>接口测试的代码看起来就是这个样子了</h3><pre><code class="hljs java"><span class="hljs-meta">@DataProvider(name = &quot;data&quot;)</span>
+  <span class="hljs-keyword">public</span> Iterator&lt;Object[]&gt; getAPITestData(Method m) <span class="hljs-keyword">throws</span> Exception &#123;
+      Map&lt;String, Class&gt; clazz = <span class="hljs-keyword">new</span> HashMap&lt;String, Class&gt;();
+      clazz.put(<span class="hljs-string">&quot;RequestData&quot;</span>, RequestData.class);
+      Iterator&lt;Object[]&gt; y = TestData.provider(<span class="hljs-string">&quot;testcase/api1.xls&quot;</span>, m, clazzMap);
+
+      <span class="hljs-keyword">return</span> y;
+  &#125;
+
+  <span class="hljs-meta">@Test(dataProvider = &quot;data&quot;)</span>
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testAPITest</span><span class="hljs-params">(RequestData data)</span> </span>&#123;
+    ResponseEntity response = RestTemplateHelper.build(serviceDescriptionPath,requestData).call();
+    Assert.assertEqual(response.getStatus,<span class="hljs-number">200</span>); <span class="hljs-comment">// response 的期望值实际可以通过dataprovider传入</span>
+  &#125;</code></pre>
 <p>而且几乎所有的代码都差不多成这个样子了，那么获取可以写个代码生成的东西,当然最后通过了JsonPath写了一些获取JSON值的工具，这个暂时也就不说了.</p>
 <h3 id="那么代码生成吧"><a href="#那么代码生成吧" class="headerlink" title="那么代码生成吧"></a>那么代码生成吧</h3><p>当封装好这些东西之后，发现所有的接口都类似了，然后就做了代码生成的工具了,代码生成器的入口实际上个就是那个服务描述文件开始的，<br>所以代码生成器的参数就是服务描述文件，在实际的使用的过程中，接口描述这个文件也可以自动生成，目前总共支持以下几种:</p>
 <ul>
@@ -213,10 +391,68 @@
 <li>开发接口定义不够准确的问题,造成使用RestTemplate时候出现了一些不在开始预期范中的问题</li>
 </ul>
 <p>HTTPS的访问是通过如下代码解决的,创建一个略SSL的httpclient就可以了</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> RestTemplateClientHelper <span class="title">getHttpClientImplInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">       RestTemplateClientHelper client = <span class="keyword">new</span> RestTemplateClientHelper();</span><br><span class="line">       HttpClient httpClient = getIgnoreSSLHttpClient();</span><br><span class="line">       client.setTemplate(<span class="keyword">new</span> RestTemplate(<span class="keyword">new</span> HttpComponentsClientHttpRequestFactory(httpClient)));</span><br><span class="line">       <span class="keyword">return</span> client;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 获取忽略SSL的httpclient，支持https的请求</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> HttpClient <span class="title">getIgnoreSSLHttpClient</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       CloseableHttpClient httpClient = <span class="keyword">null</span>;</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">           httpClient = HttpClients.custom().</span><br><span class="line">                   setHostnameVerifier(<span class="keyword">new</span> AllowAllHostnameVerifier()).</span><br><span class="line">                   setSslcontext(<span class="keyword">new</span> SSLContextBuilder().loadTrustMaterial(<span class="keyword">null</span>, <span class="keyword">new</span> TrustStrategy() &#123;</span><br><span class="line">                       <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isTrusted</span><span class="params">(X509Certificate[] arg0, String arg1)</span> <span class="keyword">throws</span> CertificateException </span>&#123;</span><br><span class="line">                           <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                       &#125;</span><br><span class="line">                   &#125;).build()).build();</span><br><span class="line">       &#125; <span class="keyword">catch</span> (NoSuchAlgorithmException | KeyManagementException | KeyStoreException e) &#123;</span><br><span class="line">           logger.error(e);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> httpClient;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> RestTemplateClientHelper <span class="hljs-title">getHttpClientImplInstance</span><span class="hljs-params">()</span></span>&#123;
+       RestTemplateClientHelper client = <span class="hljs-keyword">new</span> RestTemplateClientHelper();
+       HttpClient httpClient = getIgnoreSSLHttpClient();
+       client.setTemplate(<span class="hljs-keyword">new</span> RestTemplate(<span class="hljs-keyword">new</span> HttpComponentsClientHttpRequestFactory(httpClient)));
+       <span class="hljs-keyword">return</span> client;
+   &#125;
+
+   <span class="hljs-comment">/**</span>
+<span class="hljs-comment">    * 获取忽略SSL的httpclient，支持https的请求</span>
+<span class="hljs-comment">    * <span class="hljs-doctag">@return</span></span>
+<span class="hljs-comment">    */</span>
+   <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> HttpClient <span class="hljs-title">getIgnoreSSLHttpClient</span><span class="hljs-params">()</span> </span>&#123;
+       CloseableHttpClient httpClient = <span class="hljs-keyword">null</span>;
+       <span class="hljs-keyword">try</span> &#123;
+
+           httpClient = HttpClients.custom().
+                   setHostnameVerifier(<span class="hljs-keyword">new</span> AllowAllHostnameVerifier()).
+                   setSslcontext(<span class="hljs-keyword">new</span> SSLContextBuilder().loadTrustMaterial(<span class="hljs-keyword">null</span>, <span class="hljs-keyword">new</span> TrustStrategy() &#123;
+                       <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isTrusted</span><span class="hljs-params">(X509Certificate[] arg0, String arg1)</span> <span class="hljs-keyword">throws</span> CertificateException </span>&#123;
+                           <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+                       &#125;
+                   &#125;).build()).build();
+       &#125; <span class="hljs-keyword">catch</span> (NoSuchAlgorithmException | KeyManagementException | KeyStoreException e) &#123;
+           logger.error(e);
+       &#125;
+       <span class="hljs-keyword">return</span> httpClient;
+   &#125;</code></pre>
 
 <p>还有一个就是有时开发的接口返回类型(accept type)不能让RestTemplate处理，那么其实添加自己定义个MessageConverter就好了:<br>下面是一个修改阿里自己的FastJSON的MessageConverter的例子,<br>其实也没改什么，就是捕捉了一个异常，主要是不知道什么原因调用时候readInternal就抛出和编码格式有关系的异常，然后就捕捉了一下异常反正也就把那个问题就没有了，不过这个改法应该也是有问题的.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ModifiedFastJsonHttpMessageConverter</span> <span class="keyword">extends</span> <span class="title">AbstractHttpMessageConverter</span>&lt;<span class="title">Object</span>&gt; </span>&#123;</span><br><span class="line">   ........</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ModifiedFastJsonHttpMessageConverter</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(<span class="keyword">new</span> MediaType(<span class="string">&quot;application&quot;</span>, <span class="string">&quot;json&quot;</span>, UTF8), <span class="keyword">new</span> MediaType(<span class="string">&quot;application&quot;</span>, <span class="string">&quot;*+json&quot;</span>, UTF8));</span><br><span class="line">        <span class="keyword">this</span>.charset = UTF8;</span><br><span class="line">        <span class="keyword">this</span>.features = <span class="keyword">new</span> SerializerFeature[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ............</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> Object <span class="title">readInternal</span><span class="params">(Class&lt;?&gt; clazz, HttpInputMessage inputMessage)</span> <span class="keyword">throws</span> IOException, HttpMessageNotReadableException </span>&#123;</span><br><span class="line">        ByteArrayOutputStream baos = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">        InputStream in = inputMessage.getBody();</span><br><span class="line">        <span class="keyword">byte</span>[] buf = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> bytes = in.read(buf);</span><br><span class="line">            <span class="keyword">if</span>(bytes == -<span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">byte</span>[] bytes1 = baos.toByteArray();</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> JSON.parseObject(bytes1, <span class="number">0</span>, bytes1.length, <span class="keyword">this</span>.charset.newDecoder(), clazz);</span><br><span class="line">                &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">                    <span class="keyword">return</span> baos.toString(<span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(bytes &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                baos.write(buf, <span class="number">0</span>, bytes);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">      ........</span><br><span class="line">  &#125;  </span><br></pre></td></tr></table></figure>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ModifiedFastJsonHttpMessageConverter</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractHttpMessageConverter</span>&lt;<span class="hljs-title">Object</span>&gt; </span>&#123;
+   ........
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ModifiedFastJsonHttpMessageConverter</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">super</span>(<span class="hljs-keyword">new</span> MediaType(<span class="hljs-string">&quot;application&quot;</span>, <span class="hljs-string">&quot;json&quot;</span>, UTF8), <span class="hljs-keyword">new</span> MediaType(<span class="hljs-string">&quot;application&quot;</span>, <span class="hljs-string">&quot;*+json&quot;</span>, UTF8));
+        <span class="hljs-keyword">this</span>.charset = UTF8;
+        <span class="hljs-keyword">this</span>.features = <span class="hljs-keyword">new</span> SerializerFeature[<span class="hljs-number">0</span>];
+    &#125;
+
+    ............
+
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> Object <span class="hljs-title">readInternal</span><span class="hljs-params">(Class&lt;?&gt; clazz, HttpInputMessage inputMessage)</span> <span class="hljs-keyword">throws</span> IOException, HttpMessageNotReadableException </span>&#123;
+        ByteArrayOutputStream baos = <span class="hljs-keyword">new</span> ByteArrayOutputStream();
+        InputStream in = inputMessage.getBody();
+        <span class="hljs-keyword">byte</span>[] buf = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[<span class="hljs-number">1024</span>];
+
+        <span class="hljs-keyword">while</span>(<span class="hljs-keyword">true</span>) &#123;
+            <span class="hljs-keyword">int</span> bytes = in.read(buf);
+            <span class="hljs-keyword">if</span>(bytes == -<span class="hljs-number">1</span>) &#123;
+                <span class="hljs-keyword">byte</span>[] bytes1 = baos.toByteArray();
+                <span class="hljs-keyword">try</span> &#123;
+                    <span class="hljs-keyword">return</span> JSON.parseObject(bytes1, <span class="hljs-number">0</span>, bytes1.length, <span class="hljs-keyword">this</span>.charset.newDecoder(), clazz);
+                &#125;<span class="hljs-keyword">catch</span> (Exception e)&#123;
+                    <span class="hljs-keyword">return</span> baos.toString(<span class="hljs-string">&quot;UTF-8&quot;</span>);
+                &#125;
+            &#125;
+
+            <span class="hljs-keyword">if</span>(bytes &gt; <span class="hljs-number">0</span>) &#123;
+                baos.write(buf, <span class="hljs-number">0</span>, bytes);
+            &#125;
+        &#125;
+    &#125;
+      ........
+  &#125;  </code></pre>
 
 <h2 id="后续的一些想法"><a href="#后续的一些想法" class="headerlink" title="后续的一些想法"></a>后续的一些想法</h2><p>后续希望在这个基础上再做点其他的一些事情:</p>
 <ul>
@@ -233,59 +469,219 @@
 <li><a target="_blank" rel="noopener" href="https://github.com/Mashape/mockbin.git">mockbin</a></li>
 </ul>
 
-      
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/automation/">automation</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/automation/">automation</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2015/12/02/tips/real/2015-12-02-singleton/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Singleton 的不同写法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2015/11/19/true_stories/2015-11-19-talking_is_cheep/">
+                        <span class="hidden-mobile">Talking is Cheap,show me the code</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
 
+      </div>
+    
   </div>
+</div>
 
-  <div class="article-footer">
-    <div class="article-meta pull-left">
+<!-- Custom -->
 
-    
-      
 
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/automation/">automation</a>
-    </span>
     
 
     
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
     
 
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/automation/">automation</a>
-    </span>
     
-
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
     </div>
+  </div>
+</div>
+    
 
     
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
-</article>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
 
   
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
 
 
 
-    </main>
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
 
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
-    
-    &copy; 2020 qmeta
-    
-  </p>
-</footer>
-    
-  </div>
-</div>
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
 </body>
 </html>

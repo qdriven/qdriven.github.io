@@ -1,166 +1,609 @@
-<!DOCTYPE HTML>
-<html>
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <title>assertions | Learning Testing/QA in Hardway | Just Do It</title>
-
-  
-  <meta name="author" content="qmeta">
-  
-
-  
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="allround tester">
+  <meta name="author" content="qmeta">
+  <meta name="keywords" content="">
+  <title>assertions - Learning Testing/QA in Hardway</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
   
 
   
-  
-  <meta name="keywords" content="automation">
-  
-
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <meta property="og:title" content="assertions"/>
-
-  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
-
-  
-  <meta property="og:image" content="/favicon.ico"/>
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
   
 
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"qdriven.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.0.0"></head>
 
 
 <body>
-<div class="blog">
-  <div class="content">
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Practising</strong>&nbsp;</a>
 
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Learning Testing/QA in Hardway</a>
-    </h1>
-    <p class="site-description">Just Do It</p>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
   </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">主页</a></li>
-      
-        <li><a href="/archives">归档</a></li>
-      
-        <li><a href="/categories">分类</a></li>
-      
-        <li><a href="/tags">标签</a></li>
-      
-    </ul>
-  </nav>
-</header>
+</nav>
 
-    <main class="site-main posts-loop">
-    <article>
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="assertions">
+              
+            </span>
 
+            
+              <div class="mt-3">
   
-    
-    <h3 class="article-title"><span>assertions</span></h3>
-    
   
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2016/02/01/tips/automation/2016-02-01-assertions/" rel="bookmark">
-        <time class="entry-date published" datetime="2016-02-01T15:48:35.000Z">
-          2016-02-01
-        </time>
-      </a>
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2016-02-01 23:48" pubdate>
+        2016年2月1日 晚上
+      </time>
     </span>
-  </div>
+  
+</div>
 
-
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      923 字
+    </span>
   
 
-  <div class="article-content">
-    <div class="entry">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
       
-        <p>由于一直都在进行测试的工作，所以会关注Assertion的工具，发现两个不错的Assertion 第三方包，准备在实践中使用. 这两个分别是：</p>
+      
+      17
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">assertions</h1>
+            
+            <div class="markdown-body">
+              <p>由于一直都在进行测试的工作，所以会关注Assertion的工具，发现两个不错的Assertion 第三方包，准备在实践中使用. 这两个分别是：</p>
 <ul>
 <li>Google Truth(<a target="_blank" rel="noopener" href="http://google.github.io/truth/usage/">http://google.github.io/truth/usage/</a>)</li>
 <li><a target="_blank" rel="noopener" href="http://joel-costigliola.github.io/assertj/">assertj</a></li>
 </ul>
 <p>这个里面有很多自己想实现的比较的功能。一下是一些简单的试用的代码。</p>
 <h2 id="Google-Truth"><a href="#Google-Truth" class="headerlink" title="Google Truth"></a>Google Truth</h2><p>基础的验证：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test_basic_truth</span><span class="params">()</span></span>&#123;</span><br><span class="line">       Set&lt;String&gt; foo = Sets.newHashSet();</span><br><span class="line">       assertThat(foo).isEmpty();</span><br><span class="line">       assertThat(foo).isNotNull();</span><br><span class="line">       assertThat(<span class="number">5</span>).isEqualTo(<span class="number">5L</span>);</span><br><span class="line">       assertThat(<span class="number">5L</span>).isEqualTo(<span class="number">5</span>);</span><br><span class="line">       assert_().that(<span class="number">50</span>).isEqualTo(<span class="number">50</span>);</span><br><span class="line">       assertThat(<span class="string">&quot;test&quot;</span>).isEqualTo(<span class="string">&quot;test&quot;</span>);</span><br><span class="line">       assertThat(<span class="string">&quot;test&quot;</span>).contains(<span class="string">&quot;te&quot;</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test_basic_truth</span><span class="hljs-params">()</span></span>&#123;
+       Set&lt;String&gt; foo = Sets.newHashSet();
+       assertThat(foo).isEmpty();
+       assertThat(foo).isNotNull();
+       assertThat(<span class="hljs-number">5</span>).isEqualTo(<span class="hljs-number">5L</span>);
+       assertThat(<span class="hljs-number">5L</span>).isEqualTo(<span class="hljs-number">5</span>);
+       assert_().that(<span class="hljs-number">50</span>).isEqualTo(<span class="hljs-number">50</span>);
+       assertThat(<span class="hljs-string">&quot;test&quot;</span>).isEqualTo(<span class="hljs-string">&quot;test&quot;</span>);
+       assertThat(<span class="hljs-string">&quot;test&quot;</span>).contains(<span class="hljs-string">&quot;te&quot;</span>);
+   &#125;</code></pre>
 
 <p>Collections/Maps的验证:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test_basic_truth_maps_collections</span><span class="params">()</span></span>&#123;</span><br><span class="line">       Set&lt;String&gt; foo = Sets.newHashSet();</span><br><span class="line">       assertThat(foo).isEmpty();</span><br><span class="line">       assertThat(foo).isNotNull();</span><br><span class="line">       foo.add(<span class="string">&quot;test&quot;</span>);</span><br><span class="line">       foo.add(<span class="string">&quot;test1&quot;</span>);</span><br><span class="line">       foo.add(<span class="string">&quot;test2&quot;</span>);</span><br><span class="line">       assertThat(foo).contains(<span class="string">&quot;test&quot;</span>);</span><br><span class="line">       assertThat(foo).containsAllOf(<span class="string">&quot;test&quot;</span>, <span class="string">&quot;test1&quot;</span>);</span><br><span class="line">       assertThat(foo).containsExactly(<span class="string">&quot;test2&quot;</span>, <span class="string">&quot;test&quot;</span>, <span class="string">&quot;test1&quot;</span>);</span><br><span class="line">       assertThat(foo).containsNoneOf(<span class="string">&quot;test889&quot;</span>, <span class="string">&quot;test10&quot;</span>);</span><br><span class="line"></span><br><span class="line">       Map&lt;String,String&gt; maps = Maps.newHashMap();</span><br><span class="line">       maps.put(<span class="string">&quot;test&quot;</span>, <span class="string">&quot;test1&quot;</span>);</span><br><span class="line">       maps.put(<span class="string">&quot;test1&quot;</span>, <span class="string">&quot;test2&quot;</span>);</span><br><span class="line">       maps.put(<span class="string">&quot;test2&quot;</span>, <span class="string">&quot;test3&quot;</span>);</span><br><span class="line">       assertThat(maps).containsKey(<span class="string">&quot;test1&quot;</span>);</span><br><span class="line">       assertThat(maps).containsEntry(<span class="string">&quot;test1&quot;</span>, <span class="string">&quot;test2&quot;</span>);</span><br><span class="line">       assertThat(maps).doesNotContainEntry(<span class="string">&quot;test0&quot;</span>, <span class="string">&quot;test0&quot;</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test_basic_truth_maps_collections</span><span class="hljs-params">()</span></span>&#123;
+       Set&lt;String&gt; foo = Sets.newHashSet();
+       assertThat(foo).isEmpty();
+       assertThat(foo).isNotNull();
+       foo.add(<span class="hljs-string">&quot;test&quot;</span>);
+       foo.add(<span class="hljs-string">&quot;test1&quot;</span>);
+       foo.add(<span class="hljs-string">&quot;test2&quot;</span>);
+       assertThat(foo).contains(<span class="hljs-string">&quot;test&quot;</span>);
+       assertThat(foo).containsAllOf(<span class="hljs-string">&quot;test&quot;</span>, <span class="hljs-string">&quot;test1&quot;</span>);
+       assertThat(foo).containsExactly(<span class="hljs-string">&quot;test2&quot;</span>, <span class="hljs-string">&quot;test&quot;</span>, <span class="hljs-string">&quot;test1&quot;</span>);
+       assertThat(foo).containsNoneOf(<span class="hljs-string">&quot;test889&quot;</span>, <span class="hljs-string">&quot;test10&quot;</span>);
+
+       Map&lt;String,String&gt; maps = Maps.newHashMap();
+       maps.put(<span class="hljs-string">&quot;test&quot;</span>, <span class="hljs-string">&quot;test1&quot;</span>);
+       maps.put(<span class="hljs-string">&quot;test1&quot;</span>, <span class="hljs-string">&quot;test2&quot;</span>);
+       maps.put(<span class="hljs-string">&quot;test2&quot;</span>, <span class="hljs-string">&quot;test3&quot;</span>);
+       assertThat(maps).containsKey(<span class="hljs-string">&quot;test1&quot;</span>);
+       assertThat(maps).containsEntry(<span class="hljs-string">&quot;test1&quot;</span>, <span class="hljs-string">&quot;test2&quot;</span>);
+       assertThat(maps).doesNotContainEntry(<span class="hljs-string">&quot;test0&quot;</span>, <span class="hljs-string">&quot;test0&quot;</span>);
+   &#125;</code></pre>
 
 <h2 id="assertj"><a href="#assertj" class="headerlink" title="assertj"></a>assertj</h2><p>基础的验证：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test_contains</span><span class="params">()</span></span>&#123;</span><br><span class="line">     assertThat(<span class="string">&quot;aaa&quot;</span>).contains(<span class="string">&quot;aa&quot;</span>);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="meta">@Test</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test_list_contains</span><span class="params">()</span></span>&#123;</span><br><span class="line">     List&lt;String&gt; result = Lists.newArrayList(<span class="string">&quot;abcd&quot;</span>,<span class="string">&quot;ddds&quot;</span>,<span class="string">&quot;ttest&quot;</span>);</span><br><span class="line">     assertThat(result).contains(<span class="string">&quot;ddds&quot;</span>);</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="meta">@Test</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test_list_contains_onlyonce</span><span class="params">()</span></span>&#123;</span><br><span class="line">     List&lt;String&gt; result = Lists.newArrayList(<span class="string">&quot;abcd&quot;</span>,<span class="string">&quot;ddds&quot;</span>,<span class="string">&quot;ttest&quot;</span>);</span><br><span class="line">     assertThat(result).containsOnlyOnce(<span class="string">&quot;ddds&quot;</span>);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="meta">@Test</span></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test_list_contains_ELementOf</span><span class="params">()</span></span>&#123;</span><br><span class="line">     List&lt;String&gt; result = Lists.newArrayList(<span class="string">&quot;abcd&quot;</span>,<span class="string">&quot;ddds&quot;</span>,<span class="string">&quot;ttest&quot;</span>);</span><br><span class="line">     assertThat(result).containsExactlyElementsOf(Lists.newArrayList(<span class="string">&quot;abcd&quot;</span>, <span class="string">&quot;ddds&quot;</span>, <span class="string">&quot;ttest&quot;</span>));</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+ <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test_contains</span><span class="hljs-params">()</span></span>&#123;
+     assertThat(<span class="hljs-string">&quot;aaa&quot;</span>).contains(<span class="hljs-string">&quot;aa&quot;</span>);
+ &#125;
+
+ <span class="hljs-meta">@Test</span>
+ <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test_list_contains</span><span class="hljs-params">()</span></span>&#123;
+     List&lt;String&gt; result = Lists.newArrayList(<span class="hljs-string">&quot;abcd&quot;</span>,<span class="hljs-string">&quot;ddds&quot;</span>,<span class="hljs-string">&quot;ttest&quot;</span>);
+     assertThat(result).contains(<span class="hljs-string">&quot;ddds&quot;</span>);
+ &#125;
+ <span class="hljs-meta">@Test</span>
+ <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test_list_contains_onlyonce</span><span class="hljs-params">()</span></span>&#123;
+     List&lt;String&gt; result = Lists.newArrayList(<span class="hljs-string">&quot;abcd&quot;</span>,<span class="hljs-string">&quot;ddds&quot;</span>,<span class="hljs-string">&quot;ttest&quot;</span>);
+     assertThat(result).containsOnlyOnce(<span class="hljs-string">&quot;ddds&quot;</span>);
+ &#125;
+
+ <span class="hljs-meta">@Test</span>
+     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test_list_contains_ELementOf</span><span class="hljs-params">()</span></span>&#123;
+     List&lt;String&gt; result = Lists.newArrayList(<span class="hljs-string">&quot;abcd&quot;</span>,<span class="hljs-string">&quot;ddds&quot;</span>,<span class="hljs-string">&quot;ttest&quot;</span>);
+     assertThat(result).containsExactlyElementsOf(Lists.newArrayList(<span class="hljs-string">&quot;abcd&quot;</span>, <span class="hljs-string">&quot;ddds&quot;</span>, <span class="hljs-string">&quot;ttest&quot;</span>));
+ &#125;</code></pre>
 
 <p>Guava 的验证：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">MultiMap_assertions</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       Multimap&lt;String, String&gt; actual = ArrayListMultimap.create();</span><br><span class="line">       actual.putAll(<span class="string">&quot;Lakers&quot;</span>, newArrayList(<span class="string">&quot;Kobe Bryant&quot;</span>, <span class="string">&quot;Magic Johnson&quot;</span>, <span class="string">&quot;Kareem Abdul Jabbar&quot;</span>));</span><br><span class="line">       actual.putAll(<span class="string">&quot;Spurs&quot;</span>, newArrayList(<span class="string">&quot;Tony Parker&quot;</span>, <span class="string">&quot;Tim Duncan&quot;</span>, <span class="string">&quot;Manu Ginobili&quot;</span>));</span><br><span class="line"></span><br><span class="line">       assertThat(actual).containsKeys(<span class="string">&quot;Lakers&quot;</span>, <span class="string">&quot;Spurs&quot;</span>);</span><br><span class="line">       assertThat(actual).contains(entry(<span class="string">&quot;Lakers&quot;</span>, <span class="string">&quot;Kobe Bryant&quot;</span>),</span><br><span class="line">               entry(<span class="string">&quot;Spurs&quot;</span>, <span class="string">&quot;Tim Duncan&quot;</span>));</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Test</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">multiple_set_assertions</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       Multimap&lt;String, String&gt; listMultimap = ArrayListMultimap.create();</span><br><span class="line">       listMultimap.putAll(<span class="string">&quot;Spurs&quot;</span>, newArrayList(<span class="string">&quot;Tony Parker&quot;</span>, <span class="string">&quot;Tim Duncan&quot;</span>, <span class="string">&quot;Manu Ginobili&quot;</span>));</span><br><span class="line">       listMultimap.putAll(<span class="string">&quot;Bulls&quot;</span>, newArrayList(<span class="string">&quot;Michael Jordan&quot;</span>, <span class="string">&quot;Scottie Pippen&quot;</span>, <span class="string">&quot;Derrick Rose&quot;</span>));</span><br><span class="line"></span><br><span class="line">       Multimap&lt;String, String&gt; setMultimap = TreeMultimap.create();</span><br><span class="line">       setMultimap.putAll(<span class="string">&quot;Spurs&quot;</span>, newHashSet(<span class="string">&quot;Tony Parker&quot;</span>, <span class="string">&quot;Tim Duncan&quot;</span>, <span class="string">&quot;Manu Ginobili&quot;</span>));</span><br><span class="line">       setMultimap.putAll(<span class="string">&quot;Bulls&quot;</span>, newHashSet(<span class="string">&quot;Michael Jordan&quot;</span>, <span class="string">&quot;Scottie Pippen&quot;</span>, <span class="string">&quot;Derrick Rose&quot;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// assertion will pass as listMultimap and setMultimap have the same content</span></span><br><span class="line">       assertThat(listMultimap).hasSameEntriesAs(setMultimap);</span><br><span class="line"></span><br><span class="line"><span class="comment">// this assertion FAILS even though both multimaps have the same content</span></span><br><span class="line">       assertThat(listMultimap).isEqualTo(setMultimap);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   <span class="meta">@Test</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">range_assertions</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       Range&lt;Integer&gt; range = Range.closed(<span class="number">10</span>, <span class="number">12</span>);</span><br><span class="line">       assertThat(range).isNotEmpty()</span><br><span class="line">               .contains(<span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>)</span><br><span class="line">               .hasClosedLowerBound()</span><br><span class="line">               .hasLowerEndpointEqualTo(<span class="number">10</span>)</span><br><span class="line">               .hasUpperEndpointEqualTo(<span class="number">12</span>);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Test</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">table_assertion</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="comment">// Table assertions</span></span><br><span class="line">       Table&lt;Integer, String, String&gt; bestMovies = HashBasedTable.create();</span><br><span class="line"></span><br><span class="line">       bestMovies.put(<span class="number">1970</span>, <span class="string">&quot;Palme d&#x27;Or&quot;</span>, <span class="string">&quot;M.A.S.H&quot;</span>);</span><br><span class="line">       bestMovies.put(<span class="number">1994</span>, <span class="string">&quot;Palme d&#x27;Or&quot;</span>, <span class="string">&quot;Pulp Fiction&quot;</span>);</span><br><span class="line">       bestMovies.put(<span class="number">2008</span>, <span class="string">&quot;Palme d&#x27;Or&quot;</span>, <span class="string">&quot;Entre les murs&quot;</span>);</span><br><span class="line">       bestMovies.put(<span class="number">2000</span>, <span class="string">&quot;Best picture Oscar&quot;</span>, <span class="string">&quot;American Beauty&quot;</span>);</span><br><span class="line">       bestMovies.put(<span class="number">2011</span>, <span class="string">&quot;Goldene Bär&quot;</span>, <span class="string">&quot;A Separation&quot;</span>);</span><br><span class="line"></span><br><span class="line">       assertThat(bestMovies).hasRowCount(<span class="number">5</span>).hasColumnCount(<span class="number">3</span>).hasSize(<span class="number">5</span>)</span><br><span class="line">               .containsValues(<span class="string">&quot;American Beauty&quot;</span>, <span class="string">&quot;A Separation&quot;</span>, <span class="string">&quot;Pulp Fiction&quot;</span>)</span><br><span class="line">               .containsCell(<span class="number">1994</span>, <span class="string">&quot;Palme d&#x27;Or&quot;</span>, <span class="string">&quot;Pulp Fiction&quot;</span>)</span><br><span class="line">               .containsColumns(<span class="string">&quot;Palme d&#x27;Or&quot;</span>, <span class="string">&quot;Best picture Oscar&quot;</span>, <span class="string">&quot;Goldene Bär&quot;</span>)</span><br><span class="line">               .containsRows(<span class="number">1970</span>, <span class="number">1994</span>, <span class="number">2000</span>, <span class="number">2008</span>, <span class="number">2011</span>);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Test</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test_opotions</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="comment">// Optional assertions</span></span><br><span class="line">       Optional&lt;String&gt; optional = Optional.of(<span class="string">&quot;Test&quot;</span>);</span><br><span class="line">       assertThat(optional).isPresent().contains(<span class="string">&quot;Test&quot;</span>);</span><br><span class="line"></span><br><span class="line">       Optional&lt;Long&gt; optionalNum = Optional.of(<span class="number">12L</span>);</span><br><span class="line">       assertThat(optionalNum).extractingValue()</span><br><span class="line">               .isInstanceOf(Long.class)</span><br><span class="line">               .isEqualTo(<span class="number">12L</span>);</span><br><span class="line"></span><br><span class="line">        optional = Optional.of(<span class="string">&quot;Bill&quot;</span>);</span><br><span class="line"><span class="comment">// extractingCharSequence allows to chain String specific assertion</span></span><br><span class="line">       assertThat(optional).extractingCharSequence()</span><br><span class="line">               .startsWith(<span class="string">&quot;Bi&quot;</span>);</span><br><span class="line"></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">MultiMap_assertions</span><span class="hljs-params">()</span> </span>&#123;
+       Multimap&lt;String, String&gt; actual = ArrayListMultimap.create();
+       actual.putAll(<span class="hljs-string">&quot;Lakers&quot;</span>, newArrayList(<span class="hljs-string">&quot;Kobe Bryant&quot;</span>, <span class="hljs-string">&quot;Magic Johnson&quot;</span>, <span class="hljs-string">&quot;Kareem Abdul Jabbar&quot;</span>));
+       actual.putAll(<span class="hljs-string">&quot;Spurs&quot;</span>, newArrayList(<span class="hljs-string">&quot;Tony Parker&quot;</span>, <span class="hljs-string">&quot;Tim Duncan&quot;</span>, <span class="hljs-string">&quot;Manu Ginobili&quot;</span>));
+
+       assertThat(actual).containsKeys(<span class="hljs-string">&quot;Lakers&quot;</span>, <span class="hljs-string">&quot;Spurs&quot;</span>);
+       assertThat(actual).contains(entry(<span class="hljs-string">&quot;Lakers&quot;</span>, <span class="hljs-string">&quot;Kobe Bryant&quot;</span>),
+               entry(<span class="hljs-string">&quot;Spurs&quot;</span>, <span class="hljs-string">&quot;Tim Duncan&quot;</span>));
+   &#125;
+
+   <span class="hljs-meta">@Test</span>
+   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">multiple_set_assertions</span><span class="hljs-params">()</span> </span>&#123;
+       Multimap&lt;String, String&gt; listMultimap = ArrayListMultimap.create();
+       listMultimap.putAll(<span class="hljs-string">&quot;Spurs&quot;</span>, newArrayList(<span class="hljs-string">&quot;Tony Parker&quot;</span>, <span class="hljs-string">&quot;Tim Duncan&quot;</span>, <span class="hljs-string">&quot;Manu Ginobili&quot;</span>));
+       listMultimap.putAll(<span class="hljs-string">&quot;Bulls&quot;</span>, newArrayList(<span class="hljs-string">&quot;Michael Jordan&quot;</span>, <span class="hljs-string">&quot;Scottie Pippen&quot;</span>, <span class="hljs-string">&quot;Derrick Rose&quot;</span>));
+
+       Multimap&lt;String, String&gt; setMultimap = TreeMultimap.create();
+       setMultimap.putAll(<span class="hljs-string">&quot;Spurs&quot;</span>, newHashSet(<span class="hljs-string">&quot;Tony Parker&quot;</span>, <span class="hljs-string">&quot;Tim Duncan&quot;</span>, <span class="hljs-string">&quot;Manu Ginobili&quot;</span>));
+       setMultimap.putAll(<span class="hljs-string">&quot;Bulls&quot;</span>, newHashSet(<span class="hljs-string">&quot;Michael Jordan&quot;</span>, <span class="hljs-string">&quot;Scottie Pippen&quot;</span>, <span class="hljs-string">&quot;Derrick Rose&quot;</span>));
+
+<span class="hljs-comment">// assertion will pass as listMultimap and setMultimap have the same content</span>
+       assertThat(listMultimap).hasSameEntriesAs(setMultimap);
+
+<span class="hljs-comment">// this assertion FAILS even though both multimaps have the same content</span>
+       assertThat(listMultimap).isEqualTo(setMultimap);
+   &#125;
+
+
+   <span class="hljs-meta">@Test</span>
+   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">range_assertions</span><span class="hljs-params">()</span> </span>&#123;
+       Range&lt;Integer&gt; range = Range.closed(<span class="hljs-number">10</span>, <span class="hljs-number">12</span>);
+       assertThat(range).isNotEmpty()
+               .contains(<span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>)
+               .hasClosedLowerBound()
+               .hasLowerEndpointEqualTo(<span class="hljs-number">10</span>)
+               .hasUpperEndpointEqualTo(<span class="hljs-number">12</span>);
+   &#125;
+
+   <span class="hljs-meta">@Test</span>
+   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">table_assertion</span><span class="hljs-params">()</span> </span>&#123;
+       <span class="hljs-comment">// Table assertions</span>
+       Table&lt;Integer, String, String&gt; bestMovies = HashBasedTable.create();
+
+       bestMovies.put(<span class="hljs-number">1970</span>, <span class="hljs-string">&quot;Palme d&#x27;Or&quot;</span>, <span class="hljs-string">&quot;M.A.S.H&quot;</span>);
+       bestMovies.put(<span class="hljs-number">1994</span>, <span class="hljs-string">&quot;Palme d&#x27;Or&quot;</span>, <span class="hljs-string">&quot;Pulp Fiction&quot;</span>);
+       bestMovies.put(<span class="hljs-number">2008</span>, <span class="hljs-string">&quot;Palme d&#x27;Or&quot;</span>, <span class="hljs-string">&quot;Entre les murs&quot;</span>);
+       bestMovies.put(<span class="hljs-number">2000</span>, <span class="hljs-string">&quot;Best picture Oscar&quot;</span>, <span class="hljs-string">&quot;American Beauty&quot;</span>);
+       bestMovies.put(<span class="hljs-number">2011</span>, <span class="hljs-string">&quot;Goldene Bär&quot;</span>, <span class="hljs-string">&quot;A Separation&quot;</span>);
+
+       assertThat(bestMovies).hasRowCount(<span class="hljs-number">5</span>).hasColumnCount(<span class="hljs-number">3</span>).hasSize(<span class="hljs-number">5</span>)
+               .containsValues(<span class="hljs-string">&quot;American Beauty&quot;</span>, <span class="hljs-string">&quot;A Separation&quot;</span>, <span class="hljs-string">&quot;Pulp Fiction&quot;</span>)
+               .containsCell(<span class="hljs-number">1994</span>, <span class="hljs-string">&quot;Palme d&#x27;Or&quot;</span>, <span class="hljs-string">&quot;Pulp Fiction&quot;</span>)
+               .containsColumns(<span class="hljs-string">&quot;Palme d&#x27;Or&quot;</span>, <span class="hljs-string">&quot;Best picture Oscar&quot;</span>, <span class="hljs-string">&quot;Goldene Bär&quot;</span>)
+               .containsRows(<span class="hljs-number">1970</span>, <span class="hljs-number">1994</span>, <span class="hljs-number">2000</span>, <span class="hljs-number">2008</span>, <span class="hljs-number">2011</span>);
+   &#125;
+
+   <span class="hljs-meta">@Test</span>
+   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test_opotions</span><span class="hljs-params">()</span> </span>&#123;
+       <span class="hljs-comment">// Optional assertions</span>
+       Optional&lt;String&gt; optional = Optional.of(<span class="hljs-string">&quot;Test&quot;</span>);
+       assertThat(optional).isPresent().contains(<span class="hljs-string">&quot;Test&quot;</span>);
+
+       Optional&lt;Long&gt; optionalNum = Optional.of(<span class="hljs-number">12L</span>);
+       assertThat(optionalNum).extractingValue()
+               .isInstanceOf(Long.class)
+               .isEqualTo(<span class="hljs-number">12L</span>);
+
+        optional = Optional.of(<span class="hljs-string">&quot;Bill&quot;</span>);
+<span class="hljs-comment">// extractingCharSequence allows to chain String specific assertion</span>
+       assertThat(optional).extractingCharSequence()
+               .startsWith(<span class="hljs-string">&quot;Bi&quot;</span>);
+
+   &#125;</code></pre>
 
 <p>日期的验证：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">date_before</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">       DateTime dateTime = <span class="keyword">new</span> DateTime();</span><br><span class="line">       DateTime firstDateTime = <span class="keyword">new</span> DateTime();</span><br><span class="line">       firstDateTime.plus(<span class="number">10000L</span>);</span><br><span class="line">       assertThat(dateTime).isBefore(firstDateTime);</span><br><span class="line">       assertThat(dateTime).isAfter(<span class="string">&quot;2004-12-13T21:39:45.618-08:00&quot;</span>);</span><br><span class="line">       assertThat(dateTime).isAfter(<span class="string">&quot;2004-12-13T21:39:00&quot;</span>);</span><br><span class="line">       assertThat(dateTime).isAfter(<span class="string">&quot;2004-12-13T21:39:00&quot;</span>);</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Test</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">joda_datetime_compare</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">       DateTime utcTime = <span class="keyword">new</span> DateTime(<span class="number">2013</span>, <span class="number">6</span>, <span class="number">10</span>, <span class="number">0</span>, <span class="number">0</span>, DateTimeZone.UTC);</span><br><span class="line">       DateTime cestTime = <span class="keyword">new</span> DateTime(<span class="number">2013</span>, <span class="number">6</span>, <span class="number">10</span>, <span class="number">2</span>, <span class="number">0</span>, DateTimeZone.forID(<span class="string">&quot;Europe/Berlin&quot;</span>));</span><br><span class="line"></span><br><span class="line">       assertThat(utcTime).as(<span class="string">&quot;in UTC time&quot;</span>).isEqualTo(cestTime);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">date_before</span><span class="hljs-params">()</span></span>&#123;
 
-      
+       DateTime dateTime = <span class="hljs-keyword">new</span> DateTime();
+       DateTime firstDateTime = <span class="hljs-keyword">new</span> DateTime();
+       firstDateTime.plus(<span class="hljs-number">10000L</span>);
+       assertThat(dateTime).isBefore(firstDateTime);
+       assertThat(dateTime).isAfter(<span class="hljs-string">&quot;2004-12-13T21:39:45.618-08:00&quot;</span>);
+       assertThat(dateTime).isAfter(<span class="hljs-string">&quot;2004-12-13T21:39:00&quot;</span>);
+       assertThat(dateTime).isAfter(<span class="hljs-string">&quot;2004-12-13T21:39:00&quot;</span>);
+
+   &#125;
+
+   <span class="hljs-meta">@Test</span>
+   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">joda_datetime_compare</span><span class="hljs-params">()</span></span>&#123;
+
+       DateTime utcTime = <span class="hljs-keyword">new</span> DateTime(<span class="hljs-number">2013</span>, <span class="hljs-number">6</span>, <span class="hljs-number">10</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, DateTimeZone.UTC);
+       DateTime cestTime = <span class="hljs-keyword">new</span> DateTime(<span class="hljs-number">2013</span>, <span class="hljs-number">6</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>, DateTimeZone.forID(<span class="hljs-string">&quot;Europe/Berlin&quot;</span>));
+
+       assertThat(utcTime).as(<span class="hljs-string">&quot;in UTC time&quot;</span>).isEqualTo(cestTime);
+   &#125;</code></pre>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/automation/">automation</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/automation/">automation</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2016/02/01/tips/tester-ops/2016-02-01-microservice-try/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">01-微服务框架－Springboot/Flask,Hello World</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2016/01/27/tips/automation/2016-01-27-web-dev/">
+                        <span class="hidden-mobile">WEB 开发的几个重点</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
 
+      </div>
+    
   </div>
+</div>
 
-  <div class="article-footer">
-    <div class="article-meta pull-left">
+<!-- Custom -->
 
-    
-      
 
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/automation/">automation</a>
-    </span>
     
 
     
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
     
 
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/automation/">automation</a>
-    </span>
     
-
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
     </div>
+  </div>
+</div>
+    
 
     
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
-</article>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
 
   
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
 
 
 
-    </main>
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
 
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
-    
-    &copy; 2020 qmeta
-    
-  </p>
-</footer>
-    
-  </div>
-</div>
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
 </body>
 </html>

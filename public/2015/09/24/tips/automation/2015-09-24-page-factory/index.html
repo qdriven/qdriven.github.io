@@ -1,102 +1,257 @@
-<!DOCTYPE HTML>
-<html>
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <title>Page Factory in Selenium | Learning Testing/QA in Hardway | Just Do It</title>
-
-  
-  <meta name="author" content="qmeta">
-  
-
-  
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="allround tester">
+  <meta name="author" content="qmeta">
+  <meta name="keywords" content="">
+  <title>Page Factory in Selenium - Learning Testing/QA in Hardway</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
   
 
   
-  
-  <meta name="keywords" content="automation">
-  
-
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <meta property="og:title" content="Page Factory in Selenium"/>
-
-  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
-
-  
-  <meta property="og:image" content="/favicon.ico"/>
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
   
 
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"qdriven.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.0.0"></head>
 
 
 <body>
-<div class="blog">
-  <div class="content">
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Practising</strong>&nbsp;</a>
 
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Learning Testing/QA in Hardway</a>
-    </h1>
-    <p class="site-description">Just Do It</p>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
   </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">主页</a></li>
-      
-        <li><a href="/archives">归档</a></li>
-      
-        <li><a href="/categories">分类</a></li>
-      
-        <li><a href="/tags">标签</a></li>
-      
-    </ul>
-  </nav>
-</header>
+</nav>
 
-    <main class="site-main posts-loop">
-    <article>
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Page Factory in Selenium">
+              
+            </span>
 
+            
+              <div class="mt-3">
   
-    
-    <h3 class="article-title"><span>Page Factory in Selenium</span></h3>
-    
   
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2015/09/24/tips/automation/2015-09-24-page-factory/" rel="bookmark">
-        <time class="entry-date published" datetime="2015-09-23T18:31:11.000Z">
-          2015-09-24
-        </time>
-      </a>
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2015-09-24 02:31" pubdate>
+        2015年9月24日 凌晨
+      </time>
     </span>
-  </div>
+  
+</div>
 
-
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      983 字
+    </span>
   
 
-  <div class="article-content">
-    <div class="entry">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
       
-        <p>本文主要用来分析Page Factory实现的原理以及一些扩展的可能性。</p>
+      
+      14
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Page Factory in Selenium</h1>
+            
+            <div class="markdown-body">
+              <p>本文主要用来分析Page Factory实现的原理以及一些扩展的可能性。</p>
 <h2 id="Page-Factory-的例子"><a href="#Page-Factory-的例子" class="headerlink" title="Page Factory 的例子"></a>Page Factory 的例子</h2><p><a target="_blank" rel="noopener" href="https://code.google.com/p/selenium/wiki/PageFactory">Selenium Page Factory Wiki</a></p>
 <p>首先解释一下这个例子：</p>
 <ul>
 <li>使用注解描述元素定位</li>
 <li>使用 <code>PageFactory.initElements(driver, page);</code></li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GoogleSearchPage</span> </span>&#123;</span><br><span class="line">    <span class="comment">// The element is now looked up using the name attribute</span></span><br><span class="line">    <span class="meta">@FindBy(how = How.NAME, using = &quot;q&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> WebElement searchBox;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">searchFor</span><span class="params">(String text)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// We continue using the element just as before</span></span><br><span class="line">        searchBox.sendKeys(text);</span><br><span class="line">        searchBox.submit();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">searchFor</span><span class="params">(String text)</span> </span>&#123;</span><br><span class="line">    GoogleSearchPage page＝ PageFactory.initElements(<span class="keyword">new</span> ChromeDriver(), GoogleSearchPage.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs java">
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GoogleSearchPage</span> </span>&#123;
+    <span class="hljs-comment">// The element is now looked up using the name attribute</span>
+    <span class="hljs-meta">@FindBy(how = How.NAME, using = &quot;q&quot;)</span>
+    <span class="hljs-keyword">private</span> WebElement searchBox;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">searchFor</span><span class="hljs-params">(String text)</span> </span>&#123;
+        <span class="hljs-comment">// We continue using the element just as before</span>
+        searchBox.sendKeys(text);
+        searchBox.submit();
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">searchFor</span><span class="hljs-params">(String text)</span> </span>&#123;
+    GoogleSearchPage page＝ PageFactory.initElements(<span class="hljs-keyword">new</span> ChromeDriver(), GoogleSearchPage.class);
+    &#125;
+&#125;</code></pre>
 <p>以上一个显而易见的好处就是减少了查找元素的代码量，比如类似于一下的代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">driver.findElement(By.id(<span class="string">&quot;q&quot;</span>))</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs java">driver.findElement(By.id(<span class="hljs-string">&quot;q&quot;</span>))</code></pre>
 
 <p>但是只有这样的好处吗？我们先从分析Selenium Page Factory实现的原理说起</p>
 <p>##Page Factory 实现的原理</p>
@@ -104,7 +259,32 @@
 <ul>
 <li>PageFactory: initElements and proxyFields</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">initElements</span><span class="params">(FieldDecorator decorator, Object page)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(Class proxyIn = page.getClass(); proxyIn != Object.class; proxyIn = proxyIn.getSuperclass()) &#123;</span><br><span class="line">        proxyFields(decorator, page, proxyIn);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">proxyFields</span><span class="params">(FieldDecorator decorator, Object page, Class&lt;?&gt; proxyIn)</span> </span>&#123;</span><br><span class="line">    Field[] fields = proxyIn.getDeclaredFields();</span><br><span class="line">    Field[] arr$ = fields;</span><br><span class="line">    <span class="keyword">int</span> len$ = fields.length;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i$ = <span class="number">0</span>; i$ &lt; len$; ++i$) &#123;</span><br><span class="line">        Field field = arr$[i$];</span><br><span class="line">        Object value = decorator.decorate(page.getClass().getClassLoader(), field);</span><br><span class="line">        <span class="keyword">if</span>(value != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">                field.set(page, value);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IllegalAccessException var10) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(var10);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">initElements</span><span class="hljs-params">(FieldDecorator decorator, Object page)</span> </span>&#123;
+    <span class="hljs-keyword">for</span>(Class proxyIn = page.getClass(); proxyIn != Object.class; proxyIn = proxyIn.getSuperclass()) &#123;
+        proxyFields(decorator, page, proxyIn);
+    &#125;
+
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">proxyFields</span><span class="hljs-params">(FieldDecorator decorator, Object page, Class&lt;?&gt; proxyIn)</span> </span>&#123;
+    Field[] fields = proxyIn.getDeclaredFields();
+    Field[] arr$ = fields;
+    <span class="hljs-keyword">int</span> len$ = fields.length;
+
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i$ = <span class="hljs-number">0</span>; i$ &lt; len$; ++i$) &#123;
+        Field field = arr$[i$];
+        Object value = decorator.decorate(page.getClass().getClassLoader(), field);
+        <span class="hljs-keyword">if</span>(value != <span class="hljs-keyword">null</span>) &#123;
+            <span class="hljs-keyword">try</span> &#123;
+                field.setAccessible(<span class="hljs-keyword">true</span>);
+                field.set(page, value);
+            &#125; <span class="hljs-keyword">catch</span> (IllegalAccessException var10) &#123;
+                <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(var10);
+            &#125;
+        &#125;
+    &#125;
+
+&#125;</code></pre>
 
 <ul>
 <li>FieldDecorator：DefaultFieldDecorator 源码<br>从DefaultFieldDecorator的源码看:</li>
@@ -117,74 +297,296 @@
 </ul>
 </li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">decorate</span><span class="params">(ClassLoader loader, Field field)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!WebElement.class.isAssignableFrom(field.getType()) &amp;&amp; !<span class="keyword">this</span>.isDecoratableList(field)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            ElementLocator locator = <span class="keyword">this</span>.factory.createLocator(field);</span><br><span class="line">            <span class="keyword">return</span> locator == <span class="keyword">null</span>?<span class="keyword">null</span>:(WebElement.class.isAssignableFrom(field.getType())?<span class="keyword">this</span>.proxyForLocator(loader, locator):(List.class.isAssignableFrom(field.getType())?<span class="keyword">this</span>.proxyForListLocator(loader, locator):<span class="keyword">null</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isDecoratableList</span><span class="params">(Field field)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!List.class.isAssignableFrom(field.getType())) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            Type genericType = field.getGenericType();</span><br><span class="line">            <span class="keyword">if</span>(!(genericType <span class="keyword">instanceof</span> ParameterizedType)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                Type listType = ((ParameterizedType)genericType).getActualTypeArguments()[<span class="number">0</span>];</span><br><span class="line">                <span class="keyword">return</span> !WebElement.class.equals(listType)?<span class="keyword">false</span>:field.getAnnotation(FindBy.class) != <span class="keyword">null</span> || field.getAnnotation(FindBys.class) != <span class="keyword">null</span> || field.getAnnotation(FindAll.class) != <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> WebElement <span class="title">proxyForLocator</span><span class="params">(ClassLoader loader, ElementLocator locator)</span> </span>&#123;</span><br><span class="line">        LocatingElementHandler handler = <span class="keyword">new</span> LocatingElementHandler(locator);</span><br><span class="line">        WebElement proxy = (WebElement)Proxy.newProxyInstance(loader, <span class="keyword">new</span> Class[]&#123;WebElement.class, WrapsElement.class, Locatable.class&#125;, handler);</span><br><span class="line">        <span class="keyword">return</span> proxy;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> List&lt;WebElement&gt; <span class="title">proxyForListLocator</span><span class="params">(ClassLoader loader, ElementLocator locator)</span> </span>&#123;</span><br><span class="line">        LocatingElementListHandler handler = <span class="keyword">new</span> LocatingElementListHandler(locator);</span><br><span class="line">        List proxy = (List)Proxy.newProxyInstance(loader, <span class="keyword">new</span> Class[]&#123;List.class&#125;, handler);</span><br><span class="line">        <span class="keyword">return</span> proxy;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">decorate</span><span class="hljs-params">(ClassLoader loader, Field field)</span> </span>&#123;
+        <span class="hljs-keyword">if</span>(!WebElement.class.isAssignableFrom(field.getType()) &amp;&amp; !<span class="hljs-keyword">this</span>.isDecoratableList(field)) &#123;
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            ElementLocator locator = <span class="hljs-keyword">this</span>.factory.createLocator(field);
+            <span class="hljs-keyword">return</span> locator == <span class="hljs-keyword">null</span>?<span class="hljs-keyword">null</span>:(WebElement.class.isAssignableFrom(field.getType())?<span class="hljs-keyword">this</span>.proxyForLocator(loader, locator):(List.class.isAssignableFrom(field.getType())?<span class="hljs-keyword">this</span>.proxyForListLocator(loader, locator):<span class="hljs-keyword">null</span>));
+        &#125;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isDecoratableList</span><span class="hljs-params">(Field field)</span> </span>&#123;
+        <span class="hljs-keyword">if</span>(!List.class.isAssignableFrom(field.getType())) &#123;
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            Type genericType = field.getGenericType();
+            <span class="hljs-keyword">if</span>(!(genericType <span class="hljs-keyword">instanceof</span> ParameterizedType)) &#123;
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+            &#125; <span class="hljs-keyword">else</span> &#123;
+                Type listType = ((ParameterizedType)genericType).getActualTypeArguments()[<span class="hljs-number">0</span>];
+                <span class="hljs-keyword">return</span> !WebElement.class.equals(listType)?<span class="hljs-keyword">false</span>:field.getAnnotation(FindBy.class) != <span class="hljs-keyword">null</span> || field.getAnnotation(FindBys.class) != <span class="hljs-keyword">null</span> || field.getAnnotation(FindAll.class) != <span class="hljs-keyword">null</span>;
+            &#125;
+        &#125;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> WebElement <span class="hljs-title">proxyForLocator</span><span class="hljs-params">(ClassLoader loader, ElementLocator locator)</span> </span>&#123;
+        LocatingElementHandler handler = <span class="hljs-keyword">new</span> LocatingElementHandler(locator);
+        WebElement proxy = (WebElement)Proxy.newProxyInstance(loader, <span class="hljs-keyword">new</span> Class[]&#123;WebElement.class, WrapsElement.class, Locatable.class&#125;, handler);
+        <span class="hljs-keyword">return</span> proxy;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> List&lt;WebElement&gt; <span class="hljs-title">proxyForListLocator</span><span class="hljs-params">(ClassLoader loader, ElementLocator locator)</span> </span>&#123;
+        LocatingElementListHandler handler = <span class="hljs-keyword">new</span> LocatingElementListHandler(locator);
+        List proxy = (List)Proxy.newProxyInstance(loader, <span class="hljs-keyword">new</span> Class[]&#123;List.class&#125;, handler);
+        <span class="hljs-keyword">return</span> proxy;
+    &#125;</code></pre>
 
 <p>我们再看一下LocatingElementHandler,可以看到实际在待用PageFactory创建的元素时候<br>都是通过这个掉用LocatingElementHandler:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LocatingElementHandler</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ElementLocator locator;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LocatingElementHandler</span><span class="params">(ElementLocator locator)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.locator = locator;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object object, Method method, Object[] objects)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        WebElement element;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            element = <span class="keyword">this</span>.locator.findElement();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchElementException var7) &#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="string">&quot;toString&quot;</span>.equals(method.getName())) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="string">&quot;Proxy element for: &quot;</span> + <span class="keyword">this</span>.locator.toString();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">throw</span> var7;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(<span class="string">&quot;getWrappedElement&quot;</span>.equals(method.getName())) &#123;</span><br><span class="line">            <span class="keyword">return</span> element;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> method.invoke(element, objects);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InvocationTargetException var6) &#123;</span><br><span class="line">                <span class="keyword">throw</span> var6.getCause();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LocatingElementHandler</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">InvocationHandler</span> </span>&#123;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ElementLocator locator;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">LocatingElementHandler</span><span class="hljs-params">(ElementLocator locator)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.locator = locator;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">invoke</span><span class="hljs-params">(Object object, Method method, Object[] objects)</span> <span class="hljs-keyword">throws</span> Throwable </span>&#123;
+        WebElement element;
+        <span class="hljs-keyword">try</span> &#123;
+            element = <span class="hljs-keyword">this</span>.locator.findElement();
+        &#125; <span class="hljs-keyword">catch</span> (NoSuchElementException var7) &#123;
+            <span class="hljs-keyword">if</span>(<span class="hljs-string">&quot;toString&quot;</span>.equals(method.getName())) &#123;
+                <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Proxy element for: &quot;</span> + <span class="hljs-keyword">this</span>.locator.toString();
+            &#125;
+
+            <span class="hljs-keyword">throw</span> var7;
+        &#125;
+
+        <span class="hljs-keyword">if</span>(<span class="hljs-string">&quot;getWrappedElement&quot;</span>.equals(method.getName())) &#123;
+            <span class="hljs-keyword">return</span> element;
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-keyword">try</span> &#123;
+                <span class="hljs-keyword">return</span> method.invoke(element, objects);
+            &#125; <span class="hljs-keyword">catch</span> (InvocationTargetException var6) &#123;
+                <span class="hljs-keyword">throw</span> var6.getCause();
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre>
 
 <p>以上Selenium PageFactory大致的实现，从过程来看：<br>PageFaction-&gt; initElements-&gt; proxyFields</p>
 <h2 id="Page-Factory-有什么好处"><a href="#Page-Factory-有什么好处" class="headerlink" title="Page Factory 有什么好处"></a>Page Factory 有什么好处</h2><p>个人理解的好处:</p>
 <ul>
-<li>可以通过修改InvocationHandler里面的处理,比如<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element = <span class="keyword">this</span>.locator.findElement();</span><br></pre></td></tr></table></figure>
+<li>可以通过修改InvocationHandler里面的处理,比如<pre><code class="hljs java">element = <span class="hljs-keyword">this</span>.locator.findElement();</code></pre>
 如果都使用wait().util的方式,这样可以使所有查找的元素更加稳定</li>
 <li>使用了proxy的方式,在实例化WebElement的时候，实际上不管WebElement存在不存在都可以创建<br>而实际findElement都会延迟到真的调用这个元素时执行,这带来一个好处就是如果WebElement的实例创建后<br>页面DOM刷新后,需要重新查找WebElement,否则可能抛出StaleElementReferenceException,而Proxy之后每次都会自动<br>查找,这样就减少了代码处理</li>
 <li>工厂的设计模式同时也带了了灵活程度,在创建页面或者页面元素的时候,可以开始添加统一的前置或者后置的处理</li>
 </ul>
 <p>但是可惜的是Selenium并没有提供开发的接口来让用户定制,所以如果自己定制PageFactory模式,则需要自己去实现Selenium这<br>一套方法,同时加入自己特殊的实现</p>
 
-      
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/automation/">automation</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/automation/">automation</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2015/10/22/tips/thoughts/2015-10-22-Random-TestCaseDesign/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">测试用例设计- 随机指定一个产品的测试</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2015/09/24/tips/automation/2015-09-24-testng-simple-report/">
+                        <span class="hidden-mobile">TestNG 报告定制最简单的原理</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
 
+      </div>
+    
   </div>
+</div>
 
-  <div class="article-footer">
-    <div class="article-meta pull-left">
+<!-- Custom -->
 
-    
-      
 
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/automation/">automation</a>
-    </span>
     
 
     
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
     
 
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/automation/">automation</a>
-    </span>
     
-
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
     </div>
+  </div>
+</div>
+    
 
     
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
-</article>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
 
   
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
 
 
 
-    </main>
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
 
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
-    
-    &copy; 2020 qmeta
-    
-  </p>
-</footer>
-    
-  </div>
-</div>
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
 </body>
 </html>

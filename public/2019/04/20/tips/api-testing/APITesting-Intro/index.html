@@ -1,93 +1,233 @@
-<!DOCTYPE HTML>
-<html>
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <title>Build API Testing Framework-1 - Learn Http Api | Learning Testing/QA in Hardway | Just Do It</title>
-
-  
-  <meta name="author" content="qmeta">
-  
-
-  
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="allround tester">
+  <meta name="author" content="qmeta">
+  <meta name="keywords" content="">
+  <title>Build API Testing Framework-1 - Learn Http Api - Learning Testing/QA in Hardway</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
   
 
   
-  
-  <meta name="keywords" content="java,API Testing,patterns,testing">
-  
-
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <meta property="og:title" content="Build API Testing Framework-1 - Learn Http Api"/>
-
-  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
-
-  
-  <meta property="og:image" content="/favicon.ico"/>
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
   
 
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"qdriven.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.0.0"></head>
 
 
 <body>
-<div class="blog">
-  <div class="content">
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Practising</strong>&nbsp;</a>
 
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Learning Testing/QA in Hardway</a>
-    </h1>
-    <p class="site-description">Just Do It</p>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
   </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">主页</a></li>
-      
-        <li><a href="/archives">归档</a></li>
-      
-        <li><a href="/categories">分类</a></li>
-      
-        <li><a href="/tags">标签</a></li>
-      
-    </ul>
-  </nav>
-</header>
+</nav>
 
-    <main class="site-main posts-loop">
-    <article>
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Build API Testing Framework-1 - Learn Http Api">
+              
+            </span>
 
+            
+              <div class="mt-3">
   
-    
-    <h3 class="article-title"><span>Build API Testing Framework-1 - Learn Http Api</span></h3>
-    
   
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/04/20/tips/api-testing/APITesting-Intro/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-04-20T15:58:45.000Z">
-          2019-04-20
-        </time>
-      </a>
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-04-20 23:58" pubdate>
+        2019年4月20日 晚上
+      </time>
     </span>
-  </div>
+  
+</div>
 
-
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      501 字
+    </span>
   
 
-  <div class="article-content">
-    <div class="entry">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
       
-        <h1 id="Build-API-Testing-Framework-1-Learn-Http-Api"><a href="#Build-API-Testing-Framework-1-Learn-Http-Api" class="headerlink" title="Build API Testing Framework-1 - Learn Http Api"></a>Build API Testing Framework-1 - Learn Http Api</h1><p>API now, in most cases, it is a HTTP API which over http protocol. It is hard to explain without a example, so let’s start with a HelloWorld API sample.<br>The main purposes of these apis are to do the CRUD(Create/Read/Update/Delete) against the resouce <code>HelloWorld</code>.<br>Here are HTTP Methods mapping to CRUD:</p>
+      
+      10
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Build API Testing Framework-1 - Learn Http Api</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Build-API-Testing-Framework-1-Learn-Http-Api"><a href="#Build-API-Testing-Framework-1-Learn-Http-Api" class="headerlink" title="Build API Testing Framework-1 - Learn Http Api"></a>Build API Testing Framework-1 - Learn Http Api</h1><p>API now, in most cases, it is a HTTP API which over http protocol. It is hard to explain without a example, so let’s start with a HelloWorld API sample.<br>The main purposes of these apis are to do the CRUD(Create/Read/Update/Delete) against the resouce <code>HelloWorld</code>.<br>Here are HTTP Methods mapping to CRUD:</p>
 <table>
 <thead>
 <tr>
@@ -123,13 +263,38 @@
 </tr>
 </tbody></table>
 <p>It is easy to implement a sets of APIs against resource HelloWorld based on SpringBoot, here comes demo codes:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorldController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/HelloWorld/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> BaseResponse <span class="title">getHelloWorld</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> BaseResponse.OK().data(HelloWorldDTO.builder().id(id).msg(<span class="string">&quot;Hello World&quot;</span>).build());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostMapping(&quot;/HelloWorld&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> BaseResponse&lt;HelloWorldDTO&gt; <span class="title">createHelloWorld</span><span class="params">(<span class="meta">@RequestBody</span> HelloWorldDTO requestBody)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> BaseResponse.OK().data(requestBody);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PutMapping(&quot;/HelloWorld/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> BaseResponse&lt;HelloWorldDTO&gt; <span class="title">updateHelloWorld</span><span class="params">(<span class="meta">@PathVariable</span> Long id, <span class="meta">@RequestBody</span> HelloWorldDTO updateData)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> BaseResponse.OK().data(updateData);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@DeleteMapping(&quot;/HelloWorld/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> BaseResponse&lt;HelloWorldDTO&gt; <span class="title">deleteHelloWorld</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> BaseResponse.OK().data(HelloWorldDTO.builder().id(id).msg(<span class="string">&quot;deleted!&quot;</span>).build());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs java"><span class="hljs-meta">@RestController</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloWorldController</span> </span>&#123;
+
+    <span class="hljs-meta">@GetMapping(&quot;/HelloWorld/&#123;id&#125;&quot;)</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> BaseResponse <span class="hljs-title">getHelloWorld</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable</span> Long id)</span> </span>&#123;
+        <span class="hljs-keyword">return</span> BaseResponse.OK().data(HelloWorldDTO.builder().id(id).msg(<span class="hljs-string">&quot;Hello World&quot;</span>).build());
+
+    &#125;
+
+
+    <span class="hljs-meta">@PostMapping(&quot;/HelloWorld&quot;)</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> BaseResponse&lt;HelloWorldDTO&gt; <span class="hljs-title">createHelloWorld</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> HelloWorldDTO requestBody)</span> </span>&#123;
+        <span class="hljs-keyword">return</span> BaseResponse.OK().data(requestBody);
+    &#125;
+
+    <span class="hljs-meta">@PutMapping(&quot;/HelloWorld/&#123;id&#125;&quot;)</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> BaseResponse&lt;HelloWorldDTO&gt; <span class="hljs-title">updateHelloWorld</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable</span> Long id, <span class="hljs-meta">@RequestBody</span> HelloWorldDTO updateData)</span> </span>&#123;
+
+        <span class="hljs-keyword">return</span> BaseResponse.OK().data(updateData);
+    &#125;
+
+    <span class="hljs-meta">@DeleteMapping(&quot;/HelloWorld/&#123;id&#125;&quot;)</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> BaseResponse&lt;HelloWorldDTO&gt; <span class="hljs-title">deleteHelloWorld</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable</span> Long id)</span> </span>&#123;
+        <span class="hljs-keyword">return</span> BaseResponse.OK().data(HelloWorldDTO.builder().id(id).msg(<span class="hljs-string">&quot;deleted!&quot;</span>).build());
+    &#125;
+&#125;</code></pre>
 
 <p>Start the web server, actaully there are 4 apis with different HTTP methods, GET/DELETE/POST/PUT, use postman to check what happened:</p>
-<p><img src="https://raw.githubusercontent.com/evenhumble/hustle-player/maste/img/postman-get.jpg" alt="img"><br><img src="https://raw.githubusercontent.com/evenhumble/hustle-player/maste/img/postman-post.jpg" alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/evenhumble/hustle-player/maste/img/postman-get.jpg" srcset="/img/loading.gif" alt="img"><br><img src="https://raw.githubusercontent.com/evenhumble/hustle-player/maste/img/postman-post.jpg" srcset="/img/loading.gif" alt="img"></p>
 <p>It represents how the api work, and how to use postman to invoke the http api to get a result.</p>
 <p>So the api testing is simple, a client send a http request, then get the http response to check if the response is correct. </p>
-<p><img src="https://raw.githubusercontent.com/evenhumble/hustle-player/maste/img/api_response.png" alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/evenhumble/hustle-player/maste/img/api_response.png" srcset="/img/loading.gif" alt="img"></p>
 <p>In this case, if you want to start a api automation testing, what kind of codes need to write? In this case, it is very simple:</p>
 <ol>
 <li>A clint to invoke http api: Client</li>
@@ -137,7 +302,19 @@
 <li>Verify the response: OutputData</li>
 </ol>
 <p>the code example generated bu postman(java and OkHttpClient) is :</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">OkHttpClient client = new OkHttpClient();</span><br><span class="line"></span><br><span class="line">MediaType mediaType = MediaType.parse(<span class="string">&quot;application/json&quot;</span>);</span><br><span class="line">RequestBody body = RequestBody.create(mediaType, <span class="string">&quot;&#123;\&quot;msg\&quot;:123&#125;&quot;</span>);</span><br><span class="line">Request request = new Request.Builder()</span><br><span class="line">  .url(<span class="string">&quot;http://localhost:9090/HelloWorld&quot;</span>)</span><br><span class="line">  .post(body)</span><br><span class="line">  .addHeader(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>)</span><br><span class="line">  .addHeader(<span class="string">&quot;cache-control&quot;</span>, <span class="string">&quot;no-cache&quot;</span>)</span><br><span class="line">  .addHeader(<span class="string">&quot;Postman-Token&quot;</span>, <span class="string">&quot;ac6e83d3-8446-4ae7-81ea-59316ca5cce7&quot;</span>)</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line">Response response = client.newCall(request).execute();</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs sh">OkHttpClient client = new OkHttpClient();
+
+MediaType mediaType = MediaType.parse(<span class="hljs-string">&quot;application/json&quot;</span>);
+RequestBody body = RequestBody.create(mediaType, <span class="hljs-string">&quot;&#123;\&quot;msg\&quot;:123&#125;&quot;</span>);
+Request request = new Request.Builder()
+  .url(<span class="hljs-string">&quot;http://localhost:9090/HelloWorld&quot;</span>)
+  .post(body)
+  .addHeader(<span class="hljs-string">&quot;Content-Type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>)
+  .addHeader(<span class="hljs-string">&quot;cache-control&quot;</span>, <span class="hljs-string">&quot;no-cache&quot;</span>)
+  .addHeader(<span class="hljs-string">&quot;Postman-Token&quot;</span>, <span class="hljs-string">&quot;ac6e83d3-8446-4ae7-81ea-59316ca5cce7&quot;</span>)
+  .build();
+
+Response response = client.newCall(request).execute();</code></pre>
 
 <p>Copy these codes, and run in maven project, your first API automation code is completed.</p>
 <p>By the way, there are several questions for HTTP API:</p>
@@ -148,52 +325,218 @@
 </ul>
 <p>In Next Chapter, let’s write code and go through these cases.</p>
 
-      
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/java/">java</a>
+                    
+                      <a class="hover-with-bg" href="/tags/API-Testing/">API Testing</a>
+                    
+                      <a class="hover-with-bg" href="/tags/patterns/">patterns</a>
+                    
+                      <a class="hover-with-bg" href="/tags/testing/">testing</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/04/20/tips/0-GIT-SUBMODULE/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Git Sub Module Usage</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/02/20/tips/real/3-Defensive-programing/">
+                        <span class="hidden-mobile">Defensive Programming</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
 
+      </div>
+    
   </div>
+</div>
 
-  <div class="article-footer">
-    <div class="article-meta pull-left">
+<!-- Custom -->
+
 
     
 
     
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
     
 
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/java/">java</a><a href="/tags/API-Testing/">API Testing</a><a href="/tags/patterns/">patterns</a><a href="/tags/testing/">testing</a>
-    </span>
     
-
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
     </div>
+  </div>
+</div>
+    
 
     
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
-</article>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
 
   
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
 
 
 
-    </main>
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
 
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
-    
-    &copy; 2020 qmeta
-    
-  </p>
-</footer>
-    
-  </div>
-</div>
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
 </body>
 </html>

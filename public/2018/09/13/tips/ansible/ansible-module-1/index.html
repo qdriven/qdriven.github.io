@@ -1,94 +1,252 @@
-<!DOCTYPE HTML>
-<html>
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <title>学习ansible module-1 | Learning Testing/QA in Hardway | Just Do It</title>
-
-  
-  <meta name="author" content="qmeta">
-  
-
-  
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="allround tester">
+  <meta name="author" content="qmeta">
+  <meta name="keywords" content="">
+  <title>学习ansible module-1 - Learning Testing/QA in Hardway</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
   
 
   
-  
-  <meta name="keywords" content="ansible,CICD">
-  
-
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <meta property="og:title" content="学习ansible module-1"/>
-
-  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
-
-  
-  <meta property="og:image" content="/favicon.ico"/>
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
   
 
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"qdriven.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.0.0"></head>
 
 
 <body>
-<div class="blog">
-  <div class="content">
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Practising</strong>&nbsp;</a>
 
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Learning Testing/QA in Hardway</a>
-    </h1>
-    <p class="site-description">Just Do It</p>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
   </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">主页</a></li>
-      
-        <li><a href="/archives">归档</a></li>
-      
-        <li><a href="/categories">分类</a></li>
-      
-        <li><a href="/tags">标签</a></li>
-      
-    </ul>
-  </nav>
-</header>
+</nav>
 
-    <main class="site-main posts-loop">
-    <article>
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="学习ansible module-1">
+              
+            </span>
 
+            
+              <div class="mt-3">
   
-    
-    <h3 class="article-title"><span>学习ansible module-1</span></h3>
-    
   
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2018/09/13/tips/ansible/ansible-module-1/" rel="bookmark">
-        <time class="entry-date published" datetime="2018-09-13T15:31:21.000Z">
-          2018-09-13
-        </time>
-      </a>
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-09-13 23:31" pubdate>
+        2018年9月13日 晚上
+      </time>
     </span>
-  </div>
+  
+</div>
 
-
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      653 字
+    </span>
   
 
-  <div class="article-content">
-    <div class="entry">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
       
-        <p>写一个Ansbile Module实际上非常容易，我从看</p>
-<figure class="highlight plain"><figcaption><span>这个源码的方式大概可以了解Ansible的一个简单的</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">插件.</span><br><span class="line"></span><br><span class="line">下面分几个内容来看：</span><br><span class="line"></span><br><span class="line">- 插件运行代码</span><br><span class="line">- 插件的meta的数据</span><br><span class="line"></span><br><span class="line">## Ansible 插件代码</span><br><span class="line"></span><br><span class="line">- 首先Ansible 插件的入口函数为main函数</span><br><span class="line"></span><br><span class="line">所以先定义一个main函数，以及main函数的运行</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;python</span><br><span class="line">def main():</span><br><span class="line">  pass</span><br><span class="line"></span><br><span class="line">main()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+      10
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">学习ansible module-1</h1>
+            
+            <div class="markdown-body">
+              <p>写一个Ansbile Module实际上非常容易，我从看</p>
+<pre><figcaption><span>这个源码的方式大概可以了解Ansible的一个简单的</span></figcaption><code class="hljs https://github.com/SeleniumHQ/ansible-selenium.git```">插件.
+
+下面分几个内容来看：
+
+- 插件运行代码
+- 插件的meta的数据
+
+## Ansible 插件代码
+
+- 首先Ansible 插件的入口函数为main函数
+
+所以先定义一个main函数，以及main函数的运行
+
+&#96;&#96;&#96;python
+def main():
+  pass
+
+main()
+</code></pre>
 
 <ul>
 <li>实现main函数</li>
@@ -101,60 +259,302 @@
 <li>实现不同state对应的任务</li>
 <li>基本上就结束了一个Ansible插件了</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">module = AnsibleModule(</span><br><span class="line">    argument_spec=dict(</span><br><span class="line">        role=dict(choices=[<span class="string">&#x27;standalone&#x27;</span>, <span class="string">&#x27;hub&#x27;</span>, <span class="string">&#x27;node&#x27;</span>], default=<span class="string">&#x27;standalone&#x27;</span>),</span><br><span class="line">        state=dict(choices=[<span class="string">&#x27;running&#x27;</span>, <span class="string">&#x27;stopped&#x27;</span>, <span class="string">&#x27;restarted&#x27;</span>], default=<span class="string">&#x27;running&#x27;</span>),</span><br><span class="line">        version=dict(default=<span class="string">&#x27;2.53.0&#x27;</span>),</span><br><span class="line">        path=dict(default=<span class="string">&#x27;.&#x27;</span>),</span><br><span class="line">        force=dict(default=<span class="literal">False</span>, type=<span class="string">&#x27;bool&#x27;</span>),</span><br><span class="line">        args=dict(required=<span class="literal">False</span>, default=<span class="string">&#x27;&#x27;</span>),</span><br><span class="line">        java=dict(required=<span class="literal">False</span>, default=<span class="string">&#x27;/usr/bin/java&#x27;</span>),</span><br><span class="line">        logfile=dict(required=<span class="literal">False</span>, default=<span class="string">&#x27;./selenium.log&#x27;</span>),</span><br><span class="line">        javaargs=dict(required=<span class="literal">False</span>, default=[], type=<span class="string">&#x27;list&#x27;</span>),</span><br><span class="line">    ),</span><br><span class="line"></span><br><span class="line">    supports_check_mode=<span class="literal">False</span>,</span><br><span class="line"></span><br><span class="line">    mutually_exclusive=[]</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">state = module.params[<span class="string">&#x27;state&#x27;</span>]</span><br><span class="line">role = module.params[<span class="string">&#x27;role&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> state == <span class="string">&#x27;running&#x27;</span>:</span><br><span class="line">    (changed, pid) = start(module)</span><br><span class="line">    finish(module, msg=<span class="string">&#x27;%s is running&#x27;</span> % role, changed=changed, pid=pid)</span><br><span class="line"><span class="keyword">elif</span> state == <span class="string">&#x27;stopped&#x27;</span>:</span><br><span class="line">    changed = stop(module)</span><br><span class="line">    finish(module, msg=<span class="string">&#x27;%s is stopped&#x27;</span> % role, changed=changed)</span><br><span class="line"><span class="keyword">elif</span> state == <span class="string">&#x27;restarted&#x27;</span>:</span><br><span class="line">    (changed, pid) = restart(module)</span><br><span class="line">    finish(module, msg=<span class="string">&#x27;%s has restarted&#x27;</span> % role, changed=changed, pid=pid)</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs python">module = AnsibleModule(
+    argument_spec=dict(
+        role=dict(choices=[<span class="hljs-string">&#x27;standalone&#x27;</span>, <span class="hljs-string">&#x27;hub&#x27;</span>, <span class="hljs-string">&#x27;node&#x27;</span>], default=<span class="hljs-string">&#x27;standalone&#x27;</span>),
+        state=dict(choices=[<span class="hljs-string">&#x27;running&#x27;</span>, <span class="hljs-string">&#x27;stopped&#x27;</span>, <span class="hljs-string">&#x27;restarted&#x27;</span>], default=<span class="hljs-string">&#x27;running&#x27;</span>),
+        version=dict(default=<span class="hljs-string">&#x27;2.53.0&#x27;</span>),
+        path=dict(default=<span class="hljs-string">&#x27;.&#x27;</span>),
+        force=dict(default=<span class="hljs-literal">False</span>, type=<span class="hljs-string">&#x27;bool&#x27;</span>),
+        args=dict(required=<span class="hljs-literal">False</span>, default=<span class="hljs-string">&#x27;&#x27;</span>),
+        java=dict(required=<span class="hljs-literal">False</span>, default=<span class="hljs-string">&#x27;/usr/bin/java&#x27;</span>),
+        logfile=dict(required=<span class="hljs-literal">False</span>, default=<span class="hljs-string">&#x27;./selenium.log&#x27;</span>),
+        javaargs=dict(required=<span class="hljs-literal">False</span>, default=[], type=<span class="hljs-string">&#x27;list&#x27;</span>),
+    ),
+
+    supports_check_mode=<span class="hljs-literal">False</span>,
+
+    mutually_exclusive=[]
+)
+
+state = module.params[<span class="hljs-string">&#x27;state&#x27;</span>]
+role = module.params[<span class="hljs-string">&#x27;role&#x27;</span>]
+
+<span class="hljs-keyword">if</span> state == <span class="hljs-string">&#x27;running&#x27;</span>:
+    (changed, pid) = start(module)
+    finish(module, msg=<span class="hljs-string">&#x27;%s is running&#x27;</span> % role, changed=changed, pid=pid)
+<span class="hljs-keyword">elif</span> state == <span class="hljs-string">&#x27;stopped&#x27;</span>:
+    changed = stop(module)
+    finish(module, msg=<span class="hljs-string">&#x27;%s is stopped&#x27;</span> % role, changed=changed)
+<span class="hljs-keyword">elif</span> state == <span class="hljs-string">&#x27;restarted&#x27;</span>:
+    (changed, pid) = restart(module)
+    finish(module, msg=<span class="hljs-string">&#x27;%s has restarted&#x27;</span> % role, changed=changed, pid=pid)</code></pre>
 
 <p>start 任务的一个例子：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">start</span>(<span class="params">module</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Start the Selenium standalone</span></span><br><span class="line"><span class="string">    :param module:</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    _, jar_file = download(module)</span><br><span class="line"></span><br><span class="line">    changed = <span class="literal">False</span></span><br><span class="line">    role = module.params[<span class="string">&#x27;role&#x27;</span>]</span><br><span class="line">    <span class="keyword">if</span> role != <span class="string">&#x27;standalone&#x27;</span>:</span><br><span class="line">      role = <span class="string">&quot;-role %s&quot;</span> % role</span><br><span class="line">    <span class="keyword">else</span>: </span><br><span class="line">      role = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> is_running(module): <span class="comment"># in another implementation</span></span><br><span class="line">        changed = <span class="literal">True</span></span><br><span class="line">        args = <span class="string">&#x27;&#x27;</span></span><br><span class="line">        java_args = <span class="string">&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">if</span> module.params[<span class="string">&#x27;args&#x27;</span>]:</span><br><span class="line">            <span class="keyword">for</span> (k, v) <span class="keyword">in</span> module.params[<span class="string">&#x27;args&#x27;</span>].iteritems():</span><br><span class="line">                args += <span class="string">&#x27;-%s=%s &#x27;</span> % (k, v)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> module.params[<span class="string">&#x27;javaargs&#x27;</span>]:</span><br><span class="line">            <span class="keyword">for</span> arg <span class="keyword">in</span> module.params[<span class="string">&#x27;javaargs&#x27;</span>]:</span><br><span class="line">                java_args += <span class="string">&#x27;-%s &#x27;</span> % arg</span><br><span class="line"></span><br><span class="line">        java_executable = os.path.abspath(os.path.expandvars(module.params[<span class="string">&#x27;java&#x27;</span>]))</span><br><span class="line">        log_file = os.path.abspath(os.path.expandvars(module.params[<span class="string">&#x27;logfile&#x27;</span>]))</span><br><span class="line"></span><br><span class="line">        cmd = <span class="string">&quot;%s %s -jar %s %s %s &gt;&gt; %s 2&gt;&amp;1 &amp;&quot;</span> % (java_executable,</span><br><span class="line">                                                          java_args,</span><br><span class="line">                                                          jar_file,</span><br><span class="line">                                                          role,</span><br><span class="line">                                                          args,</span><br><span class="line">                                                          log_file)</span><br><span class="line"></span><br><span class="line">        os.setsid()</span><br><span class="line"></span><br><span class="line">        <span class="comment">#print cmd</span></span><br><span class="line">        rc = os.system(cmd)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> rc != <span class="number">0</span>:</span><br><span class="line">            abort(module, <span class="string">&#x27;Running the %s role returned code %s !&#x27;</span> % (role, rc))</span><br><span class="line"></span><br><span class="line">    pid = get_pid(module)</span><br><span class="line">    <span class="keyword">if</span> pid:</span><br><span class="line">        <span class="keyword">return</span> changed, pid</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        abort(module, <span class="string">&#x27;Couldnt fetch the pid of the running %s ! It may have ended abruptly.&#x27;</span> % module.params[<span class="string">&#x27;role&#x27;</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">start</span>(<span class="hljs-params">module</span>):</span>
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    Start the Selenium standalone</span>
+<span class="hljs-string">    :param module:</span>
+<span class="hljs-string">    :return:</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+
+    _, jar_file = download(module)
+
+    changed = <span class="hljs-literal">False</span>
+    role = module.params[<span class="hljs-string">&#x27;role&#x27;</span>]
+    <span class="hljs-keyword">if</span> role != <span class="hljs-string">&#x27;standalone&#x27;</span>:
+      role = <span class="hljs-string">&quot;-role %s&quot;</span> % role
+    <span class="hljs-keyword">else</span>: 
+      role = <span class="hljs-string">&#x27;&#x27;</span>
+
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> is_running(module): <span class="hljs-comment"># in another implementation</span>
+        changed = <span class="hljs-literal">True</span>
+        args = <span class="hljs-string">&#x27;&#x27;</span>
+        java_args = <span class="hljs-string">&#x27;&#x27;</span>
+        <span class="hljs-keyword">if</span> module.params[<span class="hljs-string">&#x27;args&#x27;</span>]:
+            <span class="hljs-keyword">for</span> (k, v) <span class="hljs-keyword">in</span> module.params[<span class="hljs-string">&#x27;args&#x27;</span>].iteritems():
+                args += <span class="hljs-string">&#x27;-%s=%s &#x27;</span> % (k, v)
+
+        <span class="hljs-keyword">if</span> module.params[<span class="hljs-string">&#x27;javaargs&#x27;</span>]:
+            <span class="hljs-keyword">for</span> arg <span class="hljs-keyword">in</span> module.params[<span class="hljs-string">&#x27;javaargs&#x27;</span>]:
+                java_args += <span class="hljs-string">&#x27;-%s &#x27;</span> % arg
+
+        java_executable = os.path.abspath(os.path.expandvars(module.params[<span class="hljs-string">&#x27;java&#x27;</span>]))
+        log_file = os.path.abspath(os.path.expandvars(module.params[<span class="hljs-string">&#x27;logfile&#x27;</span>]))
+
+        cmd = <span class="hljs-string">&quot;%s %s -jar %s %s %s &gt;&gt; %s 2&gt;&amp;1 &amp;&quot;</span> % (java_executable,
+                                                          java_args,
+                                                          jar_file,
+                                                          role,
+                                                          args,
+                                                          log_file)
+
+        os.setsid()
+
+        <span class="hljs-comment">#print cmd</span>
+        rc = os.system(cmd)
+
+        <span class="hljs-keyword">if</span> rc != <span class="hljs-number">0</span>:
+            abort(module, <span class="hljs-string">&#x27;Running the %s role returned code %s !&#x27;</span> % (role, rc))
+
+    pid = get_pid(module)
+    <span class="hljs-keyword">if</span> pid:
+        <span class="hljs-keyword">return</span> changed, pid
+    <span class="hljs-keyword">else</span>:
+        abort(module, <span class="hljs-string">&#x27;Couldnt fetch the pid of the running %s ! It may have ended abruptly.&#x27;</span> % module.params[<span class="hljs-string">&#x27;role&#x27;</span>])
+</code></pre>
 
 <h2 id="Meta-插件的meta的数据"><a href="#Meta-插件的meta的数据" class="headerlink" title="Meta 插件的meta的数据"></a>Meta 插件的meta的数据</h2><p>meta信息一般存放在meta目录中，具体写的方式参考源码:<br><code>https://github.com/SeleniumHQ/ansible-selenium.git</code></p>
-<h2 id="Ansible-MindMap"><a href="#Ansible-MindMap" class="headerlink" title="Ansible MindMap"></a>Ansible MindMap</h2><p><img src="/images/Ansible.png" alt="img"></p>
+<h2 id="Ansible-MindMap"><a href="#Ansible-MindMap" class="headerlink" title="Ansible MindMap"></a>Ansible MindMap</h2><p><img src="/images/Ansible.png" srcset="/img/loading.gif" alt="img"></p>
 
-      
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/ansible/">ansible</a>
+                    
+                      <a class="hover-with-bg" href="/tags/CICD/">CICD</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/11/20/tips/thoughts/think-twice/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">似是而非</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2018/09/12/tips/conda-cheetsheet/">
+                        <span class="hidden-mobile">conda-cheatsheet</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
 
+      </div>
+    
   </div>
+</div>
 
-  <div class="article-footer">
-    <div class="article-meta pull-left">
+<!-- Custom -->
+
 
     
 
     
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
     
 
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/ansible/">ansible</a><a href="/tags/CICD/">CICD</a>
-    </span>
     
-
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
     </div>
+  </div>
+</div>
+    
 
     
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
-</article>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
 
   
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
 
 
 
-    </main>
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
 
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
-    
-    &copy; 2020 qmeta
-    
-  </p>
-</footer>
-    
-  </div>
-</div>
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
 </body>
 </html>

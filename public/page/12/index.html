@@ -1,342 +1,860 @@
-<!DOCTYPE HTML>
-<html>
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <title>第 12 页 | Learning Testing/QA in Hardway | Just Do It</title>
-
-  
-  <meta name="author" content="qmeta">
-  
-
-  
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="allround tester">
-  
+  <meta name="author" content="qmeta">
+  <meta name="keywords" content="">
+  <title>Learning Testing/QA in Hardway</title>
 
-  
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  
 
-  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+<!-- 主题依赖的图标库，不要自行修改 -->
 
-  
-  <meta property="og:image" content="/favicon.ico"/>
-  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"qdriven.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.0.0"></head>
 
 
 <body>
-<div class="blog">
-  <div class="content">
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Practising</strong>&nbsp;</a>
 
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Learning Testing/QA in Hardway</a>
-    </h1>
-    <p class="site-description">Just Do It</p>
-  </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">主页</a></li>
-      
-        <li><a href="/archives">归档</a></li>
-      
-        <li><a href="/categories">分类</a></li>
-      
-        <li><a href="/tags">标签</a></li>
-      
-    </ul>
-  </nav>
-</header>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
 
-    <main class="site-main posts-loop">
-    
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2019/10/29/qa-thoughts/no-doubt/"><span>测试陷阱1 - 放弃怀疑</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/10/29/qa-thoughts/no-doubt/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-10-29T12:43:24.000Z">
-          2019-10-29
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>对于大部分的初级测试人员来说，有时放弃怀疑可能在工作中陷入一些被动，甚至让自己的生活有时也会搞得一团乱. 下面我从一个加班事件说起，看看我们如果应对一些突发的情况.</p>
-<h2 id="从一个加班事件说起"><a href="#从一个加班事件说起" class="headerlink" title="从一个加班事件说起"></a>从一个加班事件说起</h2><p>事情的由来是这样的,由于某种原因，一个功能只能在生产环境测试，于是测试同学自己觉得这个功能简单，就预估半天时间就可以测试完成。结果呢？由于各种配置问题，上了生产主流程都不通，然后一通检查，最后从上午一直到到晚上10点的时候发现需要的一个第三方账户权限设置错误，造成功能不同，然后在配置修改完了之后，再进行测试，结果弄到凌晨结束。从这个事情来看，完全从功能角度看，其实可能确实只要半天时间，但是这个功能又有很多依赖关系，而这些依赖关系确花了比实际测试更长的时间，而真正造成这些时间的问题确从来没有去怀疑过。于是班加了，结果其实还不太好，对外看来为什么会到最后才发现这些问题？为什么事前没有计划，为什么到最后主流程还不通？为什么从来没有人提出过这个里面可能的风险？</p>
-<h2 id="怀疑不等于不相信，怀疑是想确认"><a href="#怀疑不等于不相信，怀疑是想确认" class="headerlink" title="怀疑不等于不相信，怀疑是想确认"></a>怀疑不等于不相信，怀疑是想确认</h2><p>我事后分析了一下，有一点就是测试同学早早的放弃了怀疑，放弃怀疑了两个地方:</p>
-<ul>
-<li>这些配置问题在开发过程中就会被发现？ 因为开发承诺会测试</li>
-<li>这些功能很简单，就没有去深究这里面的依赖关系，这些总会有人去搞定的</li>
-</ul>
-<p>首先我想明确的一点是，怀疑不等于不相信，这个共识是需要团队达成的.<br>怀疑是想对事情本身的确认，而不是对开发人员的怀疑，有了这个基本共识，我觉得测试人员就应该多提问题，多怀疑，把怀疑的点变成实际放生的事实，把要做确没有做的事情落实，这样才能减少突发情况，才可以少加点班。遗憾的事，即使发生了这样的事情，大多数的测试人员还是会轻而易举的接受这样的事实，听开发人员一解释说是运营人没有告诉他账户设置，造成了此次问题，这样就过去了，我想这样的事情以后还是会发生。因为再一次的放弃了怀疑，根据发生的事情，一定程度上是可以推导将来发生的事情的，比如很明显，这么一件事情看出来:</p>
-<ul>
-<li>开发没有做任何自测，因为如果自测，那么一定可以老早就发现这个问题了</li>
-<li>开发喜欢推卸了一定的责任，这个事情的关键点不是谁没有把账号告诉别人，而是为什么这样的事情到最后才发现</li>
-<li>事实上做这个功能基本上没有做任何的调研，如果做了调研就一定会知道需要什么账户的，不是吗？那以后怎么做调研？</li>
-<li>真的只能生产了才可以测试吗？实际情况不是多申请一个第三方账户就可以在测试环境测试了吗？如果测试了不是应该老早就发现账户配置的问题了吗？就算只有一个账户，产生的测试数据可以删除吗？</li>
-</ul>
-<p>如果测试不通过事实去怀疑一些，有了怀疑又去确认一些事情，那么处在开发环节的最下游，太多的不确定性都变成自己来承担，种种压力，种种加班就会都来；到最后没有太多人会帮到你，因为到了最后一旦出了点问题，就可能变成了大问题，就可能被老板追责了。</p>
-<h2 id="事后还是要把怀疑的点落实"><a href="#事后还是要把怀疑的点落实" class="headerlink" title="事后还是要把怀疑的点落实"></a>事后还是要把怀疑的点落实</h2><p>事情既然已经发生了，还好没有出现延期之类的事情，但是如果就这么过了，可能以后还是一样会发生这样的情况。<br>所以测试人员还应该把你认为出现这次情况的怀疑点提炼出来，比如：</p>
-<ul>
-<li>开发你自测了？是一个人没有自测还是所有人没有自测？</li>
-<li>为什么只能在生产环境测试？这个调研工作真的做的彻底了吗？</li>
-<li>为什么一开始不知道会是账号的问题？为什么定位这个问题要这么就？调研工作做的彻底了吗？</li>
-<li>下次调研要这么做呢？调研了什么东西，什么结论要让相关人员知道吗？</li>
-<li>测试估算时间的时候，真的了解了这些功能的依赖了吗？真的知道如果才能在生产环境把功能全部跑通的所有条件了吗？</li>
-</ul>
-<p>这些问题什么时候解决呢？会解决吗？如果没有解决是不是后面我可以直接想老板反馈呢？这些都是合理的怀疑，不是去怀疑个人，而是有了事实之后，测试要去确认的点，过程是很辛苦，但是如果真能做到，那么这个测试在团队里面不会变得可有可无；你做的事情变成了对完全对发布负责，那么你有理由获得更多的信任。但是如果你就让这样的事情轻易通过，那么后面会有更多离奇事发生。</p>
-<h2 id="行千里路，半900"><a href="#行千里路，半900" class="headerlink" title="行千里路，半900"></a>行千里路，半900</h2><p>行千里路，半900；所以如果没有把很多的事情落实，没有去怀疑去确认实际落实的情况，那么预估的时间往往都过于乐观了。过于乐观的估计，往往造成时间紧张，时间紧张又意味出现容易出错。所以不妨把事情放到台面说</p>
-
-      
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
-
   </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/QATrap/">QATrap</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2019/10/09/tips/tester-ops/4-GOReplay-usage/"><span>goreplay-usage</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/10/09/tips/tester-ops/4-GOReplay-usage/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-10-09T02:06:26.000Z">
-          2019-10-09
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h2 id="Gorelapy简介"><a href="#Gorelapy简介" class="headerlink" title="Gorelapy简介"></a>Gorelapy简介</h2><p>goreplay是一款从生产环境copy流量到测试环境的工具，且不会影响生产环境的业务响应，又能很简单的达到复用http请求来做稳定性测试的目的。</p>
-<p>GoReplay 工作方式：listener server 捕获流量，并将其发送至 replay server 或者保存至文件。replay server 会将流量转移至配置的地址<br><img src="https://camo.githubusercontent.com/1c65a684aeb1d16343d59c3ab6d3f9d41c77c36f/68747470733a2f2f692e696d6775722e636f6d2f494e327866446d2e706e67" alt="img"></p>
-<p>最简单的使用模式是：listener server捕获流量，并将其发送至kafka，然后解析kafka的消息并存入mysql,处理起来还是比较方便的.</p>
-<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><ul>
-<li><p>1、安装kafka<br>启动zookeeper 和kafka server，并创建一个topic<br>温馨提示：server.properties中的PLAINTEX后面需要把ip加上，否则其他服务器上的消息接收不到</p>
-</li>
-<li><p>2、安装mysql<br>创建db和表,用来保存请求数据</p>
-</li>
-</ul>
-<h2 id="监听消息发送到kafaka"><a href="#监听消息发送到kafaka" class="headerlink" title="监听消息发送到kafaka"></a>监听消息发送到kafaka</h2><ul>
-<li>1、在目标服务器上安装gorepay<ul>
-<li>a、源码：<a target="_blank" rel="noopener" href="https://github.com/buger/goreplay">https://github.com/buger/goreplay</a></li>
-<li>b、二进制包：百度或者找我要吧。如果你的服务器是centos7以上，可以直接解压使用。建议使用这种方式</li>
-</ul>
-</li>
-<li>2、监听并往kafka发消息</li>
-</ul>
-<ul>
-<li><p>使用HTTP 请求输出到kafka - HTTP原始信息</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./goreplay --input-raw :8179--output-kafka-host <span class="string">&#x27;10.8.1.43:9092&#x27;</span> --output-kafka-topic <span class="string">&#x27;test&#x27;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用HTTP 请求输出到kafka - JSON格式</p>
-</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./goreplay --input-raw :8080 --input-raw-track-response --output-kafka-host <span class="string">&#x27;10.8.1.43:9092&#x27;</span> --output-kafka-topic <span class="string">&#x27;test&#x27;</span> --output-kafka-json-format</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查看监听消息<br>在kafka所在的服务器上启一个consumer，查看这个topic中的消息，可以看到监听端口的流量了<br>bin/kafka-console-consumer.sh –bootstrap-server 10.8.1.43:9092 –topic test</li>
-</ul>
-<h2 id="解析kafka的消息并保存到mysql"><a href="#解析kafka的消息并保存到mysql" class="headerlink" title="解析kafka的消息并保存到mysql"></a>解析kafka的消息并保存到mysql</h2><ul>
-<li>安装依赖库：confluent-kafka、records、PyMySQL<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install confluent-kafka</span><br><span class="line">pip install records</span><br><span class="line">pip install PyMySQL</span><br></pre></td></tr></table></figure></li>
-<li>Confluent-kafka是一款高效、稳定的kafka的python客户端<br><a target="_blank" rel="noopener" href="https://github.com/confluentinc/confluent-kafka-python">https://github.com/confluentinc/confluent-kafka-python</a></li>
-<li>records一个非常简单但功能强大的库，用于对大多数关系数据库进行原始SQL查询</li>
-<li>PyMySQL是从Python连接到MySQL数据库服务器的接口</li>
-<li>编写解析kafka消息的python代码，进行解析并且保存落库</li>
-</ul>
-<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p>基本命令：</p>
-<ul>
-<li>1、获取经过本地8080端口的请求流量，然后打印出来</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./goreplay --input-raw :8080 --output-stdout</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>2、获取经过本地8080端口的请求流量，然后保存在.gor文件中</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./goreplay --input-raw :8080 --output-file=request.gor</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>3、从保存下来的流量文件中提取流量并向某的地址的某个端口输出</p>
-</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./goreplay --input-file=request.gor --output-http=<span class="string">&quot;http://localhost:8000&quot;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>4、转发</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./goreplay --input-raw :8080 --output-http=<span class="string">&quot;http://localhost:8000&quot;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>5.请求过滤</p>
-</li>
-</ul>
-<p>例如只收集 /api 下的请求</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./gor --input-raw :8080 --output-http staging.com --http-allow-url /api</span><br></pre></td></tr></table></figure>
-<p>例如只收集请求头中符合 api-version 为 1.0x 的请求</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./gor --input-raw :8080 --output-http staging.com --http-allow-header api-version:^1\.0\d</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/test-ops/">test-ops</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2019/10/07/tips/bugs/lagou-search-bug/"><span>lagou PC版搜索选项工作经验选择应届后，取消应届后，不能返回原来的工作经验选项</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/10/07/tips/bugs/lagou-search-bug/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-10-07T13:32:43.000Z">
-          2019-10-07
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h2 id="Bug-描述"><a href="#Bug-描述" class="headerlink" title="Bug 描述"></a>Bug 描述</h2><p>lagou PC版搜索选项工作经验选择应届后，取消应届后，不能返回原来的工作经验选项<br>步骤:</p>
-<ol>
-<li>进入首页，选择地区上海，关键字输入软件测试</li>
-<li>待搜索结果显示之后，工作经验选择为应届毕业生</li>
-<li>所有结果出现后，取消应届的选择，不能再回退到工作经验的选项</li>
-</ol>
-<ul>
-<li>期望结果: 取消应届选择后，回退到有工作经验的所有选项</li>
-<li>疑问: 这是一个Bug吗？还是产品经理的一个设计?<br>有方便的地方，也有不方便的地方，如果测试人员不知道这个需求,你要怎么处理这个事情?</li>
-</ul>
-<p><img src="/images/bugs/lagou-search-bug-1/lagou-search-bug-1.jpg" alt="img"><br><img src="/images/bugs/lagou-search-bug-1/lagou-search-bug-2.jpg" alt="img"><br><img src="/images/bugs/lagou-search-bug-1/lagou-search-bug-3.jpg" alt="img"></p>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/real-bug/">real-bug</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-
-<nav class="pagination">
-  
-  <a href="/page/11/" class="pagination-prev">上一页</a>
-  
-  
-  <a href="/page/13/" class="pagination-next">下一页</a>
-  
 </nav>
-    </main>
 
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Dirty your hands,understand the discrimination and reality! Be tough and nice!">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
     
-    &copy; 2020 qmeta
+      <div class="container nopadding-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
     
-  </p>
-</footer>
     
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2015/11/15/python/2015-11-15-String-Format-in-Python/">Python 中String的格式化</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2015/11/15/python/2015-11-15-String-Format-in-Python/">
+          
+          
+            
+          
+          python中对于string有些挺有意思操作,现在把他记录如下：
+output = &#x27;Hello &#123;0&#125;!&#x27;.format(&#x27;World!&#x27;)
+output1 = &#x27;Hello &#123;0&#125; &#123;1&#125; !&#x27;.format(&#x27;Mr.&#x27;,&#x27;World!&#x2
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2015-11-15 15:12" pubdate>
+              2015-11-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/python/">python</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/python/">python</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2015/11/05/shell/2015-11-05-generate-jekyll-post-file/">shell来自动生成Jekyll post文件</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2015/11/05/shell/2015-11-05-generate-jekyll-post-file/">
+          
+          
+            
+          
+          通过以下代码可以生成jekyll 的post 文件
+#! /bin/bash
+
+CAT=$1
+TITLE=$2
+echo &quot;current location: $PWD&quot;
+echo &quot;category: $CAT&quot;
+echo &quot;file_name: $TITLE&quot;
+
+FilePrefix=`date &quot;+%Y-%m-%d-&qu
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2015-11-05 18:31" pubdate>
+              2015-11-05
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/shell/">shell</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2015/11/04/tips/thoughts/2015-11-03-Test-Tools/">测试用例-一些有意思的工具</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2015/11/04/tips/thoughts/2015-11-03-Test-Tools/">
+          
+          
+            
+          
+          Automation Test Case Generate Tools
+Korat(structurally complex tests)
+Randoop (random testing)
+CERT Basic Fuzzing Framework
+ZZUF
+cert.org
+osate
+
+link
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2015-11-04 02:31" pubdate>
+              2015-11-04
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/testing/">testing</a>
+            
+              <a href="/categories/testing/thoughts/">thoughts</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/testing/">testing</a>
+            
+              <a href="/tags/thoughts/">thoughts</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2015/11/03/tips/refactoring/2015-10-26-refactoring-arrowhead-and-double-negative/">Refactoring-9-ArrowHead AntiPattern and Remove Double Negative</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2015/11/03/tips/refactoring/2015-10-26-refactoring-arrowhead-and-double-negative/">
+          
+          
+            
+          
+          Arrowhead AntiPattern一下代码有一系列的if 判断，我们可以重新思考判断逻辑,合并一些逻辑判断来让代码更可读:
+public boolean hasAccess(User user, Permission permission,
+                        List&lt;Permission&gt; exemptions) &#123;
+      boo
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2015-11-03 10:31" pubdate>
+              2015-11-03
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/designpattern/">designpattern</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2015/11/03/tips/refactoring/2015-11-3-refactoring-introduce-method-object-and-replace-conditions-with-poly/">Refactoring-10-introduce method object, replace conditions with polymorphism</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2015/11/03/tips/refactoring/2015-11-3-refactoring-introduce-method-object-and-replace-conditions-with-poly/">
+          
+          
+            
+          
+          将方法参数转化为类有时一个方法的传入参数太多，就需要考虑是否需要引入新的类来解决的。
+public class Registration &#123;
+    public void create(double amount,String name,
+                       double credits)&#123;
+        //do work
+    &#125;
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2015-11-03 10:31" pubdate>
+              2015-11-03
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/refactoring/">refactoring</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/refactoring/">refactoring</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2015/11/03/tips/refactoring/2015-10-26-remove-god-class/">Refactoring-8-remove God Class</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2015/11/03/tips/refactoring/2015-10-26-remove-god-class/">
+          
+          
+            
+          
+          God Class 就是一个类里面有一大堆不相干的方法放在一起,一般情况下很多的工具类，或者manager有可能会有这样的情况.不是说不能有工具类或者manager类，这个的关键是不相干的放在一个类里面。
+不相干就违反了Single Responsibility的原则.
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2015-11-03 02:31" pubdate>
+              2015-11-03
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/refactoring/">refactoring</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/refactoring/">refactoring</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-EncapsulateCollection/">Refactoring-1-Encapsulate Collection</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-EncapsulateCollection/">
+          
+          
+            
+          
+          关于重构的第一篇，后续会在这个话题继续讨论
+What is Encapsulate CollectionIn certain scenarios it is beneficial to not expose a full collection to consumers of a class. Some of these circumstances is when there is addition
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2015-10-26 02:31" pubdate>
+              2015-10-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/refactoring/">refactoring</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/refactoring/">refactoring</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-Extract-Interface-Method/">Refactoring-7-Extract-Interface,Method,Sub Class,Supper Class</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-Extract-Interface-Method/">
+          
+          
+            
+          
+          Extract-Interface,Method,Sub Class,Supper Class
+以上重构的方式主要是通过提起接口,方法,为了让代码有更好的可读性,可测性.
+开始:实例代码以下是一个需要重构的实例代码：
+public class Receipt &#123;
+
+    private List&lt;Double&gt; discounts= Lists.newArrayList()
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2015-10-26 02:31" pubdate>
+              2015-10-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/refactoring/">refactoring</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/refactoring/">refactoring</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-Move-Method/">Refactoring-2-Move Method</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-Move-Method/">
+          
+          
+            
+          
+          Move Method 重构实际上比较简单，一个简单的描述就是:
+
+如果有一个方法在一个类里面出现的频率很高，但他不在这个类里面
+那么Move Method就是把这个方法移动到出现频率高的这个类里面
+
+Before Move Methodpublic class BankAccountOrigin &#123;
+
+    private int accountAge;
+    private in
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2015-10-26 02:31" pubdate>
+              2015-10-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/refactoring/">refactoring</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/refactoring/">refactoring</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-Pull-Up-Method/">Refactoring-3-Pull Up Method</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-Pull-Up-Method/">
+          
+          
+            
+          
+          Pull Up Method 顾名思义,就是把方法向上拉,向上拉是个什么意思呢?在面向对象中向上就是向父类，或者接口拉,是不是很形象？
+Pull Up Method实例假设这样一个场景,目前有:
+
+抽象类－Vehicle
+继承了Vehicle的离散类－ Car
+继承了Vehicle的离散类－ Motorcycle
+
+而turn方法目前只有在Car中有，那么我们把turn方法防盗Vehicle中这样
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2015-10-26 02:31" pubdate>
+              2015-10-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/refactoring/">refactoring</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/refactoring/">refactoring</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/11/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/13/"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
   </div>
 </div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
 </body>
 </html>

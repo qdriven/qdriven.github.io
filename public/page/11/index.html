@@ -1,315 +1,840 @@
-<!DOCTYPE HTML>
-<html>
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <title>第 11 页 | Learning Testing/QA in Hardway | Just Do It</title>
-
-  
-  <meta name="author" content="qmeta">
-  
-
-  
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="allround tester">
-  
+  <meta name="author" content="qmeta">
+  <meta name="keywords" content="">
+  <title>Learning Testing/QA in Hardway</title>
 
-  
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  
 
-  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+<!-- 主题依赖的图标库，不要自行修改 -->
 
-  
-  <meta property="og:image" content="/favicon.ico"/>
-  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"qdriven.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.0.0"></head>
 
 
 <body>
-<div class="blog">
-  <div class="content">
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Practising</strong>&nbsp;</a>
 
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Learning Testing/QA in Hardway</a>
-    </h1>
-    <p class="site-description">Just Do It</p>
-  </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">主页</a></li>
-      
-        <li><a href="/archives">归档</a></li>
-      
-        <li><a href="/categories">分类</a></li>
-      
-        <li><a href="/tags">标签</a></li>
-      
-    </ul>
-  </nav>
-</header>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
 
-    <main class="site-main posts-loop">
-    
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2019/11/27/qa-thoughts/tech-is-all/"><span>测试陷阱3-自动化测试就是测试的技术</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/11/27/qa-thoughts/tech-is-all/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-11-27T15:49:47.000Z">
-          2019-11-27
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>随着自动化测试的风靡，测试同学们越来越觉得自动化就是全部，自动化就是自己的方向。<br>这些本身没有太大问题，但是如果认为自动化测试就是终极技术，那么我觉得这是一个很大的陷阱。<br>为什么？个人觉得大部分的测试把自动化和技术都定义的太狭小了,技术和自动化都是非常宽泛的定义,下面是我自己问自己的两个问题:</p>
-<ul>
-<li>什么是自动化？测试讨论的自动化难道就是接口自动化，UI自动化测试吗？</li>
-<li>什么是技术？技术难道就是写代码吗？把测试用例代码化吗？</li>
-</ul>
-<h2 id="什么是自动化？测试讨论的自动化难道就是接口自动化，UI自动化测试吗？"><a href="#什么是自动化？测试讨论的自动化难道就是接口自动化，UI自动化测试吗？" class="headerlink" title="什么是自动化？测试讨论的自动化难道就是接口自动化，UI自动化测试吗？"></a>什么是自动化？测试讨论的自动化难道就是接口自动化，UI自动化测试吗？</h2><p>为什么先问这个问题，因为很多同学一开始没有接触过自动化，后来写了一些自动化用例之后，要么觉得高人一等，要么觉得一会就觉得没意思了，原因何在？因为写过自动化测试用例之后，要么觉得我技术很厉害了，基本可以把所有问题都解决了；要么马上一个疑问是这有技术含量吗？ 大量重复的代码，差不多的验证点，没有比设计测试用例和执行用例高级到多少,然后就有一种深深的幻灭的感觉？路在何方的问题又来了.</p>
-<p>其实什么都可以是自动化,把原来重复做的事情用代码实现是自动化的一种；把类似的事情用代码实现也是自动化的一种；把<br>日常工作用代码实现也是自动化；这些自动化都是在做了一次之后再用代码去实现，如果用时髦一点的时候machine learning/ai去把<br>没做过的事情自动实现了,也是自动化. 我甚至可以说，社会生产力的进步都是每一个自动化的结果。<br>如果从这个角度看的，那么自动化能做的事情太多了，自动化测试也好，测试自动化也好，你可以做的事情有很多很多，多到你无法想像，问题是你有<br>能力做吗？ 那些写接口自动化，web ui自动化的技能足够你去做更多的自动化吗？</p>
-<p>自动化的目的大致就是为了不让人去做差不多的事情，减少重复劳动。用一样的方法做一样的事情是重复劳动，用不一样的方法重新再做一遍一样的事情也是重复劳动；如果目标是减少重复劳动，那么自动化测试就不能停在把测试自动化这一步，还有很多很多的事情可以做。但是坦白说，有哪些事情，我也说不出来，但是我觉得用代码再去实现一遍测试过用例，也是一种重复劳动，只是还没有能力把这件事情不重复做，但是相信一定有一些办法，有一些方面是可以解决的。</p>
-<p>如果从上面的角度说，自动化的范围太广了，能做的事情太多了，会了接口自动化，UI自动化算什么呢？</p>
-<h2 id="什么是技术？技术难道就是写代码吗？把测试用例代码化吗？"><a href="#什么是技术？技术难道就是写代码吗？把测试用例代码化吗？" class="headerlink" title="什么是技术？技术难道就是写代码吗？把测试用例代码化吗？"></a>什么是技术？技术难道就是写代码吗？把测试用例代码化吗？</h2><p>个人觉得技术包括的范围也很广，不止是写代码，不仅仅是测试用例代码化，这些都只是技术的一块。讨论起代码来兴致很高，觉得技术含量很高，讨论起业务来，没有一点情绪。但是如果仔细想想，像一个会计问题，一个交易问题，一个合规问题，这些是业务，但是不也是技术吗？这些只要是专业问题，这些就也是技术的一种，就像你专业写代码，这些不能理解为计算机科学的业务吗？如果是这样的话，那有什么非要区分业务和技术的？放在现实中来说，业务就是处理实际问题的技术，代码就是解决计算机如何运行的技术，不是吗？既然是这样的化，那么问问自己业务了解的透彻了，各个流程节点了解透彻了吗？技术实现和业务的匹配对应关系了解透彻了？代码说到底只是一个产品成功的一部分，还有很多很多其他问题需要解决,如果非要说代码能占到产品上线或者成功的多少比例？或许50%都不到. 代码本身不是目的，实际业务问题才是。不用非要拘泥与代码，各种方式解决了业务问题，也是很有技术含量的。</p>
-<h2 id="自动化测试就是测试的技术？"><a href="#自动化测试就是测试的技术？" class="headerlink" title="自动化测试就是测试的技术？"></a>自动化测试就是测试的技术？</h2><p>自动化测试只是测试的一种技术, 决定你有没有价值的不是你用了什么技术手段，是你解决了什么问题。代码，自动化测试也只是测试的一个侧面，想想日常工作中有多少事情要处理，如果眼里只有自动化测试，那么是不是失去了很多其他方面的锻炼和成长。问问自己把问题说清楚了吗，问问自己<br>做到了有效沟通吗，问问自己了解业务吗，问问自己能快速了解需求吗？自动化测试只是那么一小块，需要做的事情还有很多。</p>
-<p>不过自动化测试如果你完全不会，那么现在的行情你肯定是不容易拿到高工资的；但是如果认为只有自动化测试，那么天花板也放在那边,也算给自己的一个提醒吧。</p>
-
-      
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
-
   </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/QATrap/">QATrap</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2019/11/22/python/read_excel_yml/"><span>数据驱动测试- 测试用例加载</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/11/22/python/read_excel_yml/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-11-21T18:31:11.000Z">
-          2019-11-22
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>使用pytest作为测试工具，有一个pytest.parameterized 的装饰器可以用来进行数据驱动测试，以下是一个最简单的例子：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@pytest.mark.parametrize(&quot;id_num&quot;, (1, 2, 3, 4, 5))</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_issue_plain</span>(<span class="params">id_num</span>):</span></span><br><span class="line">    print(id_num)</span><br></pre></td></tr></table></figure>
-
-<p>test_issue方法有一个参数名称是 id_num, 这个值可以在测试过程中不断的被改变，但是实际中接口自动化中，有时我们会使用一些excel，yml作为外部测试用例来传入参数进行测试，那怎么样才能实现这个功能呢？</p>
-<h2 id="case-loader-例子说明"><a href="#case-loader-例子说明" class="headerlink" title="case loader 例子说明"></a>case loader 例子说明</h2><p>简单来说，一般我们测试用例传入的数据包括：</p>
-<ul>
-<li>test_desc: 测试用例描述</li>
-<li>inputs: 输入参数，可以作为json格式</li>
-<li>expected: 期望结果，可以是json格式</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@pytest.mark.parametrize(&quot;test_desc,input,expected&quot;, load_case_by_yml(&quot;testcases.yml&quot;))</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_issue_plain</span>(<span class="params">test_desc, input, expected</span>):</span></span><br><span class="line">    print(test_desc, input, expected)</span><br></pre></td></tr></table></figure>
-
-<p>所以我们通过程序加载后的内容也就是load_case_by_yml返回的应该是这样的一个list：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(test_desc,inputs,expected),......]</span><br></pre></td></tr></table></figure>
-
-<h2 id="case-loader-实现"><a href="#case-loader-实现" class="headerlink" title="case loader 实现"></a>case loader 实现</h2><p>有了目标，我们就动手，使用yml包非常容易的下面的功能:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_case_by_yml</span>(<span class="params">path</span>):</span></span><br><span class="line">    <span class="keyword">with</span> open(path, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> stream:</span><br><span class="line">        raw_yaml_result = yaml.safe_load(stream)</span><br><span class="line">    cases = raw_yaml_result[<span class="string">&quot;tests&quot;</span>]</span><br><span class="line">    parameterized_case = []</span><br><span class="line">    <span class="keyword">for</span> case <span class="keyword">in</span> cases:</span><br><span class="line">        parameterized_case.append(tuple(case.values()))</span><br><span class="line">    <span class="keyword">return</span> parameterized_case</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>对应测试用例的yaml如下:</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">tests:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">test_desc:</span> <span class="string">test1</span></span><br><span class="line">    <span class="attr">input:</span> &#123;<span class="string">&quot;k1&quot;</span><span class="string">:&quot;v1&quot;</span>&#125;</span><br><span class="line">    <span class="attr">expected:</span> &#123;<span class="string">&quot;k1&quot;</span><span class="string">:&quot;v1&quot;</span>&#125;</span><br><span class="line">  <span class="bullet">-</span> <span class="attr">test_desc:</span> <span class="string">test2</span></span><br><span class="line">    <span class="attr">input:</span> &#123;<span class="string">&quot;k1&quot;</span><span class="string">:&quot;v2&quot;</span>&#125;</span><br><span class="line">    <span class="attr">expected:</span> &#123;<span class="string">&quot;k1&quot;</span><span class="string">:&quot;v2&quot;</span>&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>通过这个方式，就非常容易的实现了数据驱动，同时也可以让自己的测试数据更好的被阅读和管理.</p>
-<p>每天1小时，可以让你的效率更好. 明天可以自己试试如何从excel加载实现类似功能.</p>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/automation，python/">automation，python</a>, <a href="/categories/automation，python/daily-automation-tip/">daily-automation-tip</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/automation/">automation</a><a href="/tags/daily-automation-tip/">daily-automation-tip</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2019/10/31/qa-thoughts/things-matter/"><span>测试陷阱2-永远都在忙碌重要紧急的事情</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/10/31/qa-thoughts/things-matter/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-10-31T05:22:54.000Z">
-          2019-10-31
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>测试永远都很忙，忙着回归测试，忙着各种各样的测试，各种各样的交付，但是这样忙碌了3年左右之后，<br>你发现你在确实是进步了，进步的主要方面我想大部分就是以下几个方面:</p>
-<ul>
-<li>沟通能力增强了</li>
-<li>业务熟悉了非常多，开发测试流程熟悉了很多</li>
-<li>处理紧急事情能力提高了很多</li>
-</ul>
-<p>这已经很不错，可能有些测试同样的过了三年这些进步都没有，更多的在听指令，别人说测试就是做测试。</p>
-<p>但是又过了三年，那些快速进步的测试，发现貌似和前面三年的进步比起来，这三年的进步幅度没有那么明显了,<br>以前你没有办法参与决策，现在还是一样没有办法参与决策，这三年做的事情貌似没有太多变化，可能可以带<br>1，2个人进行测试，做的事情和以前又本质的区别吗？于是反思自己，到底哪方面还有欠缺，造成了这几年进步不大？<br>答案往往就是可能是技术方面还不够，那么就想加强技术吧。于是越来越焦虑，主要发现看了1个月一门语法，结果1个星期没有用，<br>都忘了；忙碌的工作让三个月一转眼就过了，回顾一下，发现貌似什么变化的没有发生？怎么办？再过三年还是和现在一样？怎么办，<br>一会就过30了，外面35岁的人就不要了，我怎么办？ 焦虑自然就越来越多了。</p>
-<p>这个问题我觉得没有答案，但是我只想说，说到底，技术提高是需要资源的，而时间是一个重要的资源，如果你在最初的三年提高很快，<br>那么我想学习能力这个资源你是不缺的，但是所有的提高都需要你的时间资源，而你自己的时间资源管理起来了吗？你把它用到一些你认为非常重要，但是可能又不是马上要做的事情上吗？你如果这么回头一看，我相信你可能1天1个小时时间都没有花到你认为很重要的事情上面。</p>
-<p>焦虑每个人都有，但是怎么应对，怎么解决自己的问题才是关键。</p>
-<h2 id="如何应对焦虑"><a href="#如何应对焦虑" class="headerlink" title="如何应对焦虑"></a>如何应对焦虑</h2><p>焦虑是要克服的，往往自我要求高的人越焦虑，对于如果应对焦虑，我觉得可以从下面两个方面想：</p>
-<ul>
-<li>努力会有结果，我假设这个是对的，但是可能短期(2-3)年有时不对的。<br>我觉得可以举一个很好的例子来说明,下面是巴菲特投资收益曲线</li>
-</ul>
-<p><img src="https://xqimg.imedao.com/16aaa851a878b3d3fc1fe4bd.jpg!custom660.jpg" alt="img"></p>
-<p>如果只看这个曲线的1-2年，我觉得一定有人比他的投资收益更高的，但是如果你放到40年这个维度，那么很明显每人比他高。<br>这我觉得就是一个很好的例子来说明，可能短期进步没有自己预期高。放到生活工作中，如果1年你比别人多进步20%，那么你就一定比别人多20%的工资吗？我觉得未必，但是如果你连续5年都比别人进步了20%，那么我想你一定比其他人的工资高的，也许没有2倍，但是高20-30%我觉得还是非常大机会的，如果以后5年持续高30%，那么你收益也不错。</p>
-<ul>
-<li>每个人不放弃追求自己的极限，但也要明白自己一定有上限的</li>
-</ul>
-<p>每个人一定都有自己的上限，无论你相不相信，他都在那里，所以不如问问自己尽力了吗？不问自己最终会在什么位置，问问现在想要做点什么可能会化解一定的焦虑，焦虑是越想越焦虑，但是越做会越少点。一方面做事情会减少一些想的时间，另外一方面焦虑的解决办法不在你想了多少，而是你做了什么，解决了那些你焦虑的地方。</p>
-<p>有些一时解决不了，那么想想每个人都有上限这半句话，如果有些能解决，那么多想想，多认可一下不放弃追求自己极限这句话。</p>
-<h2 id="重要而不紧急的事情可能决定了你的上限"><a href="#重要而不紧急的事情可能决定了你的上限" class="headerlink" title="重要而不紧急的事情可能决定了你的上限"></a>重要而不紧急的事情可能决定了你的上限</h2><p>回到测试人员焦虑，没有时间提高自己想要提高的东西，时间是你想要提高的重要的资源，那么时间管理上面有一个重要的4象限：<br><img src="https://pic4.zhimg.com/80/b555c21da20c33118a7d0309ad0642c2_hd.jpg" alt="img"></p>
-<p>如果你自己把你实际的事情填到这个象限里面，你发现你要提高的东西都是在重要不紧急这块，但是如果你统计一下你的时间，你<br>发现其实一天1个小时都做不到？这就是你觉得没有提高的很重要的原因，你想提高，但是没有去做，所以越来越焦虑。</p>
-<p>这个四个象限里面其实最重要的是花在重要不紧急上面的时间，你投入了，你就有回报，你就比一般人厉害些，就像上学时候有种书到用时方恨少的感觉，这个感觉就是你没有在重要不紧急的上面没有投入时间，没有积累，你的上限就是那么多，这个是毫无疑问的！</p>
-<p>说起来自然容易，但是做起来确实难，时间从哪里来，比如每天1个小时？对于测试人员来说，所谓技术，最短期的一个目标可能就是编程代码能力，当然21天可以熟练使用一门语言，但是你一年下来合计有21天时间投入在这个上面吗？每天1小时，一年365个小时，365/24其实都没有21天。一天1小时都不够21天，那更不要说你没有花这么多时间了。所以事情其实很清楚了，焦虑的原因不是你笨，而是你没做，不是吗？学习一门语言，不算很难，但也不是没有难度，熟练使用，21天是不够的(很多人骂21天精通XXXX，就是这个道理).能够坚持每天1个小时是最大的难度之一，遇到问题自己想办法解决，坚持遇到一个解决一个，坚持3个多月，我觉得你一定会觉得有些不一样的。</p>
-<p>很多人也会说学了又会怎么样呢？你马上涨工资吗？这个问题我觉得你可以回头看看巴菲特收益曲线。<br>很多说我学不下去，主要没有地方练手？那么就找地方练手<br>很多说我不想学这个，这个不是我的方向？那么就不做了</p>
-<p>如果想要做，那么我觉得，练手我觉得对于测试来说有大量大量的机会做，小到如果有python处理insert语句自动生成，合并一些<br>excel，或者批量修改文件名等等，这些都可以练手，所以简单又重复的事情都可以练，只是你没有想到.</p>
-<p>There is a will, there is a way! 不过是不是学会了编程技能了，就一定就是提高了呢？这是个问题，但是每一个阶段都有每一个阶段的问题，多一门技能，你可能看到更多的东西，看的更远一些，这个我觉得是一定的！</p>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/QATrap/">QATrap</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-
-<nav class="pagination">
-  
-  <a href="/page/10/" class="pagination-prev">上一页</a>
-  
-  
-  <a href="/page/12/" class="pagination-next">下一页</a>
-  
 </nav>
-    </main>
 
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Dirty your hands,understand the discrimination and reality! Be tough and nice!">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
     
-    &copy; 2020 qmeta
+      <div class="container nopadding-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
     
-  </p>
-</footer>
     
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2015/12/28/tips/thoughts/2015-12-28-next-reading/">下一步的技术了解</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2015/12/28/tips/thoughts/2015-12-28-next-reading/">
+          
+          
+            
+          
+          Thoughtworks 发布了2015年技术雷达，看看他提到的东西可以长长见识。
+技术篇这里提到了几篇Martin Flower的文章，抽时间一定要看看。
+
+Test Double
+nonDeterminism
+microservice基本上他写的文章确实有必要看看的。
+
+安全－Thread Modeling
+工具,语言，观念
+graphiz
+hoodie
+couchdb
+Flux
+git as
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2015-12-28 19:49" pubdate>
+              2015-12-28
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/thoughts/">thoughts</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/thoughts/">thoughts</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2015/12/23/tips/automation/2015-12-23-http_status_code/">http status code HTTP 状态码</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2015/12/23/tips/automation/2015-12-23-http_status_code/">
+          
+          
+            
+          
+          HTTP Status CodesThis page is created from HTTP status code information found at ietf.org and Wikipedia. Click on the category heading or the status code link to read more.
+1xx Informational
+100 Conti
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2015-12-23 22:59" pubdate>
+              2015-12-23
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/automation/">automation</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/automation/">automation</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2015/12/23/tips/testing/2015-12-23-tomcat_basic/">tomcat_basic</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2015/12/23/tips/testing/2015-12-23-tomcat_basic/">
+          
+          
+            
+          
+          Tomcat 是我们常用的一个servlet容器，所以学点TOMCAT的知识对于如何了解一些TOMCAT的内幕也会比较好理解.一下是网上看到的一片非常不错的文章:Tomcat-1
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2015-12-23 20:46" pubdate>
+              2015-12-23
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/testing/">testing</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/testing/">testing</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2015/12/22/tips/refactoring/2015-12-22-design_pattern_overview/">design pattern overview</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2015/12/22/tips/refactoring/2015-12-22-design_pattern_overview/">
+          
+          
+            
+          
+          Design Pattern overview, from GoF:
+
+CreationalAbstract Factory, Builder, Factory method, Prototype, Singleton
+StructuralAdapter, Bridge, Composite, Decorator, Façade, Flyweight, Proxy
+BehaviouralChai
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2015-12-22 23:00" pubdate>
+              2015-12-22
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/designpattern/">designpattern</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2015/12/08/tips/testing/2015-12-08-collect-performance-requirement/">收集性能测试需求</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2015/12/08/tips/testing/2015-12-08-collect-performance-requirement/">
+          
+          
+            
+          
+          很多时候遇到一些关于性能测试的需求的时候，需求方实际上是给不出任何具体的需求，更多的是一下如下的抱怨:
+
+速度慢(具体哪个操作慢又很难给出)
+经常会出现系统过载(一般也不会自己看看监控的)
+反正就是慢，我也不知道哪里慢
+有一天突然系统响应时间慢，监控报警了
+
+遇到这样的问题时,突然发现测试其实挺悲惨的,因为和这样的同事打交道其实压力挺大了.按照这样的逻辑其实背后的含义就是所有和测试有关的事情都是你
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2015-12-08 13:36" pubdate>
+              2015-12-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/testing/">testing</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/testing/">testing</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2015/12/02/tips/2015-12-02-api_contract_design/">True Stories: 从API的URL定义想到的</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2015/12/02/tips/2015-12-02-api_contract_design/">
+          
+          
+            
+          
+          关于REST API接口的设计没有了解太多，不过实际的测试中看到一些这样设计的接口资源路径URL，自己感觉就是怪怪的，感觉这样的接口URL总是哪里不太对劲，所以自己就分析了一下：
+http://domain.org/api/v4/＊＊/coursePassed/&#123;appCode&#125;/&#123;courseId&#125;/&#123;userCode&#125;
+
+自己的思考是
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2015-12-02 13:26" pubdate>
+              2015-12-02
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/truestories/">truestories</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/truestories/">truestories</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2015/12/02/tips/real/2015-12-02-singleton/">Singleton 的不同写法</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2015/12/02/tips/real/2015-12-02-singleton/">
+          
+          
+            
+          
+          Singleton是JAVA的一个非常常见的方式，不过不同写的方式会有不同的想法，下面就介绍一下这个模式
+Singleton 懒汉式模式，线程不安全一个基本的写法如下:
+private static LazySingleton instance;
+  private LazySingleton()&#123;&#125;
+
+  public static LazySingleton getInst
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2015-12-02 12:42" pubdate>
+              2015-12-02
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/java/">java</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2015/11/27/tips/automation/2015-11-27-webservice-automation/">自动化测试－接口测试</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2015/11/27/tips/automation/2015-11-27-webservice-automation/">
+          
+          
+            
+          
+          在敏捷开发交付的流程中，自动化测试实际上被放在一个看起来挺重要的位置，而自动化测试中，接口测试是一个投入产出比比较高的一种自动化测试的形式，而我自己也做了一个这样的脚手架一样的东西可以方便进行自动化测试，关键是在一些现有第三包的基础上做实现，其实一个脚手架不需要几个JAVA类就可以完成了，至少我自己的这个在10个文件以内.要论行数估计也没有多少代码量，主要时间其实都是在想怎么更方便的写自动化测试，
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2015-11-27 11:10" pubdate>
+              2015-11-27
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/automation/">automation</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/automation/">automation</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2015/11/19/true_stories/2015-11-19-talking_is_cheep/">Talking is Cheap,show me the code</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2015/11/19/true_stories/2015-11-19-talking_is_cheep/">
+          
+          
+            
+          
+          当看到如下的代码出现在production代码库的时候，不知道做何想法？无数的人动辄就谈客户需求，要触动痛点,是的没错，但是软件工程师还是要点工程追求的吧？如果这样的代码存在一些时候也就罢了，结果存在来Controller里面3-4年之久，情何以堪呀？指望用这样的代码去触动痛点？你是认真的吗？工程师首先是个匠人,先写好自己的代码，再去谈论这些虚幻的东西.看几本抽象的书，谁都可以高谈阔论，so wh
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2015-11-19 23:27" pubdate>
+              2015-11-19
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/truestories/">truestories</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/truestories/">truestories</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2015/11/16/tips/testing/2015-11-16-error_toleration/">软件容错</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2015/11/16/tips/testing/2015-11-16-error_toleration/">
+          
+          
+            
+          
+          软件的世界已经变的及其复杂，在互联网的世界中一个个知道不知道的API将世界连接起来，如蜘蛛网一般,一个看的到的功能可能依赖了好几个看不到的API,所以中间出点错误实在不能说是个意外了。但是出错归出错，出错了软件也是一样要处理这些问题，下面就讲讲我学到遇到的一点容错的小知识。
+容错的目标降低或者最小化对系统可用性，可靠性的影响，举个例子来说就是单点故障，如果一个地方出现错误而把整个系统网络都拖垮了，
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2015-11-16 23:24" pubdate>
+              2015-11-16
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/testing/">testing</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/testing/">testing</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/10/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/12/"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
   </div>
 </div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
 </body>
 </html>

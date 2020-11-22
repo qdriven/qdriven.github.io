@@ -1,95 +1,237 @@
-<!DOCTYPE HTML>
-<html>
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <title>Phantomjs Tutorial | Learning Testing/QA in Hardway | Just Do It</title>
-
-  
-  <meta name="author" content="qmeta">
-  
-
-  
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="allround tester">
+  <meta name="author" content="qmeta">
+  <meta name="keywords" content="">
+  <title>Phantomjs Tutorial - Learning Testing/QA in Hardway</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
   
 
   
-  
-  <meta name="keywords" content="automation">
-  
-
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <meta property="og:title" content="Phantomjs Tutorial"/>
-
-  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
-
-  
-  <meta property="og:image" content="/favicon.ico"/>
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
   
 
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"qdriven.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.0.0"></head>
 
 
 <body>
-<div class="blog">
-  <div class="content">
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Practising</strong>&nbsp;</a>
 
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Learning Testing/QA in Hardway</a>
-    </h1>
-    <p class="site-description">Just Do It</p>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
   </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">主页</a></li>
-      
-        <li><a href="/archives">归档</a></li>
-      
-        <li><a href="/categories">分类</a></li>
-      
-        <li><a href="/tags">标签</a></li>
-      
-    </ul>
-  </nav>
-</header>
+</nav>
 
-    <main class="site-main posts-loop">
-    <article>
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Phantomjs Tutorial">
+              
+            </span>
 
+            
+              <div class="mt-3">
   
-    
-    <h3 class="article-title"><span>Phantomjs Tutorial</span></h3>
-    
   
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2015/10/24/tips/automation/2015-10-24-phantomjs-usage/" rel="bookmark">
-        <time class="entry-date published" datetime="2015-10-23T18:31:11.000Z">
-          2015-10-24
-        </time>
-      </a>
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2015-10-24 02:31" pubdate>
+        2015年10月24日 凌晨
+      </time>
     </span>
-  </div>
+  
+</div>
 
-
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      875 字
+    </span>
   
 
-  <div class="article-content">
-    <div class="entry">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
       
-        <p>自己学习Phatomjs的教程,分享之.</p>
+      
+      14
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Phantomjs Tutorial</h1>
+            
+            <div class="markdown-body">
+              <p>自己学习Phatomjs的教程,分享之.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><p>首先phantomjs是个什么? 以下是官方网站的解释:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PhantomJS is a headless WebKit scriptable with a JavaScript API.</span><br><span class="line">It has fast and native support for various web standards:</span><br><span class="line">DOM handling, CSS selector, JSON, Canvas, and SVG.</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs mipsasm">PhantomJS is a headless WebKit <span class="hljs-keyword">scriptable </span>with a <span class="hljs-keyword">JavaScript </span>API.
+It has fast <span class="hljs-keyword">and </span>native support for various web standards:
+DOM handling, CSS selector, <span class="hljs-keyword">JSON, </span>Canvas, <span class="hljs-keyword">and </span>SVG.</code></pre>
 
 <p>phantomjs可以用来做什么?</p>
 <ul>
@@ -111,101 +253,354 @@
 <h3 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h3><ul>
 <li>Hello World</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;Hello World!&#x27;</span>);</span><br><span class="line">phantom.exit();</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Hello World!&#x27;</span>);
+phantom.exit();</code></pre>
 
 <p>result:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">phantomjs hello_world.js</span><br><span class="line">Hello World!</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs sh">phantomjs hello_world.js
+Hello World!</code></pre>
 
 <ul>
 <li>Page Loading<br>一下代码是访问百度首页,计算页面加载时间并且截屏的例子:</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> page = <span class="built_in">require</span>(<span class="string">&#x27;webpage&#x27;</span>).create();</span><br><span class="line"><span class="keyword">var</span> url = <span class="string">&#x27;http://www.baidu.com&#x27;</span>;</span><br><span class="line">t = <span class="built_in">Date</span>.now();</span><br><span class="line">page.open(url, <span class="function"><span class="keyword">function</span> (<span class="params">status</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;Status:&quot;</span> + status);</span><br><span class="line">    <span class="keyword">if</span> (status !== <span class="string">&#x27;success&#x27;</span>) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;FAIL to load the address&#x27;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        t = <span class="built_in">Date</span>.now() - t;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;Loading &#x27;</span> + url);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;Loading time &#x27;</span> + t + <span class="string">&#x27; msec&#x27;</span>);</span><br><span class="line">        page.render(<span class="string">&#x27;baidu.png&#x27;</span>); <span class="comment">//capture the screenshot</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    phantom.exit();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> page = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;webpage&#x27;</span>).create();
+<span class="hljs-keyword">var</span> url = <span class="hljs-string">&#x27;http://www.baidu.com&#x27;</span>;
+t = <span class="hljs-built_in">Date</span>.now();
+page.open(url, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">status</span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Status:&quot;</span> + status);
+    <span class="hljs-keyword">if</span> (status !== <span class="hljs-string">&#x27;success&#x27;</span>) &#123;
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;FAIL to load the address&#x27;</span>);
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        t = <span class="hljs-built_in">Date</span>.now() - t;
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Loading &#x27;</span> + url);
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Loading time &#x27;</span> + t + <span class="hljs-string">&#x27; msec&#x27;</span>);
+        page.render(<span class="hljs-string">&#x27;baidu.png&#x27;</span>); <span class="hljs-comment">//capture the screenshot</span>
+    &#125;
+
+    phantom.exit();
+&#125;)</code></pre>
 
 <p>运行结果：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">●✚  phantomjs pageload.js                              [10:43:41]</span><br><span class="line">Status:success</span><br><span class="line">Loading http://www.baidu.com</span><br><span class="line">Loading time 699 msec</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs bash">●✚  phantomjs pageload.js                              [10:43:41]
+Status:success
+Loading http://www.baidu.com
+Loading time 699 msec</code></pre>
 
 <p>是不是很简单，只要几行代码就可以实现了,这里主要使用了:<code>webpage</code> 这个模块</p>
 <ul>
 <li>Code Evaluation</li>
 </ul>
 <p>通过evaluate 方法可以在当前页面运行js程序，但是也仅限于当前页面的范围</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> page = <span class="built_in">require</span>(<span class="string">&#x27;webpage&#x27;</span>).create();</span><br><span class="line">page.onConsoleMessage = <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Page title is &#x27;</span> + msg);</span><br><span class="line">&#125;;</span><br><span class="line">page.open(<span class="string">&quot;http://www.baidu.com&quot;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">status</span>) </span>&#123;</span><br><span class="line">    page.evaluate(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">document</span>.title);</span><br><span class="line">        <span class="keyword">var</span> element = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;kw&#x27;</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(element.getAttribute(<span class="string">&#x27;name&#x27;</span>));</span><br><span class="line">    &#125;);</span><br><span class="line">    phantom.exit();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> page = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;webpage&#x27;</span>).create();
+page.onConsoleMessage = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">msg</span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Page title is &#x27;</span> + msg);
+&#125;;
+page.open(<span class="hljs-string">&quot;http://www.baidu.com&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">status</span>) </span>&#123;
+    page.evaluate(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.title);
+        <span class="hljs-keyword">var</span> element = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;kw&#x27;</span>);
+        <span class="hljs-built_in">console</span>.log(element.getAttribute(<span class="hljs-string">&#x27;name&#x27;</span>));
+    &#125;);
+    phantom.exit();
+&#125;);</code></pre>
 
 <p>运行结果：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">phantomjs code_evaluation.js                       [10:51:55]</span><br><span class="line">Page title is 一张网页，要经历怎样的过程，才能抵达用户面前？</span><br><span class="line">一位新人，要经历怎样的成长，才能站在技术之巅？</span><br><span class="line">探寻这里的秘密；</span><br><span class="line">体验这里的挑战；</span><br><span class="line">成为这里的主人；</span><br><span class="line">加入百度，加入网页搜索，你，可以影响世界。</span><br><span class="line"></span><br><span class="line">Page title is 请将简历发送至 %c ps_recruiter@baidu.com（ 邮件标题请以“姓名-应聘XX职位-来自console”命名） color:red</span><br><span class="line">Page title is 职位介绍：http://dwz.cn/hr2013</span><br><span class="line">Page title is 百度一下，你就知道</span><br><span class="line">Page title is wd</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="hljs sh">phantomjs code_evaluation.js                       [10:51:55]
+Page title is 一张网页，要经历怎样的过程，才能抵达用户面前？
+一位新人，要经历怎样的成长，才能站在技术之巅？
+探寻这里的秘密；
+体验这里的挑战；
+成为这里的主人；
+加入百度，加入网页搜索，你，可以影响世界。
+
+Page title is 请将简历发送至 %c ps_recruiter@baidu.com（ 邮件标题请以“姓名-应聘XX职位-来自console”命名） color:red
+Page title is 职位介绍：http://dwz.cn/hr2013
+Page title is 百度一下，你就知道
+Page title is wd
+</code></pre>
 
 <ul>
 <li>On request and Response</li>
 </ul>
 <p>通过phantomjs 监听request和response，代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> page = <span class="built_in">require</span>(<span class="string">&#x27;webpage&#x27;</span>).create();</span><br><span class="line"><span class="keyword">var</span> url=<span class="string">&quot;http://www.baidu.com&quot;</span></span><br><span class="line">page.onResourceRequested = <span class="function"><span class="keyword">function</span>(<span class="params">request</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Request &#x27;</span> + <span class="built_in">JSON</span>.stringify(request, <span class="literal">undefined</span>, <span class="number">4</span>));</span><br><span class="line">&#125;;</span><br><span class="line">page.onResourceReceived = <span class="function"><span class="keyword">function</span>(<span class="params">response</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Receive &#x27;</span> + <span class="built_in">JSON</span>.stringify(response, <span class="literal">undefined</span>, <span class="number">4</span>));</span><br><span class="line">&#125;;</span><br><span class="line">page.open(url,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;success&quot;</span>);</span><br><span class="line">    phantom.exit()</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> page = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;webpage&#x27;</span>).create();
+<span class="hljs-keyword">var</span> url=<span class="hljs-string">&quot;http://www.baidu.com&quot;</span>
+page.onResourceRequested = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">request</span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Request &#x27;</span> + <span class="hljs-built_in">JSON</span>.stringify(request, <span class="hljs-literal">undefined</span>, <span class="hljs-number">4</span>));
+&#125;;
+page.onResourceReceived = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">response</span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Receive &#x27;</span> + <span class="hljs-built_in">JSON</span>.stringify(response, <span class="hljs-literal">undefined</span>, <span class="hljs-number">4</span>));
+&#125;;
+page.open(url,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;success&quot;</span>);
+    phantom.exit()
+&#125;);</code></pre>
 
 <p> 运行结果：</p>
- <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> ...............</span><br><span class="line">&#125;</span><br><span class="line">],</span><br><span class="line"><span class="string">&quot;id&quot;</span>: 18,</span><br><span class="line"><span class="string">&quot;redirectURL&quot;</span>: null,</span><br><span class="line"><span class="string">&quot;stage&quot;</span>: <span class="string">&quot;end&quot;</span>,</span><br><span class="line"><span class="string">&quot;status&quot;</span>: 200,</span><br><span class="line"><span class="string">&quot;statusText&quot;</span>: <span class="string">&quot;OK&quot;</span>,</span><br><span class="line"><span class="string">&quot;time&quot;</span>: <span class="string">&quot;2015-10-24T04:05:39.086Z&quot;</span>,</span><br><span class="line"><span class="string">&quot;url&quot;</span>: <span class="string">&quot;https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=&amp;json=1&amp;p=3&amp;sid=17521_1455_17619_13245_17640_17001_17470_17072_15640_11634_17051&amp;req=2&amp;csor=0&amp;cb=jQuery110209065551124513149_1445659538702&amp;_=1445659538703&quot;</span></span><br><span class="line">&#125;</span><br><span class="line">success</span><br></pre></td></tr></table></figure>
+ <pre><code class="hljs sh"> ...............
+&#125;
+],
+<span class="hljs-string">&quot;id&quot;</span>: 18,
+<span class="hljs-string">&quot;redirectURL&quot;</span>: null,
+<span class="hljs-string">&quot;stage&quot;</span>: <span class="hljs-string">&quot;end&quot;</span>,
+<span class="hljs-string">&quot;status&quot;</span>: 200,
+<span class="hljs-string">&quot;statusText&quot;</span>: <span class="hljs-string">&quot;OK&quot;</span>,
+<span class="hljs-string">&quot;time&quot;</span>: <span class="hljs-string">&quot;2015-10-24T04:05:39.086Z&quot;</span>,
+<span class="hljs-string">&quot;url&quot;</span>: <span class="hljs-string">&quot;https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=&amp;json=1&amp;p=3&amp;sid=17521_1455_17619_13245_17640_17001_17470_17072_15640_11634_17051&amp;req=2&amp;csor=0&amp;cb=jQuery110209065551124513149_1445659538702&amp;_=1445659538703&quot;</span>
+&#125;
+success</code></pre>
 
 <h2 id="HEADLESS-WEB-TESTING"><a href="#HEADLESS-WEB-TESTING" class="headerlink" title="HEADLESS WEB TESTING"></a>HEADLESS WEB TESTING</h2><p>please refer here:<a target="_blank" rel="noopener" href="http://phantomjs.org/headless-testing.html">http://phantomjs.org/headless-testing.html</a></p>
 <h2 id="SCREENSHOT"><a href="#SCREENSHOT" class="headerlink" title="SCREENSHOT"></a>SCREENSHOT</h2><p>screen capture is quite simple,just use:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> page = <span class="built_in">require</span>(<span class="string">&#x27;webpage&#x27;</span>).create();</span><br><span class="line"><span class="keyword">var</span> url = <span class="string">&#x27;http://www.baidu.com&#x27;</span>;</span><br><span class="line">t = <span class="built_in">Date</span>.now();</span><br><span class="line">page.open(url, <span class="function"><span class="keyword">function</span> (<span class="params">status</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;Status:&quot;</span> + status);</span><br><span class="line">    <span class="keyword">if</span> (status !== <span class="string">&#x27;success&#x27;</span>) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;FAIL to load the address&#x27;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        t = <span class="built_in">Date</span>.now() - t;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;Loading &#x27;</span> + url);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;Loading time &#x27;</span> + t + <span class="string">&#x27; msec&#x27;</span>);</span><br><span class="line">        page.render(<span class="string">&#x27;baidu.png&#x27;</span>); <span class="comment">//capture the screenshot</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    phantom.exit();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> page = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;webpage&#x27;</span>).create();
+<span class="hljs-keyword">var</span> url = <span class="hljs-string">&#x27;http://www.baidu.com&#x27;</span>;
+t = <span class="hljs-built_in">Date</span>.now();
+page.open(url, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">status</span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Status:&quot;</span> + status);
+    <span class="hljs-keyword">if</span> (status !== <span class="hljs-string">&#x27;success&#x27;</span>) &#123;
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;FAIL to load the address&#x27;</span>);
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        t = <span class="hljs-built_in">Date</span>.now() - t;
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Loading &#x27;</span> + url);
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Loading time &#x27;</span> + t + <span class="hljs-string">&#x27; msec&#x27;</span>);
+        page.render(<span class="hljs-string">&#x27;baidu.png&#x27;</span>); <span class="hljs-comment">//capture the screenshot</span>
+    &#125;
+
+    phantom.exit();
+&#125;)</code></pre>
 
 <p>also actual use <code>page.render(&#39;baidu.pdf&#39;)</code> to generate a PDF file</p>
 <h2 id="page-automation"><a href="#page-automation" class="headerlink" title="page-automation"></a>page-automation</h2><p>操作</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> page = <span class="built_in">require</span>(<span class="string">&#x27;webpage&#x27;</span>).create();</span><br><span class="line"><span class="keyword">var</span> url =<span class="string">&quot;http://www.baidu.com&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> cdn_url= <span class="string">&#x27;http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js&#x27;</span>;</span><br><span class="line"></span><br><span class="line">page.open(url, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    page.includeJs(cdn_url, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        page.evaluate(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">            $(<span class="string">&quot;button&quot;</span>).click();</span><br><span class="line">        &#125;);</span><br><span class="line">        phantom.exit()</span><br><span class="line">    &#125;);</span><br><span class="line">    page.render(<span class="string">&#x27;baidu.png&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> page = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;webpage&#x27;</span>).create();
+<span class="hljs-keyword">var</span> url =<span class="hljs-string">&quot;http://www.baidu.com&quot;</span>;
+<span class="hljs-keyword">var</span> cdn_url= <span class="hljs-string">&#x27;http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js&#x27;</span>;
+
+page.open(url, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+    page.includeJs(cdn_url, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+        page.evaluate(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+
+            $(<span class="hljs-string">&quot;button&quot;</span>).click();
+        &#125;);
+        phantom.exit()
+    &#125;);
+    page.render(<span class="hljs-string">&#x27;baidu.png&#x27;</span>);
+&#125;);</code></pre>
 
 <h2 id="Related-Projects"><a href="#Related-Projects" class="headerlink" title="Related Projects"></a>Related Projects</h2><p>相关的项目请参考：<br><a target="_blank" rel="noopener" href="http://phantomjs.org/related-projects.html">projects</a></p>
 
-      
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/automation/">automation</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/automation/">automation</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2015/10/24/true_stories/2015-10-24-return-flag/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">True Stories: About Return Flag</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2015/10/23/tips/refactoring/2015-10-22-Functional-Programming-pattern/">
+                        <span class="hidden-mobile">Functional Patterns</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
 
+      </div>
+    
   </div>
+</div>
 
-  <div class="article-footer">
-    <div class="article-meta pull-left">
+<!-- Custom -->
 
-    
-      
 
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/automation/">automation</a>
-    </span>
     
 
     
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
     
 
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/automation/">automation</a>
-    </span>
     
-
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
     </div>
+  </div>
+</div>
+    
 
     
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
-</article>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
 
   
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
 
 
 
-    </main>
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
 
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
-    
-    &copy; 2020 qmeta
-    
-  </p>
-</footer>
-    
-  </div>
-</div>
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
 </body>
 </html>

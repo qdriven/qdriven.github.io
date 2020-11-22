@@ -1,103 +1,261 @@
-<!DOCTYPE HTML>
-<html>
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <title>Xmind,Test Cases,and Allure templates for TDD | Learning Testing/QA in Hardway | Just Do It</title>
-
-  
-  <meta name="author" content="qmeta">
-  
-
-  
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="allround tester">
+  <meta name="author" content="qmeta">
+  <meta name="keywords" content="">
+  <title>Xmind,Test Cases,and Allure templates for TDD - Learning Testing/QA in Hardway</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
   
 
   
-  
-  <meta name="keywords" content="Automation,JAVA,TDD,Productivity">
-  
-
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <meta property="og:title" content="Xmind,Test Cases,and Allure templates for TDD"/>
-
-  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
-
-  
-  <meta property="og:image" content="/favicon.ico"/>
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
   
 
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"qdriven.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.0.0"></head>
 
 
 <body>
-<div class="blog">
-  <div class="content">
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Practising</strong>&nbsp;</a>
 
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Learning Testing/QA in Hardway</a>
-    </h1>
-    <p class="site-description">Just Do It</p>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
   </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">主页</a></li>
-      
-        <li><a href="/archives">归档</a></li>
-      
-        <li><a href="/categories">分类</a></li>
-      
-        <li><a href="/tags">标签</a></li>
-      
-    </ul>
-  </nav>
-</header>
+</nav>
 
-    <main class="site-main posts-loop">
-    <article>
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Xmind,Test Cases,and Allure templates for TDD">
+              
+            </span>
 
+            
+              <div class="mt-3">
   
-    
-    <h3 class="article-title"><span>Xmind,Test Cases,and Allure templates for TDD</span></h3>
-    
   
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/08/07/tips/1-Junit5CaseTestTemplate/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-08-07T13:34:04.000Z">
-          2019-08-07
-        </time>
-      </a>
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-08-07 21:34" pubdate>
+        2019年8月7日 晚上
+      </time>
     </span>
-  </div>
+  
+</div>
 
-
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.1k 字
+    </span>
   
 
-  <div class="article-content">
-    <div class="entry">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
       
-        <h1 id="Xmind-TestCases-and-JUnit5-Allure-Template"><a href="#Xmind-TestCases-and-JUnit5-Allure-Template" class="headerlink" title="Xmind,TestCases and JUnit5 Allure Template"></a>Xmind,TestCases and JUnit5 Allure Template</h1><p>Learn from the requirements and write test cases are the common daily work of a tester.<br>Normally write the mind map as a guide of test cases(in internet it is enough), then<br>execute the test cases or write testing codes based on the xmind file(mind map).<br>But do you ever question about this process? It is productive enough? Is there any improvement?</p>
+      
+      21
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Xmind,Test Cases,and Allure templates for TDD</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Xmind-TestCases-and-JUnit5-Allure-Template"><a href="#Xmind-TestCases-and-JUnit5-Allure-Template" class="headerlink" title="Xmind,TestCases and JUnit5 Allure Template"></a>Xmind,TestCases and JUnit5 Allure Template</h1><p>Learn from the requirements and write test cases are the common daily work of a tester.<br>Normally write the mind map as a guide of test cases(in internet it is enough), then<br>execute the test cases or write testing codes based on the xmind file(mind map).<br>But do you ever question about this process? It is productive enough? Is there any improvement?</p>
 <a id="more"></a>
 
 <p>Let me give an example: I want to test a DateUtil functionality, it has several features, the mindmap like this:</p>
 <ol>
-<li><p>DateUtil Test Cases Mindmap:<br><img src="/images/productivity/testcase_map.jpg" alt="img"></p>
+<li><p>DateUtil Test Cases Mindmap:<br><img src="/images/productivity/testcase_map.jpg" srcset="/img/loading.gif" alt="img"></p>
 </li>
 <li><p>Then write test codes(your boss required you to write automation codes) using junit and allure:</p>
 </li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Epic(&quot;Hutool DateUtil Usage&quot;)</span></span><br><span class="line"><span class="meta">@Feature(&quot;Hutool DateUtil Simple Usage&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HutoolDateUtilsTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="meta">@DisplayName(&quot;DateUtil-Formatter-From Date&quot;)</span></span><br><span class="line">    <span class="meta">@Story(value =&quot;Formatter-From Date&quot; )</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testFrom_Date</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//write testing codes</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="meta">@DisplayName(&quot;DateUtil-Formatter-From DateTime&quot;)</span></span><br><span class="line">    <span class="meta">@Story(value =&quot;Formatter-From DateTime&quot; )</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testFrom_DateTime</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//write testing codes</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs java"><span class="hljs-meta">@Epic(&quot;Hutool DateUtil Usage&quot;)</span>
+<span class="hljs-meta">@Feature(&quot;Hutool DateUtil Simple Usage&quot;)</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HutoolDateUtilsTest</span> </span>&#123;
+
+
+    <span class="hljs-meta">@Test</span>
+    <span class="hljs-meta">@DisplayName(&quot;DateUtil-Formatter-From Date&quot;)</span>
+    <span class="hljs-meta">@Story(value =&quot;Formatter-From Date&quot; )</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testFrom_Date</span><span class="hljs-params">()</span></span>&#123;
+        <span class="hljs-comment">//write testing codes</span>
+    &#125;
+
+    <span class="hljs-meta">@Test</span>
+    <span class="hljs-meta">@DisplayName(&quot;DateUtil-Formatter-From DateTime&quot;)</span>
+    <span class="hljs-meta">@Story(value =&quot;Formatter-From DateTime&quot; )</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testFrom_DateTime</span><span class="hljs-params">()</span></span>&#123;
+        <span class="hljs-comment">//write testing codes</span>
+    &#125;
+&#125;</code></pre>
 
 <p><a target="_blank" rel="noopener" href="https://docs.qameta.io/allure/#_junit_5">allure</a> is a tool for unified test report. It is worth to use.<br>Two conceptions in allure mapping to requirments: </p>
 <ul>
@@ -109,37 +267,125 @@
 <ol start="3">
 <li>Running the tests, the report is like:</li>
 </ol>
-<p><img src="/images/productivity/allure_story_feature.jpg" alt="img"></p>
+<p><img src="/images/productivity/allure_story_feature.jpg" srcset="/img/loading.gif" alt="img"></p>
 <p>It is perfect! But don’t you think you write test cases twice? In <strong><em>xmind</em></strong>, and in <strong><em>code</em></strong> like <strong><em>@Story</em></strong> bla bla bla …..</p>
 <p>Why do I write the annotations like @Story,@Epic or @Feature? The answer is that I want to make a fancy report,but I actually did duplicated work, didn’t I?  Duplicate work have bad smell. In this case, it looks like you sacrifice your productivity to make report fancy. What if I want both fancy report and productivity? Is it possible to write once?  Scripting Boy thought there should be a way.</p>
 <h2 id="Become-a-scripting-boy-to-connect-these-dots"><a href="#Become-a-scripting-boy-to-connect-these-dots" class="headerlink" title="Become a scripting boy to connect these dots"></a>Become a scripting boy to connect these dots</h2><p>Actaully It is not that hard to find a way to achieve the goal: fancy report and productivity both.<br>Let me figure it out:</p>
 <ol>
 <li>Export to test cases in markdown format through xmind(xmind has java/python sdk to manupilate the xmind file, but it is too complex), export is in xmind menu <strong><em>file&gt;export&gt;text</em></strong>:</li>
 </ol>
-<p><img src="/images/productivity/export_md.jpg" alt="img"></p>
+<p><img src="/images/productivity/export_md.jpg" srcset="/img/loading.gif" alt="img"></p>
 <p>BTW: importing md file to xmind is in ``file&gt;import&gt;text```</p>
 <p>The exported markdown file content:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># DateUtil</span></span><br><span class="line"><span class="comment">## Functions</span></span><br><span class="line"><span class="comment">### isSameDate</span></span><br><span class="line"><span class="comment">### CurrentYear</span></span><br><span class="line"><span class="comment">### CurrentMonth</span></span><br><span class="line"><span class="comment">### CurrentDay</span></span><br></pre></td></tr></table></figure>
+<pre><code class="hljs sh"><span class="hljs-comment"># DateUtil</span>
+<span class="hljs-comment">## Functions</span>
+<span class="hljs-comment">### isSameDate</span>
+<span class="hljs-comment">### CurrentYear</span>
+<span class="hljs-comment">### CurrentMonth</span>
+<span class="hljs-comment">### CurrentDay</span></code></pre>
 
 <ol start="2">
 <li>Parse the markdown test cases, and render parsed test cases into testing code template<br>It is not hard, there are only three files, and less than 50 lines of codes:</li>
 </ol>
 <ul>
 <li><p>pom.xml for leveraging existing libs</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.jtwig&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;jtwig-core&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;5.87.0.RELEASE&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs java">&lt;dependency&gt;
+  &lt;groupId&gt;org.jtwig&lt;/groupId&gt;
+  &lt;artifactId&gt;jtwig-core&lt;/artifactId&gt;
+  &lt;version&gt;5.87.0.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
 </li>
 <li><p>a junit test code template file in class path(resources folder),named <strong><em>junit_allure_template.twig</em></strong></p>
 </li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> io.qameta.allure.Epic;</span><br><span class="line"><span class="keyword">import</span> io.qameta.allure.Story;</span><br><span class="line"><span class="keyword">import</span> io.qameta.allure.Feature;</span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.Assertions;</span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.DisplayName;</span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.Test;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Epic(&quot;&#123;&#123;context.epic&#125;&#125;&quot;)</span></span><br><span class="line"><span class="meta">@Feature(&quot;&#123;&#123;context.epic&#125;&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> </span>&#123;&#123;context.epic&#125;&#125;Test &#123;</span><br><span class="line"></span><br><span class="line">   &#123;% <span class="keyword">for</span> entry in context.features.entrySet() %&#125;</span><br><span class="line">    &#123;% <span class="keyword">for</span> feature in entry.value() %&#125;</span><br><span class="line">        <span class="meta">@Test</span></span><br><span class="line">        <span class="meta">@DisplayName(&quot;&#123;&#123;context.epic&#125;&#125;-&#123;&#123;feature.desc&#125;&#125;&quot;)</span></span><br><span class="line">        <span class="meta">@Story(value =&quot;&#123;&#123;feature.desc&#125;&#125;&quot; )</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> test&#123;&#123;feature.name&#125;&#125;()&#123;</span><br><span class="line">            <span class="comment">//write testing codes</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#123;% endfor %&#125;</span><br><span class="line">   &#123;% endfor %&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs java"><span class="hljs-keyword">import</span> io.qameta.allure.Epic;
+<span class="hljs-keyword">import</span> io.qameta.allure.Story;
+<span class="hljs-keyword">import</span> io.qameta.allure.Feature;
+<span class="hljs-keyword">import</span> org.junit.jupiter.api.Assertions;
+<span class="hljs-keyword">import</span> org.junit.jupiter.api.DisplayName;
+<span class="hljs-keyword">import</span> org.junit.jupiter.api.Test;
+
+<span class="hljs-meta">@Epic(&quot;&#123;&#123;context.epic&#125;&#125;&quot;)</span>
+<span class="hljs-meta">@Feature(&quot;&#123;&#123;context.epic&#125;&#125;&quot;)</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> </span>&#123;&#123;context.epic&#125;&#125;Test &#123;
+
+   &#123;% <span class="hljs-keyword">for</span> entry in context.features.entrySet() %&#125;
+    &#123;% <span class="hljs-keyword">for</span> feature in entry.value() %&#125;
+        <span class="hljs-meta">@Test</span>
+        <span class="hljs-meta">@DisplayName(&quot;&#123;&#123;context.epic&#125;&#125;-&#123;&#123;feature.desc&#125;&#125;&quot;)</span>
+        <span class="hljs-meta">@Story(value =&quot;&#123;&#123;feature.desc&#125;&#125;&quot; )</span>
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> test&#123;&#123;feature.name&#125;&#125;()&#123;
+            <span class="hljs-comment">//write testing codes</span>
+        &#125;
+    &#123;% endfor %&#125;
+   &#123;% endfor %&#125;
+&#125;</code></pre>
 
 <ul>
 <li>50 lines of codes, to read the exported markdown file, and render the template <strong><em>junit_allure_template.twig</em></strong></li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Junit5TestTemplateGenerator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">generateJunit5TC</span><span class="params">(String mdFile,String fileName)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        AllureTestModel allureTestModel = <span class="keyword">new</span> AllureTestModel();</span><br><span class="line">        List&lt;String&gt; mdContent= Resources.readLines(Resources.getResource(mdFile),Charsets.UTF_8);</span><br><span class="line"></span><br><span class="line">        String currentFeature=<span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span> (String line : mdContent) &#123;</span><br><span class="line">            <span class="keyword">if</span>(line.startsWith(<span class="string">&quot;###&quot;</span>))&#123;</span><br><span class="line">                AllureFeature feature = <span class="keyword">new</span> AllureFeature();</span><br><span class="line">                feature.setDesc(currentFeature+<span class="string">&quot;-&quot;</span>+line.replace(<span class="string">&quot;###&quot;</span>,<span class="string">&quot;&quot;</span>).trim());</span><br><span class="line">                feature.setName(line.replace(<span class="string">&quot;###&quot;</span>,<span class="string">&quot;&quot;</span>).trim().replace(<span class="string">&quot; &quot;</span>,<span class="string">&quot;_&quot;</span>));</span><br><span class="line">                allureTestModel.features.get(currentFeature).add(feature);</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(line.startsWith(<span class="string">&quot;##&quot;</span>))&#123;</span><br><span class="line">                currentFeature = line.replace(<span class="string">&quot;##&quot;</span>,<span class="string">&quot;&quot;</span>).trim();</span><br><span class="line">                allureTestModel.features.putIfAbsent(currentFeature,<span class="keyword">new</span> ArrayList&lt;&gt;());</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(line.startsWith(<span class="string">&quot;#&quot;</span>))&#123;</span><br><span class="line">                allureTestModel.setEpic(line.replace(<span class="string">&quot;#&quot;</span>,<span class="string">&quot;&quot;</span>).trim());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        JtwigTemplate template = JtwigTemplate.classpathTemplate(<span class="string">&quot;junit_allure_template.twig&quot;</span>);</span><br><span class="line">        JtwigModel model = JtwigModel.newModel().with(<span class="string">&quot;context&quot;</span>,allureTestModel);</span><br><span class="line">        template.render(model,<span class="keyword">new</span> FileOutputStream(<span class="keyword">new</span> File(fileName+<span class="string">&quot;.java&quot;</span>)));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Data</span></span><br><span class="line">     <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">AllureTestModel</span></span>&#123;</span><br><span class="line">        <span class="keyword">private</span> String epic;</span><br><span class="line">        <span class="keyword">private</span> Map&lt;String,List&lt;AllureFeature&gt;&gt; features = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="meta">@Data</span></span><br><span class="line">     <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">AllureFeature</span></span>&#123;</span><br><span class="line">        <span class="keyword">private</span> String name;</span><br><span class="line">        <span class="keyword">private</span> String desc;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        Junit5TestTemplateGenerator.generateJunit5TC(<span class="string">&quot;DateUtil.md&quot;</span>,<span class="string">&quot;HutoolDateUtilTest.java&quot;</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Junit5TestTemplateGenerator</span> </span>&#123;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">generateJunit5TC</span><span class="hljs-params">(String mdFile,String fileName)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;
+        AllureTestModel allureTestModel = <span class="hljs-keyword">new</span> AllureTestModel();
+        List&lt;String&gt; mdContent= Resources.readLines(Resources.getResource(mdFile),Charsets.UTF_8);
+
+        String currentFeature=<span class="hljs-string">&quot;&quot;</span>;
+        <span class="hljs-keyword">for</span> (String line : mdContent) &#123;
+            <span class="hljs-keyword">if</span>(line.startsWith(<span class="hljs-string">&quot;###&quot;</span>))&#123;
+                AllureFeature feature = <span class="hljs-keyword">new</span> AllureFeature();
+                feature.setDesc(currentFeature+<span class="hljs-string">&quot;-&quot;</span>+line.replace(<span class="hljs-string">&quot;###&quot;</span>,<span class="hljs-string">&quot;&quot;</span>).trim());
+                feature.setName(line.replace(<span class="hljs-string">&quot;###&quot;</span>,<span class="hljs-string">&quot;&quot;</span>).trim().replace(<span class="hljs-string">&quot; &quot;</span>,<span class="hljs-string">&quot;_&quot;</span>));
+                allureTestModel.features.get(currentFeature).add(feature);
+            &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(line.startsWith(<span class="hljs-string">&quot;##&quot;</span>))&#123;
+                currentFeature = line.replace(<span class="hljs-string">&quot;##&quot;</span>,<span class="hljs-string">&quot;&quot;</span>).trim();
+                allureTestModel.features.putIfAbsent(currentFeature,<span class="hljs-keyword">new</span> ArrayList&lt;&gt;());
+            &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(line.startsWith(<span class="hljs-string">&quot;#&quot;</span>))&#123;
+                allureTestModel.setEpic(line.replace(<span class="hljs-string">&quot;#&quot;</span>,<span class="hljs-string">&quot;&quot;</span>).trim());
+            &#125;
+        &#125;
+
+        JtwigTemplate template = JtwigTemplate.classpathTemplate(<span class="hljs-string">&quot;junit_allure_template.twig&quot;</span>);
+        JtwigModel model = JtwigModel.newModel().with(<span class="hljs-string">&quot;context&quot;</span>,allureTestModel);
+        template.render(model,<span class="hljs-keyword">new</span> FileOutputStream(<span class="hljs-keyword">new</span> File(fileName+<span class="hljs-string">&quot;.java&quot;</span>)));
+    &#125;
+
+    <span class="hljs-meta">@Data</span>
+     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AllureTestModel</span></span>&#123;
+        <span class="hljs-keyword">private</span> String epic;
+        <span class="hljs-keyword">private</span> Map&lt;String,List&lt;AllureFeature&gt;&gt; features = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();
+     &#125;
+
+     <span class="hljs-meta">@Data</span>
+     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AllureFeature</span></span>&#123;
+        <span class="hljs-keyword">private</span> String name;
+        <span class="hljs-keyword">private</span> String desc;
+     &#125;
+     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;
+        Junit5TestTemplateGenerator.generateJunit5TC(<span class="hljs-string">&quot;DateUtil.md&quot;</span>,<span class="hljs-string">&quot;HutoolDateUtilTest.java&quot;</span>);
+
+    &#125;
+&#125;</code></pre>
 
 <p>And the result is:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Epic(&quot;Hutool DateUtil Usage&quot;)</span></span><br><span class="line"><span class="meta">@Feature(&quot;Hutool DateUtil Simple Usage&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HutoolDateUtilsTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="meta">@DisplayName(&quot;DateUtil-Formatter-From Date&quot;)</span></span><br><span class="line">    <span class="meta">@Story(value =&quot;Formatter-From Date&quot; )</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testFrom_Date</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//write testing codes</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="meta">@DisplayName(&quot;DateUtil-Formatter-From DateTime&quot;)</span></span><br><span class="line">    <span class="meta">@Story(value =&quot;Formatter-From DateTime&quot; )</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testFrom_DateTime</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//write testing codes</span></span><br><span class="line">    &#125;</span><br><span class="line">    ......</span><br><span class="line">&#125;   </span><br></pre></td></tr></table></figure>
+<pre><code class="hljs java"><span class="hljs-meta">@Epic(&quot;Hutool DateUtil Usage&quot;)</span>
+<span class="hljs-meta">@Feature(&quot;Hutool DateUtil Simple Usage&quot;)</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HutoolDateUtilsTest</span> </span>&#123;
+    <span class="hljs-meta">@Test</span>
+    <span class="hljs-meta">@DisplayName(&quot;DateUtil-Formatter-From Date&quot;)</span>
+    <span class="hljs-meta">@Story(value =&quot;Formatter-From Date&quot; )</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testFrom_Date</span><span class="hljs-params">()</span></span>&#123;
+        <span class="hljs-comment">//write testing codes</span>
+    &#125;
+
+    <span class="hljs-meta">@Test</span>
+    <span class="hljs-meta">@DisplayName(&quot;DateUtil-Formatter-From DateTime&quot;)</span>
+    <span class="hljs-meta">@Story(value =&quot;Formatter-From DateTime&quot; )</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testFrom_DateTime</span><span class="hljs-params">()</span></span>&#123;
+        <span class="hljs-comment">//write testing codes</span>
+    &#125;
+    ......
+&#125;   </code></pre>
 <p>which is same as your writing before.</p>
 <p>Scripting boy is not kidding you, use a JAVA template lib to make both fancy report and test cases real without<br>duplicated work. </p>
 <p>It is not perfect solution which I need to admit. But it works somehow, and save my time anyway.<br>It also demostrated that there are plenty opportunities to tester to practice coding skills,<br>to know a little bit more about other libaries. It is not about rocket science, not about make a fancy product, it is just about practicing day in and day out to make life a little bit easier than before. </p>
@@ -148,52 +394,218 @@
 <li><a target="_blank" rel="noopener" href="https://github.com/evenhumble/tdd-simple">github</a></li>
 </ul>
 
-      
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Automation/">Automation</a>
+                    
+                      <a class="hover-with-bg" href="/tags/JAVA/">JAVA</a>
+                    
+                      <a class="hover-with-bg" href="/tags/TDD/">TDD</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Productivity/">Productivity</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/08/26/tips/thoughts/testing-is-hard/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">测试之难和突破</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/07/28/tips/api-testing/0-start-from-the-end/">
+                        <span class="hidden-mobile">Implement A Integration Testing Libs in two days</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
 
+      </div>
+    
   </div>
+</div>
 
-  <div class="article-footer">
-    <div class="article-meta pull-left">
+<!-- Custom -->
+
 
     
 
     
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
     
 
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/Automation/">Automation</a><a href="/tags/JAVA/">JAVA</a><a href="/tags/TDD/">TDD</a><a href="/tags/Productivity/">Productivity</a>
-    </span>
     
-
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
     </div>
+  </div>
+</div>
+    
 
     
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
-</article>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
 
   
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
 
 
 
-    </main>
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
 
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
-    
-    &copy; 2020 qmeta
-    
-  </p>
-</footer>
-    
-  </div>
-</div>
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
 </body>
 </html>

@@ -1,326 +1,825 @@
-<!DOCTYPE HTML>
-<html>
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <title>第 5 页 | Learning Testing/QA in Hardway | Just Do It</title>
-
-  
-  <meta name="author" content="qmeta">
-  
-
-  
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="allround tester">
-  
+  <meta name="author" content="qmeta">
+  <meta name="keywords" content="">
+  <title>Learning Testing/QA in Hardway</title>
 
-  
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  
 
-  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
+<!-- 主题依赖的图标库，不要自行修改 -->
 
-  
-  <meta property="og:image" content="/favicon.ico"/>
-  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"qdriven.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.0.0"></head>
 
 
 <body>
-<div class="blog">
-  <div class="content">
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Practising</strong>&nbsp;</a>
 
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Learning Testing/QA in Hardway</a>
-    </h1>
-    <p class="site-description">Just Do It</p>
-  </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">主页</a></li>
-      
-        <li><a href="/archives">归档</a></li>
-      
-        <li><a href="/categories">分类</a></li>
-      
-        <li><a href="/tags">标签</a></li>
-      
-    </ul>
-  </nav>
-</header>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
 
-    <main class="site-main posts-loop">
-    
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2020/07/30/tips/tips-github-cli/"><span>测试日志2020-2 Github Cli使用</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2020/07/30/tips/tips-github-cli/" rel="bookmark">
-        <time class="entry-date published" datetime="2020-07-30T04:12:00.000Z">
-          2020-07-30
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p><a target="_blank" rel="noopener" href="https://github.com/cli/cli">Github Cli</a>,是一个命令行工具，可以让你在命令行中直接操作github的仓库.<br>那么命令行工具可以提高平常的效率吗? 我的答案是可以,原因如下:</p>
-<ol>
-<li>使用习惯: Dev/Test 工作中基本上和Code打交道，现代的IDE都可以terminal(命令行工具),不需要额外的切换浏览器操作github仓库</li>
-<li>一个命令实现一个目的: 浏览器操作需要点击几个页面，输入不同的数据进行创建，但是命令行中使用了默认参数，可以一个命令就完成你想要的操作</li>
-</ol>
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
         
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/backend/">backend</a>, <a href="/categories/backend/tips/">tips</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/tips/">tips</a><a href="/tags/java/">java</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2020/07/30/tips/tips-maven-java/"><span>测试日志2020-1 MAVEN 创建项目JAVA项目</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2020/07/30/tips/tips-maven-java/" rel="bookmark">
-        <time class="entry-date published" datetime="2020-07-30T04:12:00.000Z">
-          2020-07-30
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h2 id="MAVEN-创建项目JAVA项目"><a href="#MAVEN-创建项目JAVA项目" class="headerlink" title="MAVEN 创建项目JAVA项目"></a>MAVEN 创建项目JAVA项目</h2><p>MAVEN是开发过程中常用的一个管理软件项目代码的工具，这里开始一个简单系列的介绍，给测试同学介绍MAVEN的使用，<br>以便更好的了解开发过程，以及版本，文档管理的方式.</p>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
         
-      
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
-
   </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/backend/">backend</a>, <a href="/categories/backend/tips/">tips</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/tips/">tips</a><a href="/tags/java/">java</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2020/03/11/shell/2020-03-11-nginx/"><span>devops nginx 使用tips</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2020/03/11/shell/2020-03-11-nginx/" rel="bookmark">
-        <time class="entry-date published" datetime="2020-03-11T00:50:24.000Z">
-          2020-03-11
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h2 id="为什么使用nginx"><a href="#为什么使用nginx" class="headerlink" title="为什么使用nginx"></a>为什么使用nginx</h2><p>使用nginx来进行web服务的反向代理，举个例子来说，目前有两个vue的前端项目，使用同一个nginx，通过路径或者端口的不同访问不同的项目入口.<br><img src="https://levonfly.github.io/p/7245bfc7/1.jpg" alt="img"></p>
-<p>先从nginx安装开始吧：</p>
-<ul>
-<li>MAC 安装Nginx:</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install nginx</span><br></pre></td></tr></table></figure>
-<ul>
-<li>启动Nginx</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew services start nginx</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>nginx 配置目录说明:</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## nginx安装文件目录</span></span><br><span class="line">/usr/<span class="built_in">local</span>/Cellar/nginx</span><br><span class="line"><span class="comment">## nginx配置文件目录</span></span><br><span class="line">/usr/<span class="built_in">local</span>/etc/nginx</span><br><span class="line"><span class="comment">## config文件目录</span></span><br><span class="line">/usr/<span class="built_in">local</span>/etc/nginx/nginx.conf</span><br><span class="line"><span class="comment">## 系统hosts位置</span></span><br><span class="line">/private/etc/hosts</span><br></pre></td></tr></table></figure>
-<h2 id="如何使用nginx"><a href="#如何使用nginx" class="headerlink" title="如何使用nginx"></a>如何使用nginx</h2><p>nginx的常用命令：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">patrick@pwlocal ~/workspace/startup/fe $ nginx -h                                  [ruby-2.4.1]</span><br><span class="line">nginx version: nginx/1.17.8</span><br><span class="line">Usage: nginx [-?hvVtTq] [-s signal] [-c filename] [-p prefix] [-g directives]</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -?,-h         : this <span class="built_in">help</span></span><br><span class="line">  -v            : show version and <span class="built_in">exit</span></span><br><span class="line">  -V            : show version and configure options <span class="keyword">then</span> <span class="built_in">exit</span></span><br><span class="line">  -t            : <span class="built_in">test</span> configuration and <span class="built_in">exit</span></span><br><span class="line">  -T            : <span class="built_in">test</span> configuration, dump it and <span class="built_in">exit</span></span><br><span class="line">  -q            : suppress non-error messages during configuration testing</span><br><span class="line">  -s signal     : send signal to a master process: stop, quit, reopen, reload</span><br><span class="line">  -p prefix     : <span class="built_in">set</span> prefix path (default: /usr/<span class="built_in">local</span>/Cellar/nginx/1.17.8/)</span><br><span class="line">  -c filename   : <span class="built_in">set</span> configuration file (default: /usr/<span class="built_in">local</span>/etc/nginx/nginx.conf)</span><br><span class="line">  -g directives : <span class="built_in">set</span> global directives out of configuration file</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h2 id="nginx示例"><a href="#nginx示例" class="headerlink" title="nginx示例"></a>nginx示例</h2><p>从一个例子来说明如何使用和配置nginx, 目前有两个项目：</p>
-<ol>
-<li>vue-project-1</li>
-<li>vue-project-2</li>
-</ol>
-<p>同时在目录 ～/workspace下面，如何配置nginx，从达到能够同时访问这两个项目的目的呢？</p>
-<ul>
-<li>首先我们先自己配置一个主页html尝试</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;nginx&#x2F;1.17.8&#x2F;html</span><br></pre></td></tr></table></figure>
-<p>修改以上目录的index.html文件，添加一个helloworld这样的说明，这样<br>**<a target="_blank" rel="noopener" href="http://localhost:8080/**%E9%A1%B5%E9%9D%A2%E5%B0%B1%E4%BC%9A%E6%8A%8Ahelloworld%E5%B1%95%E7%A4%BA%E5%88%B0%E9%A1%B5%E9%9D%A2%EF%BC%8C%E8%AF%B4%E6%98%8Enginx%E5%B7%A5%E4%BD%9C%E6%AD%A3%E5%B8%B8%E7%9A%84">http://localhost:8080/**页面就会把helloworld展示到页面，说明nginx工作正常的</a></p>
-<ul>
-<li>修改nginx配置文件，访问vue-project-1</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/etc/nginx</span><br></pre></td></tr></table></figure>
-
-<p>修改这个目录下的nginx.conf 文件,添加一个访问路径到一个server的配置中，然后访问**/project1**,就可以看到一个新的页面可以展示了</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location /project1 &#123;</span><br><span class="line">     <span class="built_in">alias</span> /Users/patrick/workspace/startup/fe/qa-daily;</span><br><span class="line">     index index.html;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>修改nginx配置文件，访问vue-project-2</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location /project2 &#123;</span><br><span class="line">     <span class="built_in">alias</span> /Users/patrick/workspace/startup/fe;</span><br><span class="line">     index index.html;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="如何使用程序来控制ngxin-配置文件的生成"><a href="#如何使用程序来控制ngxin-配置文件的生成" class="headerlink" title="如何使用程序来控制ngxin 配置文件的生成"></a>如何使用程序来控制ngxin 配置文件的生成</h2><p>在实际的使用中，一个新的前端VUE项目部署之后，还需要根据上面的方式来修改项目，那么问题来了，部署一个新的环境都需要修改一下，有没有好的办法简化这个流程呢？当然你可以说用docker，或者什么k8s之类的来进行部署，不过小公司一般没有能力来做这个事情，下面就介绍一下自己尝试的一个土方法.<br>首先实际的想达到的效果如下：</p>
-<ol>
-<li>jenkins 配置前端发布任务，首次运行</li>
-<li>前端发布任务完成后，自动更新ngixn配置</li>
-</ol>
-<p>下面是实现的一个思路：</p>
-<ol>
-<li>定义好nginx vue项目前端发布的项目名称和路径</li>
-<li>使用nginx config build生成nginx.conf文件</li>
-<li>使用fastapi构建最简单一个接口服务，接收请求，运行nginx -s reload</li>
-</ol>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/automation，devops/">automation，devops</a>, <a href="/categories/automation，devops/daily-automation-tip/">daily-automation-tip</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/daily-automation-tip/">daily-automation-tip</a><a href="/tags/devops/">devops</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-
-<nav class="pagination">
-  
-  <a href="/page/4/" class="pagination-prev">上一页</a>
-  
-  
-  <a href="/page/6/" class="pagination-next">下一页</a>
-  
 </nav>
-    </main>
 
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Dirty your hands,understand the discrimination and reality! Be tough and nice!">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
     
-    &copy; 2020 qmeta
+      <div class="container nopadding-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
     
-  </p>
-</footer>
     
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/08/07/tips/1-Junit5CaseTestTemplate/">Xmind,Test Cases,and Allure templates for TDD</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2019/08/07/tips/1-Junit5CaseTestTemplate/">
+          
+          
+            
+          
+          Xmind,TestCases and JUnit5 Allure TemplateLearn from the requirements and write test cases are the common daily work of a tester.Normally write the mind map as a guide of test cases(in internet it is 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-08-07 21:34" pubdate>
+              2019-08-07
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Automation/">Automation</a>
+            
+              <a href="/tags/JAVA/">JAVA</a>
+            
+              <a href="/tags/TDD/">TDD</a>
+            
+              <a href="/tags/Productivity/">Productivity</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/07/28/tips/api-testing/0-start-from-the-end/">Implement A Integration Testing Libs in two days</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2019/07/28/tips/api-testing/0-start-from-the-end/">
+          
+          
+            
+          
+          There is a question over my head several times. is it real hard for tester to write test codes?I don’t know, but I just want to do a task to evaluate this conclusion.
+Start From The EndI don’t prefer 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-07-28 23:58" pubdate>
+              2019-07-28
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/productivity/">productivity</a>
+            
+              <a href="/tags/real/">real</a>
+            
+              <a href="/tags/think-different/">think-different</a>
+            
+              <a href="/tags/API-Testing/">API Testing</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/07/28/tips/api-testing/3-InteljIdea-codecoverage/">Using IntelljIdea For Code Coverage</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2019/07/28/tips/api-testing/3-InteljIdea-codecoverage/">
+          
+          
+            
+          
+          Two Steps:
+
+Run Test Code with code coverage - Right click the test class, select run *** with code coverage
+
+
+
+Check the Code Coverage in intelli idea
+
+
+Line Code Covearge/Method Coverage
+
+Read marke
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-07-28 23:58" pubdate>
+              2019-07-28
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/productivity/">productivity</a>
+            
+              <a href="/tags/think-different/">think-different</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/07/28/tips/api-testing/1-Demo-TestCase/">Integration-Runner Test Case Demo</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2019/07/28/tips/api-testing/1-Demo-TestCase/">
+          
+          
+            
+          
+          Last chapter introduce how to build a test framework in two days,In this chapter, let’s do demos:
+
+A Api TestCase
+Api Chain Test Case
+Pre-Condition And Verification Render to use context data
+
+A Api T
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-07-28 23:58" pubdate>
+              2019-07-28
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/productivity/">productivity</a>
+            
+              <a href="/tags/real/">real</a>
+            
+              <a href="/tags/think-different/">think-different</a>
+            
+              <a href="/tags/api-testing/">api testing</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/07/28/tips/api-testing/4-Productivity-SimpleMock/">The Easiest Mock, The highest ROI</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2019/07/28/tips/api-testing/4-Productivity-SimpleMock/">
+          
+          
+            
+          
+          Actually it is not about how to test Rule Based Risk Engine, it is about how to use simple codes to improve thedaily productivities. 
+The Risk Engine is in the middle of the whole system, The upstream
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-07-28 23:58" pubdate>
+              2019-07-28
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/productivity/">productivity</a>
+            
+              <a href="/tags/think-different/">think-different</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/07/27/python/Python-Tester-Should-Know/">测试的Python须知脑图</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2019/07/27/python/Python-Tester-Should-Know/">
+          
+          
+            
+          
+          下图是使用Python进行自动化测试需要了解的大纲.
+
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-07-27 21:34" pubdate>
+              2019-07-27
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/Automation/">Automation</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/04/28/tips/api-testing/CreditRisk-Testing-3/">Rule Based Risk Engine Part 3 - The Easiest Mock, The highest ROI</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2019/04/28/tips/api-testing/CreditRisk-Testing-3/">
+          
+          
+            
+          
+          Rule Based Risk Engine Part 3 - The Easiest Mock, The highest ROIActually it is not about how to test Rule Based Risk Engine, it is about how to use simple codes to improve thedaily productivities. 
+T
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-04-28 23:58" pubdate>
+              2019-04-28
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/productivity/">productivity</a>
+            
+              <a href="/tags/real/">real</a>
+            
+              <a href="/tags/think-different/">think-different</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/04/28/tips/real/Thoughts-Be-A-Touch-Tester/">Think in Testing 1-Be Tough</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2019/04/28/tips/real/Thoughts-Be-A-Touch-Tester/">
+          
+          
+            
+          
+          Think in Testing 1: Be ToughIf someone tell you that software testing or quality assurance is an easy job to do, he/she might not understand what a tester or qa do.  There are many perspective a teste
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-04-28 23:58" pubdate>
+              2019-04-28
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/productivity/">productivity</a>
+            
+              <a href="/tags/real/">real</a>
+            
+              <a href="/tags/think-different/">think-different</a>
+            
+              <a href="/tags/ThinkInTesting/">ThinkInTesting</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/04/25/tips/api-testing/CreditRisk-Testing-2/">Rule Based Risk Engine Part 2 - Write Code to Test</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2019/04/25/tips/api-testing/CreditRisk-Testing-2/">
+          
+          
+            
+          
+          Rule Based Risk Engine Part 2 - Write Code to TestWhat to do is quite obvious:
+
+Compose input data - Test Case Input
+Fundamental Data
+Third Party And in-house data
+
+
+Mock the third party and in-house 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-04-25 23:58" pubdate>
+              2019-04-25
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/real/">real</a>
+            
+              <a href="/tags/API-Testing/">API Testing</a>
+            
+              <a href="/tags/patterns/">patterns</a>
+            
+              <a href="/tags/testing/">testing</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/04/23/tips/api-testing/CreditRisk-Testing-1/">Rule Based Risk Engine Testing Part 1- Background</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2019/04/23/tips/api-testing/CreditRisk-Testing-1/">
+          
+          
+            
+          
+          Rule Based Risk Engine Testing Part 1- BackgroundThis article introduces a real world case for testing a rule based risk engine. Let me separate it into several parts:
+
+System Overview to introduct th
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-04-23 23:58" pubdate>
+              2019-04-23
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/real/">real</a>
+            
+              <a href="/tags/API-Testing/">API Testing</a>
+            
+              <a href="/tags/patterns/">patterns</a>
+            
+              <a href="/tags/testing/">testing</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/4/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/6/"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
   </div>
 </div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
 </body>
 </html>

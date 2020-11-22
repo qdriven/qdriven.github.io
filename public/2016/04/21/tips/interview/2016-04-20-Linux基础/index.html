@@ -1,93 +1,233 @@
-<!DOCTYPE HTML>
-<html>
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <title>Linux 基础 | Learning Testing/QA in Hardway | Just Do It</title>
-
-  
-  <meta name="author" content="qmeta">
-  
-
-  
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="allround tester">
+  <meta name="author" content="qmeta">
+  <meta name="keywords" content="">
+  <title>Linux 基础 - Learning Testing/QA in Hardway</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
   
 
   
-  
-  <meta name="keywords" content="interview">
-  
-
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <meta property="og:title" content="Linux 基础"/>
-
-  <meta property="og:site_name" content="Learning Testing/QA in Hardway"/>
-
-  
-  <meta property="og:image" content="/favicon.ico"/>
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
   
 
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Learning Testing/QA in Hardway" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"qdriven.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.0.0"></head>
 
 
 <body>
-<div class="blog">
-  <div class="content">
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Practising</strong>&nbsp;</a>
 
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Learning Testing/QA in Hardway</a>
-    </h1>
-    <p class="site-description">Just Do It</p>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
   </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">主页</a></li>
-      
-        <li><a href="/archives">归档</a></li>
-      
-        <li><a href="/categories">分类</a></li>
-      
-        <li><a href="/tags">标签</a></li>
-      
-    </ul>
-  </nav>
-</header>
+</nav>
 
-    <main class="site-main posts-loop">
-    <article>
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Linux 基础">
+              
+            </span>
 
+            
+              <div class="mt-3">
   
-    
-    <h3 class="article-title"><span>Linux 基础</span></h3>
-    
   
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2016/04/21/tips/interview/2016-04-20-Linux基础/" rel="bookmark">
-        <time class="entry-date published" datetime="2016-04-20T18:31:11.000Z">
-          2016-04-21
-        </time>
-      </a>
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2016-04-21 02:31" pubdate>
+        2016年4月21日 凌晨
+      </time>
     </span>
-  </div>
+  
+</div>
 
-
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.2k 字
+    </span>
   
 
-  <div class="article-content">
-    <div class="entry">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
       
-        <h1 id="Linux-的使用的一些基本知识"><a href="#Linux-的使用的一些基本知识" class="headerlink" title="Linux 的使用的一些基本知识"></a>Linux 的使用的一些基本知识</h1><ul>
+      
+      35
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Linux 基础</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Linux-的使用的一些基本知识"><a href="#Linux-的使用的一些基本知识" class="headerlink" title="Linux 的使用的一些基本知识"></a>Linux 的使用的一些基本知识</h1><ul>
 <li>Linux LVM 硬盘挂载</li>
 <li>Linux 的用户安全</li>
 <li>Linux 网络监控</li>
@@ -102,7 +242,9 @@
 <li>physical extend：一个物理卷physical extends的基本单元，LVM寻址的最小单位</li>
 <li>logic extend：逻辑卷被划分为称为LE的可被寻址的基本单位</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PV:是物理的磁盘分区</span><br><span class="line">VG:LVM中的物理的磁盘分区，也就是PV，必须加入VG，可以将VG理解为一个仓库或者是几个大的硬盘。</span><br><span class="line">LV：也就是从VG中划分的逻辑分区</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs avrasm"><span class="hljs-symbol">PV:</span>是物理的磁盘分区
+<span class="hljs-symbol">VG:</span>LVM中的物理的磁盘分区，也就是PV，必须加入VG，可以将VG理解为一个仓库或者是几个大的硬盘。
+LV：也就是从VG中划分的逻辑分区</code></pre>
 
 <h2 id="Linux-的用户安全"><a href="#Linux-的用户安全" class="headerlink" title="Linux 的用户安全"></a>Linux 的用户安全</h2><ul>
 <li>root</li>
@@ -110,7 +252,7 @@
 <li>分组</li>
 <li>权限 Linux的-rwxrwxrwx权限管理也可谓人尽皆知 先rwx的权限管理是基于用户和组的，并且只是大致的分为owner|group|other这三类，无法再作更加细粒度的划分。有鉴于此，Linux目前默认是有ACL(Access Control List)管理的，所谓ACL就是能够提供更加细粒度的用户和组管理，比如可以明确哪个user可以有什么样的权限。如下示例</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getfacl abcd</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs shell">getfacl abcd</code></pre>
 
 <ul>
 <li>PAM</li>
@@ -157,61 +299,470 @@
 <li>lsof -u username 用户打开的文件</li>
 <li>lsof -p pid 进程打开的文件</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">################################################</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   author  huachao</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   date    2015-12-09</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   email   i@huachao.me</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   web     blog.huachao.me</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">################################################</span></span></span><br><span class="line"></span><br><span class="line">flagFile=&quot;/root/centos6-init.executed&quot;</span><br><span class="line"></span><br><span class="line">precheck()&#123;</span><br><span class="line"></span><br><span class="line">    if [[ &quot;$(whoami)&quot; != &quot;root&quot; ]]; then</span><br><span class="line">    echo &quot;please run this script as root .&quot; &gt;&amp;2</span><br><span class="line">    exit 1</span><br><span class="line">    fi</span><br><span class="line"></span><br><span class="line">    if [ -f &quot;$flagFile&quot; ]; then</span><br><span class="line">    echo &quot;this script had been executed, please do not execute again!!&quot; &gt;&amp;2</span><br><span class="line">    exit 1</span><br><span class="line">    fi</span><br><span class="line"></span><br><span class="line">    echo -e &quot;\033[31m WARNING! THIS SCRIPT WILL \033[0m\n&quot;</span><br><span class="line">    echo -e &quot;\033[31m *1 update the system; \033[0m\n&quot;</span><br><span class="line">    echo -e &quot;\033[31m *2 setup security permissions; \033[0m\n&quot;</span><br><span class="line">    echo -e &quot;\033[31m *3 stop irrelevant services; \033[0m\n&quot;</span><br><span class="line">    echo -e &quot;\033[31m *4 reconfig kernel parameters; \033[0m\n&quot;</span><br><span class="line">    echo -e &quot;\033[31m *5 setup timezone and sync time periodically; \033[0m\n&quot;</span><br><span class="line">    echo -e &quot;\033[31m *6 setup tcp_wrapper and netfilter firewall; \033[0m\n&quot;</span><br><span class="line">    echo -e &quot;\033[31m *7 setup vsftpd; \033[0m\n&quot;</span><br><span class="line">    sleep 5</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">yum_update()&#123;</span><br><span class="line">    yum -y update</span><br><span class="line">    #update system at 5:40pm daily</span><br><span class="line">    echo &quot;40 3 * * * root yum -y update &amp;&amp; yum clean packages&quot; &gt;&gt; /etc/crontab</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">permission_config()&#123;</span><br><span class="line">    #chattr +i /etc/shadow</span><br><span class="line">    #chattr +i /etc/passwd</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">selinux()&#123;</span><br><span class="line">    sed -i &#x27;s/SELINUX=disabled/SELINUX=enforcing/g&#x27; /etc/sysconfig/selinux</span><br><span class="line">    setenforce 1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">stop_services()&#123;</span><br><span class="line">    for server in `chkconfig --list |grep 3:on|awk &#x27;&#123;print $1&#125;&#x27;`</span><br><span class="line">    do</span><br><span class="line">        chkconfig --level 3 $server off</span><br><span class="line">    done</span><br><span class="line"></span><br><span class="line">    for server in crond network rsyslog sshd iptables</span><br><span class="line">    do</span><br><span class="line">       chkconfig --level 3 $server on</span><br><span class="line">    done</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">limits_config()&#123;</span><br><span class="line">cat &gt;&gt; /etc/security/limits.conf &lt;&lt;EOF</span><br><span class="line">* soft nproc 65535</span><br><span class="line">* hard nproc 65535</span><br><span class="line">* soft nofile 65535</span><br><span class="line">* hard nofile 65535</span><br><span class="line">EOF</span><br><span class="line">echo &quot;ulimit -SH 65535&quot; &gt;&gt; /etc/rc.local</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sysctl_config()&#123;</span><br><span class="line">sed -i &#x27;s/net.ipv4.tcp_syncookies.*$/net.ipv4.tcp_syncookies = 1/g&#x27; /etc/sysctl.conf</span><br><span class="line">sed -i &#x27;s/net.ipv4.ip_forward.*$/net.ipv4.ip_forward = 1/g&#x27; /etc/sysctl.conf</span><br><span class="line">cat &gt;&gt; /etc/sysctl.conf &lt;&lt;EOF</span><br><span class="line">net.ipv4.tcp_max_syn_backlog = 65536</span><br><span class="line">net.core.netdev_max_backlog =  32768</span><br><span class="line">net.core.somaxconn = 32768</span><br><span class="line">net.core.wmem_default = 8388608</span><br><span class="line">net.core.rmem_default = 8388608</span><br><span class="line">net.core.rmem_max = 16777216</span><br><span class="line">net.core.wmem_max = 16777216</span><br><span class="line">net.ipv4.tcp_timestamps = 0</span><br><span class="line">net.ipv4.tcp_synack_retries = 2</span><br><span class="line">net.ipv4.tcp_syn_retries = 2</span><br><span class="line">net.ipv4.tcp_tw_recycle = 1</span><br><span class="line">net.ipv4.tcp_tw_reuse = 1</span><br><span class="line">net.ipv4.tcp_mem = 94500000 915000000 927000000</span><br><span class="line">net.ipv4.tcp_max_orphans = 3276800</span><br><span class="line">net.ipv4.ip_local_port_range = 1024  65535</span><br><span class="line">EOF</span><br><span class="line">sysctl -p</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sshd_config()&#123;</span><br><span class="line">    if [ ! -f &quot;/root/.ssh/id_rsa.pub&quot; ]; then</span><br><span class="line">    ssh-keygen -t rsa -P &#x27;&#x27; -f /root/.ssh/id_rsa</span><br><span class="line">    cat /root/.ssh/id_rsa.pub &gt;&gt; /root/.ssh/authorized_keys</span><br><span class="line">    chmod 600 /root/.ssh/authorized_keys</span><br><span class="line">    fi</span><br><span class="line"></span><br><span class="line">    #sed -i &#x27;/^#Port/s/#Port 22/Port 65535/g&#x27; /etc/ssh/sshd_config</span><br><span class="line">    sed -i &#x27;/^#UseDNS/s/#UseDNS no/UseDNS yes/g&#x27; /etc/ssh/sshd_config</span><br><span class="line">    #sed -i &#x27;s/#PermitRootLogin yes/PermitRootLogin no/g&#x27; /etc/ssh/sshd_config</span><br><span class="line">    sed -i &#x27;s/#PermitEmptyPasswords yes/PermitEmptyPasswords no/g&#x27; /etc/ssh/sshd_config</span><br><span class="line">    sed -i &#x27;s/PasswordAuthentication yes/PasswordAuthentication no/g&#x27; /etc/ssh/sshd_config</span><br><span class="line">    /etc/init.d/sshd restart</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">time_config()&#123;</span><br><span class="line">    #timezone</span><br><span class="line">    echo &quot;TZ=&#x27;Asia/Shanghai&#x27;; export TZ&quot; &gt;&gt; /etc/profile</span><br><span class="line"></span><br><span class="line">    # Update time</span><br><span class="line">    if [! -f &quot;/usr/sbin/ntpdate&quot;]; then</span><br><span class="line">        yum -y install ntpdate</span><br><span class="line">    fi</span><br><span class="line"></span><br><span class="line">    /usr/sbin/ntpdate pool.ntp.org</span><br><span class="line">    echo &quot;30 3 * * * root (/usr/sbin/ntpdate pool.ntp.org &amp;&amp; /sbin/hwclock -w) &amp;&gt; /dev/null&quot; &gt;&gt; /etc/crontab</span><br><span class="line">    /sbin/service crond restart</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">iptables()&#123;</span><br><span class="line">cat &gt; /etc/sysconfig/iptables &lt;&lt; EOF</span><br><span class="line"><span class="meta">#</span><span class="bash"> Firewall configuration written by system-config-securitylevel</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Manual customization of this file is not recommended.</span></span><br><span class="line">*filter</span><br><span class="line">:INPUT DROP [0:0]</span><br><span class="line">:FORWARD ACCEPT [0:0]</span><br><span class="line">:OUTPUT ACCEPT [0:0]</span><br><span class="line">:syn-flood - [0:0]</span><br><span class="line">-A INPUT -i lo -j ACCEPT</span><br><span class="line">-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT</span><br><span class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT</span><br><span class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT</span><br><span class="line">-A INPUT -p icmp -m limit --limit 100/sec --limit-burst 100 -j ACCEPT</span><br><span class="line">-A INPUT -p icmp -m limit --limit 1/s --limit-burst 10 -j ACCEPT</span><br><span class="line">-A INPUT -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -j syn-flood</span><br><span class="line">-A INPUT -j REJECT --reject-with icmp-host-prohibited</span><br><span class="line">-A syn-flood -p tcp -m limit --limit 3/sec --limit-burst 6 -j RETURN</span><br><span class="line">-A syn-flood -j REJECT --reject-with icmp-port-unreachable</span><br><span class="line">COMMIT</span><br><span class="line">EOF</span><br><span class="line">/sbin/service iptables restart</span><br><span class="line">source /etc/profile</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">other()&#123;</span><br><span class="line">    # initdefault</span><br><span class="line">    sed -i &#x27;s/^id:.*$/id:3:initdefault:/&#x27; /etc/inittab</span><br><span class="line">    /sbin/init q</span><br><span class="line"></span><br><span class="line">    # PS1</span><br><span class="line">    #echo &#x27;PS1=&quot;\[\e[32m\][\[\e[35m\]\u\[\e[m\]@\[\e[36m\]\h \[\e[31m\]\w\[\e[32m\]]\[\e[36m\]$\[\e[m\]&quot;&#x27; &gt;&gt; /etc/profile</span><br><span class="line"></span><br><span class="line">    # Wrong password five times locked 180s</span><br><span class="line">    sed -i &#x27;4a auth        required      pam_tally2.so deny=5 unlock_time=180&#x27; /etc/pam.d/system-auth</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vsftpd_setup()&#123;</span><br><span class="line">    yum -y install vsftpd</span><br><span class="line">    mv /etc/vsftpd/vsftpd.conf /etc/vsftpd/vsftpd.conf.bak</span><br><span class="line">    touch /etc/vsftpd/chroot_list</span><br><span class="line">    setsebool -P ftp_home_dir=1</span><br><span class="line">cat &gt;&gt; /etc/vsftpd/vsftpd.conf &lt;&lt;EOF</span><br><span class="line"><span class="meta">#</span><span class="bash"> normal user settings</span></span><br><span class="line">local_enable=YES</span><br><span class="line">write_enable=YES</span><br><span class="line">local_umask=022</span><br><span class="line">chroot_local_user=YES</span><br><span class="line">chroot_list_enable=YES</span><br><span class="line">chroot_list_file=/etc/vsftpd/chroot_list</span><br><span class="line">local_max_rate=10000000</span><br><span class="line"><span class="meta">#</span><span class="bash"> anonymous settings</span></span><br><span class="line">anonymous_enable=YES</span><br><span class="line">no_anon_password=YES</span><br><span class="line">anon_max_rate=1000000</span><br><span class="line">data_connection_timeout=60</span><br><span class="line">idle_session_timeout=600</span><br><span class="line"><span class="meta">#</span><span class="bash"> ssl settings</span></span><br><span class="line"><span class="meta">#</span><span class="bash">ssl_enable=YES             </span></span><br><span class="line"><span class="meta">#</span><span class="bash">allow_anon_ssl=NO           </span></span><br><span class="line"><span class="meta">#</span><span class="bash">force_local_data_ssl=YES    </span></span><br><span class="line"><span class="meta">#</span><span class="bash">force_local_logins_ssl=YES  </span></span><br><span class="line"><span class="meta">#</span><span class="bash">ssl_tlsv1=YES               </span></span><br><span class="line"><span class="meta">#</span><span class="bash">ssl_sslv2=NO</span></span><br><span class="line"><span class="meta">#</span><span class="bash">ssl_sslv3=NO</span></span><br><span class="line"><span class="meta">#</span><span class="bash">rsa_cert_file=/etc/vsftpd/vsftpd.pem</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> server settings</span></span><br><span class="line">max_clients=50</span><br><span class="line">max_per_ip=5</span><br><span class="line">use_localtime=YES</span><br><span class="line">dirmessage_enable=YES</span><br><span class="line">xferlog_enable=YES</span><br><span class="line">connect_from_port_20=YES</span><br><span class="line">xferlog_std_format=YES</span><br><span class="line">listen=YES</span><br><span class="line">pam_service_name=vsftpd</span><br><span class="line">tcp_wrappers=YES</span><br><span class="line"><span class="meta">#</span><span class="bash">banner_file=/etc/vsftpd/welcome.txt</span></span><br><span class="line">dual_log_enable=YES</span><br><span class="line">pasv_min_port=65400</span><br><span class="line">pasv_max_port=65410</span><br><span class="line">EOF</span><br><span class="line">    chkconfig --level 3 vsftpd on</span><br><span class="line">    service vsftpd restart</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main()&#123;</span><br><span class="line">    precheck</span><br><span class="line"></span><br><span class="line">    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;updating the system            &quot;</span><br><span class="line">    yum_update</span><br><span class="line"></span><br><span class="line">    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;re-config permission           &quot;</span><br><span class="line">    permission_config</span><br><span class="line"></span><br><span class="line">    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;enabling selinux               &quot;</span><br><span class="line">    selinux</span><br><span class="line"></span><br><span class="line">    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;stopping irrelevant services   &quot;</span><br><span class="line">    stop_services</span><br><span class="line"></span><br><span class="line">    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;/etc/security/limits.config    &quot;</span><br><span class="line">    limits_config</span><br><span class="line"></span><br><span class="line">    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;/etc/sysctl.conf               &quot;</span><br><span class="line">    sysctl_config</span><br><span class="line"></span><br><span class="line">    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;sshd re-configuring            &quot;</span><br><span class="line">    sshd_config</span><br><span class="line"></span><br><span class="line">    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;configuring time               &quot;</span><br><span class="line">    time_config</span><br><span class="line"></span><br><span class="line">    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;configuring firewall           &quot;</span><br><span class="line"><span class="meta">#</span><span class="bash">   iptables</span></span><br><span class="line"></span><br><span class="line">    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;someother stuff                &quot;</span><br><span class="line">    other</span><br><span class="line"></span><br><span class="line">    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;done! rebooting                &quot;</span><br><span class="line">    touch &quot;$flagFile&quot;</span><br><span class="line">    sleep 5</span><br><span class="line">    reboot</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">!/bin/bash</span>
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">################################################</span></span>
+<span class="hljs-meta">#</span><span class="bash">   author  huachao</span>
+<span class="hljs-meta">#</span><span class="bash">   date    2015-12-09</span>
+<span class="hljs-meta">#</span><span class="bash">   email   i@huachao.me</span>
+<span class="hljs-meta">#</span><span class="bash">   web     blog.huachao.me</span>
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">################################################</span></span>
 
-      
+flagFile=&quot;/root/centos6-init.executed&quot;
+
+precheck()&#123;
+
+    if [[ &quot;$(whoami)&quot; != &quot;root&quot; ]]; then
+    echo &quot;please run this script as root .&quot; &gt;&amp;2
+    exit 1
+    fi
+
+    if [ -f &quot;$flagFile&quot; ]; then
+    echo &quot;this script had been executed, please do not execute again!!&quot; &gt;&amp;2
+    exit 1
+    fi
+
+    echo -e &quot;\033[31m WARNING! THIS SCRIPT WILL \033[0m\n&quot;
+    echo -e &quot;\033[31m *1 update the system; \033[0m\n&quot;
+    echo -e &quot;\033[31m *2 setup security permissions; \033[0m\n&quot;
+    echo -e &quot;\033[31m *3 stop irrelevant services; \033[0m\n&quot;
+    echo -e &quot;\033[31m *4 reconfig kernel parameters; \033[0m\n&quot;
+    echo -e &quot;\033[31m *5 setup timezone and sync time periodically; \033[0m\n&quot;
+    echo -e &quot;\033[31m *6 setup tcp_wrapper and netfilter firewall; \033[0m\n&quot;
+    echo -e &quot;\033[31m *7 setup vsftpd; \033[0m\n&quot;
+    sleep 5
+
+&#125;
+
+yum_update()&#123;
+    yum -y update
+    #update system at 5:40pm daily
+    echo &quot;40 3 * * * root yum -y update &amp;&amp; yum clean packages&quot; &gt;&gt; /etc/crontab
+&#125;
+
+permission_config()&#123;
+    #chattr +i /etc/shadow
+    #chattr +i /etc/passwd
+&#125;
+
+selinux()&#123;
+    sed -i &#x27;s/SELINUX=disabled/SELINUX=enforcing/g&#x27; /etc/sysconfig/selinux
+    setenforce 1
+&#125;
+
+stop_services()&#123;
+    for server in `chkconfig --list |grep 3:on|awk &#x27;&#123;print $1&#125;&#x27;`
+    do
+        chkconfig --level 3 $server off
+    done
+
+    for server in crond network rsyslog sshd iptables
+    do
+       chkconfig --level 3 $server on
+    done
+&#125;
+
+limits_config()&#123;
+cat &gt;&gt; /etc/security/limits.conf &lt;&lt;EOF
+* soft nproc 65535
+* hard nproc 65535
+* soft nofile 65535
+* hard nofile 65535
+EOF
+echo &quot;ulimit -SH 65535&quot; &gt;&gt; /etc/rc.local
+&#125;
+
+sysctl_config()&#123;
+sed -i &#x27;s/net.ipv4.tcp_syncookies.*$/net.ipv4.tcp_syncookies = 1/g&#x27; /etc/sysctl.conf
+sed -i &#x27;s/net.ipv4.ip_forward.*$/net.ipv4.ip_forward = 1/g&#x27; /etc/sysctl.conf
+cat &gt;&gt; /etc/sysctl.conf &lt;&lt;EOF
+net.ipv4.tcp_max_syn_backlog = 65536
+net.core.netdev_max_backlog =  32768
+net.core.somaxconn = 32768
+net.core.wmem_default = 8388608
+net.core.rmem_default = 8388608
+net.core.rmem_max = 16777216
+net.core.wmem_max = 16777216
+net.ipv4.tcp_timestamps = 0
+net.ipv4.tcp_synack_retries = 2
+net.ipv4.tcp_syn_retries = 2
+net.ipv4.tcp_tw_recycle = 1
+net.ipv4.tcp_tw_reuse = 1
+net.ipv4.tcp_mem = 94500000 915000000 927000000
+net.ipv4.tcp_max_orphans = 3276800
+net.ipv4.ip_local_port_range = 1024  65535
+EOF
+sysctl -p
+&#125;
+
+sshd_config()&#123;
+    if [ ! -f &quot;/root/.ssh/id_rsa.pub&quot; ]; then
+    ssh-keygen -t rsa -P &#x27;&#x27; -f /root/.ssh/id_rsa
+    cat /root/.ssh/id_rsa.pub &gt;&gt; /root/.ssh/authorized_keys
+    chmod 600 /root/.ssh/authorized_keys
+    fi
+
+    #sed -i &#x27;/^#Port/s/#Port 22/Port 65535/g&#x27; /etc/ssh/sshd_config
+    sed -i &#x27;/^#UseDNS/s/#UseDNS no/UseDNS yes/g&#x27; /etc/ssh/sshd_config
+    #sed -i &#x27;s/#PermitRootLogin yes/PermitRootLogin no/g&#x27; /etc/ssh/sshd_config
+    sed -i &#x27;s/#PermitEmptyPasswords yes/PermitEmptyPasswords no/g&#x27; /etc/ssh/sshd_config
+    sed -i &#x27;s/PasswordAuthentication yes/PasswordAuthentication no/g&#x27; /etc/ssh/sshd_config
+    /etc/init.d/sshd restart
+&#125;
+
+time_config()&#123;
+    #timezone
+    echo &quot;TZ=&#x27;Asia/Shanghai&#x27;; export TZ&quot; &gt;&gt; /etc/profile
+
+    # Update time
+    if [! -f &quot;/usr/sbin/ntpdate&quot;]; then
+        yum -y install ntpdate
+    fi
+
+    /usr/sbin/ntpdate pool.ntp.org
+    echo &quot;30 3 * * * root (/usr/sbin/ntpdate pool.ntp.org &amp;&amp; /sbin/hwclock -w) &amp;&gt; /dev/null&quot; &gt;&gt; /etc/crontab
+    /sbin/service crond restart
+&#125;
+
+iptables()&#123;
+cat &gt; /etc/sysconfig/iptables &lt;&lt; EOF
+<span class="hljs-meta">#</span><span class="bash"> Firewall configuration written by system-config-securitylevel</span>
+<span class="hljs-meta">#</span><span class="bash"> Manual customization of this file is not recommended.</span>
+*filter
+:INPUT DROP [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+:syn-flood - [0:0]
+-A INPUT -i lo -j ACCEPT
+-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT
+-A INPUT -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT
+-A INPUT -p icmp -m limit --limit 100/sec --limit-burst 100 -j ACCEPT
+-A INPUT -p icmp -m limit --limit 1/s --limit-burst 10 -j ACCEPT
+-A INPUT -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -j syn-flood
+-A INPUT -j REJECT --reject-with icmp-host-prohibited
+-A syn-flood -p tcp -m limit --limit 3/sec --limit-burst 6 -j RETURN
+-A syn-flood -j REJECT --reject-with icmp-port-unreachable
+COMMIT
+EOF
+/sbin/service iptables restart
+source /etc/profile
+&#125;
+
+other()&#123;
+    # initdefault
+    sed -i &#x27;s/^id:.*$/id:3:initdefault:/&#x27; /etc/inittab
+    /sbin/init q
+
+    # PS1
+    #echo &#x27;PS1=&quot;\[\e[32m\][\[\e[35m\]\u\[\e[m\]@\[\e[36m\]\h \[\e[31m\]\w\[\e[32m\]]\[\e[36m\]$\[\e[m\]&quot;&#x27; &gt;&gt; /etc/profile
+
+    # Wrong password five times locked 180s
+    sed -i &#x27;4a auth        required      pam_tally2.so deny=5 unlock_time=180&#x27; /etc/pam.d/system-auth
+&#125;
+
+vsftpd_setup()&#123;
+    yum -y install vsftpd
+    mv /etc/vsftpd/vsftpd.conf /etc/vsftpd/vsftpd.conf.bak
+    touch /etc/vsftpd/chroot_list
+    setsebool -P ftp_home_dir=1
+cat &gt;&gt; /etc/vsftpd/vsftpd.conf &lt;&lt;EOF
+<span class="hljs-meta">#</span><span class="bash"> normal user settings</span>
+local_enable=YES
+write_enable=YES
+local_umask=022
+chroot_local_user=YES
+chroot_list_enable=YES
+chroot_list_file=/etc/vsftpd/chroot_list
+local_max_rate=10000000
+<span class="hljs-meta">#</span><span class="bash"> anonymous settings</span>
+anonymous_enable=YES
+no_anon_password=YES
+anon_max_rate=1000000
+data_connection_timeout=60
+idle_session_timeout=600
+<span class="hljs-meta">#</span><span class="bash"> ssl settings</span>
+<span class="hljs-meta">#</span><span class="bash">ssl_enable=YES             </span>
+<span class="hljs-meta">#</span><span class="bash">allow_anon_ssl=NO           </span>
+<span class="hljs-meta">#</span><span class="bash">force_local_data_ssl=YES    </span>
+<span class="hljs-meta">#</span><span class="bash">force_local_logins_ssl=YES  </span>
+<span class="hljs-meta">#</span><span class="bash">ssl_tlsv1=YES               </span>
+<span class="hljs-meta">#</span><span class="bash">ssl_sslv2=NO</span>
+<span class="hljs-meta">#</span><span class="bash">ssl_sslv3=NO</span>
+<span class="hljs-meta">#</span><span class="bash">rsa_cert_file=/etc/vsftpd/vsftpd.pem</span>
+<span class="hljs-meta">#</span><span class="bash"> server settings</span>
+max_clients=50
+max_per_ip=5
+use_localtime=YES
+dirmessage_enable=YES
+xferlog_enable=YES
+connect_from_port_20=YES
+xferlog_std_format=YES
+listen=YES
+pam_service_name=vsftpd
+tcp_wrappers=YES
+<span class="hljs-meta">#</span><span class="bash">banner_file=/etc/vsftpd/welcome.txt</span>
+dual_log_enable=YES
+pasv_min_port=65400
+pasv_max_port=65410
+EOF
+    chkconfig --level 3 vsftpd on
+    service vsftpd restart
+&#125;
+
+main()&#123;
+    precheck
+
+    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;updating the system            &quot;
+    yum_update
+
+    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;re-config permission           &quot;
+    permission_config
+
+    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;enabling selinux               &quot;
+    selinux
+
+    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;stopping irrelevant services   &quot;
+    stop_services
+
+    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;/etc/security/limits.config    &quot;
+    limits_config
+
+    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;/etc/sysctl.conf               &quot;
+    sysctl_config
+
+    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;sshd re-configuring            &quot;
+    sshd_config
+
+    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;configuring time               &quot;
+    time_config
+
+    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;configuring firewall           &quot;
+<span class="hljs-meta">#</span><span class="bash">   iptables</span>
+
+    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;someother stuff                &quot;
+    other
+
+    printf &quot;\033[32m================%40s================\033[0m\n&quot; &quot;done! rebooting                &quot;
+    touch &quot;$flagFile&quot;
+    sleep 5
+    reboot
+&#125;
+
+main</code></pre>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/interview/">interview</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/interview/">interview</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2016/04/22/tips/2016-04-22-git-history/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Git 基本使用－2</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2016/04/21/tips/interview/2016-04-20-%E7%9B%91%E6%8E%A7%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/">
+                        <span class="hidden-mobile">Web监控基础</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
 
+      </div>
+    
   </div>
+</div>
 
-  <div class="article-footer">
-    <div class="article-meta pull-left">
+<!-- Custom -->
 
-    
-      
 
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/interview/">interview</a>
-    </span>
     
 
     
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
     
 
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/interview/">interview</a>
-    </span>
     
-
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
     </div>
+  </div>
+</div>
+    
 
     
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
-</article>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
 
   
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
 
 
 
-    </main>
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
 
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
-    
-    &copy; 2020 qmeta
-    
-  </p>
-</footer>
-    
-  </div>
-</div>
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
 </body>
 </html>
