@@ -1,0 +1,585 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="allround tester">
+  <meta name="author" content="qmeta">
+  <meta name="keywords" content="">
+  <title>快速生成简单的TPS报告 - Learning Testing/QA in Hardway</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"qdriven.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Practising</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="快速生成简单的TPS报告">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-12-13 02:19" pubdate>
+        2019年12月13日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      21
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">快速生成简单的TPS报告</h1>
+            
+            <div class="markdown-body">
+              <p>练手的机会无处不在，不需要太久，也许只要10分钟半个小时就可以.<br>测试人员来说每天重复的事情其实不少，比如今天这件，大体时期如下:</p>
+<ul>
+<li>要做压力测试，需要提供一个TPS时间序列报告</li>
+<li>压力测试工具是开发自己写的，TPS的数据从日志里面拿</li>
+<li>不同的并发数下面需要重复好几次整理收集的事情，不同的版本下面又需要做好多次这样的事情</li>
+</ul>
+<p>那么先让我们改进一下吧。</p>
+<h2 id="原材料和最终结果"><a href="#原材料和最终结果" class="headerlink" title="原材料和最终结果:"></a>原材料和最终结果:</h2><p>原材料TPS的日志大体如下:</p>
+<pre><code class="hljs sh">2019/12/11 17:36:15.810881 [0;31m[ERROR][m GID 2324, vbft actor SaveBlockCompleteMsg receives block complete event. block height=2, numtx=236
+2019/12/11 17:36:17.027152 [0;31m[ERROR][m GID 16478, vbft actor SaveBlockCompleteMsg receives block complete event. block height=3, numtx=1341
+2019/12/11 17:36:18.595527 [0;31m[ERROR][m GID 52389, checkUpdateChainConfig err:not found
+2019/12/11 17:36:18.745932 [0;31m[ERROR][m GID 63065, vbft actor SaveBlockCompleteMsg receives block complete event. block height=4, numtx=5495</code></pre>
+
+<p>需要从日志中收集的数据是，commit_time(日志中一开始的这个时间,如2019/12/11 17:36:15.810881),block height(块的高度，有点神秘，不用管它就是了Who cares)，numtx(交易比数)数量</p>
+<p>最终结果，其实需要绘制如如下图:</p>
+<p><img src="/images/chains/TPS.jpg" srcset="/img/loading.gif" alt="img"></p>
+<h2 id="开始解题"><a href="#开始解题" class="headerlink" title="开始解题"></a>开始解题</h2><p>很明显题目可以分解为一下几个步骤:</p>
+<ul>
+<li>从日志中获取需要的数据(日志不大)</li>
+<li>将数据加工转化为图表，EXCEl其实就有图标功能，直接用EXCEL就好<ul>
+<li>X轴是时间，X轴起点是0，每一个TPS点就是从0计算的时间偏移量，也就是第二行日志的时间，减去第一行日志的时间</li>
+<li>Y轴是TPS的数量</li>
+</ul>
+</li>
+</ul>
+<p>问题定义了，动作分解了，那么就动手了.</p>
+<h3 id="解析日志文件"><a href="#解析日志文件" class="headerlink" title="解析日志文件"></a>解析日志文件</h3><p>其实就是获取commit_time, height,num_tx, 解析日志就是</p>
+<ul>
+<li>先用空格切割成数组，第一个和第二个合并变成提交时间</li>
+<li>倒数第二个用=切成数组，然后获取数组第二个元素就是height值了</li>
+<li>倒数第一个用=切成数组，然后获取数组第二个元素就是提交时间是提交的交易总数量了</li>
+<li>最后返回一个数组，就是在不同时间点上提交的交易数量</li>
+</ul>
+<pre><code class="hljs python">MetricSample = namedtuple(<span class="hljs-string">&#x27;MetricsData&#x27;</span>, <span class="hljs-string">&#x27;commit_time height num_tx&#x27;</span>)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">read_metric_file</span>(<span class="hljs-params">path=<span class="hljs-string">&quot;metrics.log&quot;</span></span>):</span>
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    Read and Parse Metric Log</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    <span class="hljs-keyword">with</span> open(path, <span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-keyword">as</span> raw_metric:
+        lines = raw_metric.readlines()
+    metrics_data = []
+    <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> lines:
+        <span class="hljs-keyword">try</span>:
+            parsed_data = line.split(<span class="hljs-string">&quot; &quot;</span>)
+            start_time = <span class="hljs-string">&quot; &quot;</span>.join(parsed_data[<span class="hljs-number">0</span>:<span class="hljs-number">2</span>])
+            height = parsed_data[<span class="hljs-number">-2</span>:][<span class="hljs-number">0</span>].split(<span class="hljs-string">&quot;=&quot;</span>)[<span class="hljs-number">1</span>][<span class="hljs-number">0</span>]
+            num_tx = parsed_data[<span class="hljs-number">-1</span>:][<span class="hljs-number">0</span>].split(<span class="hljs-string">&quot;=&quot;</span>)[<span class="hljs-number">1</span>]
+            metrics_sample = MetricSample(commit_time=start_time,
+                                          height=int(height),
+                                          num_tx=int(num_tx))
+            metrics_data.append(metrics_sample)
+        <span class="hljs-keyword">except</span> IndexError <span class="hljs-keyword">as</span> e:
+            <span class="hljs-keyword">pass</span>
+
+    <span class="hljs-keyword">return</span> metrics_data</code></pre>
+
+<p>不过namedtuple用的有点好玩，其实是一个不错的学习点，可以让代码看的更好懂点，所以又练了一次手，熟悉了一个新的库用法.<br>怎么用，其实查文档看看就好，或者查查<a target="_blank" rel="noopener" href="https://pymotw.com/3/">python module of week</a>.<br>为什么代码更好懂呢？至少每个变量名代表的含义看的很清楚了，自然就好懂了。</p>
+<h3 id="保存到EXCEL并且生成图表"><a href="#保存到EXCEL并且生成图表" class="headerlink" title="保存到EXCEL并且生成图表"></a>保存到EXCEL并且生成图表</h3><p>保存到EXCEl需要加工一下数据，计算一下TPS(Transaction Per Senconds).</p>
+<p>公式其实就是：</p>
+<pre><code class="hljs ini"><span class="hljs-attr">TPS</span> = num_tx/(这次提交时间-上一次提交时间) </code></pre>
+
+<p>以下就是实现代码，当然如何操作excel，其实<a target="_blank" rel="noopener" href="https://openpyxl.readthedocs.io/en/stable/">openpyxl</a>还是很方便的,<br>怎么用？RTFM，其实还是很好理解的，chart这块稍微麻烦点，不过一样，文档里面也有示例代码，抄抄，然后自己打开一个EXCEL自己添加一个line chart<br>看看，总体意思其实是:</p>
+<ul>
+<li>chart要用的数据通过什么方式在程序里面给</li>
+</ul>
+<pre><code class="hljs python">data = Reference(ws, min_col=<span class="hljs-number">3</span>, min_row=<span class="hljs-number">1</span>,
+                    max_col=<span class="hljs-number">3</span>, max_row=max_row)
+   lc.add_data(data, titles_from_data=<span class="hljs-literal">True</span>)</code></pre>
+<ul>
+<li>X轴的数据怎么设定</li>
+</ul>
+<pre><code class="hljs python">x_timeoffset = Reference(ws,min_col=<span class="hljs-number">2</span>,
+                               max_col =<span class="hljs-number">2</span>,
+                               min_row=<span class="hljs-number">2</span>,
+                               max_row=max_row)
+   lc.set_categories(x_timeoffset)</code></pre>
+
+<p>关于操作EXCEL里面的内容:</p>
+<ul>
+<li>cell是什么鬼,excel的cell就是一个表格，怎么定位要设定值的表格呢，<br>其实就是几行几列，所以就是col=1,row=1就是第一行第一列的那个表格</li>
+<li>Reference里面的min_col,min_row,max_col,max_row是什么鬼？<br>给图表用的数据，需要设定从那行开始到那行结束，如果是多列的话，还要说明从那列开始到那列结束.所以这个是取那些数据，excel里面俗称拉一下</li>
+</ul>
+<p>下面是完整的代码实现:</p>
+<pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">metrics_to_excel</span>(<span class="hljs-params">metrics, excel_path=<span class="hljs-string">&quot;metrics.xlsx&quot;</span></span>):</span>
+    wb = Workbook()
+    ws = wb.create_sheet(<span class="hljs-string">&quot;metric&quot;</span>, <span class="hljs-number">0</span>)
+    ws.cell(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-string">&quot;duration&quot;</span>)
+    ws.cell(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-string">&quot;time_offset&quot;</span>)
+    ws.cell(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-string">&quot;tps&quot;</span>)
+    ws.cell(<span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-string">&quot;height&quot;</span>)
+    ws.cell(<span class="hljs-number">1</span>, <span class="hljs-number">5</span>, <span class="hljs-string">&quot;num_tx&quot;</span>)
+    row_num = len(metrics)
+    time_offset = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">for</span> index <span class="hljs-keyword">in</span> range(row_num):
+        ws.cell(index + <span class="hljs-number">2</span>, <span class="hljs-number">4</span>, metrics[index].height)
+        ws.cell(index + <span class="hljs-number">2</span>, <span class="hljs-number">5</span>, metrics[index].num_tx)
+        <span class="hljs-keyword">if</span> index == <span class="hljs-number">0</span>:
+            ws.cell(index + <span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)
+            ws.cell(index + <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>)
+            ws.cell(index + <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">0</span>)
+        <span class="hljs-keyword">else</span>:
+            start_time = datetime.datetime.strptime(metrics_data[index - <span class="hljs-number">1</span>].start_time,
+                                                    <span class="hljs-string">&quot;%Y/%m/%d %H:%M:%S.%f&quot;</span>)
+
+            end_time = datetime.datetime.strptime(metrics_data[index].start_time,
+                                                  <span class="hljs-string">&quot;%Y/%m/%d %H:%M:%S.%f&quot;</span>)
+            duration = (end_time - start_time).seconds
+            time_offset = time_offset + duration
+            ws.cell(index + <span class="hljs-number">2</span>, <span class="hljs-number">1</span>, duration)
+            ws.cell(index + <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, time_offset)
+            ws.cell(index + <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, metrics[index].num_tx / duration)
+    add_chart(ws, row_num)
+    wb.save(excel_path)
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add_chart</span>(<span class="hljs-params">ws, max_row</span>):</span>
+    lc = LineChart()
+    lc.title = <span class="hljs-string">&quot;Chain TPS&quot;</span>
+    lc.style = <span class="hljs-number">15</span>
+    lc.y_axis.title = <span class="hljs-string">&quot;TPS&quot;</span>
+    lc.x_axis.title = <span class="hljs-string">&quot;Time&quot;</span>
+    data = Reference(ws, min_col=<span class="hljs-number">3</span>, min_row=<span class="hljs-number">1</span>,
+                     max_col=<span class="hljs-number">3</span>, max_row=max_row)
+    lc.add_data(data, titles_from_data=<span class="hljs-literal">True</span>)
+    x_timeoffset = Reference(ws,min_col=<span class="hljs-number">2</span>,
+                                max_col =<span class="hljs-number">2</span>,
+                                min_row=<span class="hljs-number">2</span>,
+                                max_row=max_row)
+    lc.set_categories(x_timeoffset)
+    ws.add_chart(lc,<span class="hljs-string">&quot;G13&quot;</span>)
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
+    metrics_data = read_metric_file()
+    metrics_to_excel(metrics_data)</code></pre>
+
+<p>然后运行这段程序，上面的那个TPS图表就生成好了，同时简历里面可以写上:</p>
+<ul>
+<li>构建自动生成性能测试报告的工具平台</li>
+<li>熟练使用Python 标准库中的namedtuple和EXCEL openpyxl库操作EXCEl，自动生成漂亮的报告</li>
+</ul>
+<p>当然重点不是简历上写什么，重点是有时间可以看看这两个库的用法，说不定哪天又用到了。<br>时间节约了，事情完成了，东西学到了. It’s a perfect day! 大概合计用了1个小时完成，但是学到东西也不少哇！<br>原来这个报告整理一下，1次需要个2个小时，现在花了一个小时写代码，其他就没有额外时间了。这也算不上什么自动化测试，但是投入产出比不是很高吗？</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/python/">python</a>
+                    
+                      <a class="hover-with-bg" href="/tags/10Minutes/">10Minutes</a>
+                    
+                      <a class="hover-with-bg" href="/tags/productivity/">productivity</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/01/05/tips/scrum-checklist/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Scrum CheckList</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/12/13/qa-thoughts/comfortable-zone/">
+                        <span class="hidden-mobile">测试陷阱4-跳出舒适区</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

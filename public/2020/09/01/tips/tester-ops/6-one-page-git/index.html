@@ -1,0 +1,732 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="allround tester">
+  <meta name="author" content="qmeta">
+  <meta name="keywords" content="">
+  <title>Git in One Page - Learning Testing/QA in Hardway</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"qdriven.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Practising</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Git in One Page">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-09-01 21:49" pubdate>
+        2020年9月1日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      29
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Git in One Page</h1>
+            
+            <div class="markdown-body">
+              <h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><ul>
+<li><a href="#%E9%85%8D%E7%BD%AE">配置</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">配置文件</a></li>
+<li><a href="#%E5%88%9B%E5%BB%BA">创建</a></li>
+<li><a href="#%E6%9C%AC%E5%9C%B0%E4%BF%AE%E6%94%B9">本地修改</a></li>
+<li><a href="#%E6%90%9C%E7%B4%A2">搜索</a></li>
+<li><a href="#%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2">提交历史</a></li>
+<li><a href="#%E5%88%86%E6%94%AF%E4%B8%8E%E6%A0%87%E7%AD%BE">分支与标签</a></li>
+<li><a href="#%E6%9B%B4%E6%96%B0%E4%B8%8E%E5%8F%91%E5%B8%83">更新与发布</a></li>
+<li><a href="#%E5%90%88%E5%B9%B6%E4%B8%8E%E9%87%8D%E7%BD%AE">合并与重置</a></li>
+<li><a href="#%E6%92%A4%E9%94%80">撤销</a></li>
+<li><a href="#git-flow">Git Flow</a></li>
+</ul>
+<hr>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><h5 id="列出当前配置："><a href="#列出当前配置：" class="headerlink" title="列出当前配置："></a>列出当前配置：</h5><pre><code class="hljs routeros">$ git<span class="hljs-built_in"> config </span>--list</code></pre>
+
+<h5 id="列出repository配置："><a href="#列出repository配置：" class="headerlink" title="列出repository配置："></a>列出repository配置：</h5><pre><code class="hljs routeros">$ git<span class="hljs-built_in"> config </span>--local --list</code></pre>
+
+<h5 id="列出全局配置："><a href="#列出全局配置：" class="headerlink" title="列出全局配置："></a>列出全局配置：</h5><pre><code class="hljs routeros">$ git<span class="hljs-built_in"> config </span>--global --list</code></pre>
+
+<h5 id="列出系统配置："><a href="#列出系统配置：" class="headerlink" title="列出系统配置："></a>列出系统配置：</h5><pre><code class="hljs routeros">$ git<span class="hljs-built_in"> config </span>--system --list</code></pre>
+
+<h5 id="设置用户名："><a href="#设置用户名：" class="headerlink" title="设置用户名："></a>设置用户名：</h5><pre><code class="hljs routeros">$ git<span class="hljs-built_in"> config </span>--global user.name “[firstname lastname]”</code></pre>
+
+<h5 id="设置用户邮箱："><a href="#设置用户邮箱：" class="headerlink" title="设置用户邮箱："></a>设置用户邮箱：</h5><pre><code class="hljs routeros">$ git<span class="hljs-built_in"> config </span>--global user.email “[valid-email]”</code></pre>
+
+<h5 id="设置git命令输出为彩色："><a href="#设置git命令输出为彩色：" class="headerlink" title="设置git命令输出为彩色："></a>设置git命令输出为彩色：</h5><pre><code class="hljs routeros">$ git<span class="hljs-built_in"> config </span>--global color.ui auto</code></pre>
+
+<h5 id="设置git使用的文本编辑器设："><a href="#设置git使用的文本编辑器设：" class="headerlink" title="设置git使用的文本编辑器设："></a>设置git使用的文本编辑器设：</h5><pre><code class="hljs routeros">$ git<span class="hljs-built_in"> config </span>--global core.editor vi</code></pre>
+
+<hr>
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><h5 id="Repository配置对应的配置文件路径-–local-："><a href="#Repository配置对应的配置文件路径-–local-：" class="headerlink" title="Repository配置对应的配置文件路径[–local]："></a>Repository配置对应的配置文件路径[–local]：</h5><pre><code class="hljs arcade">&lt;repo&gt;<span class="hljs-regexp">/.git/</span>config</code></pre>
+
+<h5 id="用户全局配置对应的配置文件路径-–global-："><a href="#用户全局配置对应的配置文件路径-–global-：" class="headerlink" title="用户全局配置对应的配置文件路径[–global]："></a>用户全局配置对应的配置文件路径[–global]：</h5><pre><code class="hljs haml">~/.gitconfig</code></pre>
+
+<h5 id="系统配置对应的配置文件路径-–local-："><a href="#系统配置对应的配置文件路径-–local-：" class="headerlink" title="系统配置对应的配置文件路径[–local]："></a>系统配置对应的配置文件路径[–local]：</h5><pre><code class="hljs awk"><span class="hljs-regexp">/etc/gi</span>tconfig</code></pre>
+
+<hr>
+<h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><h5 id="复制一个已创建的仓库"><a href="#复制一个已创建的仓库" class="headerlink" title="复制一个已创建的仓库:"></a>复制一个已创建的仓库:</h5><pre><code class="hljs bash"><span class="hljs-comment"># 通过 SSH</span>
+$ git <span class="hljs-built_in">clone</span> ssh://user@domain.com/repo.git
+
+<span class="hljs-comment">#通过 HTTP</span>
+$ git <span class="hljs-built_in">clone</span> http://domain.com/user/repo.git</code></pre>
+
+<h5 id="创建一个新的本地仓库"><a href="#创建一个新的本地仓库" class="headerlink" title="创建一个新的本地仓库:"></a>创建一个新的本地仓库:</h5><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>git init</code></pre>
+
+<hr>
+<h3 id="本地修改"><a href="#本地修改" class="headerlink" title="本地修改"></a>本地修改</h3><h5 id="显示工作路径下已修改的文件："><a href="#显示工作路径下已修改的文件：" class="headerlink" title="显示工作路径下已修改的文件："></a>显示工作路径下已修改的文件：</h5><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>git status</code></pre>
+
+<h5 id="显示与上次提交版本文件的不同："><a href="#显示与上次提交版本文件的不同：" class="headerlink" title="显示与上次提交版本文件的不同："></a>显示与上次提交版本文件的不同：</h5><pre><code class="hljs powershell"><span class="hljs-variable">$</span> git <span class="hljs-built_in">diff</span></code></pre>
+
+<h5 id="把当前所有修改添加到下次提交中："><a href="#把当前所有修改添加到下次提交中：" class="headerlink" title="把当前所有修改添加到下次提交中："></a>把当前所有修改添加到下次提交中：</h5><pre><code class="hljs dockerfile">$ git <span class="hljs-keyword">add</span><span class="bash"> .</span></code></pre>
+
+<h5 id="把对某个文件的修改添加到下次提交中："><a href="#把对某个文件的修改添加到下次提交中：" class="headerlink" title="把对某个文件的修改添加到下次提交中："></a>把对某个文件的修改添加到下次提交中：</h5><pre><code class="hljs dockerfile">$ git <span class="hljs-keyword">add</span><span class="bash"> -p &lt;file&gt;</span></code></pre>
+
+<h5 id="提交本地的所有修改："><a href="#提交本地的所有修改：" class="headerlink" title="提交本地的所有修改："></a>提交本地的所有修改：</h5><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>git commit -a</code></pre>
+
+<h5 id="提交之前已标记的变化："><a href="#提交之前已标记的变化：" class="headerlink" title="提交之前已标记的变化："></a>提交之前已标记的变化：</h5><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>git commit</code></pre>
+
+<h5 id="附加消息提交："><a href="#附加消息提交：" class="headerlink" title="附加消息提交："></a>附加消息提交：</h5><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>git commit -m <span class="hljs-string">&#x27;message here&#x27;</span></code></pre>
+
+<h5 id="提交，并将提交时间设置为之前的某个日期"><a href="#提交，并将提交时间设置为之前的某个日期" class="headerlink" title="提交，并将提交时间设置为之前的某个日期:"></a>提交，并将提交时间设置为之前的某个日期:</h5><pre><code class="hljs autohotkey">git commit --date=<span class="hljs-string">&quot;`date --date=&#x27;n day ago&#x27;`&quot; -am &quot;</span>Commit Message<span class="hljs-string">&quot;</span></code></pre>
+
+<h5 id="修改上次提交"><a href="#修改上次提交" class="headerlink" title="修改上次提交"></a>修改上次提交</h5><p><em><sub>请勿修改已发布的提交记录!</sub></em></p>
+<pre><code class="hljs pgsql">$ git <span class="hljs-keyword">commit</span> <span class="hljs-comment">--amend</span></code></pre>
+
+<h5 id="修改上次提交的committer-date："><a href="#修改上次提交的committer-date：" class="headerlink" title="修改上次提交的committer date："></a>修改上次提交的committer date：</h5><pre><code class="hljs ini"><span class="hljs-attr">GIT_COMMITTER_DATE</span>=<span class="hljs-string">&quot;date&quot;</span> git commit --amend</code></pre>
+
+<h5 id="修改上次提交的author-date："><a href="#修改上次提交的author-date：" class="headerlink" title="修改上次提交的author date："></a>修改上次提交的author date：</h5><pre><code class="hljs jboss-cli">git commit <span class="hljs-params">--amend</span> <span class="hljs-params">--date=</span><span class="hljs-string">&quot;date&quot;</span></code></pre>
+
+<h5 id="把当前分支中未提交的修改移动到其他分支："><a href="#把当前分支中未提交的修改移动到其他分支：" class="headerlink" title="把当前分支中未提交的修改移动到其他分支："></a>把当前分支中未提交的修改移动到其他分支：</h5><pre><code class="hljs properties"><span class="hljs-attr">git</span> <span class="hljs-string">stash</span>
+<span class="hljs-attr">git</span> <span class="hljs-string">checkout branch2</span>
+<span class="hljs-attr">git</span> <span class="hljs-string">stash pop</span></code></pre>
+
+<h5 id="将-stashed-changes-应用到当前分支："><a href="#将-stashed-changes-应用到当前分支：" class="headerlink" title="将 stashed changes 应用到当前分支："></a>将 stashed changes 应用到当前分支：</h5><pre><code class="hljs coq">git stash <span class="hljs-built_in">apply</span></code></pre>
+
+<h5 id="删除最新一次的-stashed-changes："><a href="#删除最新一次的-stashed-changes：" class="headerlink" title="删除最新一次的 stashed changes："></a>删除最新一次的 stashed changes：</h5><pre><code class="hljs ebnf"><span class="hljs-attribute">git stash drop</span></code></pre>
+
+<hr>
+<h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><h5 id="从当前目录的所有文件中查找文本内容："><a href="#从当前目录的所有文件中查找文本内容：" class="headerlink" title="从当前目录的所有文件中查找文本内容："></a>从当前目录的所有文件中查找文本内容：</h5><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>git grep <span class="hljs-string">&quot;Hello&quot;</span></code></pre>
+
+<h5 id="在某一版本中搜索文本："><a href="#在某一版本中搜索文本：" class="headerlink" title="在某一版本中搜索文本："></a>在某一版本中搜索文本：</h5><pre><code class="hljs armasm">$ git grep <span class="hljs-string">&quot;Hello&quot;</span> <span class="hljs-built_in">v2</span>.<span class="hljs-number">5</span></code></pre>
+
+<hr>
+<h3 id="提交历史"><a href="#提交历史" class="headerlink" title="提交历史"></a>提交历史</h3><h5 id="从最新提交开始，显示所有的提交记录（显示hash，-作者信息，提交的标题和时间）："><a href="#从最新提交开始，显示所有的提交记录（显示hash，-作者信息，提交的标题和时间）：" class="headerlink" title="从最新提交开始，显示所有的提交记录（显示hash， 作者信息，提交的标题和时间）："></a>从最新提交开始，显示所有的提交记录（显示hash， 作者信息，提交的标题和时间）：</h5><pre><code class="hljs gams"><span class="hljs-symbol">$</span> git <span class="hljs-built_in">log</span></code></pre>
+
+<h5 id="显示所有提交（仅显示提交的hash和message）："><a href="#显示所有提交（仅显示提交的hash和message）：" class="headerlink" title="显示所有提交（仅显示提交的hash和message）："></a>显示所有提交（仅显示提交的hash和message）：</h5><pre><code class="hljs applescript">$ git <span class="hljs-built_in">log</span> <span class="hljs-comment">--oneline</span></code></pre>
+
+<h5 id="显示某个用户的所有提交："><a href="#显示某个用户的所有提交：" class="headerlink" title="显示某个用户的所有提交："></a>显示某个用户的所有提交：</h5><pre><code class="hljs gams"><span class="hljs-symbol">$</span> git <span class="hljs-built_in">log</span> --author=<span class="hljs-string">&quot;username&quot;</span></code></pre>
+
+<h5 id="显示某个文件的所有修改："><a href="#显示某个文件的所有修改：" class="headerlink" title="显示某个文件的所有修改："></a>显示某个文件的所有修改：</h5><pre><code class="hljs gams"><span class="hljs-symbol">$</span> git <span class="hljs-built_in">log</span> -p &lt;<span class="hljs-keyword">file</span>&gt;</code></pre>
+
+<h5 id="仅显示远端-lt-remote-master-gt-分支与远端-lt-origin-master-gt-分支提交记录的差集："><a href="#仅显示远端-lt-remote-master-gt-分支与远端-lt-origin-master-gt-分支提交记录的差集：" class="headerlink" title="仅显示远端&lt;remote/master&gt;分支与远端&lt;origin/master&gt;分支提交记录的差集："></a>仅显示远端&lt;remote/master&gt;分支与远端&lt;origin/master&gt;分支提交记录的差集：</h5><pre><code class="hljs excel">$ git <span class="hljs-built_in">log</span> --oneline &lt;origin/master&gt;..&lt;remote/master&gt; --<span class="hljs-built_in">left</span>-<span class="hljs-built_in">right</span></code></pre>
+
+<h5 id="谁，在什么时间，修改了文件的什么内容："><a href="#谁，在什么时间，修改了文件的什么内容：" class="headerlink" title="谁，在什么时间，修改了文件的什么内容："></a>谁，在什么时间，修改了文件的什么内容：</h5><pre><code class="hljs gams"><span class="hljs-symbol">$</span> git blame &lt;<span class="hljs-keyword">file</span>&gt;</code></pre>
+
+<h5 id="显示reflog："><a href="#显示reflog：" class="headerlink" title="显示reflog："></a>显示reflog：</h5><pre><code class="hljs angelscript">$ git <span class="hljs-built_in">ref</span>log show </code></pre>
+
+<h5 id="删除reflog："><a href="#删除reflog：" class="headerlink" title="删除reflog："></a>删除reflog：</h5><pre><code class="hljs actionscript">$ git reflog <span class="hljs-keyword">delete</span></code></pre>
+
+<hr>
+<h3 id="分支与标签"><a href="#分支与标签" class="headerlink" title="分支与标签"></a>分支与标签</h3><h5 id="列出所有的分支："><a href="#列出所有的分支：" class="headerlink" title="列出所有的分支："></a>列出所有的分支：</h5><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>git branch</code></pre>
+
+<h5 id="列出所有的远端分支："><a href="#列出所有的远端分支：" class="headerlink" title="列出所有的远端分支："></a>列出所有的远端分支：</h5><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>git branch -r</code></pre>
+
+<h5 id="切换分支："><a href="#切换分支：" class="headerlink" title="切换分支："></a>切换分支：</h5><pre><code class="hljs xml">$ git checkout <span class="hljs-tag">&lt;<span class="hljs-name">branch</span>&gt;</span></code></pre>
+
+<h5 id="创建并切换到新分支"><a href="#创建并切换到新分支" class="headerlink" title="创建并切换到新分支:"></a>创建并切换到新分支:</h5><pre><code class="hljs armasm">$ git checkout -<span class="hljs-keyword">b</span> &lt;branch&gt;</code></pre>
+
+<h5 id="基于当前分支创建新分支："><a href="#基于当前分支创建新分支：" class="headerlink" title="基于当前分支创建新分支："></a>基于当前分支创建新分支：</h5><pre><code class="hljs haxe">$ git branch &lt;<span class="hljs-keyword">new</span><span class="hljs-type"></span>-branch&gt;</code></pre>
+
+<h5 id="基于远程分支创建新的可追溯的分支："><a href="#基于远程分支创建新的可追溯的分支：" class="headerlink" title="基于远程分支创建新的可追溯的分支："></a>基于远程分支创建新的可追溯的分支：</h5><pre><code class="hljs xml">$ git branch --track <span class="hljs-tag">&lt;<span class="hljs-name">new-branch</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">remote-branch</span>&gt;</span></code></pre>
+
+<h5 id="删除本地分支"><a href="#删除本地分支" class="headerlink" title="删除本地分支:"></a>删除本地分支:</h5><pre><code class="hljs xml">$ git branch -d <span class="hljs-tag">&lt;<span class="hljs-name">branch</span>&gt;</span></code></pre>
+
+<h5 id="强制删除一个本地分支："><a href="#强制删除一个本地分支：" class="headerlink" title="强制删除一个本地分支："></a>强制删除一个本地分支：</h5><p><em><sub>将会丢失未合并的修改！</sub></em></p>
+<pre><code class="hljs xml">$ git branch -D <span class="hljs-tag">&lt;<span class="hljs-name">branch</span>&gt;</span></code></pre>
+
+
+<h5 id="给当前版本打标签："><a href="#给当前版本打标签：" class="headerlink" title="给当前版本打标签："></a>给当前版本打标签：</h5><pre><code class="hljs crmsh">$ git <span class="hljs-keyword">tag</span> <span class="hljs-title">&lt;tag-name</span>&gt;</code></pre>
+
+<h5 id="给当前版本打标签并附加消息："><a href="#给当前版本打标签并附加消息：" class="headerlink" title="给当前版本打标签并附加消息："></a>给当前版本打标签并附加消息：</h5><pre><code class="hljs crmsh">$ git <span class="hljs-keyword">tag</span> <span class="hljs-title">-a</span> <span class="hljs-tag">&lt;tag-name&gt;</span></code></pre>
+
+<hr>
+<h3 id="更新与发布"><a href="#更新与发布" class="headerlink" title="更新与发布"></a>更新与发布</h3><h5 id="列出当前配置的远程端："><a href="#列出当前配置的远程端：" class="headerlink" title="列出当前配置的远程端："></a>列出当前配置的远程端：</h5><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>git remote -v</code></pre>
+
+<h5 id="显示远程端的信息："><a href="#显示远程端的信息：" class="headerlink" title="显示远程端的信息："></a>显示远程端的信息：</h5><pre><code class="hljs xml">$ git remote show <span class="hljs-tag">&lt;<span class="hljs-name">remote</span>&gt;</span></code></pre>
+
+<h5 id="添加新的远程端："><a href="#添加新的远程端：" class="headerlink" title="添加新的远程端："></a>添加新的远程端：</h5><pre><code class="hljs vim">$ git remote <span class="hljs-built_in">add</span> <span class="hljs-symbol">&lt;remote&gt;</span> <span class="hljs-symbol">&lt;url&gt;</span></code></pre>
+
+<h5 id="下载远程端版本，但不合并到HEAD中："><a href="#下载远程端版本，但不合并到HEAD中：" class="headerlink" title="下载远程端版本，但不合并到HEAD中："></a>下载远程端版本，但不合并到HEAD中：</h5><pre><code class="hljs xml">$ git fetch <span class="hljs-tag">&lt;<span class="hljs-name">remote</span>&gt;</span></code></pre>
+
+<h5 id="下载远程端版本，并自动与HEAD版本合并："><a href="#下载远程端版本，并自动与HEAD版本合并：" class="headerlink" title="下载远程端版本，并自动与HEAD版本合并："></a>下载远程端版本，并自动与HEAD版本合并：</h5><pre><code class="hljs xml">$ git remote pull <span class="hljs-tag">&lt;<span class="hljs-name">remote</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">url</span>&gt;</span></code></pre>
+
+<h5 id="将远程端版本合并到本地版本中："><a href="#将远程端版本合并到本地版本中：" class="headerlink" title="将远程端版本合并到本地版本中："></a>将远程端版本合并到本地版本中：</h5><pre><code class="hljs crmsh">$ git pull origin <span class="hljs-literal">master</span></code></pre>
+
+<h5 id="以rebase方式将远端分支与本地合并："><a href="#以rebase方式将远端分支与本地合并：" class="headerlink" title="以rebase方式将远端分支与本地合并："></a>以rebase方式将远端分支与本地合并：</h5><pre><code class="hljs xml">git pull --rebase <span class="hljs-tag">&lt;<span class="hljs-name">remote</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">branch</span>&gt;</span></code></pre>
+
+<h5 id="将本地版本发布到远程端："><a href="#将本地版本发布到远程端：" class="headerlink" title="将本地版本发布到远程端："></a>将本地版本发布到远程端：</h5><pre><code class="hljs xml">$ git push remote <span class="hljs-tag">&lt;<span class="hljs-name">remote</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">branch</span>&gt;</span></code></pre>
+
+<h5 id="删除远程端分支："><a href="#删除远程端分支：" class="headerlink" title="删除远程端分支："></a>删除远程端分支：</h5><pre><code class="hljs mipsasm">$ git push &lt;remote&gt; :&lt;<span class="hljs-keyword">branch&gt; </span>(since Git <span class="hljs-built_in">v1</span>.<span class="hljs-number">5</span>.<span class="hljs-number">0</span>)
+<span class="hljs-keyword">or</span>
+<span class="hljs-keyword">git </span>push &lt;remote&gt; --delete &lt;<span class="hljs-keyword">branch&gt; </span>(since Git <span class="hljs-built_in">v1</span>.<span class="hljs-number">7</span>.<span class="hljs-number">0</span>)</code></pre>
+
+<h5 id="发布标签"><a href="#发布标签" class="headerlink" title="发布标签:"></a>发布标签:</h5><pre><code class="hljs ada">$ git push <span class="hljs-comment">--tags</span></code></pre>
+
+<hr>
+<p>###合并与重置(Rebase)</p>
+<h5 id="将分支合并到当前HEAD中："><a href="#将分支合并到当前HEAD中：" class="headerlink" title="将分支合并到当前HEAD中："></a>将分支合并到当前HEAD中：</h5><pre><code class="hljs xml">$ git merge <span class="hljs-tag">&lt;<span class="hljs-name">branch</span>&gt;</span></code></pre>
+
+<h5 id="将当前HEAD版本重置到分支中"><a href="#将当前HEAD版本重置到分支中" class="headerlink" title="将当前HEAD版本重置到分支中:"></a>将当前HEAD版本重置到分支中:</h5><p><em><sub>请勿重置已发布的提交!</sub></em></p>
+<pre><code class="hljs xml">$ git rebase <span class="hljs-tag">&lt;<span class="hljs-name">branch</span>&gt;</span></code></pre>
+
+<h5 id="退出重置"><a href="#退出重置" class="headerlink" title="退出重置:"></a>退出重置:</h5><pre><code class="hljs gams"><span class="hljs-symbol">$</span> git rebase --<span class="hljs-keyword">abort</span></code></pre>
+
+<h5 id="解决冲突后继续重置："><a href="#解决冲突后继续重置：" class="headerlink" title="解决冲突后继续重置："></a>解决冲突后继续重置：</h5><pre><code class="hljs kotlin">$ git rebase --<span class="hljs-keyword">continue</span></code></pre>
+
+<h5 id="使用配置好的merge-tool-解决冲突："><a href="#使用配置好的merge-tool-解决冲突：" class="headerlink" title="使用配置好的merge tool 解决冲突："></a>使用配置好的merge tool 解决冲突：</h5><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>git mergetool</code></pre>
+
+<h5 id="在编辑器中手动解决冲突后，标记文件为已解决冲突："><a href="#在编辑器中手动解决冲突后，标记文件为已解决冲突：" class="headerlink" title="在编辑器中手动解决冲突后，标记文件为已解决冲突："></a>在编辑器中手动解决冲突后，标记文件为<code>已解决冲突</code>：</h5><pre><code class="hljs dockerfile">$ git <span class="hljs-keyword">add</span><span class="bash"> &lt;resolved-file&gt;</span></code></pre>
+
+<pre><code class="hljs powershell"><span class="hljs-variable">$</span> git <span class="hljs-built_in">rm</span> &lt;resolved<span class="hljs-operator">-file</span>&gt;</code></pre>
+
+<h5 id="合并提交："><a href="#合并提交：" class="headerlink" title="合并提交："></a>合并提交：</h5><pre><code class="hljs applescript">$ git rebase -i &lt;commit-just-<span class="hljs-keyword">before</span>-<span class="hljs-keyword">first</span>&gt;</code></pre>
+
+<p>把上面的内容替换为下面的内容：</p>
+<p>原内容：</p>
+<pre><code class="hljs xml">pick <span class="hljs-tag">&lt;<span class="hljs-name">commit_id</span>&gt;</span>
+pick <span class="hljs-tag">&lt;<span class="hljs-name">commit_id2</span>&gt;</span>
+pick <span class="hljs-tag">&lt;<span class="hljs-name">commit_id3</span>&gt;</span></code></pre>
+
+<p>替换为：</p>
+<pre><code class="hljs xml">pick <span class="hljs-tag">&lt;<span class="hljs-name">commit_id</span>&gt;</span>
+squash <span class="hljs-tag">&lt;<span class="hljs-name">commit_id2</span>&gt;</span>
+squash <span class="hljs-tag">&lt;<span class="hljs-name">commit_id3</span>&gt;</span></code></pre>
+
+<hr>
+<h3 id="撤销"><a href="#撤销" class="headerlink" title="撤销"></a>撤销</h3><h5 id="放弃工作目录下的所有修改："><a href="#放弃工作目录下的所有修改：" class="headerlink" title="放弃工作目录下的所有修改："></a>放弃工作目录下的所有修改：</h5><pre><code class="hljs pgsql">$ git <span class="hljs-keyword">reset</span> <span class="hljs-comment">--hard HEAD</span></code></pre>
+
+<h5 id="移除缓存区的所有文件（i-e-撤销上次git-add）"><a href="#移除缓存区的所有文件（i-e-撤销上次git-add）" class="headerlink" title="移除缓存区的所有文件（i.e. 撤销上次git add）:"></a>移除缓存区的所有文件（i.e. 撤销上次<code>git add</code>）:</h5><pre><code class="hljs sql">$ git <span class="hljs-keyword">reset</span> <span class="hljs-keyword">HEAD</span></code></pre>
+
+<h5 id="放弃某个文件的所有本地修改："><a href="#放弃某个文件的所有本地修改：" class="headerlink" title="放弃某个文件的所有本地修改："></a>放弃某个文件的所有本地修改：</h5><pre><code class="hljs gams"><span class="hljs-symbol">$</span> git checkout HEAD &lt;<span class="hljs-keyword">file</span>&gt;</code></pre>
+
+<h5 id="重置一个提交（通过创建一个截然不同的新提交）"><a href="#重置一个提交（通过创建一个截然不同的新提交）" class="headerlink" title="重置一个提交（通过创建一个截然不同的新提交）"></a>重置一个提交（通过创建一个截然不同的新提交）</h5><pre><code class="hljs xml">$ git revert <span class="hljs-tag">&lt;<span class="hljs-name">commit</span>&gt;</span></code></pre>
+
+<h5 id="将HEAD重置到指定的版本，并抛弃该版本之后的所有修改："><a href="#将HEAD重置到指定的版本，并抛弃该版本之后的所有修改：" class="headerlink" title="将HEAD重置到指定的版本，并抛弃该版本之后的所有修改："></a>将HEAD重置到指定的版本，并抛弃该版本之后的所有修改：</h5><pre><code class="hljs pgsql">$ git <span class="hljs-keyword">reset</span> <span class="hljs-comment">--hard &lt;commit&gt;</span></code></pre>
+
+<h5 id="用远端分支强制覆盖本地分支："><a href="#用远端分支强制覆盖本地分支：" class="headerlink" title="用远端分支强制覆盖本地分支："></a>用远端分支强制覆盖本地分支：</h5><pre><code class="hljs maxima">git <span class="hljs-built_in">reset</span> --hard &lt;remote/branch&gt; e.g., upstream/master, <span class="hljs-built_in">origin</span>/my-<span class="hljs-built_in">feature</span></code></pre>
+
+<h5 id="将HEAD重置到上一次提交的版本，并将之后的修改标记为未添加到缓存区的修改："><a href="#将HEAD重置到上一次提交的版本，并将之后的修改标记为未添加到缓存区的修改：" class="headerlink" title="将HEAD重置到上一次提交的版本，并将之后的修改标记为未添加到缓存区的修改："></a>将HEAD重置到上一次提交的版本，并将之后的修改标记为未添加到缓存区的修改：</h5><pre><code class="hljs pgsql">$ git <span class="hljs-keyword">reset</span> &lt;<span class="hljs-keyword">commit</span>&gt;</code></pre>
+
+<h5 id="将HEAD重置到上一次提交的版本，并保留未提交的本地修改："><a href="#将HEAD重置到上一次提交的版本，并保留未提交的本地修改：" class="headerlink" title="将HEAD重置到上一次提交的版本，并保留未提交的本地修改："></a>将HEAD重置到上一次提交的版本，并保留未提交的本地修改：</h5><pre><code class="hljs pgsql">$ git <span class="hljs-keyword">reset</span> <span class="hljs-comment">--keep &lt;commit&gt;</span></code></pre>
+
+<h5 id="删除添加-gitignore文件前错误提交的文件："><a href="#删除添加-gitignore文件前错误提交的文件：" class="headerlink" title="删除添加.gitignore文件前错误提交的文件："></a>删除添加<code>.gitignore</code>文件前错误提交的文件：</h5><pre><code class="hljs powershell"><span class="hljs-variable">$</span> git <span class="hljs-built_in">rm</span> <span class="hljs-literal">-r</span> -<span class="hljs-literal">-cached</span> .
+<span class="hljs-variable">$</span> git add .
+<span class="hljs-variable">$</span> git commit <span class="hljs-literal">-m</span> <span class="hljs-string">&quot;remove xyz file&quot;</span></code></pre>
+
+<hr>
+<h2 id="Git-Flow"><a href="#Git-Flow" class="headerlink" title="Git-Flow"></a>Git-Flow</h2><h3 id="索引-1"><a href="#索引-1" class="headerlink" title="索引"></a>索引</h3><ul>
+<li><a href="#%E5%AE%89%E8%A3%85">安装</a></li>
+<li><a href="#%E5%BC%80%E5%A7%8B">开始</a></li>
+<li><a href="#%E7%89%B9%E6%80%A7">特性</a></li>
+<li><a href="#%E5%81%9A%E4%B8%80%E4%B8%AArelease%E7%89%88%E6%9C%AC">做一个release版本</a></li>
+<li><a href="#%E7%B4%A7%E6%80%A5%E4%BF%AE%E5%A4%8D">紧急修复</a></li>
+<li><a href="#commands">Commands</a></li>
+</ul>
+<hr>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ul>
+<li>你需要有一个可以工作的 git 作为前提。</li>
+<li>Git flow 可以工作在 OSX, Linux 和 Windows之下</li>
+</ul>
+<h5 id="OSX-Homebrew"><a href="#OSX-Homebrew" class="headerlink" title="OSX Homebrew:"></a>OSX Homebrew:</h5><pre><code class="hljs mipsasm">$ <span class="hljs-keyword">brew </span><span class="hljs-keyword">install </span>git-flow</code></pre>
+
+<h5 id="OSX-Macports"><a href="#OSX-Macports" class="headerlink" title="OSX Macports:"></a>OSX Macports:</h5><pre><code class="hljs routeros">$<span class="hljs-built_in"> port </span>install git-flow</code></pre>
+
+<h5 id="Linux"><a href="#Linux" class="headerlink" title="Linux:"></a>Linux:</h5><pre><code class="hljs routeros">$ apt-<span class="hljs-builtin-name">get</span> install git-flow</code></pre>
+
+<h5 id="Windows-Cygwin"><a href="#Windows-Cygwin" class="headerlink" title="Windows (Cygwin):"></a>Windows (Cygwin):</h5><p>安装 git-flow, 你需要 wget 和 util-linux。</p>
+<pre><code class="hljs awk">$ wget -q -O - --no-check-certificate https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/nvie/gi</span>tflow<span class="hljs-regexp">/raw/</span>develop<span class="hljs-regexp">/contrib/gi</span>tflow-installer.sh | bash</code></pre>
+
+<hr>
+<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><ul>
+<li>为了自定义你的项目，Git flow 需要初始化过程。</li>
+<li>使用 git-flow，从初始化一个现有的 git 库内开始。</li>
+<li>初始化，你必须回答几个关于分支的命名约定的问题。建议使用默认值。</li>
+</ul>
+<pre><code class="hljs ebnf"><span class="hljs-attribute">git flow init</span></code></pre>
+
+<hr>
+<h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><ul>
+<li>为即将发布的版本开发新功能特性。</li>
+<li>这通常只存在开发者的库中。</li>
+</ul>
+<h5 id="创建一个新特性"><a href="#创建一个新特性" class="headerlink" title="创建一个新特性:"></a>创建一个新特性:</h5><p>下面操作创建了一个新的feature分支，并切换到该分支</p>
+<pre><code class="hljs crmsh">git flow feature <span class="hljs-literal">start</span> MYFEATURE</code></pre>
+
+<h5 id="完成新特性的开发"><a href="#完成新特性的开发" class="headerlink" title="完成新特性的开发:"></a>完成新特性的开发:</h5><p>完成开发新特性。这个动作执行下面的操作：</p>
+<ol>
+<li>合并 MYFEATURE 分支到 ‘develop’</li>
+<li>删除这个新特性分支</li>
+<li>切换回 ‘develop’ 分支</li>
+</ol>
+<pre><code class="hljs ebnf"><span class="hljs-attribute">git flow feature finish MYFEATURE</span></code></pre>
+
+<h5 id="发布新特性"><a href="#发布新特性" class="headerlink" title="发布新特性:"></a>发布新特性:</h5><p>你是否合作开发一项新特性？<br>发布新特性分支到远程服务器，所以，其它用户也可以使用这分支。</p>
+<pre><code class="hljs ebnf"><span class="hljs-attribute">git flow feature publish MYFEATURE</span></code></pre>
+
+<h5 id="取得一个发布的新特性分支"><a href="#取得一个发布的新特性分支" class="headerlink" title="取得一个发布的新特性分支:"></a>取得一个发布的新特性分支:</h5><p>取得其它用户发布的新特性分支。</p>
+<pre><code class="hljs maxima">git flow <span class="hljs-built_in">feature</span> pull <span class="hljs-built_in">origin</span> MYFEATURE</code></pre>
+
+<h5 id="追溯远端上的特性"><a href="#追溯远端上的特性" class="headerlink" title="追溯远端上的特性:"></a>追溯远端上的特性:</h5><p>通过下面命令追溯远端上的特性</p>
+<pre><code class="hljs maxima">git flow <span class="hljs-built_in">feature</span> <span class="hljs-built_in">track</span> MYFEATURE</code></pre>
+
+<hr>
+<h3 id="做一个release版本"><a href="#做一个release版本" class="headerlink" title="做一个release版本"></a>做一个release版本</h3><ul>
+<li>支持一个新的用于生产环境的发布版本。</li>
+<li>允许修正小问题，并为发布版本准备元数据。</li>
+</ul>
+<h5 id="开始创建release版本"><a href="#开始创建release版本" class="headerlink" title="开始创建release版本:"></a>开始创建release版本:</h5><ul>
+<li>开始创建release版本，使用 git flow release 命令。 </li>
+<li>‘release’ 分支的创建基于 ‘develop’ 分支。 </li>
+<li>你可以选择提供一个 [BASE]参数，即提交记录的 sha-1 hash 值，来开启动 release 分支。</li>
+<li>这个提交记录的 sha-1 hash 值必须是’develop’ 分支下的。 </li>
+</ul>
+<pre><code class="hljs pgsql">git flow <span class="hljs-keyword">release</span> <span class="hljs-keyword">start</span> <span class="hljs-keyword">RELEASE</span> [BASE]</code></pre>
+
+<p>创建 release 分支之后立即发布允许其它用户向这个 release 分支提交内容是个明智的做法。命令十分类似发布新特性：</p>
+<pre><code class="hljs pgsql">git flow <span class="hljs-keyword">release</span> publish <span class="hljs-keyword">RELEASE</span></code></pre>
+
+<p>(你可以通过<br><code>git flow release track RELEASE</code> 命令追溯远端的 release 版本)</p>
+<h5 id="完成-release-版本"><a href="#完成-release-版本" class="headerlink" title="完成 release 版本:"></a>完成 release 版本:</h5><p>完成 release 版本是一个大 git 分支操作。它执行下面几个动作：</p>
+<ol>
+<li>归并 release 分支到 ‘master’ 分支。</li>
+<li>用 release 分支名打 Tag</li>
+<li>归并 release 分支到 ‘develop’</li>
+<li>移除 release 分支。</li>
+</ol>
+<pre><code class="hljs sql">git flow <span class="hljs-keyword">release</span> <span class="hljs-keyword">finish</span> <span class="hljs-keyword">RELEASE</span></code></pre>
+
+<p>不要忘记使用<code>git push --tags</code>将tags推送到远端</p>
+<hr>
+<h3 id="紧急修复"><a href="#紧急修复" class="headerlink" title="紧急修复"></a>紧急修复</h3><p>紧急修复来自这样的需求：生产环境的版本处于一个不预期状态，需要立即修正。有可能是需要修正 master 分支上某个 TAG 标记的生产版本。</p>
+<h5 id="开始-git-flow-紧急修复"><a href="#开始-git-flow-紧急修复" class="headerlink" title="开始 git flow 紧急修复:"></a>开始 git flow 紧急修复:</h5><p>像其它 git flow 命令一样, 紧急修复分支开始自：</p>
+<pre><code class="hljs crmsh">$ git flow hotfix <span class="hljs-literal">start</span> <span class="hljs-keyword">VERSION</span> [BASENAME]</code></pre>
+
+
+<p>VERSION 参数标记着修正版本。你可以从 <code>[BASENAME]开始，</code>[BASENAME]`为finish release时填写的版本号</p>
+<h5 id="完成紧急修复"><a href="#完成紧急修复" class="headerlink" title="完成紧急修复:"></a>完成紧急修复:</h5><p>当完成紧急修复分支，代码归并回 develop 和 master 分支。相应地，master 分支打上修正版本的 TAG。</p>
+<pre><code class="hljs crmsh">git flow hotfix finish <span class="hljs-keyword">VERSION</span></code></pre>
+
+<hr>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/test-ops/">test-ops</a>
+                    
+                      <a class="hover-with-bg" href="/tags/git/">git</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/11/02/qa-thoughts/0-%E8%B4%A8%E9%87%8F%E5%BB%BA%E8%AE%BE/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/08/28/tips/tester-ops/5-docker-onepage/">
+                        <span class="hidden-mobile">Docker One Page</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

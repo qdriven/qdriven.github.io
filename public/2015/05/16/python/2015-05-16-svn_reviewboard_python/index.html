@@ -1,0 +1,622 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="allround tester">
+  <meta name="author" content="qmeta">
+  <meta name="keywords" content="">
+  <title>Python完成简单的SVN Reviewboard Precommit的客户端 - Learning Testing/QA in Hardway</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"qdriven.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Practising</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Python完成简单的SVN Reviewboard Precommit的客户端">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2015-05-16 02:31" pubdate>
+        2015年5月16日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      26
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Python完成简单的SVN Reviewboard Precommit的客户端</h1>
+            
+            <div class="markdown-body">
+              <p>最近公司需要使用review board进行代码pre-commit review(pre-commit:正式提交前review)，而公司的现状是：</p>
+<ol>
+<li>使用SVN作为代码版本管理工具</li>
+<li>开发工具有eclipse，idea</li>
+<li>MAC 和windows 机器居多</li>
+</ol>
+<p>考虑到开发eclipse和idea插件，连接review board我一个人无法完成，同时能力也不够来开发这两种插件，<br>所以就准备python写一个命令行工具，期间研究了一下taobao review board的插件，感觉有点复杂，这个也是<br>使用python来些命令行工具的一个理由,也考虑过使用node-webkit来写个客户端，不过由于时间上的限制也就先放弃了</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>实现过程中，使用到主要的包和工具是：</p>
+<ol>
+<li>RBTools,review board 自带的工具，但是支持中文能力让人有点困惑</li>
+<li>python，cmd 包(python自带)，requests包使用 pip install requests 安装</li>
+<li>ConEmuPack(windows CMD的替代),主要为了支持window系统</li>
+<li>SVN</li>
+</ol>
+<p>最后实现了如下功能</p>
+<ul>
+<li>选择更改的文件，提交Review Board 作为pre-commit review</li>
+<li>根据review request id 提交代码到SVN</li>
+<li>python直接操作svn命令,可以通过简单的命令就提交代码(由于使用习惯的问题,个人觉得命令行比UI效率更高)<br>svn命令有个问题就是如果操作delete或者add这种的话,如果文件没有直接放到svn work copy的话,提交需要两步操作,<br>而这个工具也解决了这个问题</li>
+</ul>
+<h2 id="Review-Board-功能介绍"><a href="#Review-Board-功能介绍" class="headerlink" title="Review Board 功能介绍"></a>Review Board 功能介绍</h2><p>review board 是进行代码review的一个工具，目前公司主要用来做pre-commit的review，在review board针对pre-主要有如下概念：</p>
+<ul>
+<li>review request draft, draft里面包含了differ文件，描述，review的人等等</li>
+<li>review request，在这个review request上面review</li>
+<li>review完毕，才可以提交代码</li>
+</ul>
+<h2 id="安装和配置"><a href="#安装和配置" class="headerlink" title="安装和配置"></a>安装和配置</h2><h3 id="1-安装Python-和Requests包"><a href="#1-安装Python-和Requests包" class="headerlink" title="1.安装Python 和Requests包"></a>1.安装Python 和Requests包</h3><ul>
+<li>下载安装最新版本的Python，确保在命令行中可以执行Python命令，如果打开命令行工具，执行python -v 失败，需要在环境变量中设置Python的执行路径</li>
+<li>安装Python完成之后，在命令行中执行</li>
+</ul>
+<pre><code class="hljs sh">pip install requests</code></pre>
+
+<p>安装requests包到全局。MAC可能需要使用:</p>
+<pre><code class="hljs sh">sudo pip install requests</code></pre>
+
+<h3 id="2-安装RBTools"><a href="#2-安装RBTools" class="headerlink" title="2. 安装RBTools"></a>2. 安装RBTools</h3><p>下载安装RBTool,RBTool有不同操作系统对应的版本，根据自身操作系统下载并安装，MAC和windows都是可执行文件，一路next就可以<br>安装完毕，在命令行检查是否安装成功:</p>
+ <pre><code class="hljs sh">rbt -v</code></pre>
+
+<p> 检查版本，如果有版本显示则成功</p>
+<h3 id="3-配置SVN"><a href="#3-配置SVN" class="headerlink" title="3. 配置SVN"></a>3. 配置SVN</h3><p>配置SVN，MAC自带了SVN，Windows需要将SVN，配置到环境变量里面，具体方法如下,命令行中执行</p>
+<pre><code class="hljs sh">svn --version</code></pre>
+
+<p>如果返回版本信息，则忽略下面步骤:</p>
+<pre><code>下载SVN BIN文件，将BIN目录配置到环境变量PATH下面，命令行中执行svn --version如果返回版本信息则成功</code></pre>
+<h3 id="4-Windows-下载ComEmuPack"><a href="#4-Windows-下载ComEmuPack" class="headerlink" title="4. Windows 下载ComEmuPack"></a>4. Windows 下载ComEmuPack</h3><p>ComEmuPack是Windows Cmd的替代工具，主要为了解决中文输入和显示问题，Window上使用，如果MAC上使用终端工具就可以terminal或者iterm都可以</p>
+<h2 id="运行客户端"><a href="#运行客户端" class="headerlink" title="运行客户端"></a>运行客户端</h2><p>复制svnrbclient.py 到你本地SVN的目录下面，这个目录需要和Review Board上面的配置相对应，具体如下例说明：<br>1.review board配置某个repository是<a target="_blank" rel="noopener" href="https://scm.******.com:8443/svn/Test/automation">https://scm.******.com:8443/svn/Test/automation</a><br>2.repository的名字是：******-automation,假设你使用</p>
+<pre><code class="hljs sh">svn checkout https://scm.******.com:8443/svn/******-automation</code></pre>
+
+<p>检出代码到**<strong><strong>-automation目录，那么你需要将svnrbclient.py复制到你本地的**</strong></strong>-automation下面.</p>
+<p>打开命令行工具，运行</p>
+<pre><code class="hljs sh">python svnrbclient.py</code></pre>
+
+<p>就可以，第一次使用会让你配置你的review board设置，如果嫌麻烦，可以创建如下内容的文件<br>到.reviewboardrc，不过复制之前需要修改，具体修改参考一下注释.</p>
+<pre><code class="hljs awk"><span class="hljs-regexp">//</span> 不需要修改
+REVIEWBOARD_URL = <span class="hljs-string">&quot;192.168.3.180&quot;</span>
+<span class="hljs-regexp">//</span> 一般修改至你动作的目录名
+REPOSITORY = <span class="hljs-string">&quot;******-automation&quot;</span>
+<span class="hljs-regexp">//</span> 工号
+USERNAME=<span class="hljs-number">110863</span>
+<span class="hljs-regexp">//</span>review board密码，和LDAP密码一样
+PASSWORD=<span class="hljs-string">&quot;*******&quot;</span>
+<span class="hljs-regexp">//</span> 默认代码审查人的工号，可以是****，****格式，,间隔表示多人
+TARGET_PEOPLE=****</code></pre>
+
+<h2 id="使用客户端"><a href="#使用客户端" class="headerlink" title="使用客户端"></a>使用客户端</h2><p>在运行客户端之后，可以看到如下内容：</p>
+<pre><code class="hljs sh"> ****** Review Board Client, ? <span class="hljs-keyword">for</span> <span class="hljs-built_in">help</span>, and the total <span class="hljs-built_in">command</span> lists:
+ 1. setup:setup review board setting
+ 2. pre:precommit your changes to review board
+ 3. upre:update your precommit
+ 4. ss:svn status,find svn status <span class="hljs-keyword">for</span> the working copies
+ 5. sa:svn add,add files to <span class="hljs-built_in">local</span> svn
+ 6. sd:svn delete,delete svn file
+ 7. ci:svn commit,commit the changes by review request id
+ 8. sre: revert changes
+ 9. sdiff: generate differ file
+ 10.sci: commit the selected files directly
+ 11.exit: <span class="hljs-built_in">exit</span> the client
+(****** RB Client)</code></pre>
+
+<p>以上就是这个客户端的所有功能，重点是如下几个功能：</p>
+<ol>
+<li>pre: 创建review request</li>
+<li>upre： 更新review request</li>
+<li>ci: review通过之后，提交代码到SVN中央仓库，这个是根据review request id来作的提交<br>也就是你提交review request修改了什么文件，使用ci命令就帮你提交此review request修改过的文件<br>一般执行方法是：在(<strong>**</strong> RB Client)后面输入你需要的命令如：pre,然后按照提示一步一步操作就可以了.以下是输入的日志：</li>
+</ol>
+<p>以下是使用pre commit的一个完全的shell场景:</p>
+<ul>
+<li>输入命令pre</li>
+</ul>
+<pre><code class="hljs gherkin"><span class="hljs-symbol">*</span><span class="hljs-symbol">*</span><span class="hljs-symbol">*</span><span class="hljs-symbol">*</span><span class="hljs-symbol">*</span><span class="hljs-symbol">*</span> RB Client)pre
+// 得到输出，需要选择此次修改的文件：
+pre-commit the changes
+svn status:
+Changed Files Status:
+ID |<span class="hljs-string">FILE SVN Status</span>|<span class="hljs-string">File Name/File Path</span>
+<span class="hljs-string">0 </span>|<span class="hljs-string"> ? </span>|<span class="hljs-string"> .git</span>
+<span class="hljs-string">1 </span>|<span class="hljs-string"> ? </span>|<span class="hljs-string"> .idea</span>
+<span class="hljs-string">2 </span>|<span class="hljs-string"> ? </span>|<span class="hljs-string"> .ignorerc</span>
+<span class="hljs-string">3 </span>|<span class="hljs-string"> A </span>|<span class="hljs-string"> .reviewboardrc</span>
+<span class="hljs-string">4 </span>|<span class="hljs-string"> ? </span>|<span class="hljs-string"> automation-common/automation-common.iml</span>
+<span class="hljs-string">5 </span>|<span class="hljs-string"> M </span>|<span class="hljs-string"> automation-common/src/main/java/com/******/automation/ITestProcessor.java</span>
+<span class="hljs-string">6 </span>|<span class="hljs-string"> ? </span>|<span class="hljs-string"> automation-common/target</span>
+<span class="hljs-string">7 </span>|<span class="hljs-string"> A </span>|<span class="hljs-string"> automation-demo/automation-demo.iml</span>
+<span class="hljs-string">8 </span>|<span class="hljs-string"> ? </span>|<span class="hljs-string"> automation-demo/target</span>
+<span class="hljs-string">9 </span>|<span class="hljs-string"> A </span>|<span class="hljs-string"> differ_temp</span>
+<span class="hljs-string">10 </span>|<span class="hljs-string"> A </span>|<span class="hljs-string"> differ_temp/105</span>
+<span class="hljs-string">11 </span>|<span class="hljs-string"> A </span>|<span class="hljs-string"> differ_temp/105/diff_105_latest.txt</span>
+<span class="hljs-string">12 </span>|<span class="hljs-string"> A </span>|<span class="hljs-string"> differ_temp/105/differ_1432611692.92.txt</span>
+<span class="hljs-string">13 </span>|<span class="hljs-string"> A </span>|<span class="hljs-string"> differ_temp/105/differ_1432612400.93.txt</span>
+<span class="hljs-string">14 </span>|<span class="hljs-string"> A </span>|<span class="hljs-string"> differ_temp/105/notes.txt</span>
+<span class="hljs-string">15 </span>|<span class="hljs-string"> A </span>|<span class="hljs-string"> differ_temp/113</span>
+<span class="hljs-string">16 </span>|<span class="hljs-string"> A </span>|<span class="hljs-string"> differ_temp/113/diff_113_latest.txt</span>
+<span class="hljs-string">17 </span>|<span class="hljs-string"> A </span>|<span class="hljs-string"> differ_temp/113/differ_1432620381.6.txt</span>
+<span class="hljs-string">18 </span>|<span class="hljs-string"> A </span>|<span class="hljs-string"> differ_temp/113/differ_1432620573.37.txt</span>
+<span class="hljs-string">19 </span>|<span class="hljs-string"> A </span>|<span class="hljs-string"> differ_temp/113/notes.txt</span>
+<span class="hljs-string">20 </span>|<span class="hljs-string"> A </span>|<span class="hljs-string"> differ_temp/114</span>
+<span class="hljs-string">21 </span>|<span class="hljs-string"> A </span>|<span class="hljs-string"> differ_temp/114/diff_114_latest.txt</span>
+<span class="hljs-string">22 </span>|<span class="hljs-string"> A </span>|<span class="hljs-string"> differ_temp/114/differ_1432621517.49.txt</span>
+<span class="hljs-string">23 </span>|<span class="hljs-string"> A </span>|<span class="hljs-string"> differ_temp/114/differ_1432621894.64.txt</span>
+<span class="hljs-string">24 </span>|<span class="hljs-string"> ? </span>|<span class="hljs-string"> differ_temp/114/differ_1432622051.84.txt</span>
+<span class="hljs-string">25 </span>|<span class="hljs-string"> A </span>|<span class="hljs-string"> differ_temp/114/notes.txt</span>
+<span class="hljs-string">26 </span>|<span class="hljs-string"> ? </span>|<span class="hljs-string"> differ_temp/115</span>
+<span class="hljs-string">27 </span>|<span class="hljs-string"> ? </span>|<span class="hljs-string"> differ_temp/116</span>
+<span class="hljs-string">28 </span>|<span class="hljs-string"> ? </span>|<span class="hljs-string"> differ_temp/125</span>
+<span class="hljs-string">29 </span>|<span class="hljs-string"> ? </span>|<span class="hljs-string"> differ_temp/132</span>
+<span class="hljs-string">30 </span>|<span class="hljs-string"> ? </span>|<span class="hljs-string"> ******-automation.iml</span>
+<span class="hljs-string">31 </span>|<span class="hljs-string"> A </span>|<span class="hljs-string"> rbtools_requests.py</span>
+<span class="hljs-string">32 </span>|<span class="hljs-string"> M </span>|<span class="hljs-string"> svnrbtclient.py</span>
+<span class="hljs-string">33 </span>|<span class="hljs-string"> A </span>|<span class="hljs-string"> +</span>
+<span class="hljs-string">34 </span>|<span class="hljs-string">  </span>|<span class="hljs-string"> &gt;</span>
+<span class="hljs-string">35 </span>|<span class="hljs-string"> Summary </span>|<span class="hljs-string"> of</span>
+<span class="hljs-string">36 </span>|<span class="hljs-string">  </span>|<span class="hljs-string"> Tree</span></code></pre>
+
+<ul>
+<li>输入文件的ID， 可以是5,32，或者是5-32，34-90 表示5-32,34-90的文件</li>
+</ul>
+<pre><code class="hljs sql">Please <span class="hljs-keyword">select</span> the files IDs which your want <span class="hljs-keyword">to</span> <span class="hljs-keyword">commit</span>,eg. <span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>, <span class="hljs-keyword">or</span> Enter <span class="hljs-keyword">for</span> <span class="hljs-keyword">All</span> Files
+&lt;<span class="hljs-number">5</span>,<span class="hljs-number">32</span>
+
+
+automation-common/src/<span class="hljs-keyword">main</span>/<span class="hljs-keyword">java</span>/com<span class="hljs-comment">/******/</span>automation/ITestProcessor.java svnrbtclient.py <span class="hljs-keyword">is</span> ready <span class="hljs-keyword">to</span> post <span class="hljs-keyword">to</span> review board......
+Please <span class="hljs-keyword">input</span> your reviewer <span class="hljs-keyword">ID</span>,Entry <span class="hljs-keyword">for</span> <span class="hljs-keyword">default</span> Reviewer&gt;
+reviewer <span class="hljs-keyword">ID</span>:
+Please <span class="hljs-keyword">input</span> summary <span class="hljs-keyword">for</span> your changes,it <span class="hljs-keyword">is</span> nice <span class="hljs-keyword">to</span> provide your Bug <span class="hljs-keyword">No</span>:&gt;修改svnrbclient
+&lt;Response [<span class="hljs-number">201</span>]&gt;
+<span class="hljs-keyword">None</span>
+<span class="hljs-keyword">update</span> draft <span class="hljs-keyword">timeout</span> but it doesn<span class="hljs-string">&#x27;t matter</span>
+<span class="hljs-string">draft request review id :133</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">//到这里review request 提交完毕</span></code></pre>
+
+<ul>
+<li>审核通过之后，输入ci命令，提交review request</li>
+</ul>
+<pre><code class="hljs awk">(****** RB Client)ci
+
+last <span class="hljs-number">5</span> review requests status:
+Request Review Id |Summary  | Status | Changed File List
+<span class="hljs-number">133</span> | 修改svnrbclient
+ | pending | automation-common<span class="hljs-regexp">/src/m</span>ain<span class="hljs-regexp">/java/</span>com<span class="hljs-regexp">/******/</span>automation/ITestProcessor.java svnrbtclient.py
+
+<span class="hljs-number">132</span> | 测试很多文件
+ | pending | README.md automation-common<span class="hljs-regexp">/src/m</span>ain<span class="hljs-regexp">/java/</span>com<span class="hljs-regexp">/******/</span>automation<span class="hljs-regexp">/Environment.java automation-common/</span>src<span class="hljs-regexp">/main/</span>java<span class="hljs-regexp">/com/</span>******<span class="hljs-regexp">/automation/</span>ITestProcessor.java automation-common<span class="hljs-regexp">/src/m</span>ain<span class="hljs-regexp">/java/</span>com<span class="hljs-regexp">/******/</span>automation<span class="hljs-regexp">/drivers/</span>DriverFactory.java automation-common<span class="hljs-regexp">/src/m</span>ain<span class="hljs-regexp">/java/</span>com<span class="hljs-regexp">/******/</span>automation<span class="hljs-regexp">/helpers/</span>webdriver<span class="hljs-regexp">/WebDriverHelper.java automation-common/</span>src<span class="hljs-regexp">/main/</span>java<span class="hljs-regexp">/com/</span>******<span class="hljs-regexp">/automation/</span>listener<span class="hljs-regexp">/testng/</span>SimpleWebDriverScreenShotTestListener.java automation-common<span class="hljs-regexp">/src/m</span>ain<span class="hljs-regexp">/java/</span>com<span class="hljs-regexp">/******/</span>automation<span class="hljs-regexp">/testscaffold/</span>BaseWebCurrencyTest.java automation-common<span class="hljs-regexp">/src/m</span>ain<span class="hljs-regexp">/java/</span>com<span class="hljs-regexp">/******/</span>automation<span class="hljs-regexp">/testscaffold/</span>BaseWebTest.java automation-common<span class="hljs-regexp">/src/m</span>ain<span class="hljs-regexp">/java/</span>com<span class="hljs-regexp">/******/</span>automation<span class="hljs-regexp">/testscaffold/</span>webtest<span class="hljs-regexp">/WebTestContext.java automation-common/</span>src<span class="hljs-regexp">/main/</span>java<span class="hljs-regexp">/com/</span>******<span class="hljs-regexp">/automation/</span>testscaffold<span class="hljs-regexp">/webtest/</span>webUI<span class="hljs-regexp">/elementloader/</span>locator<span class="hljs-regexp">/CustomerElementLocatorFactory.java automation-common/</span>src<span class="hljs-regexp">/main/</span>java<span class="hljs-regexp">/com/</span>******<span class="hljs-regexp">/automation/</span>testscaffold<span class="hljs-regexp">/webtest/</span>webUI<span class="hljs-regexp">/htmlelements/</span>HtmlElement.java automation-common<span class="hljs-regexp">/src/</span>test<span class="hljs-regexp">/java/</span>com<span class="hljs-regexp">/******/</span>automation<span class="hljs-regexp">/drivers/</span>DriverFactoryTest2.java automation-common<span class="hljs-regexp">/src/</span>test<span class="hljs-regexp">/java/</span>com<span class="hljs-regexp">/******/</span>automation<span class="hljs-regexp">/drivers/</span>DriverFactoryTest_Concurrency.java automation-common<span class="hljs-regexp">/src/</span>test<span class="hljs-regexp">/java/</span>com<span class="hljs-regexp">/******/</span>automation<span class="hljs-regexp">/drivers/</span>testng-test1.xml automation-common<span class="hljs-regexp">/src/</span>test<span class="hljs-regexp">/java/</span>com<span class="hljs-regexp">/******/</span>automation<span class="hljs-regexp">/helpers/</span>webdriver/WebDriverHelperTest.java
+
+<span class="hljs-number">115</span> | 更新readme
+ | pending | ******rbclient_en.py README.md
+
+<span class="hljs-number">116</span> | 测试测试
+ | pending | ******rbclient.py
+
+<span class="hljs-number">125</span> | 修改中文注释
+ | pending | automation-common<span class="hljs-regexp">/src/m</span>ain<span class="hljs-regexp">/java/</span>com<span class="hljs-regexp">/******/</span>automation<span class="hljs-regexp">/Environment.java automation-common/</span>src<span class="hljs-regexp">/main/</span>java<span class="hljs-regexp">/com/</span>******<span class="hljs-regexp">/automation/</span>ITestProcessor.java
+
+<span class="hljs-regexp">//</span>输入你要需要提交的 review request id号：  <span class="hljs-regexp">//</span>提交结束
+(****** RB Client)
+</code></pre>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/python/">python</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/python/">python</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2015/09/24/tips/automation/2015-09-24-testng-simple-report/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">TestNG 报告定制最简单的原理</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2014/11/24/python/2014-11-24-python_mirror/">
+                        <span class="hidden-mobile">Python PIP mirror设置</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,448 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="allround tester">
+  <meta name="author" content="qmeta">
+  <meta name="keywords" content="">
+  <title>测试陷阱4-跳出舒适区 - Learning Testing/QA in Hardway</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"qdriven.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Practising</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="测试陷阱4-跳出舒适区">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-12-13 00:37" pubdate>
+        2019年12月13日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      14
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">测试陷阱4-跳出舒适区</h1>
+            
+            <div class="markdown-body">
+              <p>最近几年陆陆续续也面试了不少测试的同学，好多同学也都提到了跳出舒适区的概念，好多人因为觉得需要跳出舒适区所以觉得需要换一个工作环境；<br>就测试而言好多同学都是觉得一直在做类似的事情，没有外部刺激，没有提高；同时又相信没有实际的项目锻炼，技能很难得到提高；甚至有些同学很明显<br>在自己公司做的还是不错的，升职也有，加薪也有，可是就是觉得自己在舒适区里面，觉得一定要跳出来才能很快提高。大体上套用美国总统的话就是keep<br>me great. </p>
+<p>因为听多了,跳出舒适区貌似是这几年很流行的词语，也能在各个媒体上能看到听到，所以我有时想想貌似挺有道理的，跳出舒适区，接受挑战；可是有时又觉得总有些不对劲，为什么要跳出舒适区呢？舒适区有什么不好呢？最终最终跳出舒适区的目的是什么呢？</p>
+<h2 id="跳出舒适区的最终目的是什么？"><a href="#跳出舒适区的最终目的是什么？" class="headerlink" title="跳出舒适区的最终目的是什么？"></a>跳出舒适区的最终目的是什么？</h2><p>因为年纪大了，现在习惯性的会问自己最终的目的是什么？最终想达到什么样的状态？ 对于跳出舒适区这种史诗般问题，我感觉是几乎等同于你活着为了什么这种宏大的哲学问题时，可是我跳出来的答案是难道我不是为了自己过的舒服点过日子吗？舒服点的日子不在舒适区里面过，在哪里过呢？所以我明白了我觉得不对劲的问题点在哪里了。无论你跳的动还是跳不动，最终不是应该去找到舒序区才对吗？ 至于跳出这种，不过是听上去有点叛逆，无非就是让你显得有点酷有点得瑟吗？所以问题变成了如何寻找舒适区，跳出和寻找其实还是又很大不一样的，跳出很多时候变成了非理性，变成了我非要脱离现在的环境，不管我下面的环境是什么，更重要的一点是跳出其实是没有说明目的地的，只说要跳，没说要跳哪里还是可怕的，下面是万丈深渊呢？；而寻找最大的不同就是想要一个目的地，归根到底还是会有目标的，想想你的目标是什么？难道目前的环境真的一点实现的机会都没有吗？ 我不觉得跳出舒适区不对，但是在准备跳出去，还是需要再想一次.</p>
+<h2 id="还有一个叫能力圈的说法"><a href="#还有一个叫能力圈的说法" class="headerlink" title="还有一个叫能力圈的说法"></a>还有一个叫能力圈的说法</h2><p>无论愿不愿意承认，大多数的情况下，跳出舒适区钱还是会起到点作用的，至少认为跳出去了，会有挣更多钱的机会,这也没什么不对。但是按照前首富巴菲特的说法投资最主要原则是能力圈原则，挣钱其实基本上认为就是投资，你投资自己，利用自己的劳动获取最可观的收益，那么很显然这个原则很重要。然而这个原则<br>听起来和跳出舒适区有冲突，他说如果你找到自己的能力圈了，那么就不要出去了，稳稳妥妥的挣钱就是了，你并需要什么跳出这跳出那，你找到你的优势,好好想想你在当前环境里面的优势是什么，你的能力圈的边界是哪里，稳稳妥妥的把钱挣了没什么不好，超过了你的能力圈的边界可能更多的是亏损。无论钱听上去多么庸俗，但是它确实是可以改善你生活，帮助你达到你要的目标的最好最直接的东西。</p>
+<p>下面是一段查理·芒格说的话，我更愿意相信真的挣到钱的人，而不是相信那些看起来高大上公司(说不定明天就倒闭了)的CTO/CEO.</p>
+<pre><code class="hljs routeros">So, the<span class="hljs-built_in"> simple </span>takeaway here is clear. <span class="hljs-keyword">If</span> you want <span class="hljs-keyword">to</span> improve your odds of success <span class="hljs-keyword">in</span> life <span class="hljs-keyword">and</span> business then define the perimeter of your circle of competence, <span class="hljs-keyword">and</span> operate inside. Over time, work <span class="hljs-keyword">to</span> expand that circle but never fool yourself about where it stands today, <span class="hljs-keyword">and</span> never be afraid <span class="hljs-keyword">to</span> say “I don’t know.”</code></pre>
+
+<h2 id="高大上的外面的世界"><a href="#高大上的外面的世界" class="headerlink" title="高大上的外面的世界"></a>高大上的外面的世界</h2><p>现在测试其实交流可能越来越多，也出现了很多各种各样的新词汇，于是很多喜欢学习的同学觉得外面的世界好美好，自己公司怎么啥也没有，什么也学不到；但是你怎么知道这些东西，其实可能就像美国总统常用的词 Fake News呢？ 他们说的那些理念实践，你动手做过吗？不要听他叫什么名字，看看他到底做了什么,听上去很厉害的账户体系说不定只有一个登录功能呢？Who Knows。</p>
+<p>或许先不要想跳出，或许先寻找你的优势，你在这个公司的优势，就足够满足你过上好生活了呢？既然你都感到你在舒适区了，那么你一定有你的优势，先找到它是什么吧</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/QATrap/">QATrap</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/12/13/python/2020-07-01-generate-tps-chart/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">快速生成简单的TPS报告</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/12/04/shell/mac_lsof/">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

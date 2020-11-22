@@ -1,0 +1,587 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="allround tester">
+  <meta name="author" content="qmeta">
+  <meta name="keywords" content="">
+  <title>Shell Learning - Variant 变量 - Learning Testing/QA in Hardway</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"qdriven.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Practising</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Shell Learning - Variant 变量">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2014-08-24 10:31" pubdate>
+        2014年8月24日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      551 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      8
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Shell Learning - Variant 变量</h1>
+            
+            <div class="markdown-body">
+              <h3 id="变量赋值"><a href="#变量赋值" class="headerlink" title="变量赋值"></a>变量赋值</h3><pre><code class="hljs sh"><span class="hljs-meta">#!/bin/sh</span>
+var=value
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$var</span>
+var=<span class="hljs-string">&#x27;the value&#x27;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$var</span>
+var=<span class="hljs-string">&quot;the <span class="hljs-variable">$PARAM</span>&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$var</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$var</span>
+<span class="hljs-built_in">echo</span> `<span class="hljs-built_in">pwd</span>`
+<span class="hljs-built_in">echo</span> $(<span class="hljs-built_in">pwd</span>)
+
+<span class="hljs-comment">#result:</span>
+╰─[:)] % sh shell_variant.sh
+value
+the value
+the
+the
+/Users/patrick/workspace/works/shell_learning
+/Users/patrick/workspace/works/shell_learning</code></pre>
+
+<h3 id="字符串处理"><a href="#字符串处理" class="headerlink" title="字符串处理"></a>字符串处理</h3><ul>
+<li>可以给出字符串的长度</li>
+</ul>
+<pre><code class="hljs sh"><span class="hljs-built_in">echo</span> <span class="hljs-variable">$#</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$0</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$1</span> <span class="hljs-variable">$2</span>
+<span class="hljs-built_in">echo</span> $$
+
+p=<span class="hljs-variable">$2</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$p</span>
+
+<span class="hljs-keyword">if</span> [ <span class="hljs-variable">$&#123;#p&#125;</span> != 2 ]
+<span class="hljs-keyword">then</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;wrong input&quot;</span>
+<span class="hljs-keyword">fi</span>
+
+<span class="hljs-comment"># Result</span>
+
+h read_parameter.sh 1 2
+2
+read_parameter.sh
+1 2
+24217
+2
+wrong input</code></pre>
+
+
+<h3 id="变量分类"><a href="#变量分类" class="headerlink" title="变量分类"></a>变量分类</h3><p>四种变量：环境变量、本地变量、位置变量、特定变量参数</p>
+<ul>
+<li>环境变量可作用于所有子进程</li>
+<li>本地变量在用户现在的shell 生命期的脚本中使用，仅存在于当前进程</li>
+<li>位置变量：作为程序参数</li>
+<li>特定变量：特殊作用</li>
+</ul>
+<h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><pre><code class="hljs sh">设置
+MYVAR=<span class="hljs-string">&quot;test&quot;</span>
+expirt MYVAR
+or
+<span class="hljs-built_in">export</span> MYVAR=<span class="hljs-string">&quot;test&quot;</span>
+
+只读
+MYVAR=<span class="hljs-string">&quot;test&quot;</span>
+<span class="hljs-built_in">readonly</span> MYVAR
+or
+<span class="hljs-built_in">readonly</span> MYVAR=<span class="hljs-string">&quot;test&quot;</span>
+
+显示
+<span class="hljs-built_in">export</span> -p
+env <span class="hljs-comment">#查看所有环境变量</span>
+<span class="hljs-variable">$MYVAR</span> <span class="hljs-comment">#获取</span>
+
+消除
+<span class="hljs-built_in">unset</span> MYVAR</code></pre>
+
+<h3 id="本地变量"><a href="#本地变量" class="headerlink" title="本地变量"></a>本地变量</h3><pre><code class="hljs sh">设置
+LOCAL_VAR=<span class="hljs-string">&quot;test&quot;</span>
+or
+LOCAL_VAR=<span class="hljs-string">&quot;test&quot;</span>
+<span class="hljs-built_in">readonly</span> LOCAL_VAR <span class="hljs-comment">#设置只读</span>
+
+还可以使用<span class="hljs-built_in">declare</span>命令定义</code></pre>
+
+<h3 id="位置变量"><a href="#位置变量" class="headerlink" title="位置变量"></a>位置变量</h3><ul>
+<li>$0 脚本名称</li>
+<li>$# 传递到脚本参数个数</li>
+<li>$$ shell脚本运行当前进程ID</li>
+<li>$? 退出状态</li>
+<li>$N N&gt;=1，第n个参数</li>
+</ul>
+<pre><code class="hljs sh"><span class="hljs-meta">#!/bin/sh</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$#</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$0</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$1</span> <span class="hljs-variable">$2</span>
+<span class="hljs-built_in">echo</span> $$
+
+<span class="hljs-comment"># result:</span>
+2
+read_parameter.sh
+1 2
+24171</code></pre>
+
+
+
+<h3 id="拼接字符串"><a href="#拼接字符串" class="headerlink" title="拼接字符串"></a>拼接字符串</h3><pre><code class="hljs sh"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$x</span><span class="hljs-variable">$y</span>&quot;</span></code></pre>
+
+<h3 id="字符串切片"><a href="#字符串切片" class="headerlink" title="字符串切片"></a>字符串切片</h3><p>${变量名:起始:长度}得到子字符串</p>
+<pre><code class="hljs sh">$ <span class="hljs-built_in">test</span>=<span class="hljs-string">&#x27;I love china&#x27;</span>
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$&#123;test:5&#125;</span>
+e china
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$&#123;test:5:10&#125;</span>
+e china
+
+str=<span class="hljs-string">&quot;hello world&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$&#123;str:6&#125;</span>  <span class="hljs-comment"># $&#123;var:offset:length&#125;</span></code></pre>
+
+<h3 id="字符串替换"><a href="#字符串替换" class="headerlink" title="字符串替换"></a>字符串替换</h3><p>${变量/查找/替换值}</p>
+<p>一个“/”表示替换第一个，”//”表示替换所有,当查找中出现了：”/”请加转义符”/”表示</p>
+<pre><code class="hljs sh"><span class="hljs-built_in">echo</span> <span class="hljs-variable">$&#123;str/foo/bar&#125;</span> <span class="hljs-comment">#首个</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$&#123;str//foo/bar&#125;</span> <span class="hljs-comment">#所有</span></code></pre>
+
+<h3 id="正则匹配"><a href="#正则匹配" class="headerlink" title="正则匹配"></a>正则匹配</h3><pre><code class="hljs sh"><span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$str</span> =~ [0-9]+\.[0-9]+ ]]</code></pre>
+
+<h3 id="数值处理"><a href="#数值处理" class="headerlink" title="数值处理"></a>数值处理</h3><p>自增</p>
+<pre><code class="hljs sh">a=1
+a=`expr a + 1`
+
+or
+
+a=1
+<span class="hljs-built_in">let</span> a++
+<span class="hljs-built_in">let</span> a+=2
+<span class="hljs-built_in">let</span>
+
+no1=4
+no2=5
+<span class="hljs-built_in">let</span> result=no1+no2
+expr
+
+result=`expr 3 + 4`
+result=$(expr <span class="hljs-variable">$no1</span> + 5)</code></pre>
+
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><pre><code class="hljs sh">result=$[ no1 + no2 ]
+result=$[ <span class="hljs-variable">$no</span> + 5 ]
+
+result=$(( no1 + <span class="hljs-number">5</span> ))
+浮点数
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;4 * 0.56&quot;</span> | bc
+设定精度
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;scale=2;3/8&quot;</span> | bc
+进制转换
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;obase=2;100&quot;</span> | bc
+平方
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;sqrt(100)&quot;</span> | bc
+数组和map</code></pre>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2014/10/24/tips/2014-10-24-shell_for_update_all_git_repo/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">更新一个目录下所有的git repository的shell 脚本</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2014/08/24/shell/2014-08-24-shell_101_concept/">
+                        <span class="hidden-mobile">Shell Learning - Concept</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,563 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="allround tester">
+  <meta name="author" content="qmeta">
+  <meta name="keywords" content="">
+  <title>Jenkins API的简单介绍 - Learning Testing/QA in Hardway</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"qdriven.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Practising</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Jenkins API的简单介绍">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2016-03-30 05:15" pubdate>
+        2016年3月30日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      20
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Jenkins API的简单介绍</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Jenkins-介绍"><a href="#Jenkins-介绍" class="headerlink" title="Jenkins 介绍"></a>Jenkins 介绍</h1><p>Jenkins是一个非常有用的持续集成的工具，可以通过它完成代码的build，测试，发布等一系列的事情.</p>
+<p>From Jenkins Home Page</p>
+<pre><code class="hljs angelscript">Jenkins <span class="hljs-keyword">is</span> an <span class="hljs-built_in">auto</span>mation engine with an unparalleled plugin ecosystem to support all of your favorite tools <span class="hljs-keyword">in</span> your delivery pipelines, whether your goal <span class="hljs-keyword">is</span> continuous <span class="hljs-built_in">int</span>egration, <span class="hljs-built_in">auto</span>mated testing, <span class="hljs-keyword">or</span> continuous delivery.</code></pre>
+
+
+<h2 id="Jenkins-使用"><a href="#Jenkins-使用" class="headerlink" title="Jenkins 使用"></a>Jenkins 使用</h2><p>关于Jenkins的基本使用网上有很多的教程，基本使用其事没有太多说的，它是个平台，可以集成很多不同的工具，脚本等等.<br>总结下来这些东西包括：</p>
+<ul>
+<li>jenkins parameter setting, string, choice, ……</li>
+<li>JAVA 的maven, ant, gradle 等打包工具，其他语言也有类似的build，deploy，依赖管理的工具</li>
+<li>定制化的脚本，可以在一个Jenkins的build步骤中运行这些脚本如shell命令，python脚本</li>
+<li>定制插件来完成自己的特殊的目的</li>
+</ul>
+<p>这些内容非常庞大，自己也不可能完全都知道，如果遇到实际的一些问题需要解决的话,<br>大体的逻辑就是，如果遇到一些特殊需求，那么先去找插件看能不能完成，如果没有插件就再想shell，python脚本等不同的事情，或者自己开发插件.</p>
+<h2 id="Jenkins-的实践问题"><a href="#Jenkins-的实践问题" class="headerlink" title="Jenkins 的实践问题"></a>Jenkins 的实践问题</h2><p>随着Jenkins里面的任务越来越多，管理的环境越来越多，变更越来愈多，手工管理就会遇到一些问题：</p>
+<ul>
+<li>比如为了改一个IP地址，可能需要没一个任务都去改具体的配置，比如部署同一个war到不同的测试环境，就需要给不同的job改IP</li>
+<li>为了不同的环境配置不同的任务，需要很多的人工的配置修改等等</li>
+<li>如果需要迁移一个多应用的测试环境，那么需要很多的复制，修改工作</li>
+</ul>
+<p>那么为了解决这些问题，个人觉得可以改善的地方是：</p>
+<ul>
+<li>定义一些类型项目的模版，抽象一些参数出来给Jenkins里面的Job做参数话，当然有时需要修改的是默认值</li>
+<li>在定义了一些模版之后，就可以通过操作Jenkins API的方式来操作</li>
+<li>在尝试了一些Jenkins API之后，感觉纯粹通过API的方式去操作，不一定比复制Jenkins 任务，然后修改来的快，但是通过Jenkins API的方式<br>来操作Jenkins 的好处是，如果这些东西融入到运维的流程中，那么它会提高生产率</li>
+</ul>
+<p>一些体会是，可能代码方式的操作单个单个来看不一定会提高多少生产率(参数一样要设)，但是如果放在一个流程的角度看，那么他的效率是高的，比如你如果需要运维帮你建环境，那么你需要提供一些信息，而这些信息就可以直接建立Jenkins的Job了，那么作为用户你只提供一次信息，就可以完成你需要的所有事情，这样效率就高了.</p>
+<p>我对于自动化一切的看法是，也许对于单个任务来说，通过写代码的方式不一定是最优方式，但是如果放在一个流程中来看，那么一定是.所以平常可以积累点不同类型的脚本，代码，然后在某个时间点，也许连接你的这些脚本，代码，就可以流水线化一些你的工作了，不要以为这不会带来，我觉得这一天一定会有的。</p>
+<h2 id="Jenkins-API-的使用"><a href="#Jenkins-API-的使用" class="headerlink" title="Jenkins API 的使用"></a>Jenkins API 的使用</h2><p>对于Jenkins API来说，我使用过Java和Python的，总结下来大同小异，逻辑上可以分为几个层次：</p>
+<ul>
+<li>Job: 不同类型的Job<ul>
+<li>添加，修改，删除Job</li>
+<li>Job的详细信息</li>
+<li>可以通过Job的config.xml文件来修改配置</li>
+<li>Job创建属于哪个父类和Jenkins的URL有关系</li>
+</ul>
+</li>
+<li>View<br>基本功能和Job类似</li>
+</ul>
+<h3 id="Jenkins-API-JAVA"><a href="#Jenkins-API-JAVA" class="headerlink" title="Jenkins API - JAVA"></a>Jenkins API - JAVA</h3><p>我自己使用的是这个Jenkins的这个API client.</p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.offbytwo.jenkins<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>jenkins-client<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>0.3.3<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></code></pre>
+
+<p> 这个包中最主要的两个类是：</p>
+<ul>
+<li>JenkinsServer: JenkinsServer 可以认为是一个JenkinsHttpClient的一个Wrapper，封装了一些常用的方法，如getJob，getJobXml等等，具体可以参考他<a target="_blank" rel="noopener" href="https://github.com/RisingOak/jenkins-client">github</a></li>
+<li>JenkinsHttpClient：可以通过这个HttpClient组装URL和参数来达到完成调用其他API的方法，提供的一些方法主要包括了:<ul>
+<li>post</li>
+<li>post_xml: 主要用来修改job的config.xml</li>
+</ul>
+</li>
+</ul>
+<p>大体的东西就是这些，那么通过这个Jenkins的API client，完成了一些一些功能：</p>
+<ul>
+<li>复制Job,根据参数修改复制出来的Job</li>
+<li>复制View，根据参数修改复制出来的View，同时包括了所有的子Job</li>
+<li>查询到使用了某个shell 命令或者某个配置的任务</li>
+</ul>
+<p>一些实例代码如下：</p>
+<p>复制任务：</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">JenkinsReplicator</span> </span>&#123;
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String COPY_FROM_VIEW_URL = <span class="hljs-string">&quot;/view/%s/createItem?&quot;</span>;
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String DEFAULT_VIEW = <span class="hljs-string">&quot;All&quot;</span>;
+  <span class="hljs-keyword">private</span> JenkinsInstance instance;
+  <span class="hljs-keyword">private</span> JenkinsHttpClient client;
+
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">JenkinsReplicator</span><span class="hljs-params">(JenkinsInstance instance)</span> </span>&#123;
+      <span class="hljs-keyword">this</span>.instance = instance;
+      <span class="hljs-keyword">this</span>.client = instance.getJenkinsHttpClient();
+  &#125;
+
+  <span class="hljs-comment">/**</span>
+<span class="hljs-comment">   * <span class="hljs-doctag">@param</span> fromName: copied from issue</span>
+<span class="hljs-comment">   * <span class="hljs-doctag">@param</span> toName:   new Name</span>
+<span class="hljs-comment">   * <span class="hljs-doctag">@param</span> parentName: to View name</span>
+<span class="hljs-comment">   */</span>
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">copyItem</span><span class="hljs-params">(String fromName, String toName, String parentName)</span> </span>&#123;
+      Map&lt;String, String&gt; formData = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();
+      formData.put(<span class="hljs-string">&quot;name&quot;</span>, toName);
+      formData.put(<span class="hljs-string">&quot;mode&quot;</span>, <span class="hljs-string">&quot;copy&quot;</span>);
+      formData.put(<span class="hljs-string">&quot;from&quot;</span>, fromName);
+      formData.put(<span class="hljs-string">&quot;json&quot;</span>, String.format(<span class="hljs-string">&quot;&#123;\&quot;name\&quot;: \&quot;%s\&quot;, \&quot;mode\&quot;: \&quot;copy\&quot;, \&quot;from\&quot;: \&quot;%s\&quot;&#125;&quot;</span>, toName, fromName));
+      formData.put(<span class="hljs-string">&quot;Submit&quot;</span>, <span class="hljs-string">&quot;OK&quot;</span>);
+      <span class="hljs-keyword">try</span> &#123;
+          <span class="hljs-keyword">this</span>.client.post_form(String.format(COPY_FROM_VIEW_URL, parentName), formData, <span class="hljs-keyword">false</span>);
+      &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;
+          <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> JenkinsBaseException(<span class="hljs-string">&quot;copy item &quot;</span>+ fromName+ <span class="hljs-string">&quot;to &quot;</span> + toName+<span class="hljs-string">&quot; in view &quot;</span> + parentName + <span class="hljs-string">&quot; failed&quot;</span>, e);
+      &#125;
+  &#125;
+&#125;</code></pre>
+
+<p>update config file:</p>
+<pre><code class="hljs java">String configXml = jobDescription.jobConfigXml();
+<span class="hljs-keyword">this</span>.getJenkins().updateJob(jobDescription.getJobName(),configXml,<span class="hljs-keyword">false</span>);</code></pre>
+
+<p>复制整个view下面同时包括了不同的子Job:</p>
+<pre><code class="hljs java"><span class="hljs-meta">@Override</span>
+   <span class="hljs-function"><span class="hljs-keyword">public</span> View <span class="hljs-title">copy</span><span class="hljs-params">(String fromName, String toName, String parentNameOrNull)</span> </span>&#123;
+       View fromView = getByName(fromName);
+       <span class="hljs-keyword">if</span> (fromView == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> JenkinsViewException(fromName + <span class="hljs-string">&quot;view is not found,can&#x27;t copy from it!&quot;</span>);
+       View toView = getOrCreate(toName, fromName, parentNameOrNull);
+       Map&lt;String, Job&gt; viewJobs = jobController.getJobsByViewName(fromName);
+       <span class="hljs-keyword">for</span> (Map.Entry&lt;String, Job&gt; entry : viewJobs.entrySet()) &#123;
+           jobController.copy(entry.getKey(), toName + <span class="hljs-string">&quot;_&quot;</span> + entry.getKey(), toView.getName());
+       &#125;
+
+       <span class="hljs-keyword">return</span> getByName(toName);
+   &#125;
+</code></pre>
+
+<h2 id="Python-API-使用"><a href="#Python-API-使用" class="headerlink" title="Python API 使用"></a>Python API 使用</h2><p>Python的Jenkins API client 可以通过以下命令安装：</p>
+<pre><code class="hljs sh">pip install jenkinsapi</code></pre>
+
+<p>基本的python jenkins api client 和JAVA的概念比较类似，不过python 的这个jenkinsapi很明显要比java的这个客户端功能要丰富的多的多，后面会详细介绍这个python client api的使用.</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p><a target="_blank" rel="noopener" href="https://github.com/testless/jenkins-controller.git">GITHUB</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/automation/">automation</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/automation/">automation</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2016/03/30/tips/ansible/2016-03-30-ansible_basic/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Ansible简单介绍</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2016/02/28/python/2016-02-28-python_oop_attributes/">
+                        <span class="hidden-mobile">Python 面向对象，以及访问对象属性基础</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

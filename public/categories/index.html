@@ -1,0 +1,1313 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="allround tester">
+  <meta name="author" content="qmeta">
+  <meta name="keywords" content="">
+  <title>分类 - Learning Testing/QA in Hardway</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"qdriven.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Practising</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="分类">
+              
+            </span>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+
+
+
+
+
+<div class="category-list">
+  
+  
+  
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckht9tpaf0007j3yyav0kd55c" role="tab" data-toggle="collapse" href="#collapse-ckht9tpaf0007j3yyav0kd55c"
+        aria-expanded="false"
+      >
+        python
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/python/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>17</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckht9tpaf0007j3yyav0kd55c" class="collapse in " role="tabpanel"
+       aria-labelledby="heading-ckht9tpaf0007j3yyav0kd55c">
+    
+  
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckht9tpbt003lj3yy0124fiui" role="tab" data-toggle="collapse" href="#collapse-ckht9tpbt003lj3yy0124fiui"
+        aria-expanded="false"
+      >
+        eat-dog-food
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/python/eat-dog-food/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckht9tpbt003lj3yy0124fiui" class="collapse in " role="tabpanel"
+       aria-labelledby="heading-ckht9tpbt003lj3yy0124fiui">
+    
+  
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckht9tpby003zj3yygdrwhgnb" role="tab" data-toggle="collapse" href="#collapse-ckht9tpby003zj3yygdrwhgnb"
+        aria-expanded="false"
+      >
+        test-ops
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/python/eat-dog-food/test-ops/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckht9tpby003zj3yygdrwhgnb" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckht9tpby003zj3yygdrwhgnb">
+    
+    
+    
+      
+      
+        <a href="/2020/07/30/tools/nginx-runner/" class="list-group-item list-group-item-action">
+          <span class="category-post">测试日志2020-5 前端部署 NGINX Conf文件自动配置</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+  </div>
+
+        
+      </div>
+    </div>
+  
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckht9tpcy006fj3yygf1xd4hg" role="tab" data-toggle="collapse" href="#collapse-ckht9tpcy006fj3yygf1xd4hg"
+        aria-expanded="false"
+      >
+        automation
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/automation/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>10</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckht9tpcy006fj3yygf1xd4hg" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckht9tpcy006fj3yygf1xd4hg">
+    
+    
+    
+      
+      
+        <a href="/2016/03/30/tips/ansible/2016-03-30-ansible_basic/" class="list-group-item list-group-item-action">
+          <span class="category-post">Ansible简单介绍</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2016/03/30/tips/automation/2016-03-30-jenkins_basic/" class="list-group-item list-group-item-action">
+          <span class="category-post">Jenkins API的简单介绍</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2016/02/01/tips/automation/2016-02-01-assertions/" class="list-group-item list-group-item-action">
+          <span class="category-post">assertions</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2016/01/27/tips/automation/2016-01-27-web-dev/" class="list-group-item list-group-item-action">
+          <span class="category-post">WEB 开发的几个重点</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2016/01/10/tips/automation/2016-01-10-why_how_automation/" class="list-group-item list-group-item-action">
+          <span class="category-post">为什么自动化，如何自动化</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2015/12/23/tips/automation/2015-12-23-http_status_code/" class="list-group-item list-group-item-action">
+          <span class="category-post">http status code HTTP 状态码</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2015/11/27/tips/automation/2015-11-27-webservice-automation/" class="list-group-item list-group-item-action">
+          <span class="category-post">自动化测试－接口测试</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2015/10/24/tips/automation/2015-10-24-phantomjs-usage/" class="list-group-item list-group-item-action">
+          <span class="category-post">Phantomjs Tutorial</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2015/09/24/tips/automation/2015-09-24-page-factory/" class="list-group-item list-group-item-action">
+          <span class="category-post">Page Factory in Selenium</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2015/09/24/tips/automation/2015-09-24-testng-simple-report/" class="list-group-item list-group-item-action">
+          <span class="category-post">TestNG 报告定制最简单的原理</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckht9tpdn008yj3yy2j6p2ks6" role="tab" data-toggle="collapse" href="#collapse-ckht9tpdn008yj3yy2j6p2ks6"
+        aria-expanded="false"
+      >
+        refactoring
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/refactoring/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>9</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckht9tpdn008yj3yy2j6p2ks6" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckht9tpdn008yj3yy2j6p2ks6">
+    
+    
+    
+      
+      
+        <a href="/2015/11/03/tips/refactoring/2015-11-3-refactoring-introduce-method-object-and-replace-conditions-with-poly/" class="list-group-item list-group-item-action">
+          <span class="category-post">Refactoring-10-introduce method object, replace conditions with polymorphism</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2015/11/03/tips/refactoring/2015-10-26-remove-god-class/" class="list-group-item list-group-item-action">
+          <span class="category-post">Refactoring-8-remove God Class</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-EncapsulateCollection/" class="list-group-item list-group-item-action">
+          <span class="category-post">Refactoring-1-Encapsulate Collection</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-Extract-Interface-Method/" class="list-group-item list-group-item-action">
+          <span class="category-post">Refactoring-7-Extract-Interface,Method,Sub Class,Supper Class</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-Pull-Up-Method/" class="list-group-item list-group-item-action">
+          <span class="category-post">Refactoring-3-Pull Up Method</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-Move-Method/" class="list-group-item list-group-item-action">
+          <span class="category-post">Refactoring-2-Move Method</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-rename/" class="list-group-item list-group-item-action">
+          <span class="category-post">Refactoring-5-rename</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-PullUpField-PushDownField/" class="list-group-item list-group-item-action">
+          <span class="category-post">Refactoring-4-Push Down Method and Pull Up and Posh Down Field</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2015/10/26/tips/refactoring/2015-10-26-replace-inheritance-with-delegation/" class="list-group-item list-group-item-action">
+          <span class="category-post">Refactoring-6-Replace Inheritance with Delegation</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckht9tpeb00b2j3yyggqxa8hx" role="tab" data-toggle="collapse" href="#collapse-ckht9tpeb00b2j3yyggqxa8hx"
+        aria-expanded="false"
+      >
+        testing
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/testing/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>7</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckht9tpeb00b2j3yyggqxa8hx" class="collapse in " role="tabpanel"
+       aria-labelledby="heading-ckht9tpeb00b2j3yyggqxa8hx">
+    
+  
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckht9tpel00bvj3yya0xrf4n6" role="tab" data-toggle="collapse" href="#collapse-ckht9tpel00bvj3yya0xrf4n6"
+        aria-expanded="false"
+      >
+        thoughts
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/testing/thoughts/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>2</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckht9tpel00bvj3yya0xrf4n6" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckht9tpel00bvj3yya0xrf4n6">
+    
+    
+    
+      
+      
+        <a href="/2015/11/04/tips/thoughts/2015-11-03-Test-Tools/" class="list-group-item list-group-item-action">
+          <span class="category-post">测试用例-一些有意思的工具</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2015/10/22/tips/thoughts/2015-10-22-Random-TestCaseDesign/" class="list-group-item list-group-item-action">
+          <span class="category-post">测试用例设计- 随机指定一个产品的测试</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckht9tpdb007uj3yyc2avgnp1" role="tab" data-toggle="collapse" href="#collapse-ckht9tpdb007uj3yyc2avgnp1"
+        aria-expanded="false"
+      >
+        interview
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/interview/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>5</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckht9tpdb007uj3yyc2avgnp1" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckht9tpdb007uj3yyc2avgnp1">
+    
+    
+    
+      
+      
+        <a href="/2016/04/24/tips/interview/2016-04-24-12factors/" class="list-group-item list-group-item-action">
+          <span class="category-post">12 factors Application</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2016/04/21/tips/interview/2016-04-20-Linux%E5%9F%BA%E7%A1%80/" class="list-group-item list-group-item-action">
+          <span class="category-post">Linux 基础</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2016/04/21/tips/interview/2016-04-20-%E7%9B%91%E6%8E%A7%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" class="list-group-item list-group-item-action">
+          <span class="category-post">Web监控基础</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2016/04/20/tips/interview/2016-04-20-%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/" class="list-group-item list-group-item-action">
+          <span class="category-post">Maximum SubArray sum</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2015/10/22/tips/interview/2015-10-22-python_interview_questions/" class="list-group-item list-group-item-action">
+          <span class="category-post">Python 面试题</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckht9tpc5004bj3yy1r3gcggf" role="tab" data-toggle="collapse" href="#collapse-ckht9tpc5004bj3yy1r3gcggf"
+        aria-expanded="false"
+      >
+        truestories
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/truestories/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>4</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckht9tpc5004bj3yy1r3gcggf" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckht9tpc5004bj3yy1r3gcggf">
+    
+    
+    
+      
+      
+        <a href="/2015/12/02/tips/2015-12-02-api_contract_design/" class="list-group-item list-group-item-action">
+          <span class="category-post">True Stories: 从API的URL定义想到的</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2015/11/19/true_stories/2015-11-19-talking_is_cheep/" class="list-group-item list-group-item-action">
+          <span class="category-post">Talking is Cheap,show me the code</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2015/10/24/true_stories/2015-10-24-interesting-methods/" class="list-group-item list-group-item-action">
+          <span class="category-post">True Stories: 有趣的函数</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2015/10/24/true_stories/2015-10-24-return-flag/" class="list-group-item list-group-item-action">
+          <span class="category-post">True Stories: About Return Flag</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckht9tpc7004ij3yy4cbhdc3u" role="tab" data-toggle="collapse" href="#collapse-ckht9tpc7004ij3yy4cbhdc3u"
+        aria-expanded="false"
+      >
+        git
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/git/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>3</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckht9tpc7004ij3yy4cbhdc3u" class="collapse in " role="tabpanel"
+       aria-labelledby="heading-ckht9tpc7004ij3yy4cbhdc3u">
+    
+  
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckht9tpcl005jj3yya4sc7p62" role="tab" data-toggle="collapse" href="#collapse-ckht9tpcl005jj3yya4sc7p62"
+        aria-expanded="false"
+      >
+        tips
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/git/tips/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckht9tpcl005jj3yya4sc7p62" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckht9tpcl005jj3yya4sc7p62">
+    
+    
+    
+      
+      
+        <a href="/2020/07/30/tips/tips-Github-Slowdown/" class="list-group-item list-group-item-action">
+          <span class="category-post">测试日志2020-3 Github 访问速度缓慢解决</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckht9tpcn005pj3yy3k2t5rk7" role="tab" data-toggle="collapse" href="#collapse-ckht9tpcn005pj3yy3k2t5rk7"
+        aria-expanded="false"
+      >
+        backend
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/backend/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>2</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckht9tpcn005pj3yy3k2t5rk7" class="collapse in " role="tabpanel"
+       aria-labelledby="heading-ckht9tpcn005pj3yy3k2t5rk7">
+    
+  
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckht9tpcs0064j3yyfgz68xs2" role="tab" data-toggle="collapse" href="#collapse-ckht9tpcs0064j3yyfgz68xs2"
+        aria-expanded="false"
+      >
+        tips
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/backend/tips/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>2</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckht9tpcs0064j3yyfgz68xs2" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckht9tpcs0064j3yyfgz68xs2">
+    
+    
+    
+      
+      
+        <a href="/2020/07/30/tips/tips-github-cli/" class="list-group-item list-group-item-action">
+          <span class="category-post">测试日志2020-2 Github Cli使用</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/07/30/tips/tips-maven-java/" class="list-group-item list-group-item-action">
+          <span class="category-post">测试日志2020-1 MAVEN 创建项目JAVA项目</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckht9tpej00boj3yy56kh6z5p" role="tab" data-toggle="collapse" href="#collapse-ckht9tpej00boj3yy56kh6z5p"
+        aria-expanded="false"
+      >
+        thoughts
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/thoughts/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>2</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckht9tpej00boj3yy56kh6z5p" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckht9tpej00boj3yy56kh6z5p">
+    
+    
+    
+      
+      
+        <a href="/2015/12/28/tips/thoughts/2015-12-28-next-reading/" class="list-group-item list-group-item-action">
+          <span class="category-post">下一步的技术了解</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2013/09/24/tips/thoughts/2013-09-24-thoughts_on_testing/" class="list-group-item list-group-item-action">
+          <span class="category-post">关于测试的一点想法</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckht9tpb3001xj3yya18s0tge" role="tab" data-toggle="collapse" href="#collapse-ckht9tpb3001xj3yya18s0tge"
+        aria-expanded="false"
+      >
+        automation，python
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/automation%EF%BC%8Cpython/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckht9tpb3001xj3yya18s0tge" class="collapse in " role="tabpanel"
+       aria-labelledby="heading-ckht9tpb3001xj3yya18s0tge">
+    
+  
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckht9tpb70028j3yyepqe15id" role="tab" data-toggle="collapse" href="#collapse-ckht9tpb70028j3yyepqe15id"
+        aria-expanded="false"
+      >
+        daily-automation-tip
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/automation%EF%BC%8Cpython/daily-automation-tip/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckht9tpb70028j3yyepqe15id" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckht9tpb70028j3yyepqe15id">
+    
+    
+    
+      
+      
+        <a href="/2019/11/22/python/read_excel_yml/" class="list-group-item list-group-item-action">
+          <span class="category-post">数据驱动测试- 测试用例加载</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckht9tpbn0038j3yyc2r7702o" role="tab" data-toggle="collapse" href="#collapse-ckht9tpbn0038j3yyc2r7702o"
+        aria-expanded="false"
+      >
+        automation，devops
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/automation%EF%BC%8Cdevops/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckht9tpbn0038j3yyc2r7702o" class="collapse in " role="tabpanel"
+       aria-labelledby="heading-ckht9tpbn0038j3yyc2r7702o">
+    
+  
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckht9tpbq003fj3yy4r9egoh3" role="tab" data-toggle="collapse" href="#collapse-ckht9tpbq003fj3yy4r9egoh3"
+        aria-expanded="false"
+      >
+        daily-automation-tip
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/automation%EF%BC%8Cdevops/daily-automation-tip/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckht9tpbq003fj3yy4r9egoh3" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckht9tpbq003fj3yy4r9egoh3">
+    
+    
+    
+      
+      
+        <a href="/2020/03/11/shell/2020-03-11-nginx/" class="list-group-item list-group-item-action">
+          <span class="category-post">devops nginx 使用tips</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckht9tpbv003sj3yyd9be1v4q" role="tab" data-toggle="collapse" href="#collapse-ckht9tpbv003sj3yyd9be1v4q"
+        aria-expanded="false"
+      >
+        java
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/java/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckht9tpbv003sj3yyd9be1v4q" class="collapse in " role="tabpanel"
+       aria-labelledby="heading-ckht9tpbv003sj3yyd9be1v4q">
+    
+  
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckht9tpc00044j3yybrhk5j7x" role="tab" data-toggle="collapse" href="#collapse-ckht9tpc00044j3yybrhk5j7x"
+        aria-expanded="false"
+      >
+        testing-platform
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/java/testing-platform/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckht9tpc00044j3yybrhk5j7x" class="collapse in " role="tabpanel"
+       aria-labelledby="heading-ckht9tpc00044j3yybrhk5j7x">
+    
+  
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckht9tpcc004tj3yy6e1jad58" role="tab" data-toggle="collapse" href="#collapse-ckht9tpcc004tj3yy6e1jad58"
+        aria-expanded="false"
+      >
+        吐槽
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/java/testing-platform/%E5%90%90%E6%A7%BD/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckht9tpcc004tj3yy6e1jad58" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckht9tpcc004tj3yy6e1jad58">
+    
+    
+    
+      
+      
+        <a href="/2020/07/30/tools/alimama-intelplatform-1/" class="list-group-item list-group-item-action">
+          <span class="category-post">测试日志2020-4 Dive Into Markov(阿里妈妈功能测试平台)</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+  </div>
+
+        
+      </div>
+    </div>
+  
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckht9tpcf0050j3yyd3sw13ju" role="tab" data-toggle="collapse" href="#collapse-ckht9tpcf0050j3yyd3sw13ju"
+        aria-expanded="false"
+      >
+        rest api
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/rest-api/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckht9tpcf0050j3yyd3sw13ju" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckht9tpcf0050j3yyd3sw13ju">
+    
+    
+    
+      
+      
+        <a href="/2016/04/12/tips/2016-04-23-REST-API_SECURITY/" class="list-group-item list-group-item-action">
+          <span class="category-post">Rest API Security</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckht9tpe000a9j3yy9ojuc9v4" role="tab" data-toggle="collapse" href="#collapse-ckht9tpe000a9j3yy9ojuc9v4"
+        aria-expanded="false"
+      >
+        designpattern
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/designpattern/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckht9tpe000a9j3yy9ojuc9v4" class="collapse in " role="tabpanel"
+       aria-labelledby="heading-ckht9tpe000a9j3yy9ojuc9v4">
+    
+  
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckht9tpe400ahj3yyfuqje7r4" role="tab" data-toggle="collapse" href="#collapse-ckht9tpe400ahj3yyfuqje7r4"
+        aria-expanded="false"
+      >
+        java
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/designpattern/java/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckht9tpe400ahj3yyfuqje7r4" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckht9tpe400ahj3yyfuqje7r4">
+    
+    
+    
+      
+      
+        <a href="/2016/04/11/tips/refactoring/2016-04-11-singleton/" class="list-group-item list-group-item-action">
+          <span class="category-post">Java Singleton ENUM as instance HOLDER</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

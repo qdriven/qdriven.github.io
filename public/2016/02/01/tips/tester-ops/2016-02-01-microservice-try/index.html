@@ -1,0 +1,691 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;light&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="allround tester">
+  <meta name="author" content="qmeta">
+  <meta name="keywords" content="">
+  <title>01-微服务框架－Springboot/Flask,Hello World - Learning Testing/QA in Hardway</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"qdriven.github.io","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Practising</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="01-微服务框架－Springboot/Flask,Hello World">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2016-02-01 23:57" pubdate>
+        2016年2月1日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      23
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">01-微服务框架－Springboot/Flask,Hello World</h1>
+            
+            <div class="markdown-body">
+              <p>现在有很多的微服务框架，这里试用一下Java Springboot和Python的Flask.<br>本文分别试用SpringBoot和Flask完成了一个简单的Hello World服务来展示如何使用Springboot和Flask构建<br>一个简单的服务. 同时用AB进行了一个简单的压力测试。</p>
+<h2 id="SpringBoot-Hello-World-Web-Application"><a href="#SpringBoot-Hello-World-Web-Application" class="headerlink" title="SpringBoot Hello World Web Application"></a>SpringBoot Hello World Web Application</h2><ul>
+<li><p>Create a SpringBoot Application entry point</p>
+</li>
+<li><p>add Beans into springboot startup life cycle</p>
+<pre><code class="hljs arduino">利用command-<span class="hljs-built_in">line</span> runner的这个特性，再配合依赖注入，可以在应用程序启动时后首先引入一些依赖bean，例如data source、rpc服务或者其他模块等等，这些对象的初始化可以放在<span class="hljs-built_in">run</span>方法中。不过，需要注意的是，在<span class="hljs-built_in">run</span>方法中执行初始化动作的时候一旦遇到任何异常，都会使得应用程序停止运行，因此最好利用<span class="hljs-keyword">try</span>/<span class="hljs-keyword">catch</span>语句处理可能遇到的异常。</code></pre></li>
+<li><p>create HelloWorld Service</p>
+</li>
+</ul>
+<h2 id="All-Codes-for-the-simple-hello-world-Service"><a href="#All-Codes-for-the-simple-hello-world-Service" class="headerlink" title="All Codes for the simple hello world Service"></a>All Codes for the simple <strong><em>hello world</em></strong> Service</h2><p>以下代码的一些说明：</p>
+<ul>
+<li>Web 应用的执行入口： main方法，里面的SpringApplication.run</li>
+<li>StartupRunner 可以在SpringBoot Application启动过程中一些事情</li>
+<li>RestController注解表示了这个类是个Rest 风格的Controller</li>
+</ul>
+<p>pom.xml 中的唯一依赖，请指定版本或者parent指定为        <code>&lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</code></p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span></code></pre>
+
+<pre><code class="hljs java"><span class="hljs-meta">@SpringBootApplication</span>
+<span class="hljs-meta">@RestController</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloWorldEndPoint</span> </span>&#123;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        SpringApplication.run(HelloWorldEndPoint.class,args);
+    &#125;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StartupRunner</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">CommandLineRunner</span></span>&#123;
+        <span class="hljs-keyword">protected</span> <span class="hljs-keyword">final</span> Logger logger = LoggerFactory.getLogger(StartupRunner.class);
+
+        <span class="hljs-meta">@Override</span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">(String... strings)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;
+            logger.info(<span class="hljs-string">&quot;startup command is running ........&quot;</span>);
+        &#125;
+    &#125;
+    <span class="hljs-comment">//inject into spring start lifecycle</span>
+    <span class="hljs-meta">@Bean</span>
+    <span class="hljs-meta">@Order(value = 1)</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> StartupRunner <span class="hljs-title">runner</span><span class="hljs-params">()</span></span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> StartupRunner();
+    &#125;
+
+    <span class="hljs-meta">@Bean</span>
+    <span class="hljs-meta">@Order(value = 2)</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> StartupRunner <span class="hljs-title">runner2</span><span class="hljs-params">()</span></span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> StartupRunner()&#123;
+
+            <span class="hljs-meta">@Override</span>
+            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">(String... strings)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;
+                System.out.println(<span class="hljs-string">&quot;start up 2 command is running......&quot;</span>);
+            &#125;
+        &#125;;
+    &#125;
+
+    <span class="hljs-meta">@RequestMapping(&quot;/&quot;)</span>
+    <span class="hljs-meta">@ResponseBody</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">home</span><span class="hljs-params">()</span></span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;hello world!&quot;</span>;
+    &#125;
+
+&#125;
+</code></pre>
+
+<h2 id="启动springboot-应用"><a href="#启动springboot-应用" class="headerlink" title="启动springboot 应用"></a>启动springboot 应用</h2><p>运行如下命令：</p>
+<pre><code class="hljs sh">mvn spring-boot:run</code></pre>
+
+<p>就可以启动springboot的应用，默认是tomcat的容器，如果又需要修改tomcat的配置，再后面文章中说明。</p>
+<h2 id="curl测试"><a href="#curl测试" class="headerlink" title="curl测试"></a>curl测试</h2><p>使用curl简单测试一下，可以访问，是不是简单呀……</p>
+<pre><code class="hljs sh">$ curl http://localhost:8080/                                                            
+hello world!%</code></pre>
+
+<h1 id="HelloWorld-In-Flask"><a href="#HelloWorld-In-Flask" class="headerlink" title="HelloWorld In Flask"></a>HelloWorld In Flask</h1><p>构建Flask的Micro Service 系列的第一篇，Hello World Service</p>
+<h2 id="Flask-环境设置"><a href="#Flask-环境设置" class="headerlink" title="Flask 环境设置"></a>Flask 环境设置</h2><ul>
+<li>安装Python3</li>
+<li>创建干净的web 应用的python3 环境,python3 可以不用virtualevn，直接用一下命令就可以了<pre><code class="hljs sh">python3 -m venv &lt;your_application_name&gt;</code></pre>
+
+</li>
+</ul>
+<h2 id="Flask-HelloWorld-Service"><a href="#Flask-HelloWorld-Service" class="headerlink" title="Flask HelloWorld Service"></a>Flask HelloWorld Service</h2><pre><code class="hljs python"><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask
+
+hello_world=Flask(__name__)
+
+<span class="hljs-meta">@hello_world.rooter(&#x27;/&#x27;)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hello_world</span>():</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;hello world!&#x27;</span>
+
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
+    hello_world.run()</code></pre>
+
+<h2 id="运行Flask-HelloWorld-Service"><a href="#运行Flask-HelloWorld-Service" class="headerlink" title="运行Flask HelloWorld Service"></a>运行Flask HelloWorld Service</h2><p>直接运行次文件就可以了</p>
+<h2 id="使用AB-进行简单的性能测试"><a href="#使用AB-进行简单的性能测试" class="headerlink" title="使用AB 进行简单的性能测试"></a>使用AB 进行简单的性能测试</h2><p>AB的脚本如下： -n 表述总数，－c 表述并发</p>
+<pre><code class="hljs sh"><span class="hljs-comment"># $1 is a parameter for java or python to record different performance result</span>
+ab -n 3000 -c 30 http://127.0.0.1:8080/ &gt; <span class="hljs-variable">$1</span>-3K-30C.txt
+ab -n 6000 -c 50 http://127.0.0.1:8080/ &gt; <span class="hljs-variable">$1</span>-6K-50C.txt
+ab -n 12000 -c 100 http://127.0.0.1:8080/ &gt; <span class="hljs-variable">$1</span>-12K-100C.txt</code></pre>
+
+<p>最后的结果：</p>
+<p>30 Currents:</p>
+<p>SpringBoot:</p>
+<pre><code class="hljs yaml"><span class="hljs-attr">Concurrency Level:</span>      <span class="hljs-number">30</span>
+<span class="hljs-attr">Time taken for tests:</span>   <span class="hljs-number">5.828</span> <span class="hljs-string">seconds</span>
+<span class="hljs-attr">Complete requests:</span>      <span class="hljs-number">3000</span>
+<span class="hljs-attr">Failed requests:</span>        <span class="hljs-number">0</span>
+<span class="hljs-attr">Total transferred:</span>      <span class="hljs-number">522000</span> <span class="hljs-string">bytes</span>
+<span class="hljs-attr">HTML transferred:</span>       <span class="hljs-number">36000</span> <span class="hljs-string">bytes</span>
+<span class="hljs-attr">Requests per second:</span>    <span class="hljs-number">514.71</span> [<span class="hljs-comment">#/sec] (mean)</span>
+<span class="hljs-attr">Time per request:</span>       <span class="hljs-number">58.285</span> [<span class="hljs-string">ms</span>] <span class="hljs-string">(mean)</span>
+<span class="hljs-attr">Time per request:</span>       <span class="hljs-number">1.943</span> [<span class="hljs-string">ms</span>] <span class="hljs-string">(mean</span>, <span class="hljs-string">across</span> <span class="hljs-string">all</span> <span class="hljs-string">concurrent</span> <span class="hljs-string">requests)</span>
+<span class="hljs-attr">Transfer rate:</span>          <span class="hljs-number">87.46</span> [<span class="hljs-string">Kbytes/sec</span>] <span class="hljs-string">received</span>
+
+<span class="hljs-string">Connection</span> <span class="hljs-string">Times</span> <span class="hljs-string">(ms)</span>
+              <span class="hljs-string">min</span>  <span class="hljs-string">mean</span>[<span class="hljs-string">+/-sd</span>] <span class="hljs-string">median</span>   <span class="hljs-string">max</span>
+<span class="hljs-attr">Connect:</span>        <span class="hljs-number">0</span>   <span class="hljs-number">42</span> <span class="hljs-number">443.0</span>      <span class="hljs-number">2</span>    <span class="hljs-number">5092</span>
+<span class="hljs-attr">Processing:</span>     <span class="hljs-number">0</span>    <span class="hljs-number">4</span>   <span class="hljs-number">2.7</span>      <span class="hljs-number">4</span>      <span class="hljs-number">19</span>
+<span class="hljs-attr">Waiting:</span>        <span class="hljs-number">0</span>    <span class="hljs-number">3</span>   <span class="hljs-number">2.4</span>      <span class="hljs-number">3</span>      <span class="hljs-number">19</span>
+<span class="hljs-attr">Total:</span>          <span class="hljs-number">1</span>   <span class="hljs-number">46</span> <span class="hljs-number">442.9</span>      <span class="hljs-number">6</span>    <span class="hljs-number">5100</span>
+
+<span class="hljs-string">Percentage</span> <span class="hljs-string">of</span> <span class="hljs-string">the</span> <span class="hljs-string">requests</span> <span class="hljs-string">served</span> <span class="hljs-string">within</span> <span class="hljs-string">a</span> <span class="hljs-string">certain</span> <span class="hljs-string">time</span> <span class="hljs-string">(ms)</span>
+  <span class="hljs-number">50</span><span class="hljs-string">%</span>      <span class="hljs-number">6</span>
+  <span class="hljs-number">66</span><span class="hljs-string">%</span>      <span class="hljs-number">7</span>
+  <span class="hljs-number">75</span><span class="hljs-string">%</span>      <span class="hljs-number">8</span>
+  <span class="hljs-number">80</span><span class="hljs-string">%</span>      <span class="hljs-number">9</span>
+  <span class="hljs-number">90</span><span class="hljs-string">%</span>     <span class="hljs-number">12</span>
+  <span class="hljs-number">95</span><span class="hljs-string">%</span>     <span class="hljs-number">15</span>
+  <span class="hljs-number">98</span><span class="hljs-string">%</span>     <span class="hljs-number">19</span>
+  <span class="hljs-number">99</span><span class="hljs-string">%</span>     <span class="hljs-number">30</span>
+ <span class="hljs-number">100</span><span class="hljs-string">%</span>   <span class="hljs-number">5100</span> <span class="hljs-string">(longest</span> <span class="hljs-string">request)</span>
+
+
+ <span class="hljs-attr">Concurrency Level:</span>      <span class="hljs-number">50</span>
+<span class="hljs-attr">Time taken for tests:</span>   <span class="hljs-number">1.161</span> <span class="hljs-string">seconds</span>
+<span class="hljs-attr">Complete requests:</span>      <span class="hljs-number">6000</span>
+<span class="hljs-attr">Failed requests:</span>        <span class="hljs-number">0</span>
+<span class="hljs-attr">Total transferred:</span>      <span class="hljs-number">1044000</span> <span class="hljs-string">bytes</span>
+<span class="hljs-attr">HTML transferred:</span>       <span class="hljs-number">72000</span> <span class="hljs-string">bytes</span>
+<span class="hljs-attr">Requests per second:</span>    <span class="hljs-number">5166.09</span> [<span class="hljs-comment">#/sec] (mean)</span>
+<span class="hljs-attr">Time per request:</span>       <span class="hljs-number">9.678</span> [<span class="hljs-string">ms</span>] <span class="hljs-string">(mean)</span>
+<span class="hljs-attr">Time per request:</span>       <span class="hljs-number">0.194</span> [<span class="hljs-string">ms</span>] <span class="hljs-string">(mean</span>, <span class="hljs-string">across</span> <span class="hljs-string">all</span> <span class="hljs-string">concurrent</span> <span class="hljs-string">requests)</span>
+<span class="hljs-attr">Transfer rate:</span>          <span class="hljs-number">877.83</span> [<span class="hljs-string">Kbytes/sec</span>] <span class="hljs-string">received</span>
+
+<span class="hljs-string">Connection</span> <span class="hljs-string">Times</span> <span class="hljs-string">(ms)</span>
+              <span class="hljs-string">min</span>  <span class="hljs-string">mean</span>[<span class="hljs-string">+/-sd</span>] <span class="hljs-string">median</span>   <span class="hljs-string">max</span>
+<span class="hljs-attr">Connect:</span>        <span class="hljs-number">0</span>    <span class="hljs-number">3</span>   <span class="hljs-number">2.4</span>      <span class="hljs-number">3</span>      <span class="hljs-number">18</span>
+<span class="hljs-attr">Processing:</span>     <span class="hljs-number">1</span>    <span class="hljs-number">6</span>   <span class="hljs-number">3.3</span>      <span class="hljs-number">6</span>      <span class="hljs-number">32</span>
+<span class="hljs-attr">Waiting:</span>        <span class="hljs-number">0</span>    <span class="hljs-number">5</span>   <span class="hljs-number">3.0</span>      <span class="hljs-number">4</span>      <span class="hljs-number">30</span>
+<span class="hljs-attr">Total:</span>          <span class="hljs-number">3</span>   <span class="hljs-number">10</span>   <span class="hljs-number">4.0</span>      <span class="hljs-number">8</span>      <span class="hljs-number">33</span>
+
+<span class="hljs-string">Percentage</span> <span class="hljs-string">of</span> <span class="hljs-string">the</span> <span class="hljs-string">requests</span> <span class="hljs-string">served</span> <span class="hljs-string">within</span> <span class="hljs-string">a</span> <span class="hljs-string">certain</span> <span class="hljs-string">time</span> <span class="hljs-string">(ms)</span>
+  <span class="hljs-number">50</span><span class="hljs-string">%</span>      <span class="hljs-number">8</span>
+  <span class="hljs-number">66</span><span class="hljs-string">%</span>      <span class="hljs-number">9</span>
+  <span class="hljs-number">75</span><span class="hljs-string">%</span>     <span class="hljs-number">11</span>
+  <span class="hljs-number">80</span><span class="hljs-string">%</span>     <span class="hljs-number">11</span>
+  <span class="hljs-number">90</span><span class="hljs-string">%</span>     <span class="hljs-number">14</span>
+  <span class="hljs-number">95</span><span class="hljs-string">%</span>     <span class="hljs-number">17</span>
+  <span class="hljs-number">98</span><span class="hljs-string">%</span>     <span class="hljs-number">24</span>
+  <span class="hljs-number">99</span><span class="hljs-string">%</span>     <span class="hljs-number">27</span>
+ <span class="hljs-number">100</span><span class="hljs-string">%</span>     <span class="hljs-number">33</span> <span class="hljs-string">(longest</span> <span class="hljs-string">request)</span>
+</code></pre>
+
+<p>Flask: Current Level 100的时候没有timeout出现，不过springboot有而不能完成实验.<br>在100个并发前，SpringBoot比Flask略快，但是不知道什么原因springboot在100个并发的时候不能完成，这个会在后续使用中再做分析</p>
+<pre><code class="hljs yaml"><span class="hljs-attr">Concurrency Level:</span>      <span class="hljs-number">30</span>
+<span class="hljs-attr">Time taken for tests:</span>   <span class="hljs-number">2.598</span> <span class="hljs-string">seconds</span>
+<span class="hljs-attr">Complete requests:</span>      <span class="hljs-number">3000</span>
+<span class="hljs-attr">Failed requests:</span>        <span class="hljs-number">0</span>
+<span class="hljs-attr">Total transferred:</span>      <span class="hljs-number">498000</span> <span class="hljs-string">bytes</span>
+<span class="hljs-attr">HTML transferred:</span>       <span class="hljs-number">36000</span> <span class="hljs-string">bytes</span>
+<span class="hljs-attr">Requests per second:</span>    <span class="hljs-number">1154.77</span> [<span class="hljs-comment">#/sec] (mean)</span>
+<span class="hljs-attr">Time per request:</span>       <span class="hljs-number">25.979</span> [<span class="hljs-string">ms</span>] <span class="hljs-string">(mean)</span>
+<span class="hljs-attr">Time per request:</span>       <span class="hljs-number">0.866</span> [<span class="hljs-string">ms</span>] <span class="hljs-string">(mean</span>, <span class="hljs-string">across</span> <span class="hljs-string">all</span> <span class="hljs-string">concurrent</span> <span class="hljs-string">requests)</span>
+<span class="hljs-attr">Transfer rate:</span>          <span class="hljs-number">187.20</span> [<span class="hljs-string">Kbytes/sec</span>] <span class="hljs-string">received</span>
+
+<span class="hljs-string">Connection</span> <span class="hljs-string">Times</span> <span class="hljs-string">(ms)</span>
+              <span class="hljs-string">min</span>  <span class="hljs-string">mean</span>[<span class="hljs-string">+/-sd</span>] <span class="hljs-string">median</span>   <span class="hljs-string">max</span>
+<span class="hljs-attr">Connect:</span>        <span class="hljs-number">0</span>    <span class="hljs-number">0</span>   <span class="hljs-number">0.1</span>      <span class="hljs-number">0</span>       <span class="hljs-number">3</span>
+<span class="hljs-attr">Processing:</span>     <span class="hljs-number">1</span>   <span class="hljs-number">26</span>   <span class="hljs-number">5.8</span>     <span class="hljs-number">24</span>      <span class="hljs-number">67</span>
+<span class="hljs-attr">Waiting:</span>        <span class="hljs-number">1</span>   <span class="hljs-number">26</span>   <span class="hljs-number">5.7</span>     <span class="hljs-number">24</span>      <span class="hljs-number">67</span>
+<span class="hljs-attr">Total:</span>          <span class="hljs-number">2</span>   <span class="hljs-number">26</span>   <span class="hljs-number">5.8</span>     <span class="hljs-number">24</span>      <span class="hljs-number">67</span>
+
+<span class="hljs-string">Percentage</span> <span class="hljs-string">of</span> <span class="hljs-string">the</span> <span class="hljs-string">requests</span> <span class="hljs-string">served</span> <span class="hljs-string">within</span> <span class="hljs-string">a</span> <span class="hljs-string">certain</span> <span class="hljs-string">time</span> <span class="hljs-string">(ms)</span>
+  <span class="hljs-number">50</span><span class="hljs-string">%</span>     <span class="hljs-number">24</span>
+  <span class="hljs-number">66</span><span class="hljs-string">%</span>     <span class="hljs-number">25</span>
+  <span class="hljs-number">75</span><span class="hljs-string">%</span>     <span class="hljs-number">25</span>
+  <span class="hljs-number">80</span><span class="hljs-string">%</span>     <span class="hljs-number">27</span>
+  <span class="hljs-number">90</span><span class="hljs-string">%</span>     <span class="hljs-number">32</span>
+  <span class="hljs-number">95</span><span class="hljs-string">%</span>     <span class="hljs-number">37</span>
+  <span class="hljs-number">98</span><span class="hljs-string">%</span>     <span class="hljs-number">45</span>
+  <span class="hljs-number">99</span><span class="hljs-string">%</span>     <span class="hljs-number">52</span>
+ <span class="hljs-number">100</span><span class="hljs-string">%</span>     <span class="hljs-number">67</span> <span class="hljs-string">(longest</span> <span class="hljs-string">request)</span>
+
+ <span class="hljs-attr">Concurrency Level:</span>      <span class="hljs-number">50</span>
+ <span class="hljs-attr">Time taken for tests:</span>   <span class="hljs-number">4.731</span> <span class="hljs-string">seconds</span>
+ <span class="hljs-attr">Complete requests:</span>      <span class="hljs-number">6000</span>
+ <span class="hljs-attr">Failed requests:</span>        <span class="hljs-number">0</span>
+ <span class="hljs-attr">Total transferred:</span>      <span class="hljs-number">996000</span> <span class="hljs-string">bytes</span>
+ <span class="hljs-attr">HTML transferred:</span>       <span class="hljs-number">72000</span> <span class="hljs-string">bytes</span>
+ <span class="hljs-attr">Requests per second:</span>    <span class="hljs-number">1268.30</span> [<span class="hljs-comment">#/sec] (mean)</span>
+ <span class="hljs-attr">Time per request:</span>       <span class="hljs-number">39.423</span> [<span class="hljs-string">ms</span>] <span class="hljs-string">(mean)</span>
+ <span class="hljs-attr">Time per request:</span>       <span class="hljs-number">0.788</span> [<span class="hljs-string">ms</span>] <span class="hljs-string">(mean</span>, <span class="hljs-string">across</span> <span class="hljs-string">all</span> <span class="hljs-string">concurrent</span> <span class="hljs-string">requests)</span>
+ <span class="hljs-attr">Transfer rate:</span>          <span class="hljs-number">205.60</span> [<span class="hljs-string">Kbytes/sec</span>] <span class="hljs-string">received</span>
+
+ <span class="hljs-string">Connection</span> <span class="hljs-string">Times</span> <span class="hljs-string">(ms)</span>
+               <span class="hljs-string">min</span>  <span class="hljs-string">mean</span>[<span class="hljs-string">+/-sd</span>] <span class="hljs-string">median</span>   <span class="hljs-string">max</span>
+ <span class="hljs-attr">Connect:</span>        <span class="hljs-number">0</span>    <span class="hljs-number">0</span>   <span class="hljs-number">0.2</span>      <span class="hljs-number">0</span>       <span class="hljs-number">3</span>
+ <span class="hljs-attr">Processing:</span>     <span class="hljs-number">2</span>   <span class="hljs-number">39</span>   <span class="hljs-number">3.2</span>     <span class="hljs-number">39</span>      <span class="hljs-number">50</span>
+ <span class="hljs-attr">Waiting:</span>        <span class="hljs-number">2</span>   <span class="hljs-number">39</span>   <span class="hljs-number">3.2</span>     <span class="hljs-number">39</span>      <span class="hljs-number">50</span>
+ <span class="hljs-attr">Total:</span>          <span class="hljs-number">5</span>   <span class="hljs-number">39</span>   <span class="hljs-number">3.1</span>     <span class="hljs-number">39</span>      <span class="hljs-number">50</span>
+
+ <span class="hljs-string">Percentage</span> <span class="hljs-string">of</span> <span class="hljs-string">the</span> <span class="hljs-string">requests</span> <span class="hljs-string">served</span> <span class="hljs-string">within</span> <span class="hljs-string">a</span> <span class="hljs-string">certain</span> <span class="hljs-string">time</span> <span class="hljs-string">(ms)</span>
+   <span class="hljs-number">50</span><span class="hljs-string">%</span>     <span class="hljs-number">39</span>
+   <span class="hljs-number">66</span><span class="hljs-string">%</span>     <span class="hljs-number">40</span>
+   <span class="hljs-number">75</span><span class="hljs-string">%</span>     <span class="hljs-number">40</span>
+   <span class="hljs-number">80</span><span class="hljs-string">%</span>     <span class="hljs-number">40</span>
+   <span class="hljs-number">90</span><span class="hljs-string">%</span>     <span class="hljs-number">41</span>
+   <span class="hljs-number">95</span><span class="hljs-string">%</span>     <span class="hljs-number">46</span>
+   <span class="hljs-number">98</span><span class="hljs-string">%</span>     <span class="hljs-number">48</span>
+   <span class="hljs-number">99</span><span class="hljs-string">%</span>     <span class="hljs-number">49</span>
+  <span class="hljs-number">100</span><span class="hljs-string">%</span>     <span class="hljs-number">50</span> <span class="hljs-string">(longest</span> <span class="hljs-string">request)</span>
+
+  <span class="hljs-attr">Concurrency Level:</span>      <span class="hljs-number">100</span>
+  <span class="hljs-attr">Time taken for tests:</span>   <span class="hljs-number">32.135</span> <span class="hljs-string">seconds</span>
+  <span class="hljs-attr">Complete requests:</span>      <span class="hljs-number">12000</span>
+  <span class="hljs-attr">Failed requests:</span>        <span class="hljs-number">0</span>
+  <span class="hljs-attr">Total transferred:</span>      <span class="hljs-number">1992000</span> <span class="hljs-string">bytes</span>
+  <span class="hljs-attr">HTML transferred:</span>       <span class="hljs-number">144000</span> <span class="hljs-string">bytes</span>
+  <span class="hljs-attr">Requests per second:</span>    <span class="hljs-number">373.43</span> [<span class="hljs-comment">#/sec] (mean)</span>
+  <span class="hljs-attr">Time per request:</span>       <span class="hljs-number">267.790</span> [<span class="hljs-string">ms</span>] <span class="hljs-string">(mean)</span>
+  <span class="hljs-attr">Time per request:</span>       <span class="hljs-number">2.678</span> [<span class="hljs-string">ms</span>] <span class="hljs-string">(mean</span>, <span class="hljs-string">across</span> <span class="hljs-string">all</span> <span class="hljs-string">concurrent</span> <span class="hljs-string">requests)</span>
+  <span class="hljs-attr">Transfer rate:</span>          <span class="hljs-number">60.54</span> [<span class="hljs-string">Kbytes/sec</span>] <span class="hljs-string">received</span>
+
+  <span class="hljs-string">Connection</span> <span class="hljs-string">Times</span> <span class="hljs-string">(ms)</span>
+                <span class="hljs-string">min</span>  <span class="hljs-string">mean</span>[<span class="hljs-string">+/-sd</span>] <span class="hljs-string">median</span>   <span class="hljs-string">max</span>
+  <span class="hljs-attr">Connect:</span>        <span class="hljs-number">0</span>  <span class="hljs-number">167</span> <span class="hljs-number">1816.4      </span><span class="hljs-number">0</span>   <span class="hljs-number">20069</span>
+  <span class="hljs-attr">Processing:</span>     <span class="hljs-number">1</span>  <span class="hljs-number">101</span> <span class="hljs-number">149.1</span>     <span class="hljs-number">74</span>    <span class="hljs-number">1559</span>
+  <span class="hljs-attr">Waiting:</span>        <span class="hljs-number">1</span>  <span class="hljs-number">100</span> <span class="hljs-number">149.0</span>     <span class="hljs-number">74</span>    <span class="hljs-number">1559</span>
+  <span class="hljs-attr">Total:</span>          <span class="hljs-number">1</span>  <span class="hljs-number">267</span> <span class="hljs-number">1816.7     </span><span class="hljs-number">75</span>   <span class="hljs-number">20070</span>
+
+  <span class="hljs-string">Percentage</span> <span class="hljs-string">of</span> <span class="hljs-string">the</span> <span class="hljs-string">requests</span> <span class="hljs-string">served</span> <span class="hljs-string">within</span> <span class="hljs-string">a</span> <span class="hljs-string">certain</span> <span class="hljs-string">time</span> <span class="hljs-string">(ms)</span>
+    <span class="hljs-number">50</span><span class="hljs-string">%</span>     <span class="hljs-number">75</span>
+    <span class="hljs-number">66</span><span class="hljs-string">%</span>     <span class="hljs-number">79</span>
+    <span class="hljs-number">75</span><span class="hljs-string">%</span>     <span class="hljs-number">81</span>
+    <span class="hljs-number">80</span><span class="hljs-string">%</span>     <span class="hljs-number">86</span>
+    <span class="hljs-number">90</span><span class="hljs-string">%</span>     <span class="hljs-number">98</span>
+    <span class="hljs-number">95</span><span class="hljs-string">%</span>    <span class="hljs-number">180</span>
+    <span class="hljs-number">98</span><span class="hljs-string">%</span>    <span class="hljs-number">720</span>
+    <span class="hljs-number">99</span><span class="hljs-string">%</span>   <span class="hljs-number">1543</span>
+   <span class="hljs-number">100</span><span class="hljs-string">%</span>  <span class="hljs-number">20070</span> <span class="hljs-string">(longest</span> <span class="hljs-string">request)</span>
+</code></pre>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/test-ops/">test-ops</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2016/02/13/python/2016-02-13-python-yaml/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">python yaml 使用介绍</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2016/02/01/tips/automation/2016-02-01-assertions/">
+                        <span class="hidden-mobile">assertions</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
