@@ -592,23 +592,24 @@ public class Receipt &#123;
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-Pull-Up-Method/">Refactoring-3-Pull Up Method</a>
+        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-Move-Method/">Refactoring-2-Move Method</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-Pull-Up-Method/">
+        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-Move-Method/">
           
           
             
           
-          Pull Up Method 顾名思义,就是把方法向上拉,向上拉是个什么意思呢?在面向对象中向上就是向父类，或者接口拉,是不是很形象？
-Pull Up Method实例假设这样一个场景,目前有:
+          Move Method 重构实际上比较简单，一个简单的描述就是:
 
-抽象类－Vehicle
-继承了Vehicle的离散类－ Car
-继承了Vehicle的离散类－ Motorcycle
+如果有一个方法在一个类里面出现的频率很高，但他不在这个类里面
+那么Move Method就是把这个方法移动到出现频率高的这个类里面
 
-而turn方法目前只有在Car中有，那么我们把turn方法防盗Vehicle中这样
+Before Move Methodpublic class BankAccountOrigin &#123;
+
+    private int accountAge;
+    private in
         </a>
       </p>
 
@@ -647,24 +648,23 @@ Pull Up Method实例假设这样一个场景,目前有:
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-Move-Method/">Refactoring-2-Move Method</a>
+        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-Pull-Up-Method/">Refactoring-3-Pull Up Method</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-Move-Method/">
+        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-Pull-Up-Method/">
           
           
             
           
-          Move Method 重构实际上比较简单，一个简单的描述就是:
+          Pull Up Method 顾名思义,就是把方法向上拉,向上拉是个什么意思呢?在面向对象中向上就是向父类，或者接口拉,是不是很形象？
+Pull Up Method实例假设这样一个场景,目前有:
 
-如果有一个方法在一个类里面出现的频率很高，但他不在这个类里面
-那么Move Method就是把这个方法移动到出现频率高的这个类里面
+抽象类－Vehicle
+继承了Vehicle的离散类－ Car
+继承了Vehicle的离散类－ Motorcycle
 
-Before Move Methodpublic class BankAccountOrigin &#123;
-
-    private int accountAge;
-    private in
+而turn方法目前只有在Car中有，那么我们把turn方法防盗Vehicle中这样
         </a>
       </p>
 
@@ -758,6 +758,30 @@ Before Move Methodpublic class BankAccountOrigin &#123;
      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
   
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
 
   
 
@@ -809,6 +833,8 @@ Before Move Methodpublic class BankAccountOrigin &#123;
   <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
 
 
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 

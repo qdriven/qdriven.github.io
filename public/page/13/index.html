@@ -181,17 +181,20 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-rename/">Refactoring-5-rename</a>
+        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-PullUpField-PushDownField/">Refactoring-4-Push Down Method and Pull Up and Posh Down Field</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-rename/">
+        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-PullUpField-PushDownField/">
           
           
             
           
-          rename也是一个重构方式，对的，你没有看错，他确实是个重构的方法.不要小看了命名，命名不是个简单活哦，他背后可能包含了历史，人文，幽默，风格，立场。。。。。。。， 起个让大部分人都懂的名字可不是个容易活。
-
+          Push down method 和Pull Up method刚好相反.有时会遇到公用的父类方法在某个子类中不需要了,如果这样的情况可以考虑将功用方法放到具体的实现中
+Push Down Method实例重构前：
+public abstract class Animal &#123;
+    public void bark()&#123;
+        System.out.println(
         </a>
       </p>
 
@@ -230,20 +233,17 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-PullUpField-PushDownField/">Refactoring-4-Push Down Method and Pull Up and Posh Down Field</a>
+        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-rename/">Refactoring-5-rename</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-PullUpField-PushDownField/">
+        <a href="/2015/10/26/tips/refactoring/2015-10-26-refactoring-rename/">
           
           
             
           
-          Push down method 和Pull Up method刚好相反.有时会遇到公用的父类方法在某个子类中不需要了,如果这样的情况可以考虑将功用方法放到具体的实现中
-Push Down Method实例重构前：
-public abstract class Animal &#123;
-    public void bark()&#123;
-        System.out.println(
+          rename也是一个重构方式，对的，你没有看错，他确实是个重构的方法.不要小看了命名，命名不是个简单活哦，他背后可能包含了历史，人文，幽默，风格，立场。。。。。。。， 起个让大部分人都懂的名字可不是个容易活。
+
         </a>
       </p>
 
@@ -774,6 +774,30 @@ public class GoogleSearchPage &#123;
      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
   
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
 
   
 
@@ -825,6 +849,8 @@ public class GoogleSearchPage &#123;
   <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
 
 
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 
