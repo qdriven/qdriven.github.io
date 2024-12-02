@@ -5,8 +5,8 @@ import '@/styles/globals.css'
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
 
 export const metadata: Metadata = {
-  title: 'Next.js Template',
-  description: 'Modern Next.js template with Tailwind CSS and shadcn/ui',
+  title: 'Personal Opensource Alternatives',
+  description: 'Modern Self-host Opensource Alternatives',
 }
 
 export default function RootLayout({
