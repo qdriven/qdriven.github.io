@@ -11,7 +11,7 @@ import { SlidersHorizontal } from 'lucide-react'
 
 export function SearchHeader() {
   return (
-    <div className="flex flex-col space-y-4">a
+    <div className="flex flex-col space-y-4">
       <div className="flex items-center space-x-2">
         <div className="flex-1">
           <Input placeholder="Search alternatives..." className="w-full" />
