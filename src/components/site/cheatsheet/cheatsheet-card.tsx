@@ -3,22 +3,20 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 
-interface CheatsheetCardProps {
-  cheatsheet: Cheatsheet
-}
+interface CheatsheetCardProps extends Cheatsheet {}
 
-export function CheatsheetCard({ cheatsheet }: CheatsheetCardProps) {
+export function CheatsheetCard(props: CheatsheetCardProps) {
   return (
-    <Link href={`/cheatsheets/${cheatsheet.id}`}>
+    <Link href={`/cheatsheets/${props.slug}`}>
       <Card className="h-full transition-colors hover:bg-muted/50">
         <CardHeader>
-          <CardTitle>{cheatsheet.title}</CardTitle>
+          <CardTitle>{props.title}</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-sm text-muted-foreground">{cheatsheet.description}</p>
+          <p className="text-sm text-muted-foreground">{props.description}</p>
           <div className="mt-4 flex flex-wrap gap-2">
-            <Badge variant="secondary">{cheatsheet.category}</Badge>
-            {cheatsheet.tags.map((tag) => (
+            <Badge variant="secondary">{props.category}</Badge>
+            {props.tags.map((tag) => (
               <Badge key={tag} variant="outline">
                 {tag}
               </Badge>

@@ -1,17 +1,20 @@
 export interface Cheatsheet {
-  id: string
   title: string
   description: string
   category: string
   tags: string[]
   content: string
   lastUpdated: string
+  slug: string
 }
 
 export type CheatsheetCategory = 
   | "Programming"
   | "DevOps"
   | "Tools"
-  | "Frameworks"
-  | "Databases"
-  | "CLI"
+  | "Database"
+  | "Frontend"
+  | "Backend"
+  | "Mobile"
+  | "Security"
+  | "Testing"

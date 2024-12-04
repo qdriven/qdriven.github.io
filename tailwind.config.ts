@@ -108,7 +108,73 @@ const config = {
   			'accordion-up': 'accordion-up 0.2s ease-out',
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out'
-  		}
+  		},
+  		typography: {
+  			DEFAULT: {
+  				css: {
+  					maxWidth: "none",
+  					color: "hsl(var(--foreground))",
+  					hr: {
+  						borderColor: "hsl(var(--border))",
+  					},
+  					"h1, h2, h3, h4, h5, h6": {
+  						color: "hsl(var(--foreground))",
+  						fontWeight: "600",
+  					},
+  					a: {
+  						color: "hsl(var(--primary))",
+  						textDecoration: "none",
+  						fontWeight: "500",
+  						"&:hover": {
+  							textDecoration: "underline",
+  						},
+  					},
+  					strong: {
+  						color: "hsl(var(--foreground))",
+  					},
+  					code: {
+  						color: "hsl(var(--foreground))",
+  						backgroundColor: "hsl(var(--muted))",
+  						padding: "0.25rem",
+  						borderRadius: "0.25rem",
+  						fontWeight: "400",
+  					},
+  					"code::before": {
+  						content: '""',
+  					},
+  					"code::after": {
+  						content: '""',
+  					},
+  					pre: {
+  						backgroundColor: "hsl(var(--muted))",
+  						padding: "1rem",
+  						borderRadius: "0.5rem",
+  						overflowX: "auto",
+  					},
+  					table: {
+  						width: "100%",
+  						borderCollapse: "collapse",
+  						borderColor: "hsl(var(--border))",
+  					},
+  					"thead, tbody": {
+  						borderColor: "inherit",
+  					},
+  					"th, td": {
+  						padding: "0.75rem",
+  						borderWidth: "1px",
+  						borderColor: "inherit",
+  					},
+  					th: {
+  						backgroundColor: "hsl(var(--muted))",
+  						fontWeight: "600",
+  						textAlign: "left",
+  					},
+  					blockquote: {
+  						borderLeftColor: "hsl(var(--border))",
+  					},
+  				},
+  			},
+  		},
   	}
   },
   plugins: [require("tailwindcss-animate")],
