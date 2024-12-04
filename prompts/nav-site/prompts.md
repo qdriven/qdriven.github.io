@@ -5,3 +5,8 @@ please help me create a website like: https://www.opensourcealternative.to/ base
 ## First Impression
 
 ![alt text](image.png)
+
+
+## Application Layout Structure 
+
+

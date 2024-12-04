@@ -1,5 +1,5 @@
 import { AlternativeCard } from "@/components/site/alternative/alternative-card";
-import { SearchHeader } from "@/components/site/searcg-header";
+import { SearchHeader } from "@/components/site/search-header";
 import { SiteHeader } from "@/components/site/site-header";
 import SAMPLE_ALTERNATIVES from "@/data/SAMPLES";
 
