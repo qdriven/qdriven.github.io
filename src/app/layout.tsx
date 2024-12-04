@@ -5,8 +5,8 @@ import '@/styles/globals.css'
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
 
 export const metadata: Metadata = {
-  title: 'Personal Opensource Alternatives',
-  description: 'Modern Self-host Opensource Alternatives',
+  title: 'Personal Collection In AI Age',
+  description: 'Revisited Software in AI Age | Self-host',
 }
 
 export default function RootLayout({
